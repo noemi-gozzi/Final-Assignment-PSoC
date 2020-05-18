@@ -15,7 +15,7 @@
     #define LIS3DH_DEVICE_ADDRESS 0x18
 
     /**
-    *   \brief Address of the WHO AM I register
+    *   \brief Address ofthe WHO AM I register
     */
     #define LIS3DH_WHO_AM_I_REG_ADDR 0x0F
 
@@ -32,7 +32,7 @@
     /**
     *   \brief Hex value to set normal mode to the accelerator
     */
-    #define LIS3DH_NORMAL_MODE_CTRL_REG1 0x47
+    #define LIS3DH_NORMAL_MODE_CTRL_REG1_10Hz 0x27
 
     /**
     *   \brief  Address of the Temperature Sensor Configuration register
