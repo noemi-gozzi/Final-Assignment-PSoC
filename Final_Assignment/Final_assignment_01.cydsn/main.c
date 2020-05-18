@@ -10,6 +10,7 @@
  * ========================================
 */
 #include "project.h"
+#include "LIS3DH.h"
 
 int main(void)
 {
