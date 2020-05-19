@@ -47,7 +47,7 @@ void LIS3DH_writeByte(uint8_t addr, uint8_t dataByte);
 * @param[in]: Number of bytes to read.
 *
 */
-void LIS3DH_readPage(uint8_t addr, uint8_t* data, uint8_t nBytes);
+void LIS3DH_readPage(uint8_t addr, uint8_t* dataRX, uint8_t nBytes);
  
 /*
 * @brief Write 1+ bytes from memory.

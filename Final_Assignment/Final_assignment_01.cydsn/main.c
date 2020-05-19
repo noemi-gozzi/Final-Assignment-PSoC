@@ -17,6 +17,14 @@
 #include <string.h>
 
 #define UART_1_PutBuffer UART_1_PutString(bufferUART)
+#define DATA_SIZE 6
+#define DATA_BYTES 6
+#define CONVERSION_FACTOR_DIGIT_MG 8
+#define TRANSMIT_BUFFER_SIZE 8
+
+// New value check
+#define LIS3DH_STATUS_REG_NEW_VALUE 0x08 //00001000
+
 char bufferUART[100];
 
 int main(void)
@@ -59,12 +67,48 @@ int main(void)
     data_read = LIS3DH_readByte(LIS3DH_CTRL_REG4);
     sprintf(bufferUART, "** LIS3DH CTRL REGISTER 4= 0x%02X\r\n", data_read);
     UART_1_PutBuffer;
+    
+    /* Write */
+//    uint8_t datapage[1];
+//    datapage[0]= 0x37;
+//    
+//    LIS3DH_writePage(LIS3DH_CTRL_REG1, (uint8_t*) datapage, DATA_BYTES);
 
+    //Variables declaration
+    int8_t AccData[DATA_SIZE];
+    int16_t OutAccX;
+    int16_t OutAccY;
+    int16_t OutAccZ;
+    uint8_t header = 0xA0;
+    uint8_t footer = 0xC0;
+    uint8_t OutArray[TRANSMIT_BUFFER_SIZE];
+    
+    //Header and footer set up
+    OutArray[0] = header;
+    OutArray[TRANSMIT_BUFFER_SIZE - 1] = footer;
     
     
     for(;;)
     {
-        /* Place your application code here. */
+        uint8_t status_register = LIS3DH_readByte(LIS3DH_STATUS_REG);
+        if (((status_register) & (LIS3DH_STATUS_REG_NEW_VALUE))){
+            
+            LIS3DH_readPage(LIS3DH_OUT_X_L, (uint8_t*) AccData, DATA_BYTES);
+        
+            OutAccX = ((int16)((AccData[0]) | ((AccData[1])<<8))>>6)*CONVERSION_FACTOR_DIGIT_MG;
+            OutAccY = ((int16)((AccData[2]) | ((AccData[3])<<8))>>6)*CONVERSION_FACTOR_DIGIT_MG;
+            OutAccZ = ((int16)((AccData[4]) | ((AccData[5])<<8))>>6)*CONVERSION_FACTOR_DIGIT_MG;
+            
+            //data preparing for UART serial Communication
+            OutArray[1] = (uint8_t)(OutAccX & 0xFF); 
+            OutArray[2] = (uint8_t)(OutAccX >> 8);
+            OutArray[3] = (uint8_t)(OutAccY & 0xFF);
+            OutArray[4] = (uint8_t)(OutAccY >> 8);
+            OutArray[5] = (uint8_t)(OutAccZ & 0xFF);
+            OutArray[6] = (uint8_t)(OutAccZ >> 8);
+            
+            UART_1_PutArray(OutArray, TRANSMIT_BUFFER_SIZE);
+        }
     }
 }
 
