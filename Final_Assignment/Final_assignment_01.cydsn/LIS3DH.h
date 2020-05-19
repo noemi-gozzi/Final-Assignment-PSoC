@@ -71,5 +71,18 @@
     ctrl register 4 inhigh resolutio HR=1, +- 4g (bit FS[1:0] set to 01 --> FSR +-4g
     */
     #define LIS3DH_CTRL_REG4_HIGH_RES 0x18
+    
+    #define LIS3DH_CTRL_REG5 0x24
+    
+    #define LIS3DH_CTRL_REG5_FIFO_EN 0x40
+    
+    #define LIS3DH_FIFO_CTRL_REG 0x2E
+    
+    #define LIS3DH_FIFO_CTRL_REG_FIFO_MODE_WTM_1 0X41
+    
+    #define LIS3DH_CTRL_REG3 0x22
+    
+    #define LIS3DH_CTRL_REG3_WTM_INT 0x04
+    
 #endif
 /* [] END OF FILE */
