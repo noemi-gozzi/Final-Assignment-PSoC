@@ -15,7 +15,9 @@
 #include "SPI_Interface.h"
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #include "InterruptRoutines.h"
+#include "RGBLedDriver.h"
 
 #define UART_1_PutBuffer UART_1_PutString(bufferUART)
 #define DATA_SIZE 6
@@ -26,6 +28,7 @@
 // New value check
 #define LIS3DH_STATUS_REG_NEW_VALUE 0x08 //00001000
 
+#define CONVERSION_MG_RGB 255/4000
 char bufferUART[100];
 
 int main(void)
@@ -37,7 +40,7 @@ int main(void)
     
     /* Start SPI Master */
     SPIM_1_Start();
-    
+    RGBLed_Start();
     CyDelay(10);
     
     uint8_t data_read;
@@ -110,9 +113,9 @@ int main(void)
 
     //Variables declaration
 //    int8_t AccData[DATA_SIZE];
-//    int16_t OutAccX;
-//    int16_t OutAccY;
-//    int16_t OutAccZ;
+    int16_t OutAccX;
+    int16_t OutAccY;
+    int16_t OutAccZ;
 //    uint8_t header = 0xA0;
 //    uint8_t footer = 0xC0;
 //    uint8_t OutArray[TRANSMIT_BUFFER_SIZE];
@@ -126,21 +129,17 @@ int main(void)
     
     for(;;)
     {
-        if(PacketReadyFlag){
-            sprintf(bufferUART, "LOLLO sei STUPENDO\r\n");
-            UART_1_PutBuffer;
-            PacketReadyFlag = 0;
-        }
+
 //        uint8_t status_register = LIS3DH_readByte(LIS3DH_STATUS_REG);
 //        if (((status_register) & (LIS3DH_STATUS_REG_NEW_VALUE))){
 //            
 //            LIS3DH_readPage(LIS3DH_OUT_X_L, (uint8_t*) AccData, DATA_BYTES);
 //        
-//            OutAccX = ((int16)((AccData[0]) | ((AccData[1])<<8))>>6)*CONVERSION_FACTOR_DIGIT_MG;
-//            OutAccY = ((int16)((AccData[2]) | ((AccData[3])<<8))>>6)*CONVERSION_FACTOR_DIGIT_MG;
-//            OutAccZ = ((int16)((AccData[4]) | ((AccData[5])<<8))>>6)*CONVERSION_FACTOR_DIGIT_MG;
-//            
-//            //data preparing for UART serial Communication
+            OutAccX = ((int16)((AccData[0]) | ((AccData[1])<<8))>>6)*CONVERSION_FACTOR_DIGIT_MG;
+            OutAccY = ((int16)((AccData[2]) | ((AccData[3])<<8))>>6)*CONVERSION_FACTOR_DIGIT_MG;
+            OutAccZ = ((int16)((AccData[4]) | ((AccData[5])<<8))>>6)*CONVERSION_FACTOR_DIGIT_MG;
+            
+            //data preparing for UART serial Communication
 //            OutArray[1] = (uint8_t)(OutAccX & 0xFF); 
 //            OutArray[2] = (uint8_t)(OutAccX >> 8);
 //            OutArray[3] = (uint8_t)(OutAccY & 0xFF);
@@ -150,6 +149,18 @@ int main(void)
 //            
 //            UART_1_PutArray(OutArray, TRANSMIT_BUFFER_SIZE);
 //        }
+        
+              OutAccX=-1000;
+              OutAccY=0;
+              OutAccZ=-2000;
+              uint8_t red_x, green_y, blue_z;
+              //int abs (int x);
+              red_x= (uint8_t)(abs(OutAccX*CONVERSION_MG_RGB));
+              green_y=(uint8_t)(abs(OutAccY*CONVERSION_MG_RGB));
+              blue_z=(uint8_t)(abs(OutAccZ*CONVERSION_MG_RGB));
+              RGBLed_WriteColor(red_x, green_y, blue_z);
+
+
     }
 }
 
