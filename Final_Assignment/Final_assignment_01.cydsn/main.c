@@ -28,13 +28,13 @@ int main(void)
     SPIM_1_Start();
     
     CyDelay(10);
-    LIS3DH_writeByte(0x20, 0x37);
+    //LIS3DH_writeByte(0x20, 0x27);
      // String to print out messages on the UART
 
     
     uint8_t data_read;
-    data_read = LIS3DH_readByte(0x20);
-    sprintf(bufferUART, "** LIS3DH CTRL REG 1 = 0x%02X\r\n", data_read);
+    data_read = LIS3DH_readByte(0x0F);
+    sprintf(bufferUART, "** LIS3DH WHO I AM REGISTER = 0x%02X\r\n", data_read);
     UART_1_PutBuffer;
     /* Place your initialization/startup code here (e.g. MyInst_Start()) */
     /*          initialize CTRL REG 1 10 Hz, normale mode 0x27  

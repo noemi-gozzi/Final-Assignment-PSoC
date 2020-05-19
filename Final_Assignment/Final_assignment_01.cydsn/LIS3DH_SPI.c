@@ -45,7 +45,7 @@ void LIS3DH_writeByte(uint8_t addr, uint8_t dataByte) {
 	/* Nothing to RX... */
 	uint8_t temp = 0;
 	/* Write 1 byte to addr */
-	SPI_Interface_Multi_RW(dataTX, 4, &temp, 0);
+	SPI_Interface_Multi_RW(dataTX, 2, &temp, 0);
 	    
 }
 
