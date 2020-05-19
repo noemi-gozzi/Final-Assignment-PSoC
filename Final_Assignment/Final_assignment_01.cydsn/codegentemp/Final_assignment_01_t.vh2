@@ -1,5 +1,5 @@
 -- Project:   C:\Users\Lorenzo\Desktop\Final-Assignment-PSoC\Final_Assignment\Final_assignment_01.cydsn\Final_assignment_01.cyprj
--- Generated: 05/19/2020 15:32:11
+-- Generated: 05/19/2020 17:33:14
 -- PSoC Creator  4.3
 
 ENTITY Final_assignment_01 IS
@@ -37,6 +37,7 @@ ARCHITECTURE __DEFAULT__ OF Final_assignment_01 IS
     SIGNAL ClockBlock_XTAL_32KHZ : bit;
     SIGNAL MISO_1(0)__PA : bit;
     SIGNAL MOSI_1(0)__PA : bit;
+    SIGNAL Net_149 : bit;
     SIGNAL Net_59 : bit;
     SIGNAL Net_60 : bit;
     ATTRIBUTE placement_force OF Net_60 : SIGNAL IS "U(3,3,B)2";
@@ -46,7 +47,6 @@ ARCHITECTURE __DEFAULT__ OF Final_assignment_01 IS
     ATTRIBUTE placement_force OF Net_62 : SIGNAL IS "U(2,3,B)2";
     SIGNAL Net_65 : bit;
     SIGNAL Net_67 : bit;
-    SIGNAL Net_73 : bit;
     SIGNAL Net_78 : bit;
     ATTRIBUTE placement_force OF Net_78 : SIGNAL IS "U(2,1,A)0";
     SIGNAL Net_83 : bit;
@@ -171,6 +171,7 @@ ARCHITECTURE __DEFAULT__ OF Final_assignment_01 IS
     ATTRIBUTE Location OF SCLK_1(0) : LABEL IS "P12[0]";
     ATTRIBUTE lib_model OF CS_1(0) : LABEL IS "iocell4";
     ATTRIBUTE Location OF CS_1(0) : LABEL IS "P12[3]";
+    ATTRIBUTE Location OF Pin_ISR : LABEL IS "F(PICU,7)";
     ATTRIBUTE lib_model OF Pin_ISR(0) : LABEL IS "iocell5";
     ATTRIBUTE Location OF Pin_ISR(0) : LABEL IS "P12[4]";
     ATTRIBUTE lib_model OF Rx_1(0) : LABEL IS "iocell6";
@@ -210,7 +211,7 @@ ARCHITECTURE __DEFAULT__ OF Final_assignment_01 IS
     ATTRIBUTE lib_model OF \SPIM_1:BSPIM:sR8:Dp:u0\ : LABEL IS "datapathcell1";
     ATTRIBUTE Location OF \SPIM_1:BSPIM:sR8:Dp:u0\ : LABEL IS "U(3,3)";
     ATTRIBUTE Location OF \SPIM_1:TxInternalInterrupt\ : LABEL IS "[IntrContainer=(0)][IntrId=(1)]";
-    ATTRIBUTE Location OF isr_ACC : LABEL IS "[IntrContainer=(0)][IntrId=(2)]";
+    ATTRIBUTE Location OF isr_ACC : LABEL IS "[IntrContainer=(0)][IntrId=(11)]";
     ATTRIBUTE lib_model OF \UART_1:BUART:sTX:TxShifter:u0\ : LABEL IS "datapathcell2";
     ATTRIBUTE Location OF \UART_1:BUART:sTX:TxShifter:u0\ : LABEL IS "U(2,2)";
     ATTRIBUTE lib_model OF \UART_1:BUART:sTX:sCLOCK:TxBitClkGen\ : LABEL IS "datapathcell3";
@@ -954,7 +955,7 @@ BEGIN
             input_clk_en => 0,
             input_sync => "0",
             input_sync_mode => "0",
-            intr_mode => "00",
+            intr_mode => "01",
             invert_in_clock => 0,
             invert_in_clock_en => 0,
             invert_in_reset => 0,
@@ -1013,7 +1014,8 @@ BEGIN
             in_clock_en => open,
             in_reset => open,
             out_clock_en => open,
-            out_reset => open);
+            out_reset => open,
+            interrupt => Net_149);
 
     Pin_ISR(0):iocell
         GENERIC MAP(
@@ -1022,11 +1024,10 @@ BEGIN
             oe_sync_mode => 0,
             logicalport => "Pin_ISR",
             logicalport_pin_id => 0,
-            io_capabilities => "0000000000000000000000000000000000000000000000000000000000000101")
+            io_capabilities => "0000000000000000000000000001000000000000000000000000000000000001")
         PORT MAP(
             pa_out => Pin_ISR(0)__PA,
             oe => open,
-            fb => Net_73,
             pad_in => Pin_ISR(0)_PAD,
             in_clock => open,
             in_clock_en => '1',
@@ -1471,10 +1472,10 @@ BEGIN
 
     isr_ACC:interrupt
         GENERIC MAP(
-            int_type => "00",
+            int_type => "01",
             is_nmi => 0)
         PORT MAP(
-            interrupt => Net_73,
+            interrupt => Net_149,
             clock => ClockBlock_BUS_CLK);
 
     \UART_1:BUART:sTX:TxShifter:u0\:datapathcell

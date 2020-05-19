@@ -15,6 +15,7 @@
 #include "SPI_Interface.h"
 #include <stdio.h>
 #include <string.h>
+#include "InterruptRoutines.h"
 
 #define UART_1_PutBuffer UART_1_PutString(bufferUART)
 #define DATA_SIZE 6
@@ -38,6 +39,7 @@ int main(void)
     SPIM_1_Start();
     
     CyDelay(10);
+    
     uint8_t data_read;
     
     /*********************WHO AM I REGISTER*******************/
@@ -119,9 +121,16 @@ int main(void)
 //    OutArray[0] = header;
 //    OutArray[TRANSMIT_BUFFER_SIZE - 1] = footer;
     
+    PacketReadyFlag = 0;
+    isr_ACC_StartEx(Custom_Pin_ISR);
     
     for(;;)
     {
+        if(PacketReadyFlag){
+            sprintf(bufferUART, "LOLLO sei STUPENDO\r\n");
+            UART_1_PutBuffer;
+            PacketReadyFlag = 0;
+        }
 //        uint8_t status_register = LIS3DH_readByte(LIS3DH_STATUS_REG);
 //        if (((status_register) & (LIS3DH_STATUS_REG_NEW_VALUE))){
 //            

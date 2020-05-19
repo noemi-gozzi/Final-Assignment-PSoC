@@ -148,7 +148,7 @@ static void CyClockStartupError(uint8 errorCode)
 }
 #endif
 
-#define CY_CFG_BASE_ADDR_COUNT 26u
+#define CY_CFG_BASE_ADDR_COUNT 23u
 CYPACKED typedef struct
 {
 	uint8 offset;
@@ -156,19 +156,19 @@ CYPACKED typedef struct
 } CYPACKED_ATTR cy_cfg_addrvalue_t;
 
 #define cy_cfg_addr_table ((const uint32 CYFAR *)0x48000000u)
-#define cy_cfg_data_table ((const cy_cfg_addrvalue_t CYFAR *)0x48000068u)
+#define cy_cfg_data_table ((const cy_cfg_addrvalue_t CYFAR *)0x4800005Cu)
 
 /* IOPORT_7 Address: CYDEV_PRTDSI_PRT12_BASE Size (bytes): 6 */
-#define BS_IOPORT_7_VAL ((const uint8 CYFAR *)0x480004E0u)
+#define BS_IOPORT_7_VAL ((const uint8 CYFAR *)0x480004C8u)
 
 /* UDB_1_3_1_CONFIG Address: CYDEV_UCFG_B0_P2_U1_BASE Size (bytes): 128 */
-#define BS_UDB_1_3_1_CONFIG_VAL ((const uint8 CYFAR *)0x480004E8u)
+#define BS_UDB_1_3_1_CONFIG_VAL ((const uint8 CYFAR *)0x480004D0u)
 
 /* IOPINS0_7 Address: CYREG_PRT12_DR Size (bytes): 10 */
-#define BS_IOPINS0_7_VAL ((const uint8 CYFAR *)0x48000568u)
+#define BS_IOPINS0_7_VAL ((const uint8 CYFAR *)0x48000550u)
 
 /* IOPINS0_1 Address: CYREG_PRT1_DM0 Size (bytes): 8 */
-#define BS_IOPINS0_1_VAL ((const uint8 CYFAR *)0x48000574u)
+#define BS_IOPINS0_1_VAL ((const uint8 CYFAR *)0x4800055Cu)
 
 
 /*******************************************************************************

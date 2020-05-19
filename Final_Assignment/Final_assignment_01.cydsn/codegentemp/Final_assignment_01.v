@@ -1,6 +1,6 @@
 // ======================================================================
 // Final_assignment_01.v generated from TopDesign.cysch
-// 05/19/2020 at 15:31
+// 05/19/2020 at 17:33
 // This file is auto generated. ANY EDITS YOU MAKE MAY BE LOST WHEN THIS FILE IS REGENERATED!!!
 // ======================================================================
 
@@ -402,7 +402,6 @@ module top ;
           wire  Net_79;
           wire  Net_78;
           wire  Net_77;
-          wire  Net_73;
           wire  Net_67;
           wire  Net_66;
           wire  Net_65;
@@ -460,6 +459,7 @@ module top ;
     electrical  Net_94;
     electrical  Net_93;
     electrical  Net_92;
+          wire  Net_149;
     electrical  Net_41;
     electrical  Net_42;
     electrical  Net_75;
@@ -856,8 +856,8 @@ module top ;
 	assign tmpOE__CS_1_net = (`CYDEV_CHIP_MEMBER_USED == `CYDEV_CHIP_MEMBER_3A && `CYDEV_CHIP_REVISION_USED < `CYDEV_CHIP_REVISION_3A_ES3) ? ~{1'b1} : {1'b1};
 
 	wire [0:0] tmpOE__Pin_ISR_net;
+	wire [0:0] tmpFB_0__Pin_ISR_net;
 	wire [0:0] tmpIO_0__Pin_ISR_net;
-	wire [0:0] tmpINTERRUPT_0__Pin_ISR_net;
 	electrical [0:0] tmpSIOVREF__Pin_ISR_net;
 
 	cy_psoc3_pins_v1_10
@@ -868,7 +868,7 @@ module top ;
 		  .input_clk_en(0),
 		  .input_sync(1'b0),
 		  .input_sync_mode(1'b0),
-		  .intr_mode(2'b00),
+		  .intr_mode(2'b01),
 		  .invert_in_clock(0),
 		  .invert_in_clock_en(0),
 		  .invert_in_reset(0),
@@ -916,10 +916,10 @@ module top ;
 		Pin_ISR
 		 (.oe(tmpOE__Pin_ISR_net),
 		  .y({1'b0}),
-		  .fb({Net_73}),
+		  .fb({tmpFB_0__Pin_ISR_net[0:0]}),
 		  .io({tmpIO_0__Pin_ISR_net[0:0]}),
 		  .siovref(tmpSIOVREF__Pin_ISR_net),
-		  .interrupt({tmpINTERRUPT_0__Pin_ISR_net[0:0]}),
+		  .interrupt({Net_149}),
 		  .annotation({Net_75}),
 		  .in_clock({1'b0}),
 		  .in_clock_en({1'b1}),
@@ -932,9 +932,9 @@ module top ;
 
 
 	cy_isr_v1_0
-		#(.int_type(2'b00))
+		#(.int_type(2'b01))
 		isr_ACC
-		 (.int_signal(Net_73));
+		 (.int_signal(Net_149));
 
 
     UART_v2_50_1 UART_1 (

@@ -1,5 +1,5 @@
 -- Project:   Final_assignment_01
--- Generated: 05/19/2020 15:32:01
+-- Generated: 05/19/2020 17:33:08
 -- PSoC Creator  4.3
 
 ENTITY Final_assignment_01 IS
@@ -37,13 +37,13 @@ ARCHITECTURE __DEFAULT__ OF Final_assignment_01 IS
     SIGNAL ClockBlock_XTAL_32KHZ : bit;
     SIGNAL MISO_1(0)__PA : bit;
     SIGNAL MOSI_1(0)__PA : bit;
+    SIGNAL Net_149 : bit;
     SIGNAL Net_59 : bit;
     SIGNAL Net_60 : bit;
     SIGNAL Net_61 : bit;
     SIGNAL Net_62 : bit;
     SIGNAL Net_65 : bit;
     SIGNAL Net_67 : bit;
-    SIGNAL Net_73 : bit;
     SIGNAL Net_78 : bit;
     SIGNAL Net_83 : bit;
     SIGNAL Pin_ISR(0)__PA : bit;
@@ -887,7 +887,7 @@ BEGIN
             input_clk_en => 0,
             input_sync => "0",
             input_sync_mode => "0",
-            intr_mode => "00",
+            intr_mode => "01",
             invert_in_clock => 0,
             invert_in_clock_en => 0,
             invert_in_reset => 0,
@@ -946,7 +946,8 @@ BEGIN
             in_clock_en => open,
             in_reset => open,
             out_clock_en => open,
-            out_reset => open);
+            out_reset => open,
+            interrupt => Net_149);
 
     Pin_ISR(0):iocell
         GENERIC MAP(
@@ -955,11 +956,10 @@ BEGIN
             oe_sync_mode => 0,
             logicalport => "Pin_ISR",
             logicalport_pin_id => 0,
-            io_capabilities => "0000000000000000000000000000000000000000000000000000000000000101")
+            io_capabilities => "0000000000000000000000000001000000000000000000000000000000000001")
         PORT MAP(
             pa_out => Pin_ISR(0)__PA,
             oe => open,
-            fb => Net_73,
             pad_in => Pin_ISR(0)_PAD,
             in_clock => open,
             in_clock_en => '1',
@@ -1404,10 +1404,10 @@ BEGIN
 
     isr_ACC:interrupt
         GENERIC MAP(
-            int_type => "00",
+            int_type => "01",
             is_nmi => 0)
         PORT MAP(
-            interrupt => Net_73,
+            interrupt => Net_149,
             clock => ClockBlock_BUS_CLK);
 
     \UART_1:BUART:sTX:TxShifter:u0\:datapathcell

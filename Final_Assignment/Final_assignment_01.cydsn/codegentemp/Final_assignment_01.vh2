@@ -2,7 +2,7 @@
 --	Conversion of Final_assignment_01.v to vh2:
 --
 --	Cypress Semiconductor - WARP Version 6.3 IR 41
---	Tue May 19 15:31:59 2020
+--	Tue May 19 17:33:06 2020
 --
 
 USE cypress.cypress.all;
@@ -218,10 +218,10 @@ SIGNAL tmpIO_0__CS_1_net_0 : bit;
 TERMINAL tmpSIOVREF__CS_1_net_0 : bit;
 SIGNAL tmpINTERRUPT_0__CS_1_net_0 : bit;
 SIGNAL tmpOE__Pin_ISR_net_0 : bit;
-SIGNAL Net_73 : bit;
+SIGNAL tmpFB_0__Pin_ISR_net_0 : bit;
 SIGNAL tmpIO_0__Pin_ISR_net_0 : bit;
 TERMINAL tmpSIOVREF__Pin_ISR_net_0 : bit;
-SIGNAL tmpINTERRUPT_0__Pin_ISR_net_0 : bit;
+SIGNAL Net_149 : bit;
 SIGNAL \UART_1:Net_9\ : bit;
 SIGNAL \UART_1:Net_61\ : bit;
 SIGNAL \UART_1:BUART:clock_op\ : bit;
@@ -1231,7 +1231,7 @@ Pin_ISR:cy_psoc3_pins_v1_10
 		input_sync=>"0",
 		input_clk_en=>'0',
 		input_sync_mode=>"0",
-		intr_mode=>"00",
+		intr_mode=>"01",
 		invert_in_clock=>'0',
 		invert_in_clock_en=>'0',
 		invert_in_reset=>'0',
@@ -1281,7 +1281,7 @@ Pin_ISR:cy_psoc3_pins_v1_10
 		input_buffer_sel=>"00")
 	PORT MAP(oe=>(tmpOE__MISO_1_net_0),
 		y=>(zero),
-		fb=>Net_73,
+		fb=>(tmpFB_0__Pin_ISR_net_0),
 		analog=>(open),
 		io=>(tmpIO_0__Pin_ISR_net_0),
 		siovref=>(tmpSIOVREF__Pin_ISR_net_0),
@@ -1292,11 +1292,11 @@ Pin_ISR:cy_psoc3_pins_v1_10
 		out_clock=>zero,
 		out_clock_en=>tmpOE__MISO_1_net_0,
 		out_reset=>zero,
-		interrupt=>tmpINTERRUPT_0__Pin_ISR_net_0);
+		interrupt=>Net_149);
 isr_ACC:cy_isr_v1_0
-	GENERIC MAP(int_type=>"00",
+	GENERIC MAP(int_type=>"01",
 		is_nmi=>'0')
-	PORT MAP(int_signal=>Net_73);
+	PORT MAP(int_signal=>Net_149);
 \UART_1:IntClock\:cy_clock_v1_0
 	GENERIC MAP(cy_registers=>"",
 		id=>"b0162966-0060-4af5-82d1-fcb491ad7619/be0a0e37-ad17-42ca-b5a1-1a654d736358",
