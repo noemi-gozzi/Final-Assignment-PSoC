@@ -34,7 +34,7 @@
     #include "SPIM_1_IntClock.h"
 #endif /* (0u != SPIM_1_INTERNAL_CLOCK) */
 
-#define SPIM_1_MODE                       (2u)
+#define SPIM_1_MODE                       (4u)
 #define SPIM_1_DATA_WIDTH                 (8u)
 #define SPIM_1_MODE_USE_ZERO              (0u)
 #define SPIM_1_BIDIRECTIONAL_MODE         (0u)

@@ -1,5 +1,5 @@
 -- Project:   Final_assignment_01
--- Generated: 05/19/2020 11:32:10
+-- Generated: 05/19/2020 14:58:08
 -- PSoC Creator  4.3
 
 ENTITY Final_assignment_01 IS
@@ -59,7 +59,6 @@ ARCHITECTURE __DEFAULT__ OF Final_assignment_01 IS
     SIGNAL \SPIM_1:BSPIM:count_4\ : bit;
     SIGNAL \SPIM_1:BSPIM:count_5\ : bit;
     SIGNAL \SPIM_1:BSPIM:count_6\ : bit;
-    SIGNAL \SPIM_1:BSPIM:ld_ident\ : bit;
     SIGNAL \SPIM_1:BSPIM:load_cond\ : bit;
     SIGNAL \SPIM_1:BSPIM:load_rx_data\ : bit;
     SIGNAL \SPIM_1:BSPIM:mosi_from_dp\ : bit;
@@ -168,24 +167,23 @@ ARCHITECTURE __DEFAULT__ OF Final_assignment_01 IS
     ATTRIBUTE lib_model OF \SPIM_1:BSPIM:state_0\ : LABEL IS "macrocell17";
     ATTRIBUTE lib_model OF Net_62 : LABEL IS "macrocell18";
     ATTRIBUTE lib_model OF \SPIM_1:BSPIM:load_cond\ : LABEL IS "macrocell19";
-    ATTRIBUTE lib_model OF \SPIM_1:BSPIM:ld_ident\ : LABEL IS "macrocell20";
-    ATTRIBUTE lib_model OF \SPIM_1:BSPIM:cnt_enable\ : LABEL IS "macrocell21";
-    ATTRIBUTE lib_model OF \UART_1:BUART:txn\ : LABEL IS "macrocell22";
-    ATTRIBUTE lib_model OF \UART_1:BUART:tx_state_1\ : LABEL IS "macrocell23";
-    ATTRIBUTE lib_model OF \UART_1:BUART:tx_state_0\ : LABEL IS "macrocell24";
-    ATTRIBUTE lib_model OF \UART_1:BUART:tx_state_2\ : LABEL IS "macrocell25";
-    ATTRIBUTE lib_model OF \UART_1:BUART:tx_bitclk\ : LABEL IS "macrocell26";
-    ATTRIBUTE lib_model OF \UART_1:BUART:tx_ctrl_mark_last\ : LABEL IS "macrocell27";
-    ATTRIBUTE lib_model OF \UART_1:BUART:rx_state_0\ : LABEL IS "macrocell28";
-    ATTRIBUTE lib_model OF \UART_1:BUART:rx_load_fifo\ : LABEL IS "macrocell29";
-    ATTRIBUTE lib_model OF \UART_1:BUART:rx_state_3\ : LABEL IS "macrocell30";
-    ATTRIBUTE lib_model OF \UART_1:BUART:rx_state_2\ : LABEL IS "macrocell31";
-    ATTRIBUTE lib_model OF \UART_1:BUART:rx_bitclk_enable\ : LABEL IS "macrocell32";
-    ATTRIBUTE lib_model OF \UART_1:BUART:rx_state_stop1_reg\ : LABEL IS "macrocell33";
-    ATTRIBUTE lib_model OF \UART_1:BUART:pollcount_1\ : LABEL IS "macrocell34";
-    ATTRIBUTE lib_model OF \UART_1:BUART:pollcount_0\ : LABEL IS "macrocell35";
-    ATTRIBUTE lib_model OF \UART_1:BUART:rx_status_3\ : LABEL IS "macrocell36";
-    ATTRIBUTE lib_model OF \UART_1:BUART:rx_last\ : LABEL IS "macrocell37";
+    ATTRIBUTE lib_model OF \SPIM_1:BSPIM:cnt_enable\ : LABEL IS "macrocell20";
+    ATTRIBUTE lib_model OF \UART_1:BUART:txn\ : LABEL IS "macrocell21";
+    ATTRIBUTE lib_model OF \UART_1:BUART:tx_state_1\ : LABEL IS "macrocell22";
+    ATTRIBUTE lib_model OF \UART_1:BUART:tx_state_0\ : LABEL IS "macrocell23";
+    ATTRIBUTE lib_model OF \UART_1:BUART:tx_state_2\ : LABEL IS "macrocell24";
+    ATTRIBUTE lib_model OF \UART_1:BUART:tx_bitclk\ : LABEL IS "macrocell25";
+    ATTRIBUTE lib_model OF \UART_1:BUART:tx_ctrl_mark_last\ : LABEL IS "macrocell26";
+    ATTRIBUTE lib_model OF \UART_1:BUART:rx_state_0\ : LABEL IS "macrocell27";
+    ATTRIBUTE lib_model OF \UART_1:BUART:rx_load_fifo\ : LABEL IS "macrocell28";
+    ATTRIBUTE lib_model OF \UART_1:BUART:rx_state_3\ : LABEL IS "macrocell29";
+    ATTRIBUTE lib_model OF \UART_1:BUART:rx_state_2\ : LABEL IS "macrocell30";
+    ATTRIBUTE lib_model OF \UART_1:BUART:rx_bitclk_enable\ : LABEL IS "macrocell31";
+    ATTRIBUTE lib_model OF \UART_1:BUART:rx_state_stop1_reg\ : LABEL IS "macrocell32";
+    ATTRIBUTE lib_model OF \UART_1:BUART:pollcount_1\ : LABEL IS "macrocell33";
+    ATTRIBUTE lib_model OF \UART_1:BUART:pollcount_0\ : LABEL IS "macrocell34";
+    ATTRIBUTE lib_model OF \UART_1:BUART:rx_status_3\ : LABEL IS "macrocell35";
+    ATTRIBUTE lib_model OF \UART_1:BUART:rx_last\ : LABEL IS "macrocell36";
     COMPONENT clockblockcell
         PORT (
             dclk_0 : OUT std_ulogic;
@@ -1365,7 +1363,7 @@ BEGIN
             cl1_sync => 1,
             cmsb_sync => 1,
             co_msb_sync => 1,
-            cy_dpconfig => "0000000000000000000000001100000000000001010000000001000100010000000000011100000000010001000000000000000101000000000000010100000011111111000000001111111111111111000000000010001000001000111100000000000000000100",
+            cy_dpconfig => "0000000000000000000000001100000000000001010000000001000100010000000000011100000000010001000000000000000101000000000000010100000011111111000000001111111111111111000000000010001000001100111100000000000000000100",
             d0_init => "00000000",
             d1_init => "00000000",
             f0_blk_sync => 1,
@@ -1585,21 +1583,20 @@ BEGIN
 
     Net_61:macrocell
         GENERIC MAP(
-            eqn_main => "(!main_0 * main_2 * main_3) + (!main_1 * main_2 * main_3)",
+            eqn_main => "(!main_0 * main_1 * !main_2)",
             regmode => 1,
             clk_inv => '0',
             clken_mode => 1)
         PORT MAP(
             q => Net_61,
             clock_0 => \SPIM_1:Net_276\,
-            main_0 => Net_61,
-            main_1 => \SPIM_1:BSPIM:state_2\,
-            main_2 => \SPIM_1:BSPIM:state_1\,
-            main_3 => \SPIM_1:BSPIM:state_0\);
+            main_0 => \SPIM_1:BSPIM:state_2\,
+            main_1 => \SPIM_1:BSPIM:state_1\,
+            main_2 => \SPIM_1:BSPIM:state_0\);
 
     Net_60:macrocell
         GENERIC MAP(
-            eqn_main => "(!main_0 * !main_1 * main_3) + (!main_1 * !main_2 * !main_3) + (!main_1 * !main_3 * !main_5 * !main_6 * !main_7 * main_8 * !main_9 * !main_10) + (main_1 * !main_2 * main_3) + (main_1 * main_2 * !main_3) + (main_1 * !main_4) + (!main_3 * !main_4)",
+            eqn_main => "(main_0 * !main_1 * main_3) + (main_0 * main_1 * !main_2 * !main_3) + (!main_1 * main_2 * !main_3 * main_4)",
             regmode => 1,
             clk_inv => '0',
             clken_mode => 1)
@@ -1610,17 +1607,11 @@ BEGIN
             main_1 => \SPIM_1:BSPIM:state_2\,
             main_2 => \SPIM_1:BSPIM:state_1\,
             main_3 => \SPIM_1:BSPIM:state_0\,
-            main_4 => \SPIM_1:BSPIM:mosi_from_dp\,
-            main_5 => \SPIM_1:BSPIM:count_4\,
-            main_6 => \SPIM_1:BSPIM:count_3\,
-            main_7 => \SPIM_1:BSPIM:count_2\,
-            main_8 => \SPIM_1:BSPIM:count_1\,
-            main_9 => \SPIM_1:BSPIM:count_0\,
-            main_10 => \SPIM_1:BSPIM:ld_ident\);
+            main_4 => \SPIM_1:BSPIM:mosi_from_dp\);
 
     \SPIM_1:BSPIM:state_2\:macrocell
         GENERIC MAP(
-            eqn_main => "(!main_0 * !main_1 * main_2) + (!main_0 * main_1 * !main_2 * !main_3 * !main_4 * !main_5 * main_6 * !main_7 * !main_9) + (!main_0 * main_2 * !main_3 * !main_4 * main_5 * !main_6 * main_7 * !main_8)",
+            eqn_main => "(!main_0 * main_1 * !main_2 * !main_3 * !main_4 * !main_5 * main_6 * !main_7 * !main_8) + (!main_0 * main_1 * main_2 * !main_3 * !main_4 * !main_5 * !main_6 * main_7)",
             regmode => 1,
             clk_inv => '0',
             clken_mode => 1)
@@ -1635,13 +1626,12 @@ BEGIN
             main_5 => \SPIM_1:BSPIM:count_2\,
             main_6 => \SPIM_1:BSPIM:count_1\,
             main_7 => \SPIM_1:BSPIM:count_0\,
-            main_8 => \SPIM_1:BSPIM:tx_status_1\,
-            main_9 => \SPIM_1:BSPIM:ld_ident\);
+            main_8 => \SPIM_1:BSPIM:tx_status_1\);
 
     \SPIM_1:BSPIM:state_1\:macrocell
         GENERIC MAP(
-            eqn_main => "(!main_0 * !main_1 * main_2) + (!main_0 * main_2 * !main_3 * !main_4 * main_5 * !main_6 * main_7 * !main_8) + (main_0 * !main_2) + (main_1 * !main_2 * !main_3 * !main_4 * !main_5 * main_6 * !main_7 * !main_9)",
-            regmode => 2,
+            eqn_main => "(!main_0 * !main_1 * !main_2) + (!main_0 * !main_2 * !main_3 * !main_4 * !main_5 * main_6 * !main_7 * !main_8) + (main_0 * main_1) + (main_0 * main_2) + (main_1 * main_2 * !main_3 * !main_4 * !main_5 * !main_6 * main_7)",
+            regmode => 1,
             clk_inv => '0',
             clken_mode => 1)
         PORT MAP(
@@ -1655,12 +1645,11 @@ BEGIN
             main_5 => \SPIM_1:BSPIM:count_2\,
             main_6 => \SPIM_1:BSPIM:count_1\,
             main_7 => \SPIM_1:BSPIM:count_0\,
-            main_8 => \SPIM_1:BSPIM:tx_status_1\,
-            main_9 => \SPIM_1:BSPIM:ld_ident\);
+            main_8 => \SPIM_1:BSPIM:tx_status_1\);
 
     \SPIM_1:BSPIM:state_0\:macrocell
         GENERIC MAP(
-            eqn_main => "(!main_0 * main_1) + (main_0 * !main_1) + (!main_1 * !main_2 * !main_3)",
+            eqn_main => "(!main_0 * main_1 * main_2 * !main_3 * !main_4 * !main_5 * !main_6 * main_7) + (main_0 * !main_2) + (!main_1 * !main_2 * main_8) + (main_1 * !main_2 * !main_3 * !main_4 * !main_5 * main_6 * !main_7 * !main_8)",
             regmode => 2,
             clk_inv => '0',
             clken_mode => 1)
@@ -1670,11 +1659,16 @@ BEGIN
             main_0 => \SPIM_1:BSPIM:state_2\,
             main_1 => \SPIM_1:BSPIM:state_1\,
             main_2 => \SPIM_1:BSPIM:state_0\,
-            main_3 => \SPIM_1:BSPIM:tx_status_1\);
+            main_3 => \SPIM_1:BSPIM:count_4\,
+            main_4 => \SPIM_1:BSPIM:count_3\,
+            main_5 => \SPIM_1:BSPIM:count_2\,
+            main_6 => \SPIM_1:BSPIM:count_1\,
+            main_7 => \SPIM_1:BSPIM:count_0\,
+            main_8 => \SPIM_1:BSPIM:tx_status_1\);
 
     Net_62:macrocell
         GENERIC MAP(
-            eqn_main => "(!main_0 * !main_1 * main_2) + (!main_0 * main_1 * !main_3) + (main_0 * !main_1 * !main_2 * !main_3) + (main_1 * main_2 * !main_3)",
+            eqn_main => "(!main_0 * !main_1 * main_2) + (!main_0 * main_1 * !main_3) + (main_0 * !main_1 * !main_3)",
             regmode => 1,
             clk_inv => '0',
             clken_mode => 1)
@@ -1705,28 +1699,9 @@ BEGIN
             main_7 => \SPIM_1:BSPIM:count_0\,
             main_8 => \SPIM_1:BSPIM:load_cond\);
 
-    \SPIM_1:BSPIM:ld_ident\:macrocell
-        GENERIC MAP(
-            eqn_main => "(main_0 * !main_1 * !main_2 * !main_8) + (main_0 * main_1 * !main_2 * main_8) + (main_1 * !main_2 * !main_3 * !main_4 * !main_5 * main_6 * !main_7 * main_8)",
-            regmode => 2,
-            clk_inv => '0',
-            clken_mode => 1)
-        PORT MAP(
-            q => \SPIM_1:BSPIM:ld_ident\,
-            clock_0 => \SPIM_1:Net_276\,
-            main_0 => \SPIM_1:BSPIM:state_2\,
-            main_1 => \SPIM_1:BSPIM:state_1\,
-            main_2 => \SPIM_1:BSPIM:state_0\,
-            main_3 => \SPIM_1:BSPIM:count_4\,
-            main_4 => \SPIM_1:BSPIM:count_3\,
-            main_5 => \SPIM_1:BSPIM:count_2\,
-            main_6 => \SPIM_1:BSPIM:count_1\,
-            main_7 => \SPIM_1:BSPIM:count_0\,
-            main_8 => \SPIM_1:BSPIM:ld_ident\);
-
     \SPIM_1:BSPIM:cnt_enable\:macrocell
         GENERIC MAP(
-            eqn_main => "(!main_0 * !main_1 * !main_2 * main_3) + (!main_0 * main_1 * main_2 * !main_3) + (main_0 * !main_1 * main_2 * main_3) + (main_0 * main_1 * !main_2 * main_3)",
+            eqn_main => "(!main_0 * !main_1 * !main_2 * main_8) + (!main_0 * !main_1 * main_2 * !main_8) + (main_0 * main_1 * main_8) + (main_0 * main_2 * main_8) + (main_1 * main_2 * !main_3 * !main_4 * !main_5 * !main_6 * main_7 * main_8)",
             regmode => 2,
             clk_inv => '0',
             clken_mode => 1)
@@ -1736,7 +1711,12 @@ BEGIN
             main_0 => \SPIM_1:BSPIM:state_2\,
             main_1 => \SPIM_1:BSPIM:state_1\,
             main_2 => \SPIM_1:BSPIM:state_0\,
-            main_3 => \SPIM_1:BSPIM:cnt_enable\);
+            main_3 => \SPIM_1:BSPIM:count_4\,
+            main_4 => \SPIM_1:BSPIM:count_3\,
+            main_5 => \SPIM_1:BSPIM:count_2\,
+            main_6 => \SPIM_1:BSPIM:count_1\,
+            main_7 => \SPIM_1:BSPIM:count_0\,
+            main_8 => \SPIM_1:BSPIM:cnt_enable\);
 
     \UART_1:BUART:txn\:macrocell
         GENERIC MAP(

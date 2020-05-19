@@ -1,6 +1,6 @@
 // ======================================================================
 // Final_assignment_01.v generated from TopDesign.cysch
-// 05/19/2020 at 11:32
+// 05/19/2020 at 14:58
 // This file is auto generated. ANY EDITS YOU MAKE MAY BE LOST WHEN THIS FILE IS REGENERATED!!!
 // ======================================================================
 
@@ -179,7 +179,7 @@
 `include "C:\Program Files (x86)\Cypress\PSoC Creator\4.3\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\ZeroTerminal\ZeroTerminal.v"
 `endif
 
-// SPI_Master_v2_50(BidirectMode=false, ClockInternal=true, CtlModeReplacementString=SyncCtl, CyGetRegReplacementString=CY_GET_REG8, CySetRegReplacementString=CY_SET_REG8, DesiredBitRate=1000000, HighSpeedMode=false, InternalClockUsed=1, InternalInterruptEnabled=0, InternalRxInterruptEnabled=1, InternalTxInterruptEnabled=1, InterruptOnByteComplete=false, InterruptOnRXFull=false, InterruptOnRXNotEmpty=true, InterruptOnRXOverrun=false, InterruptOnSPIDone=false, InterruptOnSPIIdle=false, InterruptOnTXEmpty=false, InterruptOnTXNotFull=true, IntOnByteComp=0, IntOnRXFull=0, IntOnRXNotEmpty=1, IntOnRXOver=0, IntOnSPIDone=0, IntOnSPIIdle=0, IntOnTXEmpty=0, IntOnTXNotFull=1, Mode=2, ModeUseZero=0, NumberOfDataBits=8, RegDefReplacementString=reg8, RegSizeReplacementString=uint8, RxBufferSize=8, ShiftDir=0, TxBufferSize=8, UseInternalInterrupt=false, UseRxInternalInterrupt=true, UseTxInternalInterrupt=true, VerilogSectionReplacementString=sR8, CY_API_CALLBACK_HEADER_INCLUDE=#include "cyapicallbacks.h", CY_COMMENT=, CY_COMPONENT_NAME=SPI_Master_v2_50, CY_CONFIG_TITLE=SPIM_1, CY_CONST_CONFIG=true, CY_CONTROL_FILE=<:default:>, CY_DATASHEET_FILE=<:default:>, CY_FITTER_NAME=SPIM_1, CY_INSTANCE_SHORT_NAME=SPIM_1, CY_MAJOR_VERSION=2, CY_MINOR_VERSION=50, CY_PDL_DRIVER_NAME=, CY_PDL_DRIVER_REQ_VERSION=, CY_PDL_DRIVER_SUBGROUP=, CY_PDL_DRIVER_VARIANT=, CY_REMOVE=false, CY_SUPPRESS_API_GEN=false, CY_VERSION=PSoC Creator  4.3, INSTANCE_NAME=SPIM_1, )
+// SPI_Master_v2_50(BidirectMode=false, ClockInternal=true, CtlModeReplacementString=SyncCtl, CyGetRegReplacementString=CY_GET_REG8, CySetRegReplacementString=CY_SET_REG8, DesiredBitRate=1000000, HighSpeedMode=false, InternalClockUsed=1, InternalInterruptEnabled=0, InternalRxInterruptEnabled=1, InternalTxInterruptEnabled=1, InterruptOnByteComplete=false, InterruptOnRXFull=false, InterruptOnRXNotEmpty=true, InterruptOnRXOverrun=false, InterruptOnSPIDone=false, InterruptOnSPIIdle=false, InterruptOnTXEmpty=false, InterruptOnTXNotFull=true, IntOnByteComp=0, IntOnRXFull=0, IntOnRXNotEmpty=1, IntOnRXOver=0, IntOnSPIDone=0, IntOnSPIIdle=0, IntOnTXEmpty=0, IntOnTXNotFull=1, Mode=4, ModeUseZero=0, NumberOfDataBits=8, RegDefReplacementString=reg8, RegSizeReplacementString=uint8, RxBufferSize=8, ShiftDir=0, TxBufferSize=8, UseInternalInterrupt=false, UseRxInternalInterrupt=true, UseTxInternalInterrupt=true, VerilogSectionReplacementString=sR8, CY_API_CALLBACK_HEADER_INCLUDE=#include "cyapicallbacks.h", CY_COMMENT=, CY_COMPONENT_NAME=SPI_Master_v2_50, CY_CONFIG_TITLE=SPIM_1, CY_CONST_CONFIG=true, CY_CONTROL_FILE=<:default:>, CY_DATASHEET_FILE=<:default:>, CY_FITTER_NAME=SPIM_1, CY_INSTANCE_SHORT_NAME=SPIM_1, CY_MAJOR_VERSION=2, CY_MINOR_VERSION=50, CY_PDL_DRIVER_NAME=, CY_PDL_DRIVER_REQ_VERSION=, CY_PDL_DRIVER_SUBGROUP=, CY_PDL_DRIVER_VARIANT=, CY_REMOVE=false, CY_SUPPRESS_API_GEN=false, CY_VERSION=PSoC Creator  4.3, INSTANCE_NAME=SPIM_1, )
 module SPI_Master_v2_50_0 (
     mosi,
     sclk,
@@ -248,7 +248,7 @@ module SPI_Master_v2_50_0 (
         .tx_interpt(tx_interrupt));
     defparam BSPIM.BidirectMode = 0;
     defparam BSPIM.HighSpeedMode = 0;
-    defparam BSPIM.ModeCPHA = 0;
+    defparam BSPIM.ModeCPHA = 1;
     defparam BSPIM.ModePOL = 1;
     defparam BSPIM.NumberOfDataBits = 8;
     defparam BSPIM.ShiftDir = 0;
@@ -407,59 +407,59 @@ module top ;
           wire  Net_66;
           wire  Net_65;
           wire  Net_64;
-          wire  Net_63;
+          wire  Net_147;
           wire  Net_62;
-    electrical  Net_58;
-    electrical  Net_57;
-    electrical  Net_56;
-    electrical  Net_55;
-    electrical  Net_54;
-    electrical [1:0] Net_53;
-    electrical  Net_52;
-    electrical  Net_51;
-    electrical  Net_72;
-    electrical  Net_49;
-    electrical  Net_48;
-    electrical  Net_47;
-    electrical  Net_46;
-    electrical  Net_45;
-    electrical  Net_44;
-    electrical  Net_43;
-    electrical  Net_40;
-    electrical  Net_34;
-    electrical  Net_33;
-    electrical  Net_32;
-    electrical  Net_31;
-    electrical  Net_30;
-    electrical  Net_29;
-    electrical  Net_28;
-    electrical  Net_27;
-    electrical  Net_26;
-    electrical  Net_25;
-    electrical  Net_24;
-    electrical  Net_23;
-    electrical  Net_22;
-    electrical  Net_21;
-    electrical  Net_20;
-    electrical  Net_19;
-    electrical  Net_18;
-    electrical  Net_17;
-    electrical  Net_16;
-    electrical  Net_15;
-    electrical  Net_14;
-    electrical  Net_13;
-    electrical  Net_12;
-    electrical  Net_11;
-    electrical  Net_10;
-    electrical  Net_9;
-    electrical  Net_8;
-    electrical  Net_7;
-    electrical  Net_6;
-    electrical  Net_5;
-    electrical  Net_4;
-    electrical  Net_3;
-    electrical  Net_2;
-    electrical  Net_1;
+    electrical  Net_142;
+    electrical  Net_141;
+    electrical  Net_140;
+    electrical  Net_139;
+    electrical  Net_138;
+    electrical [1:0] Net_137;
+    electrical  Net_136;
+    electrical  Net_135;
+    electrical  Net_134;
+    electrical  Net_133;
+    electrical  Net_132;
+    electrical  Net_131;
+    electrical  Net_130;
+    electrical  Net_129;
+    electrical  Net_128;
+    electrical  Net_127;
+    electrical  Net_126;
+    electrical  Net_125;
+    electrical  Net_124;
+    electrical  Net_123;
+    electrical  Net_122;
+    electrical  Net_121;
+    electrical  Net_120;
+    electrical  Net_119;
+    electrical  Net_118;
+    electrical  Net_117;
+    electrical  Net_116;
+    electrical  Net_115;
+    electrical  Net_114;
+    electrical  Net_113;
+    electrical  Net_112;
+    electrical  Net_111;
+    electrical  Net_110;
+    electrical  Net_109;
+    electrical  Net_108;
+    electrical  Net_107;
+    electrical  Net_106;
+    electrical  Net_105;
+    electrical  Net_104;
+    electrical  Net_103;
+    electrical  Net_102;
+    electrical  Net_101;
+    electrical  Net_100;
+    electrical  Net_99;
+    electrical  Net_98;
+    electrical  Net_97;
+    electrical  Net_96;
+    electrical  Net_95;
+    electrical  Net_94;
+    electrical  Net_93;
+    electrical  Net_92;
     electrical  Net_41;
     electrical  Net_42;
     electrical  Net_75;
@@ -473,64 +473,64 @@ module top ;
 
     cy_annotation_universal_v1_0 KIT_059_1 (
         .connect({
-            Net_1,
-            Net_2,
-            Net_3,
-            Net_4,
-            Net_5,
-            Net_6,
-            Net_7,
-            Net_8,
-            Net_72,
-            Net_49,
-            Net_48,
+            Net_92,
+            Net_93,
+            Net_94,
+            Net_95,
+            Net_96,
+            Net_97,
+            Net_98,
+            Net_99,
+            Net_134,
+            Net_133,
+            Net_132,
             Net_35,
             Net_36,
             Net_37,
             Net_76,
             Net_75,
-            Net_40,
+            Net_126,
             Net_41,
             Net_42,
-            Net_47,
-            Net_46,
-            Net_45,
-            Net_9,
-            Net_10,
-            Net_11,
-            Net_12,
-            Net_13,
-            Net_14,
-            Net_44,
-            Net_43,
-            Net_34,
-            Net_33,
-            Net_32,
-            Net_31,
-            Net_30,
-            Net_29,
-            Net_28,
-            Net_27,
-            Net_15,
-            Net_16,
-            Net_17,
-            Net_18,
-            Net_19,
-            Net_20,
-            Net_21,
-            Net_22,
-            Net_54,
-            Net_55,
-            Net_56,
-            Net_57,
-            Net_58,
-            Net_25,
-            Net_52,
-            Net_23,
-            Net_24,
-            Net_26,
-            Net_51,
-            Net_53[1:0]
+            Net_131,
+            Net_130,
+            Net_129,
+            Net_100,
+            Net_101,
+            Net_102,
+            Net_103,
+            Net_104,
+            Net_105,
+            Net_128,
+            Net_127,
+            Net_125,
+            Net_124,
+            Net_123,
+            Net_122,
+            Net_121,
+            Net_120,
+            Net_119,
+            Net_118,
+            Net_106,
+            Net_107,
+            Net_108,
+            Net_109,
+            Net_110,
+            Net_111,
+            Net_112,
+            Net_113,
+            Net_138,
+            Net_139,
+            Net_140,
+            Net_141,
+            Net_142,
+            Net_116,
+            Net_136,
+            Net_114,
+            Net_115,
+            Net_117,
+            Net_135,
+            Net_137[1:0]
         })
     );
     defparam KIT_059_1.comp_name = "KIT_059_v1_0";

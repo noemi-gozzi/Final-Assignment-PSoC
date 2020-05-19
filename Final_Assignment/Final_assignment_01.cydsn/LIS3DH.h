@@ -47,7 +47,8 @@
     #define LIS3DH_CTRL_REG4 0x23
 
     #define LIS3DH_CTRL_REG4_BDU_ACTIVE 0x80
-
+    
+    #define LIS3DH_CTRL_REG4_4G_NORMAL 0x10
     /**
     *   \brief Address of the ADC output LSB register
     */
