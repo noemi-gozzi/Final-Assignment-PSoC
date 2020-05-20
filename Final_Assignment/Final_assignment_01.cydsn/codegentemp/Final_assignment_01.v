@@ -1,6 +1,6 @@
 // ======================================================================
 // Final_assignment_01.v generated from TopDesign.cysch
-// 05/19/2020 at 19:26
+// 05/20/2020 at 10:30
 // This file is auto generated. ANY EDITS YOU MAKE MAY BE LOST WHEN THIS FILE IS REGENERATED!!!
 // ======================================================================
 
@@ -708,6 +708,8 @@ module top ;
     electrical  Net_152;
     electrical  Net_151;
     electrical  Net_150;
+    electrical  Net_75;
+    electrical  Net_76;
           wire  Net_1357;
           wire  Net_692;
           wire  Net_384;
@@ -729,8 +731,6 @@ module top ;
     electrical  Net_41;
     electrical  Net_42;
           wire  Net_149;
-    electrical  Net_75;
-    electrical  Net_76;
 
     cy_annotation_universal_v1_0 KIT_059_1 (
         .connect({

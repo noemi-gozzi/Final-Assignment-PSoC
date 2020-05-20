@@ -32,7 +32,7 @@
     /**
     *   \brief Hex value to set normal mode to the accelerator
     */
-    #define LIS3DH_NORMAL_MODE_CTRL_REG1_10Hz 0x27
+    #define LIS3DH_NORMAL_MODE_CTRL_REG1_100Hz 0x57
 
     /**
     *   \brief  Address of the Temperature Sensor Configuration register
@@ -74,6 +74,8 @@
     
     #define LIS3DH_CTRL_REG5 0x24
     
+    #define LIS3DH_CTRL_REG6 0x25
+    
     #define LIS3DH_CTRL_REG5_FIFO_EN 0x40
     
     #define LIS3DH_FIFO_CTRL_REG 0x2E
@@ -83,6 +85,17 @@
     #define LIS3DH_CTRL_REG3 0x22
     
     #define LIS3DH_CTRL_REG3_WTM_INT 0x04
+    
+    #define LIS3DH_FIFO_SRC_REG 0x2F
+    
+    #define LIS3DH_INT1_SRC 0x31
+    
+    #define LIS3DH_INT1_THS 0x32
+    
+    #define LIS3DH_INT1_DURATION 0x33
+    
+    #define LIS3DH_INT1_CFG 0x30
+    
     
 #endif
 /* [] END OF FILE */
