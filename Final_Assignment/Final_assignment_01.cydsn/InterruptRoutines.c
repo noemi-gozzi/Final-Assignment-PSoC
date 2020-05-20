@@ -24,10 +24,10 @@ CY_ISR(Custom_Pin_ISR){
     PacketReadyFlag = 1;
     
     //uint8_t clear=LIS3DH_readByte(LIS3DH_INT1_SRC); //clear interrupt register
-    LIS3DH_readPage(LIS3DH_OUT_X_L, (uint8_t*) AccData, DATA_BYTES);
-    LIS3DH_readPage(LIS3DH_OUT_X_L, (uint8_t*) AccData, DATA_BYTES);
-    LIS3DH_readPage(LIS3DH_OUT_X_L, (uint8_t*) AccData, DATA_BYTES);
-    
+//    LIS3DH_readPage(LIS3DH_OUT_X_L, (uint8_t*) AccData, DATA_BYTES);
+//    LIS3DH_readPage(LIS3DH_OUT_X_L, (uint8_t*) AccData, DATA_BYTES);
+//    LIS3DH_readPage(LIS3DH_OUT_X_L, (uint8_t*) AccData, DATA_BYTES);
+//    
     LIS3DH_writeByte(LIS3DH_FIFO_CTRL_REG,0x00);
     LIS3DH_writeByte(LIS3DH_FIFO_CTRL_REG,0x4F);
 

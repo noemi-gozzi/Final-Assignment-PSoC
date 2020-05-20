@@ -54,7 +54,7 @@ int main(void)
     /*          x,y,z enable                                  */
     /*          normal/high resolution mode                   */
     
-    LIS3DH_writeByte(LIS3DH_CTRL_REG1, LIS3DH_NORMAL_MODE_CTRL_REG1_100Hz);
+    LIS3DH_writeByte(LIS3DH_CTRL_REG1, 0x27);
     data_read = LIS3DH_readByte(LIS3DH_CTRL_REG1);
     sprintf(bufferUART, "** LIS3DH CTRL REGISTER 1= 0x%02X\r\n", data_read);
     UART_1_PutBuffer;
@@ -101,7 +101,7 @@ int main(void)
     /*          0b000000100                                   */
     /*          watermark interrupt set                       */
 
-    LIS3DH_writeByte(LIS3DH_CTRL_REG3, 0x04);
+    LIS3DH_writeByte(LIS3DH_CTRL_REG3, 0x40);
     data_read = LIS3DH_readByte(LIS3DH_CTRL_REG3);
     sprintf(bufferUART, "** LIS3DH CTRL REGISTER 3= 0x%02X\r\n", data_read);
     UART_1_PutBuffer;
@@ -111,7 +111,7 @@ int main(void)
     /*          OR combination                                */
     /*          HIGH event on z y x                           */
 
-    LIS3DH_writeByte(LIS3DH_INT1_CFG, 0x00);
+    LIS3DH_writeByte(LIS3DH_INT1_CFG, 0x2A);
     data_read = LIS3DH_readByte(LIS3DH_INT1_CFG);
     sprintf(bufferUART, "** LIS3DH INT 1 CFG REGISTER= 0x%02X\r\n", data_read);
     UART_1_PutBuffer;
@@ -120,7 +120,7 @@ int main(void)
     /*          settings:   0x3E                              */
     /*          thresh:2000mg                                 */
  
-    LIS3DH_writeByte(LIS3DH_INT1_THS, 0x00);
+    LIS3DH_writeByte(LIS3DH_INT1_THS, 0x5D);
     data_read = LIS3DH_readByte(LIS3DH_INT1_THS);
     sprintf(bufferUART, "** LIS3DH INT1 THS REGISTER= 0x%02X\r\n", data_read);
     UART_1_PutBuffer;
@@ -129,7 +129,7 @@ int main(void)
     /*          settings:   0x05                              */
     /*          thresh:5/ODR=50ms                                 */
  
-    LIS3DH_writeByte(LIS3DH_INT1_DURATION, 0x00);
+    LIS3DH_writeByte(LIS3DH_INT1_DURATION, 0x04);
     data_read = LIS3DH_readByte(LIS3DH_INT1_DURATION);
     sprintf(bufferUART, "** LIS3DH DURATION REGISTER= 0x%02X\r\n", data_read);
     UART_1_PutBuffer;
@@ -170,6 +170,25 @@ int main(void)
 //        data_read = LIS3DH_readByte(LIS3DH_FIFO_SRC_REG);
 //        sprintf(bufferUART, "** LIS3DH FIFO SRC REG= 0x%02X\r\n", data_read);
 //        UART_1_PutBuffer;
+        data_read = LIS3DH_readByte(LIS3DH_FIFO_SRC_REG);
+        if (data_read&0x80){
+            
+            LIS3DH_readPage(LIS3DH_OUT_X_L, (uint8_t*) AccData, DATA_BYTES); 
+            LIS3DH_readPage(LIS3DH_OUT_X_L, (uint8_t*) AccData, DATA_BYTES);
+            LIS3DH_readPage(LIS3DH_OUT_X_L, (uint8_t*) AccData, DATA_BYTES);
+            LIS3DH_readPage(LIS3DH_OUT_X_L, (uint8_t*) AccData, DATA_BYTES); 
+            LIS3DH_readPage(LIS3DH_OUT_X_L, (uint8_t*) AccData, DATA_BYTES);
+            LIS3DH_readPage(LIS3DH_OUT_X_L, (uint8_t*) AccData, DATA_BYTES);
+            LIS3DH_readPage(LIS3DH_OUT_X_L, (uint8_t*) AccData, DATA_BYTES); 
+            LIS3DH_readPage(LIS3DH_OUT_X_L, (uint8_t*) AccData, DATA_BYTES);
+            LIS3DH_readPage(LIS3DH_OUT_X_L, (uint8_t*) AccData, DATA_BYTES);
+            LIS3DH_readPage(LIS3DH_OUT_X_L, (uint8_t*) AccData, DATA_BYTES); 
+            LIS3DH_readPage(LIS3DH_OUT_X_L, (uint8_t*) AccData, DATA_BYTES);
+            LIS3DH_readPage(LIS3DH_OUT_X_L, (uint8_t*) AccData, DATA_BYTES);
+            
+            sprintf(bufferUART, "LETTI\r\n");
+            UART_1_PutBuffer;
+        }
         
        if (PacketReadyFlag){
         PacketReadyFlag=0;
