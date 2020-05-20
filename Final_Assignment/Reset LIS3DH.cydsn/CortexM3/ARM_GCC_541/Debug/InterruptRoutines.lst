@@ -1,0 +1,805 @@
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccdpviAw.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"InterruptRoutines.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.Custom_Pin_ISR,"ax",%progbits
+  20              		.align	2
+  21              		.global	Custom_Pin_ISR
+  22              		.thumb
+  23              		.thumb_func
+  24              		.type	Custom_Pin_ISR, %function
+  25              	Custom_Pin_ISR:
+  26              	.LFB63:
+  27              		.file 1 "InterruptRoutines.c"
+   1:InterruptRoutines.c **** /* ========================================
+   2:InterruptRoutines.c ****  *
+   3:InterruptRoutines.c ****  * Copyright YOUR COMPANY, THE YEAR
+   4:InterruptRoutines.c ****  * All Rights Reserved
+   5:InterruptRoutines.c ****  * UNPUBLISHED, LICENSED SOFTWARE.
+   6:InterruptRoutines.c ****  *
+   7:InterruptRoutines.c ****  * CONFIDENTIAL AND PROPRIETARY INFORMATION
+   8:InterruptRoutines.c ****  * WHICH IS THE PROPERTY OF your company.
+   9:InterruptRoutines.c ****  *
+  10:InterruptRoutines.c ****  * ========================================
+  11:InterruptRoutines.c **** */
+  12:InterruptRoutines.c **** #include "InterruptRoutines.h"
+  13:InterruptRoutines.c **** 
+  14:InterruptRoutines.c **** #define DATA_BYTES 6
+  15:InterruptRoutines.c **** 
+  16:InterruptRoutines.c **** #define empty_bit 0x20
+  17:InterruptRoutines.c **** 
+  18:InterruptRoutines.c **** 
+  19:InterruptRoutines.c **** 
+  20:InterruptRoutines.c **** CY_ISR(Custom_Pin_ISR){
+  28              		.loc 1 20 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32 0000 10B5     		push	{r4, lr}
+  33              		.cfi_def_cfa_offset 8
+  34              		.cfi_offset 4, -8
+  35              		.cfi_offset 14, -4
+  21:InterruptRoutines.c ****     
+  22:InterruptRoutines.c ****     Pin_ISR_ClearInterrupt();
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccdpviAw.s 			page 2
+
+
+  36              		.loc 1 22 0
+  37 0002 FFF7FEFF 		bl	Pin_ISR_ClearInterrupt
+  38              	.LVL0:
+  23:InterruptRoutines.c ****     PacketReadyFlag = 1;
+  39              		.loc 1 23 0
+  40 0006 0122     		movs	r2, #1
+  41 0008 094B     		ldr	r3, .L5
+  42 000a 1A70     		strb	r2, [r3]
+  24:InterruptRoutines.c ****     
+  25:InterruptRoutines.c ****     uint8_t clear=LIS3DH_readByte(LIS3DH_INT1_SRC); //clear interrupt register
+  43              		.loc 1 25 0
+  44 000c 3120     		movs	r0, #49
+  45 000e FFF7FEFF 		bl	LIS3DH_readByte
+  46              	.LVL1:
+  26:InterruptRoutines.c ****     
+  27:InterruptRoutines.c ****     uint8_t value=LIS3DH_readByte(LIS3DH_FIFO_SRC_REG);
+  47              		.loc 1 27 0
+  48 0012 2F20     		movs	r0, #47
+  49 0014 FFF7FEFF 		bl	LIS3DH_readByte
+  50              	.LVL2:
+  51 0018 0446     		mov	r4, r0
+  52              	.LVL3:
+  28:InterruptRoutines.c ****     while (!(value&empty_bit)){
+  53              		.loc 1 28 0
+  54 001a 04E0     		b	.L2
+  55              	.L3:
+  29:InterruptRoutines.c ****     LIS3DH_readPage(LIS3DH_OUT_X_L, (uint8_t*) AccData, DATA_BYTES);
+  56              		.loc 1 29 0
+  57 001c 0622     		movs	r2, #6
+  58 001e 0549     		ldr	r1, .L5+4
+  59 0020 2820     		movs	r0, #40
+  60 0022 FFF7FEFF 		bl	LIS3DH_readPage
+  61              	.LVL4:
+  62              	.L2:
+  28:InterruptRoutines.c ****     while (!(value&empty_bit)){
+  63              		.loc 1 28 0
+  64 0026 14F0200F 		tst	r4, #32
+  65 002a F7D0     		beq	.L3
+  30:InterruptRoutines.c **** }
+  31:InterruptRoutines.c ****     
+  32:InterruptRoutines.c **** }
+  66              		.loc 1 32 0
+  67 002c 10BD     		pop	{r4, pc}
+  68              	.LVL5:
+  69              	.L6:
+  70 002e 00BF     		.align	2
+  71              	.L5:
+  72 0030 00000000 		.word	PacketReadyFlag
+  73 0034 00000000 		.word	AccData
+  74              		.cfi_endproc
+  75              	.LFE63:
+  76              		.size	Custom_Pin_ISR, .-Custom_Pin_ISR
+  77              		.comm	PacketReadyFlag,1,1
+  78              		.comm	AccData,6,4
+  79              		.text
+  80              	.Letext0:
+  81              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.3\\psoc creator\\import\\gnu\\arm\\5.4.
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccdpviAw.s 			page 3
+
+
+  82              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.3\\psoc creator\\import\\gnu\\arm\\5.4.
+  83              		.file 4 "Generated_Source\\PSoC5/cytypes.h"
+  84              		.file 5 "Generated_Source\\PSoC5/core_cm3.h"
+  85              		.file 6 "InterruptRoutines.h"
+  86              		.file 7 "Generated_Source\\PSoC5/Pin_ISR.h"
+  87              		.file 8 "LIS3DH_SPI.h"
+  88              		.section	.debug_info,"",%progbits
+  89              	.Ldebug_info0:
+  90 0000 AB010000 		.4byte	0x1ab
+  91 0004 0400     		.2byte	0x4
+  92 0006 00000000 		.4byte	.Ldebug_abbrev0
+  93 000a 04       		.byte	0x4
+  94 000b 01       		.uleb128 0x1
+  95 000c 59000000 		.4byte	.LASF25
+  96 0010 0C       		.byte	0xc
+  97 0011 63020000 		.4byte	.LASF26
+  98 0015 54010000 		.4byte	.LASF27
+  99 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 100 001d 00000000 		.4byte	0
+ 101 0021 00000000 		.4byte	.Ldebug_line0
+ 102 0025 02       		.uleb128 0x2
+ 103 0026 01       		.byte	0x1
+ 104 0027 06       		.byte	0x6
+ 105 0028 57020000 		.4byte	.LASF0
+ 106 002c 03       		.uleb128 0x3
+ 107 002d 10000000 		.4byte	.LASF4
+ 108 0031 02       		.byte	0x2
+ 109 0032 1D       		.byte	0x1d
+ 110 0033 37000000 		.4byte	0x37
+ 111 0037 02       		.uleb128 0x2
+ 112 0038 01       		.byte	0x1
+ 113 0039 08       		.byte	0x8
+ 114 003a 4B000000 		.4byte	.LASF1
+ 115 003e 02       		.uleb128 0x2
+ 116 003f 02       		.byte	0x2
+ 117 0040 05       		.byte	0x5
+ 118 0041 01020000 		.4byte	.LASF2
+ 119 0045 02       		.uleb128 0x2
+ 120 0046 02       		.byte	0x2
+ 121 0047 07       		.byte	0x7
+ 122 0048 F9000000 		.4byte	.LASF3
+ 123 004c 03       		.uleb128 0x3
+ 124 004d 35000000 		.4byte	.LASF5
+ 125 0051 02       		.byte	0x2
+ 126 0052 3F       		.byte	0x3f
+ 127 0053 57000000 		.4byte	0x57
+ 128 0057 02       		.uleb128 0x2
+ 129 0058 04       		.byte	0x4
+ 130 0059 05       		.byte	0x5
+ 131 005a 42020000 		.4byte	.LASF6
+ 132 005e 02       		.uleb128 0x2
+ 133 005f 04       		.byte	0x4
+ 134 0060 07       		.byte	0x7
+ 135 0061 E7000000 		.4byte	.LASF7
+ 136 0065 02       		.uleb128 0x2
+ 137 0066 08       		.byte	0x8
+ 138 0067 05       		.byte	0x5
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccdpviAw.s 			page 4
+
+
+ 139 0068 EE010000 		.4byte	.LASF8
+ 140 006c 02       		.uleb128 0x2
+ 141 006d 08       		.byte	0x8
+ 142 006e 07       		.byte	0x7
+ 143 006f 35010000 		.4byte	.LASF9
+ 144 0073 04       		.uleb128 0x4
+ 145 0074 04       		.byte	0x4
+ 146 0075 05       		.byte	0x5
+ 147 0076 696E7400 		.ascii	"int\000"
+ 148 007a 02       		.uleb128 0x2
+ 149 007b 04       		.byte	0x4
+ 150 007c 07       		.byte	0x7
+ 151 007d 28010000 		.4byte	.LASF10
+ 152 0081 03       		.uleb128 0x3
+ 153 0082 4C010000 		.4byte	.LASF11
+ 154 0086 03       		.byte	0x3
+ 155 0087 18       		.byte	0x18
+ 156 0088 2C000000 		.4byte	0x2c
+ 157 008c 03       		.uleb128 0x3
+ 158 008d DD010000 		.4byte	.LASF12
+ 159 0091 03       		.byte	0x3
+ 160 0092 2C       		.byte	0x2c
+ 161 0093 4C000000 		.4byte	0x4c
+ 162 0097 05       		.uleb128 0x5
+ 163 0098 45000000 		.4byte	.LASF13
+ 164 009c 04       		.byte	0x4
+ 165 009d E401     		.2byte	0x1e4
+ 166 009f 37000000 		.4byte	0x37
+ 167 00a3 02       		.uleb128 0x2
+ 168 00a4 04       		.byte	0x4
+ 169 00a5 04       		.byte	0x4
+ 170 00a6 3F000000 		.4byte	.LASF14
+ 171 00aa 02       		.uleb128 0x2
+ 172 00ab 08       		.byte	0x8
+ 173 00ac 04       		.byte	0x4
+ 174 00ad 21010000 		.4byte	.LASF15
+ 175 00b1 02       		.uleb128 0x2
+ 176 00b2 01       		.byte	0x1
+ 177 00b3 08       		.byte	0x8
+ 178 00b4 FC010000 		.4byte	.LASF16
+ 179 00b8 06       		.uleb128 0x6
+ 180 00b9 97000000 		.4byte	0x97
+ 181 00bd 02       		.uleb128 0x2
+ 182 00be 08       		.byte	0x8
+ 183 00bf 04       		.byte	0x4
+ 184 00c0 4B020000 		.4byte	.LASF17
+ 185 00c4 02       		.uleb128 0x2
+ 186 00c5 04       		.byte	0x4
+ 187 00c6 07       		.byte	0x7
+ 188 00c7 E5010000 		.4byte	.LASF18
+ 189 00cb 07       		.uleb128 0x7
+ 190 00cc 20000000 		.4byte	.LASF28
+ 191 00d0 01       		.byte	0x1
+ 192 00d1 14       		.byte	0x14
+ 193 00d2 00000000 		.4byte	.LFB63
+ 194 00d6 38000000 		.4byte	.LFE63-.LFB63
+ 195 00da 01       		.uleb128 0x1
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccdpviAw.s 			page 5
+
+
+ 196 00db 9C       		.byte	0x9c
+ 197 00dc 4A010000 		.4byte	0x14a
+ 198 00e0 08       		.uleb128 0x8
+ 199 00e1 1A000000 		.4byte	.LASF29
+ 200 00e5 01       		.byte	0x1
+ 201 00e6 19       		.byte	0x19
+ 202 00e7 81000000 		.4byte	0x81
+ 203 00eb 09       		.uleb128 0x9
+ 204 00ec 2F000000 		.4byte	.LASF30
+ 205 00f0 01       		.byte	0x1
+ 206 00f1 1B       		.byte	0x1b
+ 207 00f2 81000000 		.4byte	0x81
+ 208 00f6 00000000 		.4byte	.LLST0
+ 209 00fa 0A       		.uleb128 0xa
+ 210 00fb 06000000 		.4byte	.LVL0
+ 211 00ff 8D010000 		.4byte	0x18d
+ 212 0103 0B       		.uleb128 0xb
+ 213 0104 12000000 		.4byte	.LVL1
+ 214 0108 98010000 		.4byte	0x198
+ 215 010c 17010000 		.4byte	0x117
+ 216 0110 0C       		.uleb128 0xc
+ 217 0111 01       		.uleb128 0x1
+ 218 0112 50       		.byte	0x50
+ 219 0113 02       		.uleb128 0x2
+ 220 0114 08       		.byte	0x8
+ 221 0115 31       		.byte	0x31
+ 222 0116 00       		.byte	0
+ 223 0117 0B       		.uleb128 0xb
+ 224 0118 18000000 		.4byte	.LVL2
+ 225 011c 98010000 		.4byte	0x198
+ 226 0120 2B010000 		.4byte	0x12b
+ 227 0124 0C       		.uleb128 0xc
+ 228 0125 01       		.uleb128 0x1
+ 229 0126 50       		.byte	0x50
+ 230 0127 02       		.uleb128 0x2
+ 231 0128 08       		.byte	0x8
+ 232 0129 2F       		.byte	0x2f
+ 233 012a 00       		.byte	0
+ 234 012b 0D       		.uleb128 0xd
+ 235 012c 26000000 		.4byte	.LVL4
+ 236 0130 A3010000 		.4byte	0x1a3
+ 237 0134 0C       		.uleb128 0xc
+ 238 0135 01       		.uleb128 0x1
+ 239 0136 50       		.byte	0x50
+ 240 0137 02       		.uleb128 0x2
+ 241 0138 08       		.byte	0x8
+ 242 0139 28       		.byte	0x28
+ 243 013a 0C       		.uleb128 0xc
+ 244 013b 01       		.uleb128 0x1
+ 245 013c 51       		.byte	0x51
+ 246 013d 05       		.uleb128 0x5
+ 247 013e 03       		.byte	0x3
+ 248 013f 00000000 		.4byte	AccData
+ 249 0143 0C       		.uleb128 0xc
+ 250 0144 01       		.uleb128 0x1
+ 251 0145 52       		.byte	0x52
+ 252 0146 01       		.uleb128 0x1
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccdpviAw.s 			page 6
+
+
+ 253 0147 36       		.byte	0x36
+ 254 0148 00       		.byte	0
+ 255 0149 00       		.byte	0
+ 256 014a 0E       		.uleb128 0xe
+ 257 014b 0C010000 		.4byte	.LASF19
+ 258 014f 05       		.byte	0x5
+ 259 0150 1207     		.2byte	0x712
+ 260 0152 56010000 		.4byte	0x156
+ 261 0156 06       		.uleb128 0x6
+ 262 0157 8C000000 		.4byte	0x8c
+ 263 015b 0F       		.uleb128 0xf
+ 264 015c 81000000 		.4byte	0x81
+ 265 0160 6B010000 		.4byte	0x16b
+ 266 0164 10       		.uleb128 0x10
+ 267 0165 C4000000 		.4byte	0xc4
+ 268 0169 05       		.byte	0x5
+ 269 016a 00       		.byte	0
+ 270 016b 11       		.uleb128 0x11
+ 271 016c 19010000 		.4byte	.LASF20
+ 272 0170 06       		.byte	0x6
+ 273 0171 17       		.byte	0x17
+ 274 0172 5B010000 		.4byte	0x15b
+ 275 0176 05       		.uleb128 0x5
+ 276 0177 03       		.byte	0x3
+ 277 0178 00000000 		.4byte	AccData
+ 278 017c 11       		.uleb128 0x11
+ 279 017d 1B020000 		.4byte	.LASF21
+ 280 0181 06       		.byte	0x6
+ 281 0182 19       		.byte	0x19
+ 282 0183 B8000000 		.4byte	0xb8
+ 283 0187 05       		.uleb128 0x5
+ 284 0188 03       		.byte	0x3
+ 285 0189 00000000 		.4byte	PacketReadyFlag
+ 286 018d 12       		.uleb128 0x12
+ 287 018e 2B020000 		.4byte	.LASF22
+ 288 0192 2B020000 		.4byte	.LASF22
+ 289 0196 07       		.byte	0x7
+ 290 0197 2B       		.byte	0x2b
+ 291 0198 12       		.uleb128 0x12
+ 292 0199 00000000 		.4byte	.LASF23
+ 293 019d 00000000 		.4byte	.LASF23
+ 294 01a1 08       		.byte	0x8
+ 295 01a2 20       		.byte	0x20
+ 296 01a3 12       		.uleb128 0x12
+ 297 01a4 0B020000 		.4byte	.LASF24
+ 298 01a8 0B020000 		.4byte	.LASF24
+ 299 01ac 08       		.byte	0x8
+ 300 01ad 32       		.byte	0x32
+ 301 01ae 00       		.byte	0
+ 302              		.section	.debug_abbrev,"",%progbits
+ 303              	.Ldebug_abbrev0:
+ 304 0000 01       		.uleb128 0x1
+ 305 0001 11       		.uleb128 0x11
+ 306 0002 01       		.byte	0x1
+ 307 0003 25       		.uleb128 0x25
+ 308 0004 0E       		.uleb128 0xe
+ 309 0005 13       		.uleb128 0x13
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccdpviAw.s 			page 7
+
+
+ 310 0006 0B       		.uleb128 0xb
+ 311 0007 03       		.uleb128 0x3
+ 312 0008 0E       		.uleb128 0xe
+ 313 0009 1B       		.uleb128 0x1b
+ 314 000a 0E       		.uleb128 0xe
+ 315 000b 55       		.uleb128 0x55
+ 316 000c 17       		.uleb128 0x17
+ 317 000d 11       		.uleb128 0x11
+ 318 000e 01       		.uleb128 0x1
+ 319 000f 10       		.uleb128 0x10
+ 320 0010 17       		.uleb128 0x17
+ 321 0011 00       		.byte	0
+ 322 0012 00       		.byte	0
+ 323 0013 02       		.uleb128 0x2
+ 324 0014 24       		.uleb128 0x24
+ 325 0015 00       		.byte	0
+ 326 0016 0B       		.uleb128 0xb
+ 327 0017 0B       		.uleb128 0xb
+ 328 0018 3E       		.uleb128 0x3e
+ 329 0019 0B       		.uleb128 0xb
+ 330 001a 03       		.uleb128 0x3
+ 331 001b 0E       		.uleb128 0xe
+ 332 001c 00       		.byte	0
+ 333 001d 00       		.byte	0
+ 334 001e 03       		.uleb128 0x3
+ 335 001f 16       		.uleb128 0x16
+ 336 0020 00       		.byte	0
+ 337 0021 03       		.uleb128 0x3
+ 338 0022 0E       		.uleb128 0xe
+ 339 0023 3A       		.uleb128 0x3a
+ 340 0024 0B       		.uleb128 0xb
+ 341 0025 3B       		.uleb128 0x3b
+ 342 0026 0B       		.uleb128 0xb
+ 343 0027 49       		.uleb128 0x49
+ 344 0028 13       		.uleb128 0x13
+ 345 0029 00       		.byte	0
+ 346 002a 00       		.byte	0
+ 347 002b 04       		.uleb128 0x4
+ 348 002c 24       		.uleb128 0x24
+ 349 002d 00       		.byte	0
+ 350 002e 0B       		.uleb128 0xb
+ 351 002f 0B       		.uleb128 0xb
+ 352 0030 3E       		.uleb128 0x3e
+ 353 0031 0B       		.uleb128 0xb
+ 354 0032 03       		.uleb128 0x3
+ 355 0033 08       		.uleb128 0x8
+ 356 0034 00       		.byte	0
+ 357 0035 00       		.byte	0
+ 358 0036 05       		.uleb128 0x5
+ 359 0037 16       		.uleb128 0x16
+ 360 0038 00       		.byte	0
+ 361 0039 03       		.uleb128 0x3
+ 362 003a 0E       		.uleb128 0xe
+ 363 003b 3A       		.uleb128 0x3a
+ 364 003c 0B       		.uleb128 0xb
+ 365 003d 3B       		.uleb128 0x3b
+ 366 003e 05       		.uleb128 0x5
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccdpviAw.s 			page 8
+
+
+ 367 003f 49       		.uleb128 0x49
+ 368 0040 13       		.uleb128 0x13
+ 369 0041 00       		.byte	0
+ 370 0042 00       		.byte	0
+ 371 0043 06       		.uleb128 0x6
+ 372 0044 35       		.uleb128 0x35
+ 373 0045 00       		.byte	0
+ 374 0046 49       		.uleb128 0x49
+ 375 0047 13       		.uleb128 0x13
+ 376 0048 00       		.byte	0
+ 377 0049 00       		.byte	0
+ 378 004a 07       		.uleb128 0x7
+ 379 004b 2E       		.uleb128 0x2e
+ 380 004c 01       		.byte	0x1
+ 381 004d 3F       		.uleb128 0x3f
+ 382 004e 19       		.uleb128 0x19
+ 383 004f 03       		.uleb128 0x3
+ 384 0050 0E       		.uleb128 0xe
+ 385 0051 3A       		.uleb128 0x3a
+ 386 0052 0B       		.uleb128 0xb
+ 387 0053 3B       		.uleb128 0x3b
+ 388 0054 0B       		.uleb128 0xb
+ 389 0055 27       		.uleb128 0x27
+ 390 0056 19       		.uleb128 0x19
+ 391 0057 11       		.uleb128 0x11
+ 392 0058 01       		.uleb128 0x1
+ 393 0059 12       		.uleb128 0x12
+ 394 005a 06       		.uleb128 0x6
+ 395 005b 40       		.uleb128 0x40
+ 396 005c 18       		.uleb128 0x18
+ 397 005d 9742     		.uleb128 0x2117
+ 398 005f 19       		.uleb128 0x19
+ 399 0060 01       		.uleb128 0x1
+ 400 0061 13       		.uleb128 0x13
+ 401 0062 00       		.byte	0
+ 402 0063 00       		.byte	0
+ 403 0064 08       		.uleb128 0x8
+ 404 0065 34       		.uleb128 0x34
+ 405 0066 00       		.byte	0
+ 406 0067 03       		.uleb128 0x3
+ 407 0068 0E       		.uleb128 0xe
+ 408 0069 3A       		.uleb128 0x3a
+ 409 006a 0B       		.uleb128 0xb
+ 410 006b 3B       		.uleb128 0x3b
+ 411 006c 0B       		.uleb128 0xb
+ 412 006d 49       		.uleb128 0x49
+ 413 006e 13       		.uleb128 0x13
+ 414 006f 00       		.byte	0
+ 415 0070 00       		.byte	0
+ 416 0071 09       		.uleb128 0x9
+ 417 0072 34       		.uleb128 0x34
+ 418 0073 00       		.byte	0
+ 419 0074 03       		.uleb128 0x3
+ 420 0075 0E       		.uleb128 0xe
+ 421 0076 3A       		.uleb128 0x3a
+ 422 0077 0B       		.uleb128 0xb
+ 423 0078 3B       		.uleb128 0x3b
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccdpviAw.s 			page 9
+
+
+ 424 0079 0B       		.uleb128 0xb
+ 425 007a 49       		.uleb128 0x49
+ 426 007b 13       		.uleb128 0x13
+ 427 007c 02       		.uleb128 0x2
+ 428 007d 17       		.uleb128 0x17
+ 429 007e 00       		.byte	0
+ 430 007f 00       		.byte	0
+ 431 0080 0A       		.uleb128 0xa
+ 432 0081 898201   		.uleb128 0x4109
+ 433 0084 00       		.byte	0
+ 434 0085 11       		.uleb128 0x11
+ 435 0086 01       		.uleb128 0x1
+ 436 0087 31       		.uleb128 0x31
+ 437 0088 13       		.uleb128 0x13
+ 438 0089 00       		.byte	0
+ 439 008a 00       		.byte	0
+ 440 008b 0B       		.uleb128 0xb
+ 441 008c 898201   		.uleb128 0x4109
+ 442 008f 01       		.byte	0x1
+ 443 0090 11       		.uleb128 0x11
+ 444 0091 01       		.uleb128 0x1
+ 445 0092 31       		.uleb128 0x31
+ 446 0093 13       		.uleb128 0x13
+ 447 0094 01       		.uleb128 0x1
+ 448 0095 13       		.uleb128 0x13
+ 449 0096 00       		.byte	0
+ 450 0097 00       		.byte	0
+ 451 0098 0C       		.uleb128 0xc
+ 452 0099 8A8201   		.uleb128 0x410a
+ 453 009c 00       		.byte	0
+ 454 009d 02       		.uleb128 0x2
+ 455 009e 18       		.uleb128 0x18
+ 456 009f 9142     		.uleb128 0x2111
+ 457 00a1 18       		.uleb128 0x18
+ 458 00a2 00       		.byte	0
+ 459 00a3 00       		.byte	0
+ 460 00a4 0D       		.uleb128 0xd
+ 461 00a5 898201   		.uleb128 0x4109
+ 462 00a8 01       		.byte	0x1
+ 463 00a9 11       		.uleb128 0x11
+ 464 00aa 01       		.uleb128 0x1
+ 465 00ab 31       		.uleb128 0x31
+ 466 00ac 13       		.uleb128 0x13
+ 467 00ad 00       		.byte	0
+ 468 00ae 00       		.byte	0
+ 469 00af 0E       		.uleb128 0xe
+ 470 00b0 34       		.uleb128 0x34
+ 471 00b1 00       		.byte	0
+ 472 00b2 03       		.uleb128 0x3
+ 473 00b3 0E       		.uleb128 0xe
+ 474 00b4 3A       		.uleb128 0x3a
+ 475 00b5 0B       		.uleb128 0xb
+ 476 00b6 3B       		.uleb128 0x3b
+ 477 00b7 05       		.uleb128 0x5
+ 478 00b8 49       		.uleb128 0x49
+ 479 00b9 13       		.uleb128 0x13
+ 480 00ba 3F       		.uleb128 0x3f
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccdpviAw.s 			page 10
+
+
+ 481 00bb 19       		.uleb128 0x19
+ 482 00bc 3C       		.uleb128 0x3c
+ 483 00bd 19       		.uleb128 0x19
+ 484 00be 00       		.byte	0
+ 485 00bf 00       		.byte	0
+ 486 00c0 0F       		.uleb128 0xf
+ 487 00c1 01       		.uleb128 0x1
+ 488 00c2 01       		.byte	0x1
+ 489 00c3 49       		.uleb128 0x49
+ 490 00c4 13       		.uleb128 0x13
+ 491 00c5 01       		.uleb128 0x1
+ 492 00c6 13       		.uleb128 0x13
+ 493 00c7 00       		.byte	0
+ 494 00c8 00       		.byte	0
+ 495 00c9 10       		.uleb128 0x10
+ 496 00ca 21       		.uleb128 0x21
+ 497 00cb 00       		.byte	0
+ 498 00cc 49       		.uleb128 0x49
+ 499 00cd 13       		.uleb128 0x13
+ 500 00ce 2F       		.uleb128 0x2f
+ 501 00cf 0B       		.uleb128 0xb
+ 502 00d0 00       		.byte	0
+ 503 00d1 00       		.byte	0
+ 504 00d2 11       		.uleb128 0x11
+ 505 00d3 34       		.uleb128 0x34
+ 506 00d4 00       		.byte	0
+ 507 00d5 03       		.uleb128 0x3
+ 508 00d6 0E       		.uleb128 0xe
+ 509 00d7 3A       		.uleb128 0x3a
+ 510 00d8 0B       		.uleb128 0xb
+ 511 00d9 3B       		.uleb128 0x3b
+ 512 00da 0B       		.uleb128 0xb
+ 513 00db 49       		.uleb128 0x49
+ 514 00dc 13       		.uleb128 0x13
+ 515 00dd 3F       		.uleb128 0x3f
+ 516 00de 19       		.uleb128 0x19
+ 517 00df 02       		.uleb128 0x2
+ 518 00e0 18       		.uleb128 0x18
+ 519 00e1 00       		.byte	0
+ 520 00e2 00       		.byte	0
+ 521 00e3 12       		.uleb128 0x12
+ 522 00e4 2E       		.uleb128 0x2e
+ 523 00e5 00       		.byte	0
+ 524 00e6 3F       		.uleb128 0x3f
+ 525 00e7 19       		.uleb128 0x19
+ 526 00e8 3C       		.uleb128 0x3c
+ 527 00e9 19       		.uleb128 0x19
+ 528 00ea 6E       		.uleb128 0x6e
+ 529 00eb 0E       		.uleb128 0xe
+ 530 00ec 03       		.uleb128 0x3
+ 531 00ed 0E       		.uleb128 0xe
+ 532 00ee 3A       		.uleb128 0x3a
+ 533 00ef 0B       		.uleb128 0xb
+ 534 00f0 3B       		.uleb128 0x3b
+ 535 00f1 0B       		.uleb128 0xb
+ 536 00f2 00       		.byte	0
+ 537 00f3 00       		.byte	0
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccdpviAw.s 			page 11
+
+
+ 538 00f4 00       		.byte	0
+ 539              		.section	.debug_loc,"",%progbits
+ 540              	.Ldebug_loc0:
+ 541              	.LLST0:
+ 542 0000 1A000000 		.4byte	.LVL3
+ 543 0004 2E000000 		.4byte	.LVL5
+ 544 0008 0100     		.2byte	0x1
+ 545 000a 54       		.byte	0x54
+ 546 000b 00000000 		.4byte	0
+ 547 000f 00000000 		.4byte	0
+ 548              		.section	.debug_aranges,"",%progbits
+ 549 0000 1C000000 		.4byte	0x1c
+ 550 0004 0200     		.2byte	0x2
+ 551 0006 00000000 		.4byte	.Ldebug_info0
+ 552 000a 04       		.byte	0x4
+ 553 000b 00       		.byte	0
+ 554 000c 0000     		.2byte	0
+ 555 000e 0000     		.2byte	0
+ 556 0010 00000000 		.4byte	.LFB63
+ 557 0014 38000000 		.4byte	.LFE63-.LFB63
+ 558 0018 00000000 		.4byte	0
+ 559 001c 00000000 		.4byte	0
+ 560              		.section	.debug_ranges,"",%progbits
+ 561              	.Ldebug_ranges0:
+ 562 0000 00000000 		.4byte	.LFB63
+ 563 0004 38000000 		.4byte	.LFE63
+ 564 0008 00000000 		.4byte	0
+ 565 000c 00000000 		.4byte	0
+ 566              		.section	.debug_line,"",%progbits
+ 567              	.Ldebug_line0:
+ 568 0000 AA010000 		.section	.debug_str,"MS",%progbits,1
+ 568      02008D01 
+ 568      00000201 
+ 568      FB0E0D00 
+ 568      01010101 
+ 569              	.LASF23:
+ 570 0000 4C495333 		.ascii	"LIS3DH_readByte\000"
+ 570      44485F72 
+ 570      65616442 
+ 570      79746500 
+ 571              	.LASF4:
+ 572 0010 5F5F7569 		.ascii	"__uint8_t\000"
+ 572      6E74385F 
+ 572      7400
+ 573              	.LASF29:
+ 574 001a 636C6561 		.ascii	"clear\000"
+ 574      7200
+ 575              	.LASF28:
+ 576 0020 43757374 		.ascii	"Custom_Pin_ISR\000"
+ 576      6F6D5F50 
+ 576      696E5F49 
+ 576      535200
+ 577              	.LASF30:
+ 578 002f 76616C75 		.ascii	"value\000"
+ 578      6500
+ 579              	.LASF5:
+ 580 0035 5F5F696E 		.ascii	"__int32_t\000"
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccdpviAw.s 			page 12
+
+
+ 580      7433325F 
+ 580      7400
+ 581              	.LASF14:
+ 582 003f 666C6F61 		.ascii	"float\000"
+ 582      7400
+ 583              	.LASF13:
+ 584 0045 75696E74 		.ascii	"uint8\000"
+ 584      3800
+ 585              	.LASF1:
+ 586 004b 756E7369 		.ascii	"unsigned char\000"
+ 586      676E6564 
+ 586      20636861 
+ 586      7200
+ 587              	.LASF25:
+ 588 0059 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 588      43313120 
+ 588      352E342E 
+ 588      31203230 
+ 588      31363036 
+ 589 008c 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 589      20726576 
+ 589      6973696F 
+ 589      6E203233 
+ 589      37373135 
+ 590 00bf 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 590      66756E63 
+ 590      74696F6E 
+ 590      2D736563 
+ 590      74696F6E 
+ 591              	.LASF7:
+ 592 00e7 6C6F6E67 		.ascii	"long unsigned int\000"
+ 592      20756E73 
+ 592      69676E65 
+ 592      6420696E 
+ 592      7400
+ 593              	.LASF3:
+ 594 00f9 73686F72 		.ascii	"short unsigned int\000"
+ 594      7420756E 
+ 594      7369676E 
+ 594      65642069 
+ 594      6E7400
+ 595              	.LASF19:
+ 596 010c 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 596      52784275 
+ 596      66666572 
+ 596      00
+ 597              	.LASF20:
+ 598 0119 41636344 		.ascii	"AccData\000"
+ 598      61746100 
+ 599              	.LASF15:
+ 600 0121 646F7562 		.ascii	"double\000"
+ 600      6C6500
+ 601              	.LASF10:
+ 602 0128 756E7369 		.ascii	"unsigned int\000"
+ 602      676E6564 
+ 602      20696E74 
+ 602      00
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccdpviAw.s 			page 13
+
+
+ 603              	.LASF9:
+ 604 0135 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 604      206C6F6E 
+ 604      6720756E 
+ 604      7369676E 
+ 604      65642069 
+ 605              	.LASF11:
+ 606 014c 75696E74 		.ascii	"uint8_t\000"
+ 606      385F7400 
+ 607              	.LASF27:
+ 608 0154 433A5C55 		.ascii	"C:\\Users\\noemi\\Desktop\\university\\university\\"
+ 608      73657273 
+ 608      5C6E6F65 
+ 608      6D695C44 
+ 608      65736B74 
+ 609 0181 706F6C69 		.ascii	"poli\\lab sensors\\final assignment\\Final-Assignme"
+ 609      5C6C6162 
+ 609      2073656E 
+ 609      736F7273 
+ 609      5C66696E 
+ 610 01b1 6E742D50 		.ascii	"nt-PSoC\\Final_Assignment\\Reset LIS3DH.cydsn\000"
+ 610      536F435C 
+ 610      46696E61 
+ 610      6C5F4173 
+ 610      7369676E 
+ 611              	.LASF12:
+ 612 01dd 696E7433 		.ascii	"int32_t\000"
+ 612      325F7400 
+ 613              	.LASF18:
+ 614 01e5 73697A65 		.ascii	"sizetype\000"
+ 614      74797065 
+ 614      00
+ 615              	.LASF8:
+ 616 01ee 6C6F6E67 		.ascii	"long long int\000"
+ 616      206C6F6E 
+ 616      6720696E 
+ 616      7400
+ 617              	.LASF16:
+ 618 01fc 63686172 		.ascii	"char\000"
+ 618      00
+ 619              	.LASF2:
+ 620 0201 73686F72 		.ascii	"short int\000"
+ 620      7420696E 
+ 620      7400
+ 621              	.LASF24:
+ 622 020b 4C495333 		.ascii	"LIS3DH_readPage\000"
+ 622      44485F72 
+ 622      65616450 
+ 622      61676500 
+ 623              	.LASF21:
+ 624 021b 5061636B 		.ascii	"PacketReadyFlag\000"
+ 624      65745265 
+ 624      61647946 
+ 624      6C616700 
+ 625              	.LASF22:
+ 626 022b 50696E5F 		.ascii	"Pin_ISR_ClearInterrupt\000"
+ 626      4953525F 
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccdpviAw.s 			page 14
+
+
+ 626      436C6561 
+ 626      72496E74 
+ 626      65727275 
+ 627              	.LASF6:
+ 628 0242 6C6F6E67 		.ascii	"long int\000"
+ 628      20696E74 
+ 628      00
+ 629              	.LASF17:
+ 630 024b 6C6F6E67 		.ascii	"long double\000"
+ 630      20646F75 
+ 630      626C6500 
+ 631              	.LASF0:
+ 632 0257 7369676E 		.ascii	"signed char\000"
+ 632      65642063 
+ 632      68617200 
+ 633              	.LASF26:
+ 634 0263 496E7465 		.ascii	"InterruptRoutines.c\000"
+ 634      72727570 
+ 634      74526F75 
+ 634      74696E65 
+ 634      732E6300 
+ 635              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

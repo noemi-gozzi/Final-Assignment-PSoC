@@ -1,0 +1,1679 @@
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccxiVGTb.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"25LC256.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.EEPROM_readStatus,"ax",%progbits
+  20              		.align	2
+  21              		.global	EEPROM_readStatus
+  22              		.thumb
+  23              		.thumb_func
+  24              		.type	EEPROM_readStatus, %function
+  25              	EEPROM_readStatus:
+  26              	.LFB0:
+  27              		.file 1 "25LC256.c"
+   1:25LC256.c     **** /**
+   2:25LC256.c     ****  * @file 25LC256.c
+   3:25LC256.c     ****  * @brief Functions required to interface with the SPI EEPROM 25LC256.
+   4:25LC256.c     ****  * 
+   5:25LC256.c     ****  * This c file contains the API functions to interface
+   6:25LC256.c     ****  * with the SPI EEPROM 25LC256.
+   7:25LC256.c     ****  *
+   8:25LC256.c     ****  * @author Mattia Pesenti
+   9:25LC256.c     ****  * @date 24 March, 2020
+  10:25LC256.c     **** */
+  11:25LC256.c     **** 
+  12:25LC256.c     **** #include "25LC256.h"
+  13:25LC256.c     **** 
+  14:25LC256.c     **** uint8_t eeprom_Status;
+  15:25LC256.c     **** 
+  16:25LC256.c     **** /** ====== Helper Functions ====== **/
+  17:25LC256.c     **** 
+  18:25LC256.c     **** uint8_t EEPROM_readStatus() {
+  28              		.loc 1 18 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32 0000 08B5     		push	{r3, lr}
+  33              		.cfi_def_cfa_offset 8
+  34              		.cfi_offset 3, -8
+  35              		.cfi_offset 14, -4
+  19:25LC256.c     ****     
+  20:25LC256.c     **** 	return SPI_Interface_ReadByte(SPI_EEPROM_RDSR);
+  36              		.loc 1 20 0
+  37 0002 0520     		movs	r0, #5
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccxiVGTb.s 			page 2
+
+
+  38 0004 FFF7FEFF 		bl	SPI_Interface_ReadByte
+  39              	.LVL0:
+  21:25LC256.c     ****     
+  22:25LC256.c     **** }
+  40              		.loc 1 22 0
+  41 0008 08BD     		pop	{r3, pc}
+  42              		.cfi_endproc
+  43              	.LFE0:
+  44              		.size	EEPROM_readStatus, .-EEPROM_readStatus
+  45 000a 00BF     		.section	.text.EEPROM_writeEnable,"ax",%progbits
+  46              		.align	2
+  47              		.global	EEPROM_writeEnable
+  48              		.thumb
+  49              		.thumb_func
+  50              		.type	EEPROM_writeEnable, %function
+  51              	EEPROM_writeEnable:
+  52              	.LFB1:
+  23:25LC256.c     **** 
+  24:25LC256.c     **** void EEPROM_writeEnable() {
+  53              		.loc 1 24 0
+  54              		.cfi_startproc
+  55              		@ args = 0, pretend = 0, frame = 0
+  56              		@ frame_needed = 0, uses_anonymous_args = 0
+  57 0000 08B5     		push	{r3, lr}
+  58              		.cfi_def_cfa_offset 8
+  59              		.cfi_offset 3, -8
+  60              		.cfi_offset 14, -4
+  25:25LC256.c     ****     
+  26:25LC256.c     **** 	/* Send 1-byte Instruction */
+  27:25LC256.c     **** 	SPI_Interface_tradeByte(SPI_EEPROM_WREN);
+  61              		.loc 1 27 0
+  62 0002 0620     		movs	r0, #6
+  63 0004 FFF7FEFF 		bl	SPI_Interface_tradeByte
+  64              	.LVL1:
+  65 0008 08BD     		pop	{r3, pc}
+  66              		.cfi_endproc
+  67              	.LFE1:
+  68              		.size	EEPROM_writeEnable, .-EEPROM_writeEnable
+  69 000a 00BF     		.section	.text.EEPROM_readByte,"ax",%progbits
+  70              		.align	2
+  71              		.global	EEPROM_readByte
+  72              		.thumb
+  73              		.thumb_func
+  74              		.type	EEPROM_readByte, %function
+  75              	EEPROM_readByte:
+  76              	.LFB2:
+  28:25LC256.c     ****     
+  29:25LC256.c     **** }
+  30:25LC256.c     **** 
+  31:25LC256.c     **** /** ====== User-level Functions ====== **/
+  32:25LC256.c     **** 
+  33:25LC256.c     **** uint8_t EEPROM_readByte(uint16_t addr) {
+  77              		.loc 1 33 0
+  78              		.cfi_startproc
+  79              		@ args = 0, pretend = 0, frame = 8
+  80              		@ frame_needed = 0, uses_anonymous_args = 0
+  81              	.LVL2:
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccxiVGTb.s 			page 3
+
+
+  82 0000 00B5     		push	{lr}
+  83              		.cfi_def_cfa_offset 4
+  84              		.cfi_offset 14, -4
+  85 0002 83B0     		sub	sp, sp, #12
+  86              		.cfi_def_cfa_offset 16
+  34:25LC256.c     **** 
+  35:25LC256.c     **** 	/* Prepare the TX data packet: instruction + address */
+  36:25LC256.c     **** 	uint8_t dataTX[3] = { SPI_EEPROM_READ, ((addr & 0xFF00) >> 8), (addr & 0x00FF) };
+  87              		.loc 1 36 0
+  88 0004 0321     		movs	r1, #3
+  89 0006 8DF80410 		strb	r1, [sp, #4]
+  90 000a 030A     		lsrs	r3, r0, #8
+  91 000c 8DF80530 		strb	r3, [sp, #5]
+  92 0010 8DF80600 		strb	r0, [sp, #6]
+  37:25LC256.c     **** 	
+  38:25LC256.c     **** 	/* Prepare the RX byte */
+  39:25LC256.c     **** 	uint8_t dataRX = 0;
+  93              		.loc 1 39 0
+  94 0014 02AA     		add	r2, sp, #8
+  95 0016 0023     		movs	r3, #0
+  96 0018 02F8053D 		strb	r3, [r2, #-5]!
+  40:25LC256.c     **** 	
+  41:25LC256.c     **** 	/* Read 1 byte from addr */
+  42:25LC256.c     **** 	SPI_Interface_Multi_RW(dataTX, 3, &dataRX, 1);
+  97              		.loc 1 42 0
+  98 001c 0123     		movs	r3, #1
+  99 001e 01A8     		add	r0, sp, #4
+ 100              	.LVL3:
+ 101 0020 FFF7FEFF 		bl	SPI_Interface_Multi_RW
+ 102              	.LVL4:
+  43:25LC256.c     **** 	
+  44:25LC256.c     **** 	return dataRX;
+  45:25LC256.c     ****     
+  46:25LC256.c     **** }
+ 103              		.loc 1 46 0
+ 104 0024 9DF80300 		ldrb	r0, [sp, #3]	@ zero_extendqisi2
+ 105 0028 03B0     		add	sp, sp, #12
+ 106              		.cfi_def_cfa_offset 4
+ 107              		@ sp needed
+ 108 002a 5DF804FB 		ldr	pc, [sp], #4
+ 109              		.cfi_endproc
+ 110              	.LFE2:
+ 111              		.size	EEPROM_readByte, .-EEPROM_readByte
+ 112 002e 00BF     		.section	.text.EEPROM_writeByte,"ax",%progbits
+ 113              		.align	2
+ 114              		.global	EEPROM_writeByte
+ 115              		.thumb
+ 116              		.thumb_func
+ 117              		.type	EEPROM_writeByte, %function
+ 118              	EEPROM_writeByte:
+ 119              	.LFB3:
+  47:25LC256.c     **** 
+  48:25LC256.c     **** void EEPROM_writeByte(uint16_t addr, uint8_t dataByte) {
+ 120              		.loc 1 48 0
+ 121              		.cfi_startproc
+ 122              		@ args = 0, pretend = 0, frame = 8
+ 123              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccxiVGTb.s 			page 4
+
+
+ 124              	.LVL5:
+ 125 0000 30B5     		push	{r4, r5, lr}
+ 126              		.cfi_def_cfa_offset 12
+ 127              		.cfi_offset 4, -12
+ 128              		.cfi_offset 5, -8
+ 129              		.cfi_offset 14, -4
+ 130 0002 83B0     		sub	sp, sp, #12
+ 131              		.cfi_def_cfa_offset 24
+ 132 0004 0446     		mov	r4, r0
+ 133 0006 0D46     		mov	r5, r1
+  49:25LC256.c     ****     
+  50:25LC256.c     ****     /* Enable WRITE operations */
+  51:25LC256.c     ****     EEPROM_writeEnable();
+ 134              		.loc 1 51 0
+ 135 0008 FFF7FEFF 		bl	EEPROM_writeEnable
+ 136              	.LVL6:
+  52:25LC256.c     **** 	
+  53:25LC256.c     **** 	/* Prepare the TX packet */
+  54:25LC256.c     ****     uint8_t dataTX[4] = {SPI_EEPROM_WRITE, ((addr & 0xFF00) >> 8), (addr & 0x00FF), dataByte};
+ 137              		.loc 1 54 0
+ 138 000c 0223     		movs	r3, #2
+ 139 000e 8DF80430 		strb	r3, [sp, #4]
+ 140 0012 230A     		lsrs	r3, r4, #8
+ 141 0014 8DF80530 		strb	r3, [sp, #5]
+ 142 0018 8DF80640 		strb	r4, [sp, #6]
+ 143 001c 8DF80750 		strb	r5, [sp, #7]
+  55:25LC256.c     **** 	/* Nothing to RX... */
+  56:25LC256.c     **** 	uint8_t temp = 0;
+ 144              		.loc 1 56 0
+ 145 0020 0023     		movs	r3, #0
+ 146 0022 02AA     		add	r2, sp, #8
+ 147 0024 02F8053D 		strb	r3, [r2, #-5]!
+  57:25LC256.c     **** 	
+  58:25LC256.c     **** 	/* Write 1 byte to addr */
+  59:25LC256.c     **** 	SPI_Interface_Multi_RW(dataTX, 4, &temp, 0);
+ 148              		.loc 1 59 0
+ 149 0028 0421     		movs	r1, #4
+ 150 002a 0DEB0100 		add	r0, sp, r1
+ 151 002e FFF7FEFF 		bl	SPI_Interface_Multi_RW
+ 152              	.LVL7:
+  60:25LC256.c     **** 	    
+  61:25LC256.c     **** }
+ 153              		.loc 1 61 0
+ 154 0032 03B0     		add	sp, sp, #12
+ 155              		.cfi_def_cfa_offset 12
+ 156              		@ sp needed
+ 157 0034 30BD     		pop	{r4, r5, pc}
+ 158              		.cfi_endproc
+ 159              	.LFE3:
+ 160              		.size	EEPROM_writeByte, .-EEPROM_writeByte
+ 161 0036 00BF     		.section	.text.EEPROM_readPage,"ax",%progbits
+ 162              		.align	2
+ 163              		.global	EEPROM_readPage
+ 164              		.thumb
+ 165              		.thumb_func
+ 166              		.type	EEPROM_readPage, %function
+ 167              	EEPROM_readPage:
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccxiVGTb.s 			page 5
+
+
+ 168              	.LFB4:
+  62:25LC256.c     **** 
+  63:25LC256.c     **** void EEPROM_readPage(uint16_t addr, uint8_t* dataRX, uint8_t nBytes) {
+ 169              		.loc 1 63 0
+ 170              		.cfi_startproc
+ 171              		@ args = 0, pretend = 0, frame = 8
+ 172              		@ frame_needed = 0, uses_anonymous_args = 0
+ 173              	.LVL8:
+ 174 0000 10B5     		push	{r4, lr}
+ 175              		.cfi_def_cfa_offset 8
+ 176              		.cfi_offset 4, -8
+ 177              		.cfi_offset 14, -4
+ 178 0002 82B0     		sub	sp, sp, #8
+ 179              		.cfi_def_cfa_offset 16
+  64:25LC256.c     ****     
+  65:25LC256.c     **** 	/* Prepare the TX data packet: instruction + address */
+  66:25LC256.c     **** 	uint8_t dataTX[3] = {SPI_EEPROM_READ, ((addr & 0xFF00) >> 8), (addr & 0x00FF)};
+ 180              		.loc 1 66 0
+ 181 0004 0324     		movs	r4, #3
+ 182 0006 8DF80440 		strb	r4, [sp, #4]
+ 183 000a 030A     		lsrs	r3, r0, #8
+ 184 000c 8DF80530 		strb	r3, [sp, #5]
+ 185 0010 8DF80600 		strb	r0, [sp, #6]
+  67:25LC256.c     **** 	
+  68:25LC256.c     **** 	/* Read the nBytes */
+  69:25LC256.c     **** 	SPI_Interface_Multi_RW(dataTX, 3, dataRX, nBytes);
+ 186              		.loc 1 69 0
+ 187 0014 1346     		mov	r3, r2
+ 188 0016 0A46     		mov	r2, r1
+ 189              	.LVL9:
+ 190 0018 2146     		mov	r1, r4
+ 191              	.LVL10:
+ 192 001a 01A8     		add	r0, sp, #4
+ 193              	.LVL11:
+ 194 001c FFF7FEFF 		bl	SPI_Interface_Multi_RW
+ 195              	.LVL12:
+  70:25LC256.c     **** 		
+  71:25LC256.c     **** }
+ 196              		.loc 1 71 0
+ 197 0020 02B0     		add	sp, sp, #8
+ 198              		.cfi_def_cfa_offset 8
+ 199              		@ sp needed
+ 200 0022 10BD     		pop	{r4, pc}
+ 201              		.cfi_endproc
+ 202              	.LFE4:
+ 203              		.size	EEPROM_readPage, .-EEPROM_readPage
+ 204              		.section	.text.EEPROM_writePage,"ax",%progbits
+ 205              		.align	2
+ 206              		.global	EEPROM_writePage
+ 207              		.thumb
+ 208              		.thumb_func
+ 209              		.type	EEPROM_writePage, %function
+ 210              	EEPROM_writePage:
+ 211              	.LFB5:
+  72:25LC256.c     **** 
+  73:25LC256.c     **** void EEPROM_writePage(uint16_t addr, uint8_t* data, uint8_t nBytes) {
+ 212              		.loc 1 73 0
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccxiVGTb.s 			page 6
+
+
+ 213              		.cfi_startproc
+ 214              		@ args = 0, pretend = 0, frame = 8
+ 215              		@ frame_needed = 1, uses_anonymous_args = 0
+ 216              	.LVL13:
+ 217 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 218              		.cfi_def_cfa_offset 24
+ 219              		.cfi_offset 4, -24
+ 220              		.cfi_offset 5, -20
+ 221              		.cfi_offset 6, -16
+ 222              		.cfi_offset 7, -12
+ 223              		.cfi_offset 8, -8
+ 224              		.cfi_offset 14, -4
+ 225 0004 82B0     		sub	sp, sp, #8
+ 226              		.cfi_def_cfa_offset 32
+ 227 0006 00AF     		add	r7, sp, #0
+ 228              		.cfi_def_cfa_register 7
+ 229 0008 0546     		mov	r5, r0
+ 230 000a 8846     		mov	r8, r1
+ 231 000c 1446     		mov	r4, r2
+  74:25LC256.c     **** 	    
+  75:25LC256.c     ****     /* Enable WRITE operations */
+  76:25LC256.c     ****     EEPROM_writeEnable();
+ 232              		.loc 1 76 0
+ 233 000e FFF7FEFF 		bl	EEPROM_writeEnable
+ 234              	.LVL14:
+  77:25LC256.c     **** 	
+  78:25LC256.c     ****     CyDelayUs(1);
+ 235              		.loc 1 78 0
+ 236 0012 0120     		movs	r0, #1
+ 237 0014 FFF7FEFF 		bl	CyDelayUs
+ 238              	.LVL15:
+  79:25LC256.c     ****     
+  80:25LC256.c     **** 	/* Prepare the TX packet of size nBytes+3 
+  81:25LC256.c     ****        [ Write Instruction - Address MSB - Address LSB - +++data+++ ]
+  82:25LC256.c     ****     */
+  83:25LC256.c     **** 	uint8_t dataTX[3+nBytes];
+ 239              		.loc 1 83 0
+ 240 0018 E61C     		adds	r6, r4, #3
+ 241              	.LVL16:
+ 242 001a 04F10A03 		add	r3, r4, #10
+ 243 001e 23F00703 		bic	r3, r3, #7
+ 244 0022 ADEB030D 		sub	sp, sp, r3
+ 245              	.LVL17:
+  84:25LC256.c     ****     dataTX[0] = SPI_EEPROM_WRITE;
+ 246              		.loc 1 84 0
+ 247 0026 0223     		movs	r3, #2
+ 248 0028 8DF80030 		strb	r3, [sp]
+  85:25LC256.c     ****     dataTX[1] = (addr & 0xFF00) >> 8;
+ 249              		.loc 1 85 0
+ 250 002c 2B0A     		lsrs	r3, r5, #8
+ 251 002e 8DF80130 		strb	r3, [sp, #1]
+  86:25LC256.c     ****     dataTX[2] = addr & 0x00FF;
+ 252              		.loc 1 86 0
+ 253 0032 8DF80250 		strb	r5, [sp, #2]
+  87:25LC256.c     ****     /* Copy the input data in the memory */
+  88:25LC256.c     **** 	memcpy(&dataTX[3], data, nBytes);
+ 254              		.loc 1 88 0
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccxiVGTb.s 			page 7
+
+
+ 255 0036 2246     		mov	r2, r4
+ 256 0038 4146     		mov	r1, r8
+ 257 003a 0DF10300 		add	r0, sp, #3
+ 258 003e FFF7FEFF 		bl	memcpy
+ 259              	.LVL18:
+  89:25LC256.c     **** 	
+  90:25LC256.c     **** 	/* Nothing to RX: point to a dummy variable */
+  91:25LC256.c     **** 	uint8_t temp = 0;
+ 260              		.loc 1 91 0
+ 261 0042 0023     		movs	r3, #0
+ 262 0044 07F10802 		add	r2, r7, #8
+ 263 0048 02F8013D 		strb	r3, [r2, #-1]!
+  92:25LC256.c     **** 	
+  93:25LC256.c     **** 	SPI_Interface_Multi_RW(dataTX, 3+nBytes, &temp, 0);
+ 264              		.loc 1 93 0
+ 265 004c F1B2     		uxtb	r1, r6
+ 266 004e 6846     		mov	r0, sp
+ 267 0050 FFF7FEFF 		bl	SPI_Interface_Multi_RW
+ 268              	.LVL19:
+  94:25LC256.c     **** 	
+  95:25LC256.c     **** }
+ 269              		.loc 1 95 0
+ 270 0054 0837     		adds	r7, r7, #8
+ 271              		.cfi_def_cfa_offset 24
+ 272 0056 BD46     		mov	sp, r7
+ 273              		.cfi_def_cfa_register 13
+ 274              	.LVL20:
+ 275              		@ sp needed
+ 276 0058 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 277              		.cfi_endproc
+ 278              	.LFE5:
+ 279              		.size	EEPROM_writePage, .-EEPROM_writePage
+ 280              		.section	.text.EEPROM_waitForWriteComplete,"ax",%progbits
+ 281              		.align	2
+ 282              		.global	EEPROM_waitForWriteComplete
+ 283              		.thumb
+ 284              		.thumb_func
+ 285              		.type	EEPROM_waitForWriteComplete, %function
+ 286              	EEPROM_waitForWriteComplete:
+ 287              	.LFB6:
+  96:25LC256.c     **** 
+  97:25LC256.c     **** void EEPROM_waitForWriteComplete() {
+ 288              		.loc 1 97 0
+ 289              		.cfi_startproc
+ 290              		@ args = 0, pretend = 0, frame = 0
+ 291              		@ frame_needed = 0, uses_anonymous_args = 0
+ 292 0000 08B5     		push	{r3, lr}
+ 293              		.cfi_def_cfa_offset 8
+ 294              		.cfi_offset 3, -8
+ 295              		.cfi_offset 14, -4
+ 296              	.L14:
+  98:25LC256.c     ****     
+  99:25LC256.c     ****     while( EEPROM_readStatus() & SPI_EEPROM_WRITE_IN_PROGRESS );
+ 297              		.loc 1 99 0 discriminator 1
+ 298 0002 FFF7FEFF 		bl	EEPROM_readStatus
+ 299              	.LVL21:
+ 300 0006 10F0010F 		tst	r0, #1
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccxiVGTb.s 			page 8
+
+
+ 301 000a FAD1     		bne	.L14
+ 100:25LC256.c     ****     
+ 101:25LC256.c     **** }
+ 302              		.loc 1 101 0
+ 303 000c 08BD     		pop	{r3, pc}
+ 304              		.cfi_endproc
+ 305              	.LFE6:
+ 306              		.size	EEPROM_waitForWriteComplete, .-EEPROM_waitForWriteComplete
+ 307              		.comm	eeprom_Status,1,1
+ 308 000e 00BF     		.text
+ 309              	.Letext0:
+ 310              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.3\\psoc creator\\import\\gnu\\arm\\5.4.
+ 311              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.3\\psoc creator\\import\\gnu\\arm\\5.4.
+ 312              		.file 4 "SPI_Interface.h"
+ 313              		.file 5 "Generated_Source\\PSoC5/CyLib.h"
+ 314              		.section	.debug_info,"",%progbits
+ 315              	.Ldebug_info0:
+ 316 0000 B0030000 		.4byte	0x3b0
+ 317 0004 0400     		.2byte	0x4
+ 318 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 319 000a 04       		.byte	0x4
+ 320 000b 01       		.uleb128 0x1
+ 321 000c 9A000000 		.4byte	.LASF36
+ 322 0010 0C       		.byte	0xc
+ 323 0011 54010000 		.4byte	.LASF37
+ 324 0015 6B020000 		.4byte	.LASF38
+ 325 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 326 001d 00000000 		.4byte	0
+ 327 0021 00000000 		.4byte	.Ldebug_line0
+ 328 0025 02       		.uleb128 0x2
+ 329 0026 01       		.byte	0x1
+ 330 0027 06       		.byte	0x6
+ 331 0028 58020000 		.4byte	.LASF0
+ 332 002c 03       		.uleb128 0x3
+ 333 002d 11000000 		.4byte	.LASF3
+ 334 0031 02       		.byte	0x2
+ 335 0032 1D       		.byte	0x1d
+ 336 0033 37000000 		.4byte	0x37
+ 337 0037 02       		.uleb128 0x2
+ 338 0038 01       		.byte	0x1
+ 339 0039 08       		.byte	0x8
+ 340 003a 8C000000 		.4byte	.LASF1
+ 341 003e 02       		.uleb128 0x2
+ 342 003f 02       		.byte	0x2
+ 343 0040 05       		.byte	0x5
+ 344 0041 1A020000 		.4byte	.LASF2
+ 345 0045 03       		.uleb128 0x3
+ 346 0046 67010000 		.4byte	.LASF4
+ 347 004a 02       		.byte	0x2
+ 348 004b 2B       		.byte	0x2b
+ 349 004c 50000000 		.4byte	0x50
+ 350 0050 02       		.uleb128 0x2
+ 351 0051 02       		.byte	0x2
+ 352 0052 07       		.byte	0x7
+ 353 0053 28000000 		.4byte	.LASF5
+ 354 0057 02       		.uleb128 0x2
+ 355 0058 04       		.byte	0x4
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccxiVGTb.s 			page 9
+
+
+ 356 0059 05       		.byte	0x5
+ 357 005a 3E020000 		.4byte	.LASF6
+ 358 005e 02       		.uleb128 0x2
+ 359 005f 04       		.byte	0x4
+ 360 0060 07       		.byte	0x7
+ 361 0061 28010000 		.4byte	.LASF7
+ 362 0065 02       		.uleb128 0x2
+ 363 0066 08       		.byte	0x8
+ 364 0067 05       		.byte	0x5
+ 365 0068 05020000 		.4byte	.LASF8
+ 366 006c 02       		.uleb128 0x2
+ 367 006d 08       		.byte	0x8
+ 368 006e 07       		.byte	0x7
+ 369 006f BA010000 		.4byte	.LASF9
+ 370 0073 04       		.uleb128 0x4
+ 371 0074 04       		.byte	0x4
+ 372 0075 05       		.byte	0x5
+ 373 0076 696E7400 		.ascii	"int\000"
+ 374 007a 02       		.uleb128 0x2
+ 375 007b 04       		.byte	0x4
+ 376 007c 07       		.byte	0x7
+ 377 007d AD010000 		.4byte	.LASF10
+ 378 0081 03       		.uleb128 0x3
+ 379 0082 D1010000 		.4byte	.LASF11
+ 380 0086 03       		.byte	0x3
+ 381 0087 18       		.byte	0x18
+ 382 0088 2C000000 		.4byte	0x2c
+ 383 008c 03       		.uleb128 0x3
+ 384 008d 35020000 		.4byte	.LASF12
+ 385 0091 03       		.byte	0x3
+ 386 0092 24       		.byte	0x24
+ 387 0093 45000000 		.4byte	0x45
+ 388 0097 02       		.uleb128 0x2
+ 389 0098 04       		.byte	0x4
+ 390 0099 04       		.byte	0x4
+ 391 009a 1B000000 		.4byte	.LASF13
+ 392 009e 02       		.uleb128 0x2
+ 393 009f 08       		.byte	0x8
+ 394 00a0 04       		.byte	0x4
+ 395 00a1 72010000 		.4byte	.LASF14
+ 396 00a5 02       		.uleb128 0x2
+ 397 00a6 01       		.byte	0x1
+ 398 00a7 08       		.byte	0x8
+ 399 00a8 47020000 		.4byte	.LASF15
+ 400 00ac 02       		.uleb128 0x2
+ 401 00ad 08       		.byte	0x8
+ 402 00ae 04       		.byte	0x4
+ 403 00af 4C020000 		.4byte	.LASF16
+ 404 00b3 02       		.uleb128 0x2
+ 405 00b4 04       		.byte	0x4
+ 406 00b5 07       		.byte	0x7
+ 407 00b6 FC010000 		.4byte	.LASF17
+ 408 00ba 05       		.uleb128 0x5
+ 409 00bb 9B010000 		.4byte	.LASF18
+ 410 00bf 01       		.byte	0x1
+ 411 00c0 12       		.byte	0x12
+ 412 00c1 81000000 		.4byte	0x81
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccxiVGTb.s 			page 10
+
+
+ 413 00c5 00000000 		.4byte	.LFB0
+ 414 00c9 0A000000 		.4byte	.LFE0-.LFB0
+ 415 00cd 01       		.uleb128 0x1
+ 416 00ce 9C       		.byte	0x9c
+ 417 00cf E3000000 		.4byte	0xe3
+ 418 00d3 06       		.uleb128 0x6
+ 419 00d4 08000000 		.4byte	.LVL0
+ 420 00d8 7E030000 		.4byte	0x37e
+ 421 00dc 07       		.uleb128 0x7
+ 422 00dd 01       		.uleb128 0x1
+ 423 00de 50       		.byte	0x50
+ 424 00df 01       		.uleb128 0x1
+ 425 00e0 35       		.byte	0x35
+ 426 00e1 00       		.byte	0
+ 427 00e2 00       		.byte	0
+ 428 00e3 08       		.uleb128 0x8
+ 429 00e4 FB020000 		.4byte	.LASF22
+ 430 00e8 01       		.byte	0x1
+ 431 00e9 18       		.byte	0x18
+ 432 00ea 00000000 		.4byte	.LFB1
+ 433 00ee 0A000000 		.4byte	.LFE1-.LFB1
+ 434 00f2 01       		.uleb128 0x1
+ 435 00f3 9C       		.byte	0x9c
+ 436 00f4 08010000 		.4byte	0x108
+ 437 00f8 06       		.uleb128 0x6
+ 438 00f9 08000000 		.4byte	.LVL1
+ 439 00fd 89030000 		.4byte	0x389
+ 440 0101 07       		.uleb128 0x7
+ 441 0102 01       		.uleb128 0x1
+ 442 0103 50       		.byte	0x50
+ 443 0104 01       		.uleb128 0x1
+ 444 0105 36       		.byte	0x36
+ 445 0106 00       		.byte	0
+ 446 0107 00       		.byte	0
+ 447 0108 05       		.uleb128 0x5
+ 448 0109 44010000 		.4byte	.LASF19
+ 449 010d 01       		.byte	0x1
+ 450 010e 21       		.byte	0x21
+ 451 010f 81000000 		.4byte	0x81
+ 452 0113 00000000 		.4byte	.LFB2
+ 453 0117 2E000000 		.4byte	.LFE2-.LFB2
+ 454 011b 01       		.uleb128 0x1
+ 455 011c 9C       		.byte	0x9c
+ 456 011d 6D010000 		.4byte	0x16d
+ 457 0121 09       		.uleb128 0x9
+ 458 0122 3F010000 		.4byte	.LASF24
+ 459 0126 01       		.byte	0x1
+ 460 0127 21       		.byte	0x21
+ 461 0128 8C000000 		.4byte	0x8c
+ 462 012c 00000000 		.4byte	.LLST0
+ 463 0130 0A       		.uleb128 0xa
+ 464 0131 64020000 		.4byte	.LASF20
+ 465 0135 01       		.byte	0x1
+ 466 0136 24       		.byte	0x24
+ 467 0137 6D010000 		.4byte	0x16d
+ 468 013b 02       		.uleb128 0x2
+ 469 013c 91       		.byte	0x91
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccxiVGTb.s 			page 11
+
+
+ 470 013d 74       		.sleb128 -12
+ 471 013e 0A       		.uleb128 0xa
+ 472 013f D9010000 		.4byte	.LASF21
+ 473 0143 01       		.byte	0x1
+ 474 0144 27       		.byte	0x27
+ 475 0145 81000000 		.4byte	0x81
+ 476 0149 02       		.uleb128 0x2
+ 477 014a 91       		.byte	0x91
+ 478 014b 73       		.sleb128 -13
+ 479 014c 06       		.uleb128 0x6
+ 480 014d 24000000 		.4byte	.LVL4
+ 481 0151 94030000 		.4byte	0x394
+ 482 0155 07       		.uleb128 0x7
+ 483 0156 01       		.uleb128 0x1
+ 484 0157 50       		.byte	0x50
+ 485 0158 02       		.uleb128 0x2
+ 486 0159 91       		.byte	0x91
+ 487 015a 74       		.sleb128 -12
+ 488 015b 07       		.uleb128 0x7
+ 489 015c 01       		.uleb128 0x1
+ 490 015d 51       		.byte	0x51
+ 491 015e 01       		.uleb128 0x1
+ 492 015f 33       		.byte	0x33
+ 493 0160 07       		.uleb128 0x7
+ 494 0161 01       		.uleb128 0x1
+ 495 0162 52       		.byte	0x52
+ 496 0163 02       		.uleb128 0x2
+ 497 0164 91       		.byte	0x91
+ 498 0165 73       		.sleb128 -13
+ 499 0166 07       		.uleb128 0x7
+ 500 0167 01       		.uleb128 0x1
+ 501 0168 53       		.byte	0x53
+ 502 0169 01       		.uleb128 0x1
+ 503 016a 31       		.byte	0x31
+ 504 016b 00       		.byte	0
+ 505 016c 00       		.byte	0
+ 506 016d 0B       		.uleb128 0xb
+ 507 016e 81000000 		.4byte	0x81
+ 508 0172 7D010000 		.4byte	0x17d
+ 509 0176 0C       		.uleb128 0xc
+ 510 0177 B3000000 		.4byte	0xb3
+ 511 017b 02       		.byte	0x2
+ 512 017c 00       		.byte	0
+ 513 017d 08       		.uleb128 0x8
+ 514 017e 00000000 		.4byte	.LASF23
+ 515 0182 01       		.byte	0x1
+ 516 0183 30       		.byte	0x30
+ 517 0184 00000000 		.4byte	.LFB3
+ 518 0188 36000000 		.4byte	.LFE3-.LFB3
+ 519 018c 01       		.uleb128 0x1
+ 520 018d 9C       		.byte	0x9c
+ 521 018e F6010000 		.4byte	0x1f6
+ 522 0192 09       		.uleb128 0x9
+ 523 0193 3F010000 		.4byte	.LASF24
+ 524 0197 01       		.byte	0x1
+ 525 0198 30       		.byte	0x30
+ 526 0199 8C000000 		.4byte	0x8c
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccxiVGTb.s 			page 12
+
+
+ 527 019d 21000000 		.4byte	.LLST1
+ 528 01a1 09       		.uleb128 0x9
+ 529 01a2 5E010000 		.4byte	.LASF25
+ 530 01a6 01       		.byte	0x1
+ 531 01a7 30       		.byte	0x30
+ 532 01a8 81000000 		.4byte	0x81
+ 533 01ac 42000000 		.4byte	.LLST2
+ 534 01b0 0A       		.uleb128 0xa
+ 535 01b1 64020000 		.4byte	.LASF20
+ 536 01b5 01       		.byte	0x1
+ 537 01b6 36       		.byte	0x36
+ 538 01b7 F6010000 		.4byte	0x1f6
+ 539 01bb 02       		.uleb128 0x2
+ 540 01bc 91       		.byte	0x91
+ 541 01bd 6C       		.sleb128 -20
+ 542 01be 0A       		.uleb128 0xa
+ 543 01bf 3A010000 		.4byte	.LASF26
+ 544 01c3 01       		.byte	0x1
+ 545 01c4 38       		.byte	0x38
+ 546 01c5 81000000 		.4byte	0x81
+ 547 01c9 02       		.uleb128 0x2
+ 548 01ca 91       		.byte	0x91
+ 549 01cb 6B       		.sleb128 -21
+ 550 01cc 0D       		.uleb128 0xd
+ 551 01cd 0C000000 		.4byte	.LVL6
+ 552 01d1 E3000000 		.4byte	0xe3
+ 553 01d5 06       		.uleb128 0x6
+ 554 01d6 32000000 		.4byte	.LVL7
+ 555 01da 94030000 		.4byte	0x394
+ 556 01de 07       		.uleb128 0x7
+ 557 01df 01       		.uleb128 0x1
+ 558 01e0 50       		.byte	0x50
+ 559 01e1 02       		.uleb128 0x2
+ 560 01e2 91       		.byte	0x91
+ 561 01e3 6C       		.sleb128 -20
+ 562 01e4 07       		.uleb128 0x7
+ 563 01e5 01       		.uleb128 0x1
+ 564 01e6 51       		.byte	0x51
+ 565 01e7 01       		.uleb128 0x1
+ 566 01e8 34       		.byte	0x34
+ 567 01e9 07       		.uleb128 0x7
+ 568 01ea 01       		.uleb128 0x1
+ 569 01eb 52       		.byte	0x52
+ 570 01ec 02       		.uleb128 0x2
+ 571 01ed 91       		.byte	0x91
+ 572 01ee 6B       		.sleb128 -21
+ 573 01ef 07       		.uleb128 0x7
+ 574 01f0 01       		.uleb128 0x1
+ 575 01f1 53       		.byte	0x53
+ 576 01f2 01       		.uleb128 0x1
+ 577 01f3 30       		.byte	0x30
+ 578 01f4 00       		.byte	0
+ 579 01f5 00       		.byte	0
+ 580 01f6 0B       		.uleb128 0xb
+ 581 01f7 81000000 		.4byte	0x81
+ 582 01fb 06020000 		.4byte	0x206
+ 583 01ff 0C       		.uleb128 0xc
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccxiVGTb.s 			page 13
+
+
+ 584 0200 B3000000 		.4byte	0xb3
+ 585 0204 03       		.byte	0x3
+ 586 0205 00       		.byte	0
+ 587 0206 08       		.uleb128 0x8
+ 588 0207 52000000 		.4byte	.LASF27
+ 589 020b 01       		.byte	0x1
+ 590 020c 3F       		.byte	0x3f
+ 591 020d 00000000 		.4byte	.LFB4
+ 592 0211 24000000 		.4byte	.LFE4-.LFB4
+ 593 0215 01       		.uleb128 0x1
+ 594 0216 9C       		.byte	0x9c
+ 595 0217 74020000 		.4byte	0x274
+ 596 021b 09       		.uleb128 0x9
+ 597 021c 3F010000 		.4byte	.LASF24
+ 598 0220 01       		.byte	0x1
+ 599 0221 3F       		.byte	0x3f
+ 600 0222 8C000000 		.4byte	0x8c
+ 601 0226 63000000 		.4byte	.LLST3
+ 602 022a 09       		.uleb128 0x9
+ 603 022b D9010000 		.4byte	.LASF21
+ 604 022f 01       		.byte	0x1
+ 605 0230 3F       		.byte	0x3f
+ 606 0231 74020000 		.4byte	0x274
+ 607 0235 84000000 		.4byte	.LLST4
+ 608 0239 09       		.uleb128 0x9
+ 609 023a 21000000 		.4byte	.LASF28
+ 610 023e 01       		.byte	0x1
+ 611 023f 3F       		.byte	0x3f
+ 612 0240 81000000 		.4byte	0x81
+ 613 0244 B0000000 		.4byte	.LLST5
+ 614 0248 0A       		.uleb128 0xa
+ 615 0249 64020000 		.4byte	.LASF20
+ 616 024d 01       		.byte	0x1
+ 617 024e 42       		.byte	0x42
+ 618 024f 6D010000 		.4byte	0x16d
+ 619 0253 02       		.uleb128 0x2
+ 620 0254 91       		.byte	0x91
+ 621 0255 74       		.sleb128 -12
+ 622 0256 06       		.uleb128 0x6
+ 623 0257 20000000 		.4byte	.LVL12
+ 624 025b 94030000 		.4byte	0x394
+ 625 025f 07       		.uleb128 0x7
+ 626 0260 01       		.uleb128 0x1
+ 627 0261 50       		.byte	0x50
+ 628 0262 02       		.uleb128 0x2
+ 629 0263 91       		.byte	0x91
+ 630 0264 74       		.sleb128 -12
+ 631 0265 07       		.uleb128 0x7
+ 632 0266 01       		.uleb128 0x1
+ 633 0267 51       		.byte	0x51
+ 634 0268 02       		.uleb128 0x2
+ 635 0269 74       		.byte	0x74
+ 636 026a 00       		.sleb128 0
+ 637 026b 07       		.uleb128 0x7
+ 638 026c 01       		.uleb128 0x1
+ 639 026d 52       		.byte	0x52
+ 640 026e 03       		.uleb128 0x3
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccxiVGTb.s 			page 14
+
+
+ 641 026f F3       		.byte	0xf3
+ 642 0270 01       		.uleb128 0x1
+ 643 0271 51       		.byte	0x51
+ 644 0272 00       		.byte	0
+ 645 0273 00       		.byte	0
+ 646 0274 0E       		.uleb128 0xe
+ 647 0275 04       		.byte	0x4
+ 648 0276 81000000 		.4byte	0x81
+ 649 027a 08       		.uleb128 0x8
+ 650 027b 24020000 		.4byte	.LASF29
+ 651 027f 01       		.byte	0x1
+ 652 0280 49       		.byte	0x49
+ 653 0281 00000000 		.4byte	.LFB5
+ 654 0285 5C000000 		.4byte	.LFE5-.LFB5
+ 655 0289 01       		.uleb128 0x1
+ 656 028a 9C       		.byte	0x9c
+ 657 028b 37030000 		.4byte	0x337
+ 658 028f 09       		.uleb128 0x9
+ 659 0290 3F010000 		.4byte	.LASF24
+ 660 0294 01       		.byte	0x1
+ 661 0295 49       		.byte	0x49
+ 662 0296 8C000000 		.4byte	0x8c
+ 663 029a D1000000 		.4byte	.LLST6
+ 664 029e 09       		.uleb128 0x9
+ 665 029f 70000000 		.4byte	.LASF30
+ 666 02a3 01       		.byte	0x1
+ 667 02a4 49       		.byte	0x49
+ 668 02a5 74020000 		.4byte	0x274
+ 669 02a9 F2000000 		.4byte	.LLST7
+ 670 02ad 09       		.uleb128 0x9
+ 671 02ae 21000000 		.4byte	.LASF28
+ 672 02b2 01       		.byte	0x1
+ 673 02b3 49       		.byte	0x49
+ 674 02b4 81000000 		.4byte	0x81
+ 675 02b8 10010000 		.4byte	.LLST8
+ 676 02bc 0F       		.uleb128 0xf
+ 677 02bd 64020000 		.4byte	.LASF20
+ 678 02c1 01       		.byte	0x1
+ 679 02c2 53       		.byte	0x53
+ 680 02c3 37030000 		.4byte	0x337
+ 681 02c7 31010000 		.4byte	.LLST9
+ 682 02cb 0A       		.uleb128 0xa
+ 683 02cc 3A010000 		.4byte	.LASF26
+ 684 02d0 01       		.byte	0x1
+ 685 02d1 5B       		.byte	0x5b
+ 686 02d2 81000000 		.4byte	0x81
+ 687 02d6 02       		.uleb128 0x2
+ 688 02d7 91       		.byte	0x91
+ 689 02d8 67       		.sleb128 -25
+ 690 02d9 0D       		.uleb128 0xd
+ 691 02da 12000000 		.4byte	.LVL14
+ 692 02de E3000000 		.4byte	0xe3
+ 693 02e2 10       		.uleb128 0x10
+ 694 02e3 18000000 		.4byte	.LVL15
+ 695 02e7 9F030000 		.4byte	0x39f
+ 696 02eb F5020000 		.4byte	0x2f5
+ 697 02ef 07       		.uleb128 0x7
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccxiVGTb.s 			page 15
+
+
+ 698 02f0 01       		.uleb128 0x1
+ 699 02f1 50       		.byte	0x50
+ 700 02f2 01       		.uleb128 0x1
+ 701 02f3 31       		.byte	0x31
+ 702 02f4 00       		.byte	0
+ 703 02f5 10       		.uleb128 0x10
+ 704 02f6 42000000 		.4byte	.LVL18
+ 705 02fa AA030000 		.4byte	0x3aa
+ 706 02fe 15030000 		.4byte	0x315
+ 707 0302 07       		.uleb128 0x7
+ 708 0303 01       		.uleb128 0x1
+ 709 0304 50       		.byte	0x50
+ 710 0305 02       		.uleb128 0x2
+ 711 0306 7D       		.byte	0x7d
+ 712 0307 03       		.sleb128 3
+ 713 0308 07       		.uleb128 0x7
+ 714 0309 01       		.uleb128 0x1
+ 715 030a 51       		.byte	0x51
+ 716 030b 02       		.uleb128 0x2
+ 717 030c 78       		.byte	0x78
+ 718 030d 00       		.sleb128 0
+ 719 030e 07       		.uleb128 0x7
+ 720 030f 01       		.uleb128 0x1
+ 721 0310 52       		.byte	0x52
+ 722 0311 02       		.uleb128 0x2
+ 723 0312 74       		.byte	0x74
+ 724 0313 00       		.sleb128 0
+ 725 0314 00       		.byte	0
+ 726 0315 06       		.uleb128 0x6
+ 727 0316 54000000 		.4byte	.LVL19
+ 728 031a 94030000 		.4byte	0x394
+ 729 031e 07       		.uleb128 0x7
+ 730 031f 01       		.uleb128 0x1
+ 731 0320 50       		.byte	0x50
+ 732 0321 02       		.uleb128 0x2
+ 733 0322 7D       		.byte	0x7d
+ 734 0323 00       		.sleb128 0
+ 735 0324 07       		.uleb128 0x7
+ 736 0325 01       		.uleb128 0x1
+ 737 0326 51       		.byte	0x51
+ 738 0327 02       		.uleb128 0x2
+ 739 0328 76       		.byte	0x76
+ 740 0329 00       		.sleb128 0
+ 741 032a 07       		.uleb128 0x7
+ 742 032b 01       		.uleb128 0x1
+ 743 032c 52       		.byte	0x52
+ 744 032d 02       		.uleb128 0x2
+ 745 032e 77       		.byte	0x77
+ 746 032f 17       		.sleb128 23
+ 747 0330 07       		.uleb128 0x7
+ 748 0331 01       		.uleb128 0x1
+ 749 0332 53       		.byte	0x53
+ 750 0333 01       		.uleb128 0x1
+ 751 0334 30       		.byte	0x30
+ 752 0335 00       		.byte	0
+ 753 0336 00       		.byte	0
+ 754 0337 0B       		.uleb128 0xb
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccxiVGTb.s 			page 16
+
+
+ 755 0338 81000000 		.4byte	0x81
+ 756 033c 4E030000 		.4byte	0x34e
+ 757 0340 11       		.uleb128 0x11
+ 758 0341 B3000000 		.4byte	0xb3
+ 759 0345 07       		.uleb128 0x7
+ 760 0346 74       		.byte	0x74
+ 761 0347 00       		.sleb128 0
+ 762 0348 08       		.byte	0x8
+ 763 0349 FF       		.byte	0xff
+ 764 034a 1A       		.byte	0x1a
+ 765 034b 23       		.byte	0x23
+ 766 034c 02       		.uleb128 0x2
+ 767 034d 00       		.byte	0
+ 768 034e 08       		.uleb128 0x8
+ 769 034f E0010000 		.4byte	.LASF31
+ 770 0353 01       		.byte	0x1
+ 771 0354 61       		.byte	0x61
+ 772 0355 00000000 		.4byte	.LFB6
+ 773 0359 0E000000 		.4byte	.LFE6-.LFB6
+ 774 035d 01       		.uleb128 0x1
+ 775 035e 9C       		.byte	0x9c
+ 776 035f 6D030000 		.4byte	0x36d
+ 777 0363 0D       		.uleb128 0xd
+ 778 0364 06000000 		.4byte	.LVL21
+ 779 0368 BA000000 		.4byte	0xba
+ 780 036c 00       		.byte	0
+ 781 036d 12       		.uleb128 0x12
+ 782 036e 62000000 		.4byte	.LASF39
+ 783 0372 01       		.byte	0x1
+ 784 0373 0E       		.byte	0xe
+ 785 0374 81000000 		.4byte	0x81
+ 786 0378 05       		.uleb128 0x5
+ 787 0379 03       		.byte	0x3
+ 788 037a 00000000 		.4byte	eeprom_Status
+ 789 037e 13       		.uleb128 0x13
+ 790 037f 75000000 		.4byte	.LASF32
+ 791 0383 75000000 		.4byte	.LASF32
+ 792 0387 04       		.byte	0x4
+ 793 0388 3B       		.byte	0x3b
+ 794 0389 13       		.uleb128 0x13
+ 795 038a 79010000 		.4byte	.LASF33
+ 796 038e 79010000 		.4byte	.LASF33
+ 797 0392 04       		.byte	0x4
+ 798 0393 2B       		.byte	0x2b
+ 799 0394 13       		.uleb128 0x13
+ 800 0395 3B000000 		.4byte	.LASF34
+ 801 0399 3B000000 		.4byte	.LASF34
+ 802 039d 04       		.byte	0x4
+ 803 039e 57       		.byte	0x57
+ 804 039f 13       		.uleb128 0x13
+ 805 03a0 91010000 		.4byte	.LASF35
+ 806 03a4 91010000 		.4byte	.LASF35
+ 807 03a8 05       		.byte	0x5
+ 808 03a9 77       		.byte	0x77
+ 809 03aa 14       		.uleb128 0x14
+ 810 03ab 13020000 		.4byte	.LASF40
+ 811 03af 13020000 		.4byte	.LASF40
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccxiVGTb.s 			page 17
+
+
+ 812 03b3 00       		.byte	0
+ 813              		.section	.debug_abbrev,"",%progbits
+ 814              	.Ldebug_abbrev0:
+ 815 0000 01       		.uleb128 0x1
+ 816 0001 11       		.uleb128 0x11
+ 817 0002 01       		.byte	0x1
+ 818 0003 25       		.uleb128 0x25
+ 819 0004 0E       		.uleb128 0xe
+ 820 0005 13       		.uleb128 0x13
+ 821 0006 0B       		.uleb128 0xb
+ 822 0007 03       		.uleb128 0x3
+ 823 0008 0E       		.uleb128 0xe
+ 824 0009 1B       		.uleb128 0x1b
+ 825 000a 0E       		.uleb128 0xe
+ 826 000b 55       		.uleb128 0x55
+ 827 000c 17       		.uleb128 0x17
+ 828 000d 11       		.uleb128 0x11
+ 829 000e 01       		.uleb128 0x1
+ 830 000f 10       		.uleb128 0x10
+ 831 0010 17       		.uleb128 0x17
+ 832 0011 00       		.byte	0
+ 833 0012 00       		.byte	0
+ 834 0013 02       		.uleb128 0x2
+ 835 0014 24       		.uleb128 0x24
+ 836 0015 00       		.byte	0
+ 837 0016 0B       		.uleb128 0xb
+ 838 0017 0B       		.uleb128 0xb
+ 839 0018 3E       		.uleb128 0x3e
+ 840 0019 0B       		.uleb128 0xb
+ 841 001a 03       		.uleb128 0x3
+ 842 001b 0E       		.uleb128 0xe
+ 843 001c 00       		.byte	0
+ 844 001d 00       		.byte	0
+ 845 001e 03       		.uleb128 0x3
+ 846 001f 16       		.uleb128 0x16
+ 847 0020 00       		.byte	0
+ 848 0021 03       		.uleb128 0x3
+ 849 0022 0E       		.uleb128 0xe
+ 850 0023 3A       		.uleb128 0x3a
+ 851 0024 0B       		.uleb128 0xb
+ 852 0025 3B       		.uleb128 0x3b
+ 853 0026 0B       		.uleb128 0xb
+ 854 0027 49       		.uleb128 0x49
+ 855 0028 13       		.uleb128 0x13
+ 856 0029 00       		.byte	0
+ 857 002a 00       		.byte	0
+ 858 002b 04       		.uleb128 0x4
+ 859 002c 24       		.uleb128 0x24
+ 860 002d 00       		.byte	0
+ 861 002e 0B       		.uleb128 0xb
+ 862 002f 0B       		.uleb128 0xb
+ 863 0030 3E       		.uleb128 0x3e
+ 864 0031 0B       		.uleb128 0xb
+ 865 0032 03       		.uleb128 0x3
+ 866 0033 08       		.uleb128 0x8
+ 867 0034 00       		.byte	0
+ 868 0035 00       		.byte	0
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccxiVGTb.s 			page 18
+
+
+ 869 0036 05       		.uleb128 0x5
+ 870 0037 2E       		.uleb128 0x2e
+ 871 0038 01       		.byte	0x1
+ 872 0039 3F       		.uleb128 0x3f
+ 873 003a 19       		.uleb128 0x19
+ 874 003b 03       		.uleb128 0x3
+ 875 003c 0E       		.uleb128 0xe
+ 876 003d 3A       		.uleb128 0x3a
+ 877 003e 0B       		.uleb128 0xb
+ 878 003f 3B       		.uleb128 0x3b
+ 879 0040 0B       		.uleb128 0xb
+ 880 0041 27       		.uleb128 0x27
+ 881 0042 19       		.uleb128 0x19
+ 882 0043 49       		.uleb128 0x49
+ 883 0044 13       		.uleb128 0x13
+ 884 0045 11       		.uleb128 0x11
+ 885 0046 01       		.uleb128 0x1
+ 886 0047 12       		.uleb128 0x12
+ 887 0048 06       		.uleb128 0x6
+ 888 0049 40       		.uleb128 0x40
+ 889 004a 18       		.uleb128 0x18
+ 890 004b 9742     		.uleb128 0x2117
+ 891 004d 19       		.uleb128 0x19
+ 892 004e 01       		.uleb128 0x1
+ 893 004f 13       		.uleb128 0x13
+ 894 0050 00       		.byte	0
+ 895 0051 00       		.byte	0
+ 896 0052 06       		.uleb128 0x6
+ 897 0053 898201   		.uleb128 0x4109
+ 898 0056 01       		.byte	0x1
+ 899 0057 11       		.uleb128 0x11
+ 900 0058 01       		.uleb128 0x1
+ 901 0059 31       		.uleb128 0x31
+ 902 005a 13       		.uleb128 0x13
+ 903 005b 00       		.byte	0
+ 904 005c 00       		.byte	0
+ 905 005d 07       		.uleb128 0x7
+ 906 005e 8A8201   		.uleb128 0x410a
+ 907 0061 00       		.byte	0
+ 908 0062 02       		.uleb128 0x2
+ 909 0063 18       		.uleb128 0x18
+ 910 0064 9142     		.uleb128 0x2111
+ 911 0066 18       		.uleb128 0x18
+ 912 0067 00       		.byte	0
+ 913 0068 00       		.byte	0
+ 914 0069 08       		.uleb128 0x8
+ 915 006a 2E       		.uleb128 0x2e
+ 916 006b 01       		.byte	0x1
+ 917 006c 3F       		.uleb128 0x3f
+ 918 006d 19       		.uleb128 0x19
+ 919 006e 03       		.uleb128 0x3
+ 920 006f 0E       		.uleb128 0xe
+ 921 0070 3A       		.uleb128 0x3a
+ 922 0071 0B       		.uleb128 0xb
+ 923 0072 3B       		.uleb128 0x3b
+ 924 0073 0B       		.uleb128 0xb
+ 925 0074 27       		.uleb128 0x27
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccxiVGTb.s 			page 19
+
+
+ 926 0075 19       		.uleb128 0x19
+ 927 0076 11       		.uleb128 0x11
+ 928 0077 01       		.uleb128 0x1
+ 929 0078 12       		.uleb128 0x12
+ 930 0079 06       		.uleb128 0x6
+ 931 007a 40       		.uleb128 0x40
+ 932 007b 18       		.uleb128 0x18
+ 933 007c 9742     		.uleb128 0x2117
+ 934 007e 19       		.uleb128 0x19
+ 935 007f 01       		.uleb128 0x1
+ 936 0080 13       		.uleb128 0x13
+ 937 0081 00       		.byte	0
+ 938 0082 00       		.byte	0
+ 939 0083 09       		.uleb128 0x9
+ 940 0084 05       		.uleb128 0x5
+ 941 0085 00       		.byte	0
+ 942 0086 03       		.uleb128 0x3
+ 943 0087 0E       		.uleb128 0xe
+ 944 0088 3A       		.uleb128 0x3a
+ 945 0089 0B       		.uleb128 0xb
+ 946 008a 3B       		.uleb128 0x3b
+ 947 008b 0B       		.uleb128 0xb
+ 948 008c 49       		.uleb128 0x49
+ 949 008d 13       		.uleb128 0x13
+ 950 008e 02       		.uleb128 0x2
+ 951 008f 17       		.uleb128 0x17
+ 952 0090 00       		.byte	0
+ 953 0091 00       		.byte	0
+ 954 0092 0A       		.uleb128 0xa
+ 955 0093 34       		.uleb128 0x34
+ 956 0094 00       		.byte	0
+ 957 0095 03       		.uleb128 0x3
+ 958 0096 0E       		.uleb128 0xe
+ 959 0097 3A       		.uleb128 0x3a
+ 960 0098 0B       		.uleb128 0xb
+ 961 0099 3B       		.uleb128 0x3b
+ 962 009a 0B       		.uleb128 0xb
+ 963 009b 49       		.uleb128 0x49
+ 964 009c 13       		.uleb128 0x13
+ 965 009d 02       		.uleb128 0x2
+ 966 009e 18       		.uleb128 0x18
+ 967 009f 00       		.byte	0
+ 968 00a0 00       		.byte	0
+ 969 00a1 0B       		.uleb128 0xb
+ 970 00a2 01       		.uleb128 0x1
+ 971 00a3 01       		.byte	0x1
+ 972 00a4 49       		.uleb128 0x49
+ 973 00a5 13       		.uleb128 0x13
+ 974 00a6 01       		.uleb128 0x1
+ 975 00a7 13       		.uleb128 0x13
+ 976 00a8 00       		.byte	0
+ 977 00a9 00       		.byte	0
+ 978 00aa 0C       		.uleb128 0xc
+ 979 00ab 21       		.uleb128 0x21
+ 980 00ac 00       		.byte	0
+ 981 00ad 49       		.uleb128 0x49
+ 982 00ae 13       		.uleb128 0x13
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccxiVGTb.s 			page 20
+
+
+ 983 00af 2F       		.uleb128 0x2f
+ 984 00b0 0B       		.uleb128 0xb
+ 985 00b1 00       		.byte	0
+ 986 00b2 00       		.byte	0
+ 987 00b3 0D       		.uleb128 0xd
+ 988 00b4 898201   		.uleb128 0x4109
+ 989 00b7 00       		.byte	0
+ 990 00b8 11       		.uleb128 0x11
+ 991 00b9 01       		.uleb128 0x1
+ 992 00ba 31       		.uleb128 0x31
+ 993 00bb 13       		.uleb128 0x13
+ 994 00bc 00       		.byte	0
+ 995 00bd 00       		.byte	0
+ 996 00be 0E       		.uleb128 0xe
+ 997 00bf 0F       		.uleb128 0xf
+ 998 00c0 00       		.byte	0
+ 999 00c1 0B       		.uleb128 0xb
+ 1000 00c2 0B       		.uleb128 0xb
+ 1001 00c3 49       		.uleb128 0x49
+ 1002 00c4 13       		.uleb128 0x13
+ 1003 00c5 00       		.byte	0
+ 1004 00c6 00       		.byte	0
+ 1005 00c7 0F       		.uleb128 0xf
+ 1006 00c8 34       		.uleb128 0x34
+ 1007 00c9 00       		.byte	0
+ 1008 00ca 03       		.uleb128 0x3
+ 1009 00cb 0E       		.uleb128 0xe
+ 1010 00cc 3A       		.uleb128 0x3a
+ 1011 00cd 0B       		.uleb128 0xb
+ 1012 00ce 3B       		.uleb128 0x3b
+ 1013 00cf 0B       		.uleb128 0xb
+ 1014 00d0 49       		.uleb128 0x49
+ 1015 00d1 13       		.uleb128 0x13
+ 1016 00d2 02       		.uleb128 0x2
+ 1017 00d3 17       		.uleb128 0x17
+ 1018 00d4 00       		.byte	0
+ 1019 00d5 00       		.byte	0
+ 1020 00d6 10       		.uleb128 0x10
+ 1021 00d7 898201   		.uleb128 0x4109
+ 1022 00da 01       		.byte	0x1
+ 1023 00db 11       		.uleb128 0x11
+ 1024 00dc 01       		.uleb128 0x1
+ 1025 00dd 31       		.uleb128 0x31
+ 1026 00de 13       		.uleb128 0x13
+ 1027 00df 01       		.uleb128 0x1
+ 1028 00e0 13       		.uleb128 0x13
+ 1029 00e1 00       		.byte	0
+ 1030 00e2 00       		.byte	0
+ 1031 00e3 11       		.uleb128 0x11
+ 1032 00e4 21       		.uleb128 0x21
+ 1033 00e5 00       		.byte	0
+ 1034 00e6 49       		.uleb128 0x49
+ 1035 00e7 13       		.uleb128 0x13
+ 1036 00e8 2F       		.uleb128 0x2f
+ 1037 00e9 18       		.uleb128 0x18
+ 1038 00ea 00       		.byte	0
+ 1039 00eb 00       		.byte	0
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccxiVGTb.s 			page 21
+
+
+ 1040 00ec 12       		.uleb128 0x12
+ 1041 00ed 34       		.uleb128 0x34
+ 1042 00ee 00       		.byte	0
+ 1043 00ef 03       		.uleb128 0x3
+ 1044 00f0 0E       		.uleb128 0xe
+ 1045 00f1 3A       		.uleb128 0x3a
+ 1046 00f2 0B       		.uleb128 0xb
+ 1047 00f3 3B       		.uleb128 0x3b
+ 1048 00f4 0B       		.uleb128 0xb
+ 1049 00f5 49       		.uleb128 0x49
+ 1050 00f6 13       		.uleb128 0x13
+ 1051 00f7 3F       		.uleb128 0x3f
+ 1052 00f8 19       		.uleb128 0x19
+ 1053 00f9 02       		.uleb128 0x2
+ 1054 00fa 18       		.uleb128 0x18
+ 1055 00fb 00       		.byte	0
+ 1056 00fc 00       		.byte	0
+ 1057 00fd 13       		.uleb128 0x13
+ 1058 00fe 2E       		.uleb128 0x2e
+ 1059 00ff 00       		.byte	0
+ 1060 0100 3F       		.uleb128 0x3f
+ 1061 0101 19       		.uleb128 0x19
+ 1062 0102 3C       		.uleb128 0x3c
+ 1063 0103 19       		.uleb128 0x19
+ 1064 0104 6E       		.uleb128 0x6e
+ 1065 0105 0E       		.uleb128 0xe
+ 1066 0106 03       		.uleb128 0x3
+ 1067 0107 0E       		.uleb128 0xe
+ 1068 0108 3A       		.uleb128 0x3a
+ 1069 0109 0B       		.uleb128 0xb
+ 1070 010a 3B       		.uleb128 0x3b
+ 1071 010b 0B       		.uleb128 0xb
+ 1072 010c 00       		.byte	0
+ 1073 010d 00       		.byte	0
+ 1074 010e 14       		.uleb128 0x14
+ 1075 010f 2E       		.uleb128 0x2e
+ 1076 0110 00       		.byte	0
+ 1077 0111 3F       		.uleb128 0x3f
+ 1078 0112 19       		.uleb128 0x19
+ 1079 0113 3C       		.uleb128 0x3c
+ 1080 0114 19       		.uleb128 0x19
+ 1081 0115 6E       		.uleb128 0x6e
+ 1082 0116 0E       		.uleb128 0xe
+ 1083 0117 03       		.uleb128 0x3
+ 1084 0118 0E       		.uleb128 0xe
+ 1085 0119 00       		.byte	0
+ 1086 011a 00       		.byte	0
+ 1087 011b 00       		.byte	0
+ 1088              		.section	.debug_loc,"",%progbits
+ 1089              	.Ldebug_loc0:
+ 1090              	.LLST0:
+ 1091 0000 00000000 		.4byte	.LVL2
+ 1092 0004 20000000 		.4byte	.LVL3
+ 1093 0008 0100     		.2byte	0x1
+ 1094 000a 50       		.byte	0x50
+ 1095 000b 20000000 		.4byte	.LVL3
+ 1096 000f 2E000000 		.4byte	.LFE2
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccxiVGTb.s 			page 22
+
+
+ 1097 0013 0400     		.2byte	0x4
+ 1098 0015 F3       		.byte	0xf3
+ 1099 0016 01       		.uleb128 0x1
+ 1100 0017 50       		.byte	0x50
+ 1101 0018 9F       		.byte	0x9f
+ 1102 0019 00000000 		.4byte	0
+ 1103 001d 00000000 		.4byte	0
+ 1104              	.LLST1:
+ 1105 0021 00000000 		.4byte	.LVL5
+ 1106 0025 0B000000 		.4byte	.LVL6-1
+ 1107 0029 0100     		.2byte	0x1
+ 1108 002b 50       		.byte	0x50
+ 1109 002c 0B000000 		.4byte	.LVL6-1
+ 1110 0030 36000000 		.4byte	.LFE3
+ 1111 0034 0400     		.2byte	0x4
+ 1112 0036 F3       		.byte	0xf3
+ 1113 0037 01       		.uleb128 0x1
+ 1114 0038 50       		.byte	0x50
+ 1115 0039 9F       		.byte	0x9f
+ 1116 003a 00000000 		.4byte	0
+ 1117 003e 00000000 		.4byte	0
+ 1118              	.LLST2:
+ 1119 0042 00000000 		.4byte	.LVL5
+ 1120 0046 0B000000 		.4byte	.LVL6-1
+ 1121 004a 0100     		.2byte	0x1
+ 1122 004c 51       		.byte	0x51
+ 1123 004d 0B000000 		.4byte	.LVL6-1
+ 1124 0051 36000000 		.4byte	.LFE3
+ 1125 0055 0400     		.2byte	0x4
+ 1126 0057 F3       		.byte	0xf3
+ 1127 0058 01       		.uleb128 0x1
+ 1128 0059 51       		.byte	0x51
+ 1129 005a 9F       		.byte	0x9f
+ 1130 005b 00000000 		.4byte	0
+ 1131 005f 00000000 		.4byte	0
+ 1132              	.LLST3:
+ 1133 0063 00000000 		.4byte	.LVL8
+ 1134 0067 1C000000 		.4byte	.LVL11
+ 1135 006b 0100     		.2byte	0x1
+ 1136 006d 50       		.byte	0x50
+ 1137 006e 1C000000 		.4byte	.LVL11
+ 1138 0072 24000000 		.4byte	.LFE4
+ 1139 0076 0400     		.2byte	0x4
+ 1140 0078 F3       		.byte	0xf3
+ 1141 0079 01       		.uleb128 0x1
+ 1142 007a 50       		.byte	0x50
+ 1143 007b 9F       		.byte	0x9f
+ 1144 007c 00000000 		.4byte	0
+ 1145 0080 00000000 		.4byte	0
+ 1146              	.LLST4:
+ 1147 0084 00000000 		.4byte	.LVL8
+ 1148 0088 1A000000 		.4byte	.LVL10
+ 1149 008c 0100     		.2byte	0x1
+ 1150 008e 51       		.byte	0x51
+ 1151 008f 1A000000 		.4byte	.LVL10
+ 1152 0093 1F000000 		.4byte	.LVL12-1
+ 1153 0097 0100     		.2byte	0x1
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccxiVGTb.s 			page 23
+
+
+ 1154 0099 52       		.byte	0x52
+ 1155 009a 1F000000 		.4byte	.LVL12-1
+ 1156 009e 24000000 		.4byte	.LFE4
+ 1157 00a2 0400     		.2byte	0x4
+ 1158 00a4 F3       		.byte	0xf3
+ 1159 00a5 01       		.uleb128 0x1
+ 1160 00a6 51       		.byte	0x51
+ 1161 00a7 9F       		.byte	0x9f
+ 1162 00a8 00000000 		.4byte	0
+ 1163 00ac 00000000 		.4byte	0
+ 1164              	.LLST5:
+ 1165 00b0 00000000 		.4byte	.LVL8
+ 1166 00b4 18000000 		.4byte	.LVL9
+ 1167 00b8 0100     		.2byte	0x1
+ 1168 00ba 52       		.byte	0x52
+ 1169 00bb 18000000 		.4byte	.LVL9
+ 1170 00bf 24000000 		.4byte	.LFE4
+ 1171 00c3 0400     		.2byte	0x4
+ 1172 00c5 F3       		.byte	0xf3
+ 1173 00c6 01       		.uleb128 0x1
+ 1174 00c7 52       		.byte	0x52
+ 1175 00c8 9F       		.byte	0x9f
+ 1176 00c9 00000000 		.4byte	0
+ 1177 00cd 00000000 		.4byte	0
+ 1178              	.LLST6:
+ 1179 00d1 00000000 		.4byte	.LVL13
+ 1180 00d5 11000000 		.4byte	.LVL14-1
+ 1181 00d9 0100     		.2byte	0x1
+ 1182 00db 50       		.byte	0x50
+ 1183 00dc 11000000 		.4byte	.LVL14-1
+ 1184 00e0 5C000000 		.4byte	.LFE5
+ 1185 00e4 0400     		.2byte	0x4
+ 1186 00e6 F3       		.byte	0xf3
+ 1187 00e7 01       		.uleb128 0x1
+ 1188 00e8 50       		.byte	0x50
+ 1189 00e9 9F       		.byte	0x9f
+ 1190 00ea 00000000 		.4byte	0
+ 1191 00ee 00000000 		.4byte	0
+ 1192              	.LLST7:
+ 1193 00f2 00000000 		.4byte	.LVL13
+ 1194 00f6 11000000 		.4byte	.LVL14-1
+ 1195 00fa 0100     		.2byte	0x1
+ 1196 00fc 51       		.byte	0x51
+ 1197 00fd 11000000 		.4byte	.LVL14-1
+ 1198 0101 5C000000 		.4byte	.LFE5
+ 1199 0105 0100     		.2byte	0x1
+ 1200 0107 58       		.byte	0x58
+ 1201 0108 00000000 		.4byte	0
+ 1202 010c 00000000 		.4byte	0
+ 1203              	.LLST8:
+ 1204 0110 00000000 		.4byte	.LVL13
+ 1205 0114 11000000 		.4byte	.LVL14-1
+ 1206 0118 0100     		.2byte	0x1
+ 1207 011a 52       		.byte	0x52
+ 1208 011b 11000000 		.4byte	.LVL14-1
+ 1209 011f 5C000000 		.4byte	.LFE5
+ 1210 0123 0400     		.2byte	0x4
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccxiVGTb.s 			page 24
+
+
+ 1211 0125 F3       		.byte	0xf3
+ 1212 0126 01       		.uleb128 0x1
+ 1213 0127 52       		.byte	0x52
+ 1214 0128 9F       		.byte	0x9f
+ 1215 0129 00000000 		.4byte	0
+ 1216 012d 00000000 		.4byte	0
+ 1217              	.LLST9:
+ 1218 0131 26000000 		.4byte	.LVL17
+ 1219 0135 58000000 		.4byte	.LVL20
+ 1220 0139 0200     		.2byte	0x2
+ 1221 013b 7D       		.byte	0x7d
+ 1222 013c 00       		.sleb128 0
+ 1223 013d 58000000 		.4byte	.LVL20
+ 1224 0141 5C000000 		.4byte	.LFE5
+ 1225 0145 0B00     		.2byte	0xb
+ 1226 0147 91       		.byte	0x91
+ 1227 0148 00       		.sleb128 0
+ 1228 0149 74       		.byte	0x74
+ 1229 014a 0A       		.sleb128 10
+ 1230 014b 09       		.byte	0x9
+ 1231 014c F8       		.byte	0xf8
+ 1232 014d 1A       		.byte	0x1a
+ 1233 014e 1C       		.byte	0x1c
+ 1234 014f 08       		.byte	0x8
+ 1235 0150 20       		.byte	0x20
+ 1236 0151 1C       		.byte	0x1c
+ 1237 0152 00000000 		.4byte	0
+ 1238 0156 00000000 		.4byte	0
+ 1239              		.section	.debug_aranges,"",%progbits
+ 1240 0000 4C000000 		.4byte	0x4c
+ 1241 0004 0200     		.2byte	0x2
+ 1242 0006 00000000 		.4byte	.Ldebug_info0
+ 1243 000a 04       		.byte	0x4
+ 1244 000b 00       		.byte	0
+ 1245 000c 0000     		.2byte	0
+ 1246 000e 0000     		.2byte	0
+ 1247 0010 00000000 		.4byte	.LFB0
+ 1248 0014 0A000000 		.4byte	.LFE0-.LFB0
+ 1249 0018 00000000 		.4byte	.LFB1
+ 1250 001c 0A000000 		.4byte	.LFE1-.LFB1
+ 1251 0020 00000000 		.4byte	.LFB2
+ 1252 0024 2E000000 		.4byte	.LFE2-.LFB2
+ 1253 0028 00000000 		.4byte	.LFB3
+ 1254 002c 36000000 		.4byte	.LFE3-.LFB3
+ 1255 0030 00000000 		.4byte	.LFB4
+ 1256 0034 24000000 		.4byte	.LFE4-.LFB4
+ 1257 0038 00000000 		.4byte	.LFB5
+ 1258 003c 5C000000 		.4byte	.LFE5-.LFB5
+ 1259 0040 00000000 		.4byte	.LFB6
+ 1260 0044 0E000000 		.4byte	.LFE6-.LFB6
+ 1261 0048 00000000 		.4byte	0
+ 1262 004c 00000000 		.4byte	0
+ 1263              		.section	.debug_ranges,"",%progbits
+ 1264              	.Ldebug_ranges0:
+ 1265 0000 00000000 		.4byte	.LFB0
+ 1266 0004 0A000000 		.4byte	.LFE0
+ 1267 0008 00000000 		.4byte	.LFB1
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccxiVGTb.s 			page 25
+
+
+ 1268 000c 0A000000 		.4byte	.LFE1
+ 1269 0010 00000000 		.4byte	.LFB2
+ 1270 0014 2E000000 		.4byte	.LFE2
+ 1271 0018 00000000 		.4byte	.LFB3
+ 1272 001c 36000000 		.4byte	.LFE3
+ 1273 0020 00000000 		.4byte	.LFB4
+ 1274 0024 24000000 		.4byte	.LFE4
+ 1275 0028 00000000 		.4byte	.LFB5
+ 1276 002c 5C000000 		.4byte	.LFE5
+ 1277 0030 00000000 		.4byte	.LFB6
+ 1278 0034 0E000000 		.4byte	.LFE6
+ 1279 0038 00000000 		.4byte	0
+ 1280 003c 00000000 		.4byte	0
+ 1281              		.section	.debug_line,"",%progbits
+ 1282              	.Ldebug_line0:
+ 1283 0000 E2010000 		.section	.debug_str,"MS",%progbits,1
+ 1283      02005201 
+ 1283      00000201 
+ 1283      FB0E0D00 
+ 1283      01010101 
+ 1284              	.LASF23:
+ 1285 0000 45455052 		.ascii	"EEPROM_writeByte\000"
+ 1285      4F4D5F77 
+ 1285      72697465 
+ 1285      42797465 
+ 1285      00
+ 1286              	.LASF3:
+ 1287 0011 5F5F7569 		.ascii	"__uint8_t\000"
+ 1287      6E74385F 
+ 1287      7400
+ 1288              	.LASF13:
+ 1289 001b 666C6F61 		.ascii	"float\000"
+ 1289      7400
+ 1290              	.LASF28:
+ 1291 0021 6E427974 		.ascii	"nBytes\000"
+ 1291      657300
+ 1292              	.LASF5:
+ 1293 0028 73686F72 		.ascii	"short unsigned int\000"
+ 1293      7420756E 
+ 1293      7369676E 
+ 1293      65642069 
+ 1293      6E7400
+ 1294              	.LASF34:
+ 1295 003b 5350495F 		.ascii	"SPI_Interface_Multi_RW\000"
+ 1295      496E7465 
+ 1295      72666163 
+ 1295      655F4D75 
+ 1295      6C74695F 
+ 1296              	.LASF27:
+ 1297 0052 45455052 		.ascii	"EEPROM_readPage\000"
+ 1297      4F4D5F72 
+ 1297      65616450 
+ 1297      61676500 
+ 1298              	.LASF39:
+ 1299 0062 65657072 		.ascii	"eeprom_Status\000"
+ 1299      6F6D5F53 
+ 1299      74617475 
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccxiVGTb.s 			page 26
+
+
+ 1299      7300
+ 1300              	.LASF30:
+ 1301 0070 64617461 		.ascii	"data\000"
+ 1301      00
+ 1302              	.LASF32:
+ 1303 0075 5350495F 		.ascii	"SPI_Interface_ReadByte\000"
+ 1303      496E7465 
+ 1303      72666163 
+ 1303      655F5265 
+ 1303      61644279 
+ 1304              	.LASF1:
+ 1305 008c 756E7369 		.ascii	"unsigned char\000"
+ 1305      676E6564 
+ 1305      20636861 
+ 1305      7200
+ 1306              	.LASF36:
+ 1307 009a 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1307      43313120 
+ 1307      352E342E 
+ 1307      31203230 
+ 1307      31363036 
+ 1308 00cd 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 1308      20726576 
+ 1308      6973696F 
+ 1308      6E203233 
+ 1308      37373135 
+ 1309 0100 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 1309      66756E63 
+ 1309      74696F6E 
+ 1309      2D736563 
+ 1309      74696F6E 
+ 1310              	.LASF7:
+ 1311 0128 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1311      20756E73 
+ 1311      69676E65 
+ 1311      6420696E 
+ 1311      7400
+ 1312              	.LASF26:
+ 1313 013a 74656D70 		.ascii	"temp\000"
+ 1313      00
+ 1314              	.LASF24:
+ 1315 013f 61646472 		.ascii	"addr\000"
+ 1315      00
+ 1316              	.LASF19:
+ 1317 0144 45455052 		.ascii	"EEPROM_readByte\000"
+ 1317      4F4D5F72 
+ 1317      65616442 
+ 1317      79746500 
+ 1318              	.LASF37:
+ 1319 0154 32354C43 		.ascii	"25LC256.c\000"
+ 1319      3235362E 
+ 1319      6300
+ 1320              	.LASF25:
+ 1321 015e 64617461 		.ascii	"dataByte\000"
+ 1321      42797465 
+ 1321      00
+ 1322              	.LASF4:
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccxiVGTb.s 			page 27
+
+
+ 1323 0167 5F5F7569 		.ascii	"__uint16_t\000"
+ 1323      6E743136 
+ 1323      5F7400
+ 1324              	.LASF14:
+ 1325 0172 646F7562 		.ascii	"double\000"
+ 1325      6C6500
+ 1326              	.LASF33:
+ 1327 0179 5350495F 		.ascii	"SPI_Interface_tradeByte\000"
+ 1327      496E7465 
+ 1327      72666163 
+ 1327      655F7472 
+ 1327      61646542 
+ 1328              	.LASF35:
+ 1329 0191 43794465 		.ascii	"CyDelayUs\000"
+ 1329      6C617955 
+ 1329      7300
+ 1330              	.LASF18:
+ 1331 019b 45455052 		.ascii	"EEPROM_readStatus\000"
+ 1331      4F4D5F72 
+ 1331      65616453 
+ 1331      74617475 
+ 1331      7300
+ 1332              	.LASF10:
+ 1333 01ad 756E7369 		.ascii	"unsigned int\000"
+ 1333      676E6564 
+ 1333      20696E74 
+ 1333      00
+ 1334              	.LASF9:
+ 1335 01ba 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1335      206C6F6E 
+ 1335      6720756E 
+ 1335      7369676E 
+ 1335      65642069 
+ 1336              	.LASF11:
+ 1337 01d1 75696E74 		.ascii	"uint8_t\000"
+ 1337      385F7400 
+ 1338              	.LASF21:
+ 1339 01d9 64617461 		.ascii	"dataRX\000"
+ 1339      525800
+ 1340              	.LASF31:
+ 1341 01e0 45455052 		.ascii	"EEPROM_waitForWriteComplete\000"
+ 1341      4F4D5F77 
+ 1341      61697446 
+ 1341      6F725772 
+ 1341      69746543 
+ 1342              	.LASF17:
+ 1343 01fc 73697A65 		.ascii	"sizetype\000"
+ 1343      74797065 
+ 1343      00
+ 1344              	.LASF8:
+ 1345 0205 6C6F6E67 		.ascii	"long long int\000"
+ 1345      206C6F6E 
+ 1345      6720696E 
+ 1345      7400
+ 1346              	.LASF40:
+ 1347 0213 6D656D63 		.ascii	"memcpy\000"
+ 1347      707900
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccxiVGTb.s 			page 28
+
+
+ 1348              	.LASF2:
+ 1349 021a 73686F72 		.ascii	"short int\000"
+ 1349      7420696E 
+ 1349      7400
+ 1350              	.LASF29:
+ 1351 0224 45455052 		.ascii	"EEPROM_writePage\000"
+ 1351      4F4D5F77 
+ 1351      72697465 
+ 1351      50616765 
+ 1351      00
+ 1352              	.LASF12:
+ 1353 0235 75696E74 		.ascii	"uint16_t\000"
+ 1353      31365F74 
+ 1353      00
+ 1354              	.LASF6:
+ 1355 023e 6C6F6E67 		.ascii	"long int\000"
+ 1355      20696E74 
+ 1355      00
+ 1356              	.LASF15:
+ 1357 0247 63686172 		.ascii	"char\000"
+ 1357      00
+ 1358              	.LASF16:
+ 1359 024c 6C6F6E67 		.ascii	"long double\000"
+ 1359      20646F75 
+ 1359      626C6500 
+ 1360              	.LASF0:
+ 1361 0258 7369676E 		.ascii	"signed char\000"
+ 1361      65642063 
+ 1361      68617200 
+ 1362              	.LASF20:
+ 1363 0264 64617461 		.ascii	"dataTX\000"
+ 1363      545800
+ 1364              	.LASF38:
+ 1365 026b 433A5C55 		.ascii	"C:\\Users\\noemi\\Desktop\\university\\university\\"
+ 1365      73657273 
+ 1365      5C6E6F65 
+ 1365      6D695C44 
+ 1365      65736B74 
+ 1366 0298 706F6C69 		.ascii	"poli\\lab sensors\\final assignment\\Final-Assignme"
+ 1366      5C6C6162 
+ 1366      2073656E 
+ 1366      736F7273 
+ 1366      5C66696E 
+ 1367 02c8 6E742D50 		.ascii	"nt-PSoC\\Final_Assignment\\Final_assignment_01.cyds"
+ 1367      536F435C 
+ 1367      46696E61 
+ 1367      6C5F4173 
+ 1367      7369676E 
+ 1368 02f9 6E00     		.ascii	"n\000"
+ 1369              	.LASF22:
+ 1370 02fb 45455052 		.ascii	"EEPROM_writeEnable\000"
+ 1370      4F4D5F77 
+ 1370      72697465 
+ 1370      456E6162 
+ 1370      6C6500
+ 1371              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

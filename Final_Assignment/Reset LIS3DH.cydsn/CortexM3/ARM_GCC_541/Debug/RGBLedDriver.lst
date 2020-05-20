@@ -1,0 +1,1117 @@
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\cclfaqnO.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"RGBLedDriver.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.RGBLed_WriteRed,"ax",%progbits
+  20              		.align	2
+  21              		.thumb
+  22              		.thumb_func
+  23              		.type	RGBLed_WriteRed, %function
+  24              	RGBLed_WriteRed:
+  25              	.LFB66:
+  26              		.file 1 "RGBLedDriver.c"
+   1:RGBLedDriver.c **** /**
+   2:RGBLedDriver.c **** *   \brief Source code for RGB Led Driver.
+   3:RGBLedDriver.c **** */
+   4:RGBLedDriver.c **** 
+   5:RGBLedDriver.c **** #include "RGBLedDriver.h"
+   6:RGBLedDriver.c **** 
+   7:RGBLedDriver.c **** static void RGBLed_WriteRed(uint8_t red);       // Write new red value
+   8:RGBLedDriver.c **** static void RGBLed_WriteGreen(uint8_t green);   // Write new green value
+   9:RGBLedDriver.c **** static void RGBLed_WriteBlu(uint8_t blu);       // Write new blu value
+  10:RGBLedDriver.c **** 
+  11:RGBLedDriver.c **** void RGBLed_Start(void)
+  12:RGBLedDriver.c **** {
+  13:RGBLedDriver.c ****     // Start PWM Components
+  14:RGBLedDriver.c ****     PWM_RG_Start(); // Start PWM connected to red and green channels
+  15:RGBLedDriver.c ****     PWM_B_Start();  // Start PWM connected to blu channel
+  16:RGBLedDriver.c **** }
+  17:RGBLedDriver.c **** 
+  18:RGBLedDriver.c **** void RGBLed_Stop(void)
+  19:RGBLedDriver.c **** {
+  20:RGBLedDriver.c ****     // Stop PWM Components
+  21:RGBLedDriver.c ****     PWM_RG_Stop(); // Stop PWM connected to red and green channels
+  22:RGBLedDriver.c ****     PWM_B_Stop();  // Stop PWM connected to blu channel
+  23:RGBLedDriver.c **** }
+  24:RGBLedDriver.c **** 
+  25:RGBLedDriver.c **** void RGBLed_WriteColor(uint8_t red, uint8_t green, uint8_t blue)
+  26:RGBLedDriver.c **** {
+  27:RGBLedDriver.c ****     RGBLed_WriteRed(red);
+  28:RGBLedDriver.c ****     RGBLed_WriteGreen(green);
+  29:RGBLedDriver.c ****     RGBLed_WriteBlu(blue);
+  30:RGBLedDriver.c **** }
+  31:RGBLedDriver.c **** 
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\cclfaqnO.s 			page 2
+
+
+  32:RGBLedDriver.c **** static void RGBLed_WriteRed(uint8_t red)
+  33:RGBLedDriver.c **** {
+  27              		.loc 1 33 0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 0
+  30              		@ frame_needed = 0, uses_anonymous_args = 0
+  31              	.LVL0:
+  32 0000 08B5     		push	{r3, lr}
+  33              		.cfi_def_cfa_offset 8
+  34              		.cfi_offset 3, -8
+  35              		.cfi_offset 14, -4
+  34:RGBLedDriver.c ****     PWM_RG_WriteCompare1(255-red);
+  36              		.loc 1 34 0
+  37 0002 C043     		mvns	r0, r0
+  38              	.LVL1:
+  39 0004 C0B2     		uxtb	r0, r0
+  40 0006 FFF7FEFF 		bl	PWM_RG_WriteCompare1
+  41              	.LVL2:
+  42 000a 08BD     		pop	{r3, pc}
+  43              		.cfi_endproc
+  44              	.LFE66:
+  45              		.size	RGBLed_WriteRed, .-RGBLed_WriteRed
+  46              		.section	.text.RGBLed_WriteGreen,"ax",%progbits
+  47              		.align	2
+  48              		.thumb
+  49              		.thumb_func
+  50              		.type	RGBLed_WriteGreen, %function
+  51              	RGBLed_WriteGreen:
+  52              	.LFB67:
+  35:RGBLedDriver.c **** }
+  36:RGBLedDriver.c **** 
+  37:RGBLedDriver.c **** static void RGBLed_WriteGreen(uint8_t green)
+  38:RGBLedDriver.c **** {
+  53              		.loc 1 38 0
+  54              		.cfi_startproc
+  55              		@ args = 0, pretend = 0, frame = 0
+  56              		@ frame_needed = 0, uses_anonymous_args = 0
+  57              	.LVL3:
+  58 0000 08B5     		push	{r3, lr}
+  59              		.cfi_def_cfa_offset 8
+  60              		.cfi_offset 3, -8
+  61              		.cfi_offset 14, -4
+  39:RGBLedDriver.c ****     PWM_RG_WriteCompare2(255-green);
+  62              		.loc 1 39 0
+  63 0002 C043     		mvns	r0, r0
+  64              	.LVL4:
+  65 0004 C0B2     		uxtb	r0, r0
+  66 0006 FFF7FEFF 		bl	PWM_RG_WriteCompare2
+  67              	.LVL5:
+  68 000a 08BD     		pop	{r3, pc}
+  69              		.cfi_endproc
+  70              	.LFE67:
+  71              		.size	RGBLed_WriteGreen, .-RGBLed_WriteGreen
+  72              		.section	.text.RGBLed_WriteBlu,"ax",%progbits
+  73              		.align	2
+  74              		.thumb
+  75              		.thumb_func
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\cclfaqnO.s 			page 3
+
+
+  76              		.type	RGBLed_WriteBlu, %function
+  77              	RGBLed_WriteBlu:
+  78              	.LFB68:
+  40:RGBLedDriver.c **** }
+  41:RGBLedDriver.c **** 
+  42:RGBLedDriver.c **** static void RGBLed_WriteBlu(uint8_t blu)
+  43:RGBLedDriver.c **** {
+  79              		.loc 1 43 0
+  80              		.cfi_startproc
+  81              		@ args = 0, pretend = 0, frame = 0
+  82              		@ frame_needed = 0, uses_anonymous_args = 0
+  83              	.LVL6:
+  84 0000 08B5     		push	{r3, lr}
+  85              		.cfi_def_cfa_offset 8
+  86              		.cfi_offset 3, -8
+  87              		.cfi_offset 14, -4
+  44:RGBLedDriver.c ****     PWM_B_WriteCompare(255-blu);
+  88              		.loc 1 44 0
+  89 0002 C043     		mvns	r0, r0
+  90              	.LVL7:
+  91 0004 C0B2     		uxtb	r0, r0
+  92 0006 FFF7FEFF 		bl	PWM_B_WriteCompare
+  93              	.LVL8:
+  94 000a 08BD     		pop	{r3, pc}
+  95              		.cfi_endproc
+  96              	.LFE68:
+  97              		.size	RGBLed_WriteBlu, .-RGBLed_WriteBlu
+  98              		.section	.text.RGBLed_Start,"ax",%progbits
+  99              		.align	2
+ 100              		.global	RGBLed_Start
+ 101              		.thumb
+ 102              		.thumb_func
+ 103              		.type	RGBLed_Start, %function
+ 104              	RGBLed_Start:
+ 105              	.LFB63:
+  12:RGBLedDriver.c ****     // Start PWM Components
+ 106              		.loc 1 12 0
+ 107              		.cfi_startproc
+ 108              		@ args = 0, pretend = 0, frame = 0
+ 109              		@ frame_needed = 0, uses_anonymous_args = 0
+ 110 0000 08B5     		push	{r3, lr}
+ 111              		.cfi_def_cfa_offset 8
+ 112              		.cfi_offset 3, -8
+ 113              		.cfi_offset 14, -4
+  14:RGBLedDriver.c ****     PWM_B_Start();  // Start PWM connected to blu channel
+ 114              		.loc 1 14 0
+ 115 0002 FFF7FEFF 		bl	PWM_RG_Start
+ 116              	.LVL9:
+  15:RGBLedDriver.c **** }
+ 117              		.loc 1 15 0
+ 118 0006 FFF7FEFF 		bl	PWM_B_Start
+ 119              	.LVL10:
+ 120 000a 08BD     		pop	{r3, pc}
+ 121              		.cfi_endproc
+ 122              	.LFE63:
+ 123              		.size	RGBLed_Start, .-RGBLed_Start
+ 124              		.section	.text.RGBLed_Stop,"ax",%progbits
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\cclfaqnO.s 			page 4
+
+
+ 125              		.align	2
+ 126              		.global	RGBLed_Stop
+ 127              		.thumb
+ 128              		.thumb_func
+ 129              		.type	RGBLed_Stop, %function
+ 130              	RGBLed_Stop:
+ 131              	.LFB64:
+  19:RGBLedDriver.c ****     // Stop PWM Components
+ 132              		.loc 1 19 0
+ 133              		.cfi_startproc
+ 134              		@ args = 0, pretend = 0, frame = 0
+ 135              		@ frame_needed = 0, uses_anonymous_args = 0
+ 136 0000 08B5     		push	{r3, lr}
+ 137              		.cfi_def_cfa_offset 8
+ 138              		.cfi_offset 3, -8
+ 139              		.cfi_offset 14, -4
+  21:RGBLedDriver.c ****     PWM_B_Stop();  // Stop PWM connected to blu channel
+ 140              		.loc 1 21 0
+ 141 0002 FFF7FEFF 		bl	PWM_RG_Stop
+ 142              	.LVL11:
+  22:RGBLedDriver.c **** }
+ 143              		.loc 1 22 0
+ 144 0006 FFF7FEFF 		bl	PWM_B_Stop
+ 145              	.LVL12:
+ 146 000a 08BD     		pop	{r3, pc}
+ 147              		.cfi_endproc
+ 148              	.LFE64:
+ 149              		.size	RGBLed_Stop, .-RGBLed_Stop
+ 150              		.section	.text.RGBLed_WriteColor,"ax",%progbits
+ 151              		.align	2
+ 152              		.global	RGBLed_WriteColor
+ 153              		.thumb
+ 154              		.thumb_func
+ 155              		.type	RGBLed_WriteColor, %function
+ 156              	RGBLed_WriteColor:
+ 157              	.LFB65:
+  26:RGBLedDriver.c ****     RGBLed_WriteRed(red);
+ 158              		.loc 1 26 0
+ 159              		.cfi_startproc
+ 160              		@ args = 0, pretend = 0, frame = 0
+ 161              		@ frame_needed = 0, uses_anonymous_args = 0
+ 162              	.LVL13:
+ 163 0000 38B5     		push	{r3, r4, r5, lr}
+ 164              		.cfi_def_cfa_offset 16
+ 165              		.cfi_offset 3, -16
+ 166              		.cfi_offset 4, -12
+ 167              		.cfi_offset 5, -8
+ 168              		.cfi_offset 14, -4
+ 169 0002 0D46     		mov	r5, r1
+ 170 0004 1446     		mov	r4, r2
+  27:RGBLedDriver.c ****     RGBLed_WriteGreen(green);
+ 171              		.loc 1 27 0
+ 172 0006 FFF7FEFF 		bl	RGBLed_WriteRed
+ 173              	.LVL14:
+  28:RGBLedDriver.c ****     RGBLed_WriteBlu(blue);
+ 174              		.loc 1 28 0
+ 175 000a 2846     		mov	r0, r5
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\cclfaqnO.s 			page 5
+
+
+ 176 000c FFF7FEFF 		bl	RGBLed_WriteGreen
+ 177              	.LVL15:
+  29:RGBLedDriver.c **** }
+ 178              		.loc 1 29 0
+ 179 0010 2046     		mov	r0, r4
+ 180 0012 FFF7FEFF 		bl	RGBLed_WriteBlu
+ 181              	.LVL16:
+ 182 0016 38BD     		pop	{r3, r4, r5, pc}
+ 183              		.cfi_endproc
+ 184              	.LFE65:
+ 185              		.size	RGBLed_WriteColor, .-RGBLed_WriteColor
+ 186              		.text
+ 187              	.Letext0:
+ 188              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.3\\psoc creator\\import\\gnu\\arm\\5.4.
+ 189              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.3\\psoc creator\\import\\gnu\\arm\\5.4.
+ 190              		.file 4 "Generated_Source\\PSoC5/PWM_RG.h"
+ 191              		.file 5 "Generated_Source\\PSoC5/PWM_B.h"
+ 192              		.file 6 "Generated_Source\\PSoC5/core_cm3.h"
+ 193              		.section	.debug_info,"",%progbits
+ 194              	.Ldebug_info0:
+ 195 0000 5F020000 		.4byte	0x25f
+ 196 0004 0400     		.2byte	0x4
+ 197 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 198 000a 04       		.byte	0x4
+ 199 000b 01       		.uleb128 0x1
+ 200 000c 68000000 		.4byte	.LASF33
+ 201 0010 0C       		.byte	0xc
+ 202 0011 42020000 		.4byte	.LASF34
+ 203 0015 B9010000 		.4byte	.LASF35
+ 204 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 205 001d 00000000 		.4byte	0
+ 206 0021 00000000 		.4byte	.Ldebug_line0
+ 207 0025 02       		.uleb128 0x2
+ 208 0026 01       		.byte	0x1
+ 209 0027 06       		.byte	0x6
+ 210 0028 4E000000 		.4byte	.LASF0
+ 211 002c 03       		.uleb128 0x3
+ 212 002d 00000000 		.4byte	.LASF4
+ 213 0031 02       		.byte	0x2
+ 214 0032 1D       		.byte	0x1d
+ 215 0033 37000000 		.4byte	0x37
+ 216 0037 02       		.uleb128 0x2
+ 217 0038 01       		.byte	0x1
+ 218 0039 08       		.byte	0x8
+ 219 003a 5A000000 		.4byte	.LASF1
+ 220 003e 02       		.uleb128 0x2
+ 221 003f 02       		.byte	0x2
+ 222 0040 05       		.byte	0x5
+ 223 0041 9A020000 		.4byte	.LASF2
+ 224 0045 02       		.uleb128 0x2
+ 225 0046 02       		.byte	0x2
+ 226 0047 07       		.byte	0x7
+ 227 0048 31010000 		.4byte	.LASF3
+ 228 004c 03       		.uleb128 0x3
+ 229 004d 1A000000 		.4byte	.LASF5
+ 230 0051 02       		.byte	0x2
+ 231 0052 3F       		.byte	0x3f
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\cclfaqnO.s 			page 6
+
+
+ 232 0053 57000000 		.4byte	0x57
+ 233 0057 02       		.uleb128 0x2
+ 234 0058 04       		.byte	0x4
+ 235 0059 05       		.byte	0x5
+ 236 005a C2020000 		.4byte	.LASF6
+ 237 005e 02       		.uleb128 0x2
+ 238 005f 04       		.byte	0x4
+ 239 0060 07       		.byte	0x7
+ 240 0061 12010000 		.4byte	.LASF7
+ 241 0065 02       		.uleb128 0x2
+ 242 0066 08       		.byte	0x8
+ 243 0067 05       		.byte	0x5
+ 244 0068 74020000 		.4byte	.LASF8
+ 245 006c 02       		.uleb128 0x2
+ 246 006d 08       		.byte	0x8
+ 247 006e 07       		.byte	0x7
+ 248 006f 8E010000 		.4byte	.LASF9
+ 249 0073 04       		.uleb128 0x4
+ 250 0074 04       		.byte	0x4
+ 251 0075 05       		.byte	0x5
+ 252 0076 696E7400 		.ascii	"int\000"
+ 253 007a 02       		.uleb128 0x2
+ 254 007b 04       		.byte	0x4
+ 255 007c 07       		.byte	0x7
+ 256 007d 81010000 		.4byte	.LASF10
+ 257 0081 03       		.uleb128 0x3
+ 258 0082 A5010000 		.4byte	.LASF11
+ 259 0086 03       		.byte	0x3
+ 260 0087 18       		.byte	0x18
+ 261 0088 2C000000 		.4byte	0x2c
+ 262 008c 03       		.uleb128 0x3
+ 263 008d 51020000 		.4byte	.LASF12
+ 264 0091 03       		.byte	0x3
+ 265 0092 2C       		.byte	0x2c
+ 266 0093 4C000000 		.4byte	0x4c
+ 267 0097 02       		.uleb128 0x2
+ 268 0098 04       		.byte	0x4
+ 269 0099 04       		.byte	0x4
+ 270 009a 48000000 		.4byte	.LASF13
+ 271 009e 02       		.uleb128 0x2
+ 272 009f 08       		.byte	0x8
+ 273 00a0 04       		.byte	0x4
+ 274 00a1 24000000 		.4byte	.LASF14
+ 275 00a5 02       		.uleb128 0x2
+ 276 00a6 01       		.byte	0x1
+ 277 00a7 08       		.byte	0x8
+ 278 00a8 82020000 		.4byte	.LASF15
+ 279 00ac 02       		.uleb128 0x2
+ 280 00ad 08       		.byte	0x8
+ 281 00ae 04       		.byte	0x4
+ 282 00af CB020000 		.4byte	.LASF16
+ 283 00b3 02       		.uleb128 0x2
+ 284 00b4 04       		.byte	0x4
+ 285 00b5 07       		.byte	0x7
+ 286 00b6 6B020000 		.4byte	.LASF17
+ 287 00ba 05       		.uleb128 0x5
+ 288 00bb 0A000000 		.4byte	.LASF18
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\cclfaqnO.s 			page 7
+
+
+ 289 00bf 01       		.byte	0x1
+ 290 00c0 20       		.byte	0x20
+ 291 00c1 00000000 		.4byte	.LFB66
+ 292 00c5 0C000000 		.4byte	.LFE66-.LFB66
+ 293 00c9 01       		.uleb128 0x1
+ 294 00ca 9C       		.byte	0x9c
+ 295 00cb E8000000 		.4byte	0xe8
+ 296 00cf 06       		.uleb128 0x6
+ 297 00d0 72656400 		.ascii	"red\000"
+ 298 00d4 01       		.byte	0x1
+ 299 00d5 20       		.byte	0x20
+ 300 00d6 81000000 		.4byte	0x81
+ 301 00da 00000000 		.4byte	.LLST0
+ 302 00de 07       		.uleb128 0x7
+ 303 00df 0A000000 		.4byte	.LVL2
+ 304 00e3 15020000 		.4byte	0x215
+ 305 00e7 00       		.byte	0
+ 306 00e8 05       		.uleb128 0x5
+ 307 00e9 59020000 		.4byte	.LASF19
+ 308 00ed 01       		.byte	0x1
+ 309 00ee 25       		.byte	0x25
+ 310 00ef 00000000 		.4byte	.LFB67
+ 311 00f3 0C000000 		.4byte	.LFE67-.LFB67
+ 312 00f7 01       		.uleb128 0x1
+ 313 00f8 9C       		.byte	0x9c
+ 314 00f9 16010000 		.4byte	0x116
+ 315 00fd 08       		.uleb128 0x8
+ 316 00fe 44010000 		.4byte	.LASF20
+ 317 0102 01       		.byte	0x1
+ 318 0103 25       		.byte	0x25
+ 319 0104 81000000 		.4byte	0x81
+ 320 0108 21000000 		.4byte	.LLST1
+ 321 010c 07       		.uleb128 0x7
+ 322 010d 0A000000 		.4byte	.LVL5
+ 323 0111 20020000 		.4byte	0x220
+ 324 0115 00       		.byte	0
+ 325 0116 05       		.uleb128 0x5
+ 326 0117 02010000 		.4byte	.LASF21
+ 327 011b 01       		.byte	0x1
+ 328 011c 2A       		.byte	0x2a
+ 329 011d 00000000 		.4byte	.LFB68
+ 330 0121 0C000000 		.4byte	.LFE68-.LFB68
+ 331 0125 01       		.uleb128 0x1
+ 332 0126 9C       		.byte	0x9c
+ 333 0127 44010000 		.4byte	0x144
+ 334 012b 06       		.uleb128 0x6
+ 335 012c 626C7500 		.ascii	"blu\000"
+ 336 0130 01       		.byte	0x1
+ 337 0131 2A       		.byte	0x2a
+ 338 0132 81000000 		.4byte	0x81
+ 339 0136 42000000 		.4byte	.LLST2
+ 340 013a 07       		.uleb128 0x7
+ 341 013b 0A000000 		.4byte	.LVL8
+ 342 013f 2B020000 		.4byte	0x22b
+ 343 0143 00       		.byte	0
+ 344 0144 09       		.uleb128 0x9
+ 345 0145 30000000 		.4byte	.LASF22
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\cclfaqnO.s 			page 8
+
+
+ 346 0149 01       		.byte	0x1
+ 347 014a 0B       		.byte	0xb
+ 348 014b 00000000 		.4byte	.LFB63
+ 349 014f 0C000000 		.4byte	.LFE63-.LFB63
+ 350 0153 01       		.uleb128 0x1
+ 351 0154 9C       		.byte	0x9c
+ 352 0155 6C010000 		.4byte	0x16c
+ 353 0159 07       		.uleb128 0x7
+ 354 015a 06000000 		.4byte	.LVL9
+ 355 015e 36020000 		.4byte	0x236
+ 356 0162 07       		.uleb128 0x7
+ 357 0163 0A000000 		.4byte	.LVL10
+ 358 0167 41020000 		.4byte	0x241
+ 359 016b 00       		.byte	0
+ 360 016c 09       		.uleb128 0x9
+ 361 016d F6000000 		.4byte	.LASF23
+ 362 0171 01       		.byte	0x1
+ 363 0172 12       		.byte	0x12
+ 364 0173 00000000 		.4byte	.LFB64
+ 365 0177 0C000000 		.4byte	.LFE64-.LFB64
+ 366 017b 01       		.uleb128 0x1
+ 367 017c 9C       		.byte	0x9c
+ 368 017d 94010000 		.4byte	0x194
+ 369 0181 07       		.uleb128 0x7
+ 370 0182 06000000 		.4byte	.LVL11
+ 371 0186 4C020000 		.4byte	0x24c
+ 372 018a 07       		.uleb128 0x7
+ 373 018b 0A000000 		.4byte	.LVL12
+ 374 018f 57020000 		.4byte	0x257
+ 375 0193 00       		.byte	0
+ 376 0194 09       		.uleb128 0x9
+ 377 0195 A4020000 		.4byte	.LASF24
+ 378 0199 01       		.byte	0x1
+ 379 019a 19       		.byte	0x19
+ 380 019b 00000000 		.4byte	.LFB65
+ 381 019f 18000000 		.4byte	.LFE65-.LFB65
+ 382 01a3 01       		.uleb128 0x1
+ 383 01a4 9C       		.byte	0x9c
+ 384 01a5 04020000 		.4byte	0x204
+ 385 01a9 06       		.uleb128 0x6
+ 386 01aa 72656400 		.ascii	"red\000"
+ 387 01ae 01       		.byte	0x1
+ 388 01af 19       		.byte	0x19
+ 389 01b0 81000000 		.4byte	0x81
+ 390 01b4 63000000 		.4byte	.LLST3
+ 391 01b8 08       		.uleb128 0x8
+ 392 01b9 44010000 		.4byte	.LASF20
+ 393 01bd 01       		.byte	0x1
+ 394 01be 19       		.byte	0x19
+ 395 01bf 81000000 		.4byte	0x81
+ 396 01c3 84000000 		.4byte	.LLST4
+ 397 01c7 08       		.uleb128 0x8
+ 398 01c8 2B000000 		.4byte	.LASF25
+ 399 01cc 01       		.byte	0x1
+ 400 01cd 19       		.byte	0x19
+ 401 01ce 81000000 		.4byte	0x81
+ 402 01d2 A5000000 		.4byte	.LLST5
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\cclfaqnO.s 			page 9
+
+
+ 403 01d6 07       		.uleb128 0x7
+ 404 01d7 0A000000 		.4byte	.LVL14
+ 405 01db BA000000 		.4byte	0xba
+ 406 01df 0A       		.uleb128 0xa
+ 407 01e0 10000000 		.4byte	.LVL15
+ 408 01e4 E8000000 		.4byte	0xe8
+ 409 01e8 F3010000 		.4byte	0x1f3
+ 410 01ec 0B       		.uleb128 0xb
+ 411 01ed 01       		.uleb128 0x1
+ 412 01ee 50       		.byte	0x50
+ 413 01ef 02       		.uleb128 0x2
+ 414 01f0 75       		.byte	0x75
+ 415 01f1 00       		.sleb128 0
+ 416 01f2 00       		.byte	0
+ 417 01f3 0C       		.uleb128 0xc
+ 418 01f4 16000000 		.4byte	.LVL16
+ 419 01f8 16010000 		.4byte	0x116
+ 420 01fc 0B       		.uleb128 0xb
+ 421 01fd 01       		.uleb128 0x1
+ 422 01fe 50       		.byte	0x50
+ 423 01ff 02       		.uleb128 0x2
+ 424 0200 74       		.byte	0x74
+ 425 0201 00       		.sleb128 0
+ 426 0202 00       		.byte	0
+ 427 0203 00       		.byte	0
+ 428 0204 0D       		.uleb128 0xd
+ 429 0205 4A010000 		.4byte	.LASF36
+ 430 0209 06       		.byte	0x6
+ 431 020a 1207     		.2byte	0x712
+ 432 020c 10020000 		.4byte	0x210
+ 433 0210 0E       		.uleb128 0xe
+ 434 0211 8C000000 		.4byte	0x8c
+ 435 0215 0F       		.uleb128 0xf
+ 436 0216 57010000 		.4byte	.LASF26
+ 437 021a 57010000 		.4byte	.LASF26
+ 438 021e 04       		.byte	0x4
+ 439 021f C7       		.byte	0xc7
+ 440 0220 0F       		.uleb128 0xf
+ 441 0221 6C010000 		.4byte	.LASF27
+ 442 0225 6C010000 		.4byte	.LASF27
+ 443 0229 04       		.byte	0x4
+ 444 022a CA       		.byte	0xca
+ 445 022b 0F       		.uleb128 0xf
+ 446 022c 87020000 		.4byte	.LASF28
+ 447 0230 87020000 		.4byte	.LASF28
+ 448 0234 05       		.byte	0x5
+ 449 0235 C3       		.byte	0xc3
+ 450 0236 0F       		.uleb128 0xf
+ 451 0237 24010000 		.4byte	.LASF29
+ 452 023b 24010000 		.4byte	.LASF29
+ 453 023f 04       		.byte	0x4
+ 454 0240 92       		.byte	0x92
+ 455 0241 0F       		.uleb128 0xf
+ 456 0242 B6020000 		.4byte	.LASF30
+ 457 0246 B6020000 		.4byte	.LASF30
+ 458 024a 05       		.byte	0x5
+ 459 024b 92       		.byte	0x92
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\cclfaqnO.s 			page 10
+
+
+ 460 024c 0F       		.uleb128 0xf
+ 461 024d AD010000 		.4byte	.LASF31
+ 462 0251 AD010000 		.4byte	.LASF31
+ 463 0255 04       		.byte	0x4
+ 464 0256 93       		.byte	0x93
+ 465 0257 0F       		.uleb128 0xf
+ 466 0258 3D000000 		.4byte	.LASF32
+ 467 025c 3D000000 		.4byte	.LASF32
+ 468 0260 05       		.byte	0x5
+ 469 0261 93       		.byte	0x93
+ 470 0262 00       		.byte	0
+ 471              		.section	.debug_abbrev,"",%progbits
+ 472              	.Ldebug_abbrev0:
+ 473 0000 01       		.uleb128 0x1
+ 474 0001 11       		.uleb128 0x11
+ 475 0002 01       		.byte	0x1
+ 476 0003 25       		.uleb128 0x25
+ 477 0004 0E       		.uleb128 0xe
+ 478 0005 13       		.uleb128 0x13
+ 479 0006 0B       		.uleb128 0xb
+ 480 0007 03       		.uleb128 0x3
+ 481 0008 0E       		.uleb128 0xe
+ 482 0009 1B       		.uleb128 0x1b
+ 483 000a 0E       		.uleb128 0xe
+ 484 000b 55       		.uleb128 0x55
+ 485 000c 17       		.uleb128 0x17
+ 486 000d 11       		.uleb128 0x11
+ 487 000e 01       		.uleb128 0x1
+ 488 000f 10       		.uleb128 0x10
+ 489 0010 17       		.uleb128 0x17
+ 490 0011 00       		.byte	0
+ 491 0012 00       		.byte	0
+ 492 0013 02       		.uleb128 0x2
+ 493 0014 24       		.uleb128 0x24
+ 494 0015 00       		.byte	0
+ 495 0016 0B       		.uleb128 0xb
+ 496 0017 0B       		.uleb128 0xb
+ 497 0018 3E       		.uleb128 0x3e
+ 498 0019 0B       		.uleb128 0xb
+ 499 001a 03       		.uleb128 0x3
+ 500 001b 0E       		.uleb128 0xe
+ 501 001c 00       		.byte	0
+ 502 001d 00       		.byte	0
+ 503 001e 03       		.uleb128 0x3
+ 504 001f 16       		.uleb128 0x16
+ 505 0020 00       		.byte	0
+ 506 0021 03       		.uleb128 0x3
+ 507 0022 0E       		.uleb128 0xe
+ 508 0023 3A       		.uleb128 0x3a
+ 509 0024 0B       		.uleb128 0xb
+ 510 0025 3B       		.uleb128 0x3b
+ 511 0026 0B       		.uleb128 0xb
+ 512 0027 49       		.uleb128 0x49
+ 513 0028 13       		.uleb128 0x13
+ 514 0029 00       		.byte	0
+ 515 002a 00       		.byte	0
+ 516 002b 04       		.uleb128 0x4
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\cclfaqnO.s 			page 11
+
+
+ 517 002c 24       		.uleb128 0x24
+ 518 002d 00       		.byte	0
+ 519 002e 0B       		.uleb128 0xb
+ 520 002f 0B       		.uleb128 0xb
+ 521 0030 3E       		.uleb128 0x3e
+ 522 0031 0B       		.uleb128 0xb
+ 523 0032 03       		.uleb128 0x3
+ 524 0033 08       		.uleb128 0x8
+ 525 0034 00       		.byte	0
+ 526 0035 00       		.byte	0
+ 527 0036 05       		.uleb128 0x5
+ 528 0037 2E       		.uleb128 0x2e
+ 529 0038 01       		.byte	0x1
+ 530 0039 03       		.uleb128 0x3
+ 531 003a 0E       		.uleb128 0xe
+ 532 003b 3A       		.uleb128 0x3a
+ 533 003c 0B       		.uleb128 0xb
+ 534 003d 3B       		.uleb128 0x3b
+ 535 003e 0B       		.uleb128 0xb
+ 536 003f 27       		.uleb128 0x27
+ 537 0040 19       		.uleb128 0x19
+ 538 0041 11       		.uleb128 0x11
+ 539 0042 01       		.uleb128 0x1
+ 540 0043 12       		.uleb128 0x12
+ 541 0044 06       		.uleb128 0x6
+ 542 0045 40       		.uleb128 0x40
+ 543 0046 18       		.uleb128 0x18
+ 544 0047 9742     		.uleb128 0x2117
+ 545 0049 19       		.uleb128 0x19
+ 546 004a 01       		.uleb128 0x1
+ 547 004b 13       		.uleb128 0x13
+ 548 004c 00       		.byte	0
+ 549 004d 00       		.byte	0
+ 550 004e 06       		.uleb128 0x6
+ 551 004f 05       		.uleb128 0x5
+ 552 0050 00       		.byte	0
+ 553 0051 03       		.uleb128 0x3
+ 554 0052 08       		.uleb128 0x8
+ 555 0053 3A       		.uleb128 0x3a
+ 556 0054 0B       		.uleb128 0xb
+ 557 0055 3B       		.uleb128 0x3b
+ 558 0056 0B       		.uleb128 0xb
+ 559 0057 49       		.uleb128 0x49
+ 560 0058 13       		.uleb128 0x13
+ 561 0059 02       		.uleb128 0x2
+ 562 005a 17       		.uleb128 0x17
+ 563 005b 00       		.byte	0
+ 564 005c 00       		.byte	0
+ 565 005d 07       		.uleb128 0x7
+ 566 005e 898201   		.uleb128 0x4109
+ 567 0061 00       		.byte	0
+ 568 0062 11       		.uleb128 0x11
+ 569 0063 01       		.uleb128 0x1
+ 570 0064 31       		.uleb128 0x31
+ 571 0065 13       		.uleb128 0x13
+ 572 0066 00       		.byte	0
+ 573 0067 00       		.byte	0
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\cclfaqnO.s 			page 12
+
+
+ 574 0068 08       		.uleb128 0x8
+ 575 0069 05       		.uleb128 0x5
+ 576 006a 00       		.byte	0
+ 577 006b 03       		.uleb128 0x3
+ 578 006c 0E       		.uleb128 0xe
+ 579 006d 3A       		.uleb128 0x3a
+ 580 006e 0B       		.uleb128 0xb
+ 581 006f 3B       		.uleb128 0x3b
+ 582 0070 0B       		.uleb128 0xb
+ 583 0071 49       		.uleb128 0x49
+ 584 0072 13       		.uleb128 0x13
+ 585 0073 02       		.uleb128 0x2
+ 586 0074 17       		.uleb128 0x17
+ 587 0075 00       		.byte	0
+ 588 0076 00       		.byte	0
+ 589 0077 09       		.uleb128 0x9
+ 590 0078 2E       		.uleb128 0x2e
+ 591 0079 01       		.byte	0x1
+ 592 007a 3F       		.uleb128 0x3f
+ 593 007b 19       		.uleb128 0x19
+ 594 007c 03       		.uleb128 0x3
+ 595 007d 0E       		.uleb128 0xe
+ 596 007e 3A       		.uleb128 0x3a
+ 597 007f 0B       		.uleb128 0xb
+ 598 0080 3B       		.uleb128 0x3b
+ 599 0081 0B       		.uleb128 0xb
+ 600 0082 27       		.uleb128 0x27
+ 601 0083 19       		.uleb128 0x19
+ 602 0084 11       		.uleb128 0x11
+ 603 0085 01       		.uleb128 0x1
+ 604 0086 12       		.uleb128 0x12
+ 605 0087 06       		.uleb128 0x6
+ 606 0088 40       		.uleb128 0x40
+ 607 0089 18       		.uleb128 0x18
+ 608 008a 9742     		.uleb128 0x2117
+ 609 008c 19       		.uleb128 0x19
+ 610 008d 01       		.uleb128 0x1
+ 611 008e 13       		.uleb128 0x13
+ 612 008f 00       		.byte	0
+ 613 0090 00       		.byte	0
+ 614 0091 0A       		.uleb128 0xa
+ 615 0092 898201   		.uleb128 0x4109
+ 616 0095 01       		.byte	0x1
+ 617 0096 11       		.uleb128 0x11
+ 618 0097 01       		.uleb128 0x1
+ 619 0098 31       		.uleb128 0x31
+ 620 0099 13       		.uleb128 0x13
+ 621 009a 01       		.uleb128 0x1
+ 622 009b 13       		.uleb128 0x13
+ 623 009c 00       		.byte	0
+ 624 009d 00       		.byte	0
+ 625 009e 0B       		.uleb128 0xb
+ 626 009f 8A8201   		.uleb128 0x410a
+ 627 00a2 00       		.byte	0
+ 628 00a3 02       		.uleb128 0x2
+ 629 00a4 18       		.uleb128 0x18
+ 630 00a5 9142     		.uleb128 0x2111
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\cclfaqnO.s 			page 13
+
+
+ 631 00a7 18       		.uleb128 0x18
+ 632 00a8 00       		.byte	0
+ 633 00a9 00       		.byte	0
+ 634 00aa 0C       		.uleb128 0xc
+ 635 00ab 898201   		.uleb128 0x4109
+ 636 00ae 01       		.byte	0x1
+ 637 00af 11       		.uleb128 0x11
+ 638 00b0 01       		.uleb128 0x1
+ 639 00b1 31       		.uleb128 0x31
+ 640 00b2 13       		.uleb128 0x13
+ 641 00b3 00       		.byte	0
+ 642 00b4 00       		.byte	0
+ 643 00b5 0D       		.uleb128 0xd
+ 644 00b6 34       		.uleb128 0x34
+ 645 00b7 00       		.byte	0
+ 646 00b8 03       		.uleb128 0x3
+ 647 00b9 0E       		.uleb128 0xe
+ 648 00ba 3A       		.uleb128 0x3a
+ 649 00bb 0B       		.uleb128 0xb
+ 650 00bc 3B       		.uleb128 0x3b
+ 651 00bd 05       		.uleb128 0x5
+ 652 00be 49       		.uleb128 0x49
+ 653 00bf 13       		.uleb128 0x13
+ 654 00c0 3F       		.uleb128 0x3f
+ 655 00c1 19       		.uleb128 0x19
+ 656 00c2 3C       		.uleb128 0x3c
+ 657 00c3 19       		.uleb128 0x19
+ 658 00c4 00       		.byte	0
+ 659 00c5 00       		.byte	0
+ 660 00c6 0E       		.uleb128 0xe
+ 661 00c7 35       		.uleb128 0x35
+ 662 00c8 00       		.byte	0
+ 663 00c9 49       		.uleb128 0x49
+ 664 00ca 13       		.uleb128 0x13
+ 665 00cb 00       		.byte	0
+ 666 00cc 00       		.byte	0
+ 667 00cd 0F       		.uleb128 0xf
+ 668 00ce 2E       		.uleb128 0x2e
+ 669 00cf 00       		.byte	0
+ 670 00d0 3F       		.uleb128 0x3f
+ 671 00d1 19       		.uleb128 0x19
+ 672 00d2 3C       		.uleb128 0x3c
+ 673 00d3 19       		.uleb128 0x19
+ 674 00d4 6E       		.uleb128 0x6e
+ 675 00d5 0E       		.uleb128 0xe
+ 676 00d6 03       		.uleb128 0x3
+ 677 00d7 0E       		.uleb128 0xe
+ 678 00d8 3A       		.uleb128 0x3a
+ 679 00d9 0B       		.uleb128 0xb
+ 680 00da 3B       		.uleb128 0x3b
+ 681 00db 0B       		.uleb128 0xb
+ 682 00dc 00       		.byte	0
+ 683 00dd 00       		.byte	0
+ 684 00de 00       		.byte	0
+ 685              		.section	.debug_loc,"",%progbits
+ 686              	.Ldebug_loc0:
+ 687              	.LLST0:
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\cclfaqnO.s 			page 14
+
+
+ 688 0000 00000000 		.4byte	.LVL0
+ 689 0004 04000000 		.4byte	.LVL1
+ 690 0008 0100     		.2byte	0x1
+ 691 000a 50       		.byte	0x50
+ 692 000b 04000000 		.4byte	.LVL1
+ 693 000f 0C000000 		.4byte	.LFE66
+ 694 0013 0400     		.2byte	0x4
+ 695 0015 F3       		.byte	0xf3
+ 696 0016 01       		.uleb128 0x1
+ 697 0017 50       		.byte	0x50
+ 698 0018 9F       		.byte	0x9f
+ 699 0019 00000000 		.4byte	0
+ 700 001d 00000000 		.4byte	0
+ 701              	.LLST1:
+ 702 0021 00000000 		.4byte	.LVL3
+ 703 0025 04000000 		.4byte	.LVL4
+ 704 0029 0100     		.2byte	0x1
+ 705 002b 50       		.byte	0x50
+ 706 002c 04000000 		.4byte	.LVL4
+ 707 0030 0C000000 		.4byte	.LFE67
+ 708 0034 0400     		.2byte	0x4
+ 709 0036 F3       		.byte	0xf3
+ 710 0037 01       		.uleb128 0x1
+ 711 0038 50       		.byte	0x50
+ 712 0039 9F       		.byte	0x9f
+ 713 003a 00000000 		.4byte	0
+ 714 003e 00000000 		.4byte	0
+ 715              	.LLST2:
+ 716 0042 00000000 		.4byte	.LVL6
+ 717 0046 04000000 		.4byte	.LVL7
+ 718 004a 0100     		.2byte	0x1
+ 719 004c 50       		.byte	0x50
+ 720 004d 04000000 		.4byte	.LVL7
+ 721 0051 0C000000 		.4byte	.LFE68
+ 722 0055 0400     		.2byte	0x4
+ 723 0057 F3       		.byte	0xf3
+ 724 0058 01       		.uleb128 0x1
+ 725 0059 50       		.byte	0x50
+ 726 005a 9F       		.byte	0x9f
+ 727 005b 00000000 		.4byte	0
+ 728 005f 00000000 		.4byte	0
+ 729              	.LLST3:
+ 730 0063 00000000 		.4byte	.LVL13
+ 731 0067 09000000 		.4byte	.LVL14-1
+ 732 006b 0100     		.2byte	0x1
+ 733 006d 50       		.byte	0x50
+ 734 006e 09000000 		.4byte	.LVL14-1
+ 735 0072 18000000 		.4byte	.LFE65
+ 736 0076 0400     		.2byte	0x4
+ 737 0078 F3       		.byte	0xf3
+ 738 0079 01       		.uleb128 0x1
+ 739 007a 50       		.byte	0x50
+ 740 007b 9F       		.byte	0x9f
+ 741 007c 00000000 		.4byte	0
+ 742 0080 00000000 		.4byte	0
+ 743              	.LLST4:
+ 744 0084 00000000 		.4byte	.LVL13
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\cclfaqnO.s 			page 15
+
+
+ 745 0088 09000000 		.4byte	.LVL14-1
+ 746 008c 0100     		.2byte	0x1
+ 747 008e 51       		.byte	0x51
+ 748 008f 09000000 		.4byte	.LVL14-1
+ 749 0093 18000000 		.4byte	.LFE65
+ 750 0097 0400     		.2byte	0x4
+ 751 0099 F3       		.byte	0xf3
+ 752 009a 01       		.uleb128 0x1
+ 753 009b 51       		.byte	0x51
+ 754 009c 9F       		.byte	0x9f
+ 755 009d 00000000 		.4byte	0
+ 756 00a1 00000000 		.4byte	0
+ 757              	.LLST5:
+ 758 00a5 00000000 		.4byte	.LVL13
+ 759 00a9 09000000 		.4byte	.LVL14-1
+ 760 00ad 0100     		.2byte	0x1
+ 761 00af 52       		.byte	0x52
+ 762 00b0 09000000 		.4byte	.LVL14-1
+ 763 00b4 18000000 		.4byte	.LFE65
+ 764 00b8 0400     		.2byte	0x4
+ 765 00ba F3       		.byte	0xf3
+ 766 00bb 01       		.uleb128 0x1
+ 767 00bc 52       		.byte	0x52
+ 768 00bd 9F       		.byte	0x9f
+ 769 00be 00000000 		.4byte	0
+ 770 00c2 00000000 		.4byte	0
+ 771              		.section	.debug_aranges,"",%progbits
+ 772 0000 44000000 		.4byte	0x44
+ 773 0004 0200     		.2byte	0x2
+ 774 0006 00000000 		.4byte	.Ldebug_info0
+ 775 000a 04       		.byte	0x4
+ 776 000b 00       		.byte	0
+ 777 000c 0000     		.2byte	0
+ 778 000e 0000     		.2byte	0
+ 779 0010 00000000 		.4byte	.LFB66
+ 780 0014 0C000000 		.4byte	.LFE66-.LFB66
+ 781 0018 00000000 		.4byte	.LFB67
+ 782 001c 0C000000 		.4byte	.LFE67-.LFB67
+ 783 0020 00000000 		.4byte	.LFB68
+ 784 0024 0C000000 		.4byte	.LFE68-.LFB68
+ 785 0028 00000000 		.4byte	.LFB63
+ 786 002c 0C000000 		.4byte	.LFE63-.LFB63
+ 787 0030 00000000 		.4byte	.LFB64
+ 788 0034 0C000000 		.4byte	.LFE64-.LFB64
+ 789 0038 00000000 		.4byte	.LFB65
+ 790 003c 18000000 		.4byte	.LFE65-.LFB65
+ 791 0040 00000000 		.4byte	0
+ 792 0044 00000000 		.4byte	0
+ 793              		.section	.debug_ranges,"",%progbits
+ 794              	.Ldebug_ranges0:
+ 795 0000 00000000 		.4byte	.LFB66
+ 796 0004 0C000000 		.4byte	.LFE66
+ 797 0008 00000000 		.4byte	.LFB67
+ 798 000c 0C000000 		.4byte	.LFE67
+ 799 0010 00000000 		.4byte	.LFB68
+ 800 0014 0C000000 		.4byte	.LFE68
+ 801 0018 00000000 		.4byte	.LFB63
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\cclfaqnO.s 			page 16
+
+
+ 802 001c 0C000000 		.4byte	.LFE63
+ 803 0020 00000000 		.4byte	.LFB64
+ 804 0024 0C000000 		.4byte	.LFE64
+ 805 0028 00000000 		.4byte	.LFB65
+ 806 002c 18000000 		.4byte	.LFE65
+ 807 0030 00000000 		.4byte	0
+ 808 0034 00000000 		.4byte	0
+ 809              		.section	.debug_line,"",%progbits
+ 810              	.Ldebug_line0:
+ 811 0000 C8010000 		.section	.debug_str,"MS",%progbits,1
+ 811      02005E01 
+ 811      00000201 
+ 811      FB0E0D00 
+ 811      01010101 
+ 812              	.LASF4:
+ 813 0000 5F5F7569 		.ascii	"__uint8_t\000"
+ 813      6E74385F 
+ 813      7400
+ 814              	.LASF18:
+ 815 000a 5247424C 		.ascii	"RGBLed_WriteRed\000"
+ 815      65645F57 
+ 815      72697465 
+ 815      52656400 
+ 816              	.LASF5:
+ 817 001a 5F5F696E 		.ascii	"__int32_t\000"
+ 817      7433325F 
+ 817      7400
+ 818              	.LASF14:
+ 819 0024 646F7562 		.ascii	"double\000"
+ 819      6C6500
+ 820              	.LASF25:
+ 821 002b 626C7565 		.ascii	"blue\000"
+ 821      00
+ 822              	.LASF22:
+ 823 0030 5247424C 		.ascii	"RGBLed_Start\000"
+ 823      65645F53 
+ 823      74617274 
+ 823      00
+ 824              	.LASF32:
+ 825 003d 50574D5F 		.ascii	"PWM_B_Stop\000"
+ 825      425F5374 
+ 825      6F7000
+ 826              	.LASF13:
+ 827 0048 666C6F61 		.ascii	"float\000"
+ 827      7400
+ 828              	.LASF0:
+ 829 004e 7369676E 		.ascii	"signed char\000"
+ 829      65642063 
+ 829      68617200 
+ 830              	.LASF1:
+ 831 005a 756E7369 		.ascii	"unsigned char\000"
+ 831      676E6564 
+ 831      20636861 
+ 831      7200
+ 832              	.LASF33:
+ 833 0068 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 833      43313120 
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\cclfaqnO.s 			page 17
+
+
+ 833      352E342E 
+ 833      31203230 
+ 833      31363036 
+ 834 009b 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 834      20726576 
+ 834      6973696F 
+ 834      6E203233 
+ 834      37373135 
+ 835 00ce 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 835      66756E63 
+ 835      74696F6E 
+ 835      2D736563 
+ 835      74696F6E 
+ 836              	.LASF23:
+ 837 00f6 5247424C 		.ascii	"RGBLed_Stop\000"
+ 837      65645F53 
+ 837      746F7000 
+ 838              	.LASF21:
+ 839 0102 5247424C 		.ascii	"RGBLed_WriteBlu\000"
+ 839      65645F57 
+ 839      72697465 
+ 839      426C7500 
+ 840              	.LASF7:
+ 841 0112 6C6F6E67 		.ascii	"long unsigned int\000"
+ 841      20756E73 
+ 841      69676E65 
+ 841      6420696E 
+ 841      7400
+ 842              	.LASF29:
+ 843 0124 50574D5F 		.ascii	"PWM_RG_Start\000"
+ 843      52475F53 
+ 843      74617274 
+ 843      00
+ 844              	.LASF3:
+ 845 0131 73686F72 		.ascii	"short unsigned int\000"
+ 845      7420756E 
+ 845      7369676E 
+ 845      65642069 
+ 845      6E7400
+ 846              	.LASF20:
+ 847 0144 67726565 		.ascii	"green\000"
+ 847      6E00
+ 848              	.LASF36:
+ 849 014a 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 849      52784275 
+ 849      66666572 
+ 849      00
+ 850              	.LASF26:
+ 851 0157 50574D5F 		.ascii	"PWM_RG_WriteCompare1\000"
+ 851      52475F57 
+ 851      72697465 
+ 851      436F6D70 
+ 851      61726531 
+ 852              	.LASF27:
+ 853 016c 50574D5F 		.ascii	"PWM_RG_WriteCompare2\000"
+ 853      52475F57 
+ 853      72697465 
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\cclfaqnO.s 			page 18
+
+
+ 853      436F6D70 
+ 853      61726532 
+ 854              	.LASF10:
+ 855 0181 756E7369 		.ascii	"unsigned int\000"
+ 855      676E6564 
+ 855      20696E74 
+ 855      00
+ 856              	.LASF9:
+ 857 018e 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 857      206C6F6E 
+ 857      6720756E 
+ 857      7369676E 
+ 857      65642069 
+ 858              	.LASF11:
+ 859 01a5 75696E74 		.ascii	"uint8_t\000"
+ 859      385F7400 
+ 860              	.LASF31:
+ 861 01ad 50574D5F 		.ascii	"PWM_RG_Stop\000"
+ 861      52475F53 
+ 861      746F7000 
+ 862              	.LASF35:
+ 863 01b9 433A5C55 		.ascii	"C:\\Users\\noemi\\Desktop\\university\\university\\"
+ 863      73657273 
+ 863      5C6E6F65 
+ 863      6D695C44 
+ 863      65736B74 
+ 864 01e6 706F6C69 		.ascii	"poli\\lab sensors\\final assignment\\Final-Assignme"
+ 864      5C6C6162 
+ 864      2073656E 
+ 864      736F7273 
+ 864      5C66696E 
+ 865 0216 6E742D50 		.ascii	"nt-PSoC\\Final_Assignment\\Reset LIS3DH.cydsn\000"
+ 865      536F435C 
+ 865      46696E61 
+ 865      6C5F4173 
+ 865      7369676E 
+ 866              	.LASF34:
+ 867 0242 5247424C 		.ascii	"RGBLedDriver.c\000"
+ 867      65644472 
+ 867      69766572 
+ 867      2E6300
+ 868              	.LASF12:
+ 869 0251 696E7433 		.ascii	"int32_t\000"
+ 869      325F7400 
+ 870              	.LASF19:
+ 871 0259 5247424C 		.ascii	"RGBLed_WriteGreen\000"
+ 871      65645F57 
+ 871      72697465 
+ 871      47726565 
+ 871      6E00
+ 872              	.LASF17:
+ 873 026b 73697A65 		.ascii	"sizetype\000"
+ 873      74797065 
+ 873      00
+ 874              	.LASF8:
+ 875 0274 6C6F6E67 		.ascii	"long long int\000"
+ 875      206C6F6E 
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\cclfaqnO.s 			page 19
+
+
+ 875      6720696E 
+ 875      7400
+ 876              	.LASF15:
+ 877 0282 63686172 		.ascii	"char\000"
+ 877      00
+ 878              	.LASF28:
+ 879 0287 50574D5F 		.ascii	"PWM_B_WriteCompare\000"
+ 879      425F5772 
+ 879      69746543 
+ 879      6F6D7061 
+ 879      726500
+ 880              	.LASF2:
+ 881 029a 73686F72 		.ascii	"short int\000"
+ 881      7420696E 
+ 881      7400
+ 882              	.LASF24:
+ 883 02a4 5247424C 		.ascii	"RGBLed_WriteColor\000"
+ 883      65645F57 
+ 883      72697465 
+ 883      436F6C6F 
+ 883      7200
+ 884              	.LASF30:
+ 885 02b6 50574D5F 		.ascii	"PWM_B_Start\000"
+ 885      425F5374 
+ 885      61727400 
+ 886              	.LASF6:
+ 887 02c2 6C6F6E67 		.ascii	"long int\000"
+ 887      20696E74 
+ 887      00
+ 888              	.LASF16:
+ 889 02cb 6C6F6E67 		.ascii	"long double\000"
+ 889      20646F75 
+ 889      626C6500 
+ 890              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

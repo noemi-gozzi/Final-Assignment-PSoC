@@ -68,7 +68,7 @@ int main(void)
     /*          CTRL4[4:5]= FULL SCALE RANGE. e.g. 01 +-4g    */
     /*          CTRL4[3]=RESOLUTION. normal 0                 */
     /*                                                        */
-    LIS3DH_writeByte(LIS3DH_CTRL_REG4, LIS3DH_CTRL_REG4_4G_NORMAL);
+    LIS3DH_writeByte(LIS3DH_CTRL_REG4, 0x00);
     data_read = LIS3DH_readByte(LIS3DH_CTRL_REG4);
     sprintf(bufferUART, "** LIS3DH CTRL REGISTER 4= 0x%02X\r\n", data_read);
     UART_1_PutBuffer;
@@ -78,7 +78,7 @@ int main(void)
     /*          0b01--0000                                    */
     /*          FIFO enable                                   */
  
-    LIS3DH_writeByte(LIS3DH_CTRL_REG5, 0x48);
+    LIS3DH_writeByte(LIS3DH_CTRL_REG5, 0x40);
     data_read = LIS3DH_readByte(LIS3DH_CTRL_REG5);
     sprintf(bufferUART, "** LIS3DH CTRL REGISTER 5= 0x%02X\r\n", data_read);
     UART_1_PutBuffer;
@@ -88,8 +88,13 @@ int main(void)
     /*          0b01000001                                    */
     /*          FIFO mode                                     */
     /*          watermark: 1 sample                           */
-
-    LIS3DH_writeByte(LIS3DH_FIFO_CTRL_REG,0x40);
+    
+    LIS3DH_writeByte(LIS3DH_FIFO_CTRL_REG,0x00);
+    data_read = LIS3DH_readByte(LIS3DH_FIFO_CTRL_REG);
+    sprintf(bufferUART, "** LIS3DH FIFO CTRL REGISTER = 0x%02X\r\n", data_read);
+    UART_1_PutBuffer;
+    
+    LIS3DH_writeByte(LIS3DH_FIFO_CTRL_REG,0x4F);
     data_read = LIS3DH_readByte(LIS3DH_FIFO_CTRL_REG);
     sprintf(bufferUART, "** LIS3DH FIFO CTRL REGISTER = 0x%02X\r\n", data_read);
     UART_1_PutBuffer;
@@ -99,7 +104,7 @@ int main(void)
     /*          0b000000100                                   */
     /*          watermark interrupt set                       */
 
-    LIS3DH_writeByte(LIS3DH_CTRL_REG3, 0x42);
+    LIS3DH_writeByte(LIS3DH_CTRL_REG3, 0x04);
     data_read = LIS3DH_readByte(LIS3DH_CTRL_REG3);
     sprintf(bufferUART, "** LIS3DH CTRL REGISTER 3= 0x%02X\r\n", data_read);
     UART_1_PutBuffer;
@@ -109,7 +114,7 @@ int main(void)
     /*          OR combination                                */
     /*          HIGH event on z y x                           */
 
-    LIS3DH_writeByte(LIS3DH_INT1_CFG, 0x2A);
+    LIS3DH_writeByte(LIS3DH_INT1_CFG, 0x00);
     data_read = LIS3DH_readByte(LIS3DH_INT1_CFG);
     sprintf(bufferUART, "** LIS3DH INT 1 CFG REGISTER= 0x%02X\r\n", data_read);
     UART_1_PutBuffer;
@@ -118,7 +123,7 @@ int main(void)
     /*          settings:   0x3E                              */
     /*          thresh:2000mg                                 */
  
-    LIS3DH_writeByte(LIS3DH_INT1_THS, 0x3E);
+    LIS3DH_writeByte(LIS3DH_INT1_THS, 0x00);
     data_read = LIS3DH_readByte(LIS3DH_INT1_THS);
     sprintf(bufferUART, "** LIS3DH INT1 THS REGISTER= 0x%02X\r\n", data_read);
     UART_1_PutBuffer;
@@ -127,7 +132,7 @@ int main(void)
     /*          settings:   0x05                              */
     /*          thresh:5/ODR=50ms                                 */
  
-    LIS3DH_writeByte(LIS3DH_INT1_DURATION, 0x05);
+    LIS3DH_writeByte(LIS3DH_INT1_DURATION, 0x00);
     data_read = LIS3DH_readByte(LIS3DH_INT1_DURATION);
     sprintf(bufferUART, "** LIS3DH DURATION REGISTER= 0x%02X\r\n", data_read);
     UART_1_PutBuffer;
@@ -165,9 +170,9 @@ int main(void)
         //READ LIS3DH STATUS REGISTER: EXPECTED IT CHANGES
         //PROBLEM=IT IS ALWAYS 0X20 (EMPTY)
         
-        data_read = LIS3DH_readByte(LIS3DH_FIFO_SRC_REG);
-        sprintf(bufferUART, "** LIS3DH FIFO SRC REG= 0x%02X\r\n", data_read);
-        UART_1_PutBuffer;
+//        data_read = LIS3DH_readByte(LIS3DH_FIFO_SRC_REG);
+//        sprintf(bufferUART, "** LIS3DH FIFO SRC REG= 0x%02X\r\n", data_read);
+//        UART_1_PutBuffer;
         
        if (PacketReadyFlag){
         PacketReadyFlag=0;
