@@ -15,23 +15,36 @@
 
 #define empty_bit 0x20
 
-
+char bufferUART[100];
+#define UART_1_PutBuffer UART_1_PutString(bufferUART)
+#include <stdio.h>
+#include <string.h>
 
 CY_ISR(Custom_Pin_ISR){
     
-    Pin_ISR_ClearInterrupt();
     
-    PacketReadyFlag = 1;
+
     
+    PacketReadyFlag=1;
+    
+    
+//        if (data_read&0x1E){
+//            PacketReadyFlag=1;  
+//        }
+//        else{
+//            PacketReadyFlag=2;
+//        }
+        
+//        else{
+//            PacketReadyFlag = 2;
+//        }
+  
     //uint8_t clear=LIS3DH_readByte(LIS3DH_INT1_SRC); //clear interrupt register
 //    LIS3DH_readPage(LIS3DH_OUT_X_L, (uint8_t*) AccData, DATA_BYTES);
 //    LIS3DH_readPage(LIS3DH_OUT_X_L, (uint8_t*) AccData, DATA_BYTES);
 //    LIS3DH_readPage(LIS3DH_OUT_X_L, (uint8_t*) AccData, DATA_BYTES);
 //    
-    LIS3DH_writeByte(LIS3DH_FIFO_CTRL_REG,0x00);
-    LIS3DH_writeByte(LIS3DH_FIFO_CTRL_REG,0x4F);
-
-
+    Pin_ISR_ClearInterrupt();
     
     //uint8_t value=LIS3DH_readByte(LIS3DH_FIFO_SRC_REG);
 //    while (!(value&empty_bit)){
