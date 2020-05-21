@@ -26,7 +26,15 @@ CY_ISR(Custom_Pin_ISR){
 
     
     PacketReadyFlag=1;
-    
+//    uint8_t data = LIS3DH_readByte(LIS3DH_INT1_SRC);
+//    sprintf(bufferUART, "INT1_SRC 0x%02X\r\n", data);
+//        UART_1_PutBuffer;
+//    data = LIS3DH_readByte(LIS3DH_FIFO_SRC_REG);
+//    sprintf(bufferUART, "FIFO_SRC 0x%02X\r\n", data);
+//        UART_1_PutBuffer;
+//    
+//    LIS3DH_writeByte(LIS3DH_FIFO_CTRL_REG,0x00);
+//    LIS3DH_writeByte(LIS3DH_FIFO_CTRL_REG,0x47);
     
 //        if (data_read&0x1E){
 //            PacketReadyFlag=1;  
