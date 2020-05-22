@@ -11,10 +11,9 @@
 
 #pragma once
 
-#include "SPI_Interface.h"
+#include "SPI_Interface_EEPROM.h"
 
-#define SLAVE_CS_Write CS_1_Write
-#define SPIM           SPIM_1
+
 
 extern uint8_t eeprom_Status;
 

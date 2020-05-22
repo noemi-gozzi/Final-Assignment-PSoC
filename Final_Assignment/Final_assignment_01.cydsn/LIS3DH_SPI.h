@@ -14,8 +14,7 @@
 
 #include "SPI_Interface.h"
 
-#define SLAVE_CS_Write CS_1_Write
-#define SPIM           SPIM_1
+
 
  /*** ========= MACROS ========= ***/   
 

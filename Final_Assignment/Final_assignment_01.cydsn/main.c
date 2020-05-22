@@ -16,6 +16,7 @@ Gozzi Noemi
 #include "InterruptRoutines.h"
 #include "RGBLedDriver.h"
 #include "25LC256.h"
+#include "SPI_Interface_EEPROM.h"
 
 
 #define UART_1_PutBuffer UART_1_PutString(bufferUART)
@@ -39,6 +40,7 @@ int main(void)
     
     /* Start SPI Master */
     SPIM_1_Start();
+    SPIM_2_Start();
     RGBLed_Start();
     CyDelay(10);
     
@@ -54,11 +56,13 @@ int main(void)
     
     /* Write */
     EEPROM_writePage(0x0001, (uint8_t*) data, DATA_BYTES);
-    EEPROM_waitForWriteComplete();
     
+    
+    EEPROM_waitForWriteComplete();
+
     /**** PROJECT 4 ****/
     /* Read */
-    int16_t data_EEPROM[DATA_SIZE];
+    int16_t data_EEPROM[3];
     EEPROM_readPage(0x0001, (uint8_t*) data_EEPROM, DATA_BYTES);
     
     

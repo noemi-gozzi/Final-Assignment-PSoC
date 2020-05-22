@@ -21,15 +21,12 @@
 /*
 * @brief Full-Duplex, Single-Operation 1-Byte Trade
 */
-uint8_t SPI_Interface_tradeByte(uint8_t byte, uint8_t CS_value) {
+uint8_t SPI_Interface_tradeByte(uint8_t byte) {
 	
 	
-    if (CS_value==1){
-        CS_1_Write(0);
-    }
-    else if (CS_value==2){
-        CS_2_Write(0);
-    }
+    
+    CS_1_Write(0);
+
 	
 	/* Load the TX Buffer */
 	SPIM_1_WriteTxData(byte);
@@ -41,13 +38,9 @@ uint8_t SPI_Interface_tradeByte(uint8_t byte, uint8_t CS_value) {
 	uint8_t data = SPIM_1_ReadRxData();
 	
 	/* Disable the Slave */
-	if (CS_value==1){
-        CS_1_Write(1);
-    }
-    else if (CS_value==2){
-        CS_2_Write(1);
-    }
-	
+
+    CS_1_Write(1);
+
 	return data;
     
 }
@@ -56,15 +49,12 @@ uint8_t SPI_Interface_tradeByte(uint8_t byte, uint8_t CS_value) {
 /*
 * @brief RX-only, Dual-Operation 1-Byte READ
 */
-uint8_t SPI_Interface_ReadByte(uint8_t byteTX, uint8_t CS_value) {
+uint8_t SPI_Interface_ReadByte(uint8_t byteTX) {
 	
 	/* Enable the Slave */
-	if (CS_value==1){
-        CS_1_Write(0);
-    }
-    else if (CS_value==2){
-        CS_2_Write(0);
-    }
+
+    CS_1_Write(0);
+
     
     SPIM_1_WriteTxData(byteTX);
     
@@ -75,12 +65,10 @@ uint8_t SPI_Interface_ReadByte(uint8_t byteTX, uint8_t CS_value) {
     uint8_t byteRX = SPIM_1_ReadRxData();
         
     
-    if (CS_value==1){
-        CS_1_Write(1);
-    }
-    else if (CS_value==2){
-        CS_2_Write(1);
-    }
+    
+    CS_1_Write(1);
+    
+
     return byteRX;
     
 	
@@ -100,14 +88,11 @@ void SPI_Interface_Multi_Trade(uint8_t* dataTX, uint8_t* dataRX, uint8_t nBytes)
 /*
 * @brief RX-only, Dual-Operation Multi-Byte READ/WRITE
 */
-void SPI_Interface_Multi_RW(uint8_t* dataTX, uint8_t bytesTX, uint8_t* dataRX, uint8_t bytesRX, uint8_t CS_value) {
+void SPI_Interface_Multi_RW(uint8_t* dataTX, uint8_t bytesTX, uint8_t* dataRX, uint8_t bytesRX) {
 	
-    if (CS_value==1){
-        CS_1_Write(0);
-    }
-    else if (CS_value==2){
-        CS_2_Write(0);
-    }
+
+    CS_1_Write(0);
+
 //	        /* Enable the Slave */
 
             
@@ -157,13 +142,10 @@ void SPI_Interface_Multi_RW(uint8_t* dataTX, uint8_t bytesTX, uint8_t* dataRX, u
         }
             
         /* Disable the Slave */
-    if (CS_value==1){
+
         CS_1_Write(1);
-    }
-    else if (CS_value==2){
-        CS_2_Write(1);
-    }
-        	
+
+
         /* Clear */
         SPIM_1_ClearFIFO();
         SPIM_1_ClearRxBuffer();

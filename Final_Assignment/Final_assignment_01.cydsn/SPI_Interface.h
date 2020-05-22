@@ -20,7 +20,7 @@
 
 #include <cytypes.h>
 #include "CS_1.h"
-#include "CS_2.h"
+
 #include "SPIM_1.h"
 
 #define SPI_DUMMY_BYTE  0x00
@@ -40,7 +40,7 @@
 *
 * @return: uint8_t > received 1-byte word 
 */
-uint8_t SPI_Interface_tradeByte(uint8_t byte, uint8_t CS_value);
+uint8_t SPI_Interface_tradeByte(uint8_t byte);
 
 /*
 * @brief RX-only, Dual-Operation 1-Byte READ
@@ -56,7 +56,7 @@ uint8_t SPI_Interface_tradeByte(uint8_t byte, uint8_t CS_value);
 *
 * @return: uint8_t > received 1-byte word 
 */
-uint8_t SPI_Interface_ReadByte(uint8_t addr, uint8_t CS_value);
+uint8_t SPI_Interface_ReadByte(uint8_t addr);
 
 /*
 * @brief Full-Duplex, Multi-Byte Trade (RX/TX)
@@ -84,6 +84,6 @@ void SPI_Interface_Multi_Trade(uint8_t* dataTX, uint8_t* dataRX, uint8_t nBytes)
 * @param[out]: uint8_t* dataRX > Pointer to the output (RX) data array
 * @param[in]:  uint8_t bytesRX  > Number of bytes to receive
 */
-void SPI_Interface_Multi_RW(uint8_t* dataTX, uint8_t bytesTX, uint8_t* dataRX, uint8_t bytesRX, uint8_t CS_value);
+void SPI_Interface_Multi_RW(uint8_t* dataTX, uint8_t bytesTX, uint8_t* dataRX, uint8_t bytesRX);
 
 /* [] END OF FILE */

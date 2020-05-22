@@ -1,6 +1,6 @@
 // ======================================================================
 // Final_assignment_01.v generated from TopDesign.cysch
-// 05/22/2020 at 11:44
+// 05/22/2020 at 15:08
 // This file is auto generated. ANY EDITS YOU MAKE MAY BE LOST WHEN THIS FILE IS REGENERATED!!!
 // ======================================================================
 
@@ -613,36 +613,109 @@ endmodule
 `include "C:\Program Files (x86)\Cypress\PSoC Creator\4.3\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\cy_constant_v1_0\cy_constant_v1_0.v"
 `endif
 
-// Component: not_v1_0
-`ifdef CY_BLK_DIR
-`undef CY_BLK_DIR
-`endif
+// SPI_Master_v2_50(BidirectMode=false, ClockInternal=true, CtlModeReplacementString=SyncCtl, CyGetRegReplacementString=CY_GET_REG8, CySetRegReplacementString=CY_SET_REG8, DesiredBitRate=1000000, HighSpeedMode=false, InternalClockUsed=1, InternalInterruptEnabled=0, InternalRxInterruptEnabled=1, InternalTxInterruptEnabled=1, InterruptOnByteComplete=false, InterruptOnRXFull=false, InterruptOnRXNotEmpty=true, InterruptOnRXOverrun=false, InterruptOnSPIDone=false, InterruptOnSPIIdle=false, InterruptOnTXEmpty=false, InterruptOnTXNotFull=true, IntOnByteComp=0, IntOnRXFull=0, IntOnRXNotEmpty=1, IntOnRXOver=0, IntOnSPIDone=0, IntOnSPIIdle=0, IntOnTXEmpty=0, IntOnTXNotFull=1, Mode=1, ModeUseZero=1, NumberOfDataBits=8, RegDefReplacementString=reg8, RegSizeReplacementString=uint8, RxBufferSize=8, ShiftDir=0, TxBufferSize=8, UseInternalInterrupt=false, UseRxInternalInterrupt=true, UseTxInternalInterrupt=true, VerilogSectionReplacementString=sR8, CY_API_CALLBACK_HEADER_INCLUDE=#include "cyapicallbacks.h", CY_COMMENT=, CY_COMPONENT_NAME=SPI_Master_v2_50, CY_CONFIG_TITLE=SPIM_2, CY_CONST_CONFIG=true, CY_CONTROL_FILE=<:default:>, CY_DATASHEET_FILE=<:default:>, CY_FITTER_NAME=SPIM_2, CY_INSTANCE_SHORT_NAME=SPIM_2, CY_MAJOR_VERSION=2, CY_MINOR_VERSION=50, CY_PDL_DRIVER_NAME=, CY_PDL_DRIVER_REQ_VERSION=, CY_PDL_DRIVER_SUBGROUP=, CY_PDL_DRIVER_VARIANT=, CY_REMOVE=false, CY_SUPPRESS_API_GEN=false, CY_VERSION=PSoC Creator  4.3, INSTANCE_NAME=SPIM_2, )
+module SPI_Master_v2_50_4 (
+    mosi,
+    sclk,
+    ss,
+    miso,
+    clock,
+    reset,
+    rx_interrupt,
+    sdat,
+    tx_interrupt);
+    output      mosi;
+    output      sclk;
+    output      ss;
+    input       miso;
+    input       clock;
+    input       reset;
+    output      rx_interrupt;
+    inout       sdat;
+    output      tx_interrupt;
 
-`ifdef WARP
-`define CY_BLK_DIR "C:\Program Files (x86)\Cypress\PSoC Creator\4.3\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\not_v1_0"
-`include "C:\Program Files (x86)\Cypress\PSoC Creator\4.3\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\not_v1_0\not_v1_0.v"
-`else
-`define CY_BLK_DIR "C:\Program Files (x86)\Cypress\PSoC Creator\4.3\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\not_v1_0"
-`include "C:\Program Files (x86)\Cypress\PSoC Creator\4.3\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\not_v1_0\not_v1_0.v"
-`endif
+    parameter BidirectMode = 0;
+    parameter HighSpeedMode = 0;
+    parameter NumberOfDataBits = 8;
+    parameter ShiftDir = 0;
 
-// Component: or_v1_0
-`ifdef CY_BLK_DIR
-`undef CY_BLK_DIR
-`endif
+          wire  Net_289;
+          wire  Net_257;
+          wire  Net_288;
+          wire  Net_294;
+          wire  Net_161;
+          wire  Net_244;
+          wire  Net_273;
+          wire  Net_276;
 
-`ifdef WARP
-`define CY_BLK_DIR "C:\Program Files (x86)\Cypress\PSoC Creator\4.3\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\or_v1_0"
-`include "C:\Program Files (x86)\Cypress\PSoC Creator\4.3\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\or_v1_0\or_v1_0.v"
-`else
-`define CY_BLK_DIR "C:\Program Files (x86)\Cypress\PSoC Creator\4.3\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\or_v1_0"
-`include "C:\Program Files (x86)\Cypress\PSoC Creator\4.3\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\or_v1_0\or_v1_0.v"
-`endif
+	// VirtualMux_1 (cy_virtualmux_v1_0)
+	assign Net_276 = Net_288;
+
+
+	cy_clock_v1_0
+		#(.id("51a16b94-a774-40fe-81a8-24ada57b1663/426fcbe0-714d-4404-8fa8-581ff40c30f1"),
+		  .source_clock_id(""),
+		  .divisor(0),
+		  .period("500000000"),
+		  .is_direct(0),
+		  .is_digital(1))
+		IntClock
+		 (.clock_out(Net_288));
+
+
+
+	cy_isr_v1_0
+		#(.int_type(2'b10))
+		RxInternalInterrupt
+		 (.int_signal(rx_interrupt));
+
+
+    B_SPI_Master_v2_50 BSPIM (
+        .sclk(sclk),
+        .ss(ss),
+        .miso(Net_244),
+        .clock(Net_276),
+        .reset(Net_273),
+        .rx_interpt(rx_interrupt),
+        .tx_enable(Net_294),
+        .mosi(mosi),
+        .tx_interpt(tx_interrupt));
+    defparam BSPIM.BidirectMode = 0;
+    defparam BSPIM.HighSpeedMode = 0;
+    defparam BSPIM.ModeCPHA = 0;
+    defparam BSPIM.ModePOL = 0;
+    defparam BSPIM.NumberOfDataBits = 8;
+    defparam BSPIM.ShiftDir = 0;
+
+	// VirtualMux_2 (cy_virtualmux_v1_0)
+	assign Net_244 = miso;
+
+
+	cy_isr_v1_0
+		#(.int_type(2'b10))
+		TxInternalInterrupt
+		 (.int_signal(tx_interrupt));
+
+
+	// VirtualMux_3 (cy_virtualmux_v1_0)
+	assign Net_273 = Net_289;
+
+    ZeroTerminal ZeroTerminal_1 (
+        .z(Net_289));
+
+
+
+endmodule
 
 // top
 module top ;
 
-          wire  Net_2347;
+          wire  Net_2538;
+          wire  Net_2537;
+          wire  Net_2536;
+          wire  Net_2535;
+          wire  Net_2534;
+          wire  Net_2533;
     electrical  Net_689;
           wire  Net_259;
           wire  Net_2297;
@@ -679,59 +752,62 @@ module top ;
           wire  Net_2395;
           wire  Net_2394;
           wire  Net_2393;
-          wire  Net_469;
-          wire  Net_468;
-          wire  Net_467;
-          wire  Net_466;
-          wire  Net_465;
-          wire  Net_464;
-    electrical  Net_2450;
-    electrical  Net_2449;
-    electrical  Net_2448;
-    electrical  Net_2447;
-    electrical  Net_2446;
-    electrical [1:0] Net_2445;
-    electrical  Net_2444;
-    electrical  Net_2443;
-    electrical  Net_2442;
-    electrical  Net_2441;
-    electrical  Net_2440;
-    electrical  Net_2439;
-    electrical  Net_2438;
-    electrical  Net_2437;
-    electrical  Net_2436;
-    electrical  Net_2435;
-    electrical  Net_2434;
-    electrical  Net_2432;
-    electrical  Net_2431;
-    electrical  Net_2430;
-    electrical  Net_2429;
-    electrical  Net_2428;
-    electrical  Net_2427;
-    electrical  Net_2426;
-    electrical  Net_2425;
-    electrical  Net_2424;
-    electrical  Net_2423;
-    electrical  Net_2422;
-    electrical  Net_2421;
-    electrical  Net_2420;
-    electrical  Net_2419;
-    electrical  Net_2418;
-    electrical  Net_2417;
-    electrical  Net_2416;
-    electrical  Net_2415;
-    electrical  Net_2414;
-    electrical  Net_2413;
-    electrical  Net_2412;
-    electrical  Net_2411;
-    electrical  Net_2410;
-    electrical  Net_2409;
-    electrical  Net_2408;
-    electrical  Net_2407;
-    electrical  Net_2406;
-          wire  Net_2458;
-          wire  Net_2454;
-          wire  Net_59;
+          wire  Net_2530;
+          wire  Net_2529;
+          wire  Net_2528;
+          wire  Net_2527;
+          wire  Net_2526;
+          wire  Net_2525;
+    electrical  Net_2502;
+    electrical  Net_2501;
+    electrical  Net_2500;
+    electrical  Net_2499;
+    electrical  Net_2498;
+    electrical [1:0] Net_2497;
+    electrical  Net_2496;
+    electrical  Net_2495;
+    electrical  Net_2494;
+    electrical  Net_2493;
+    electrical  Net_2492;
+    electrical  Net_2491;
+    electrical  Net_2490;
+    electrical  Net_2489;
+    electrical  Net_2488;
+    electrical  Net_2487;
+    electrical  Net_2486;
+    electrical  Net_2485;
+    electrical  Net_2484;
+    electrical  Net_2483;
+    electrical  Net_2482;
+    electrical  Net_2481;
+    electrical  Net_2480;
+    electrical  Net_2479;
+    electrical  Net_2478;
+    electrical  Net_2477;
+    electrical  Net_2476;
+    electrical  Net_2475;
+    electrical  Net_2474;
+    electrical  Net_2473;
+    electrical  Net_2472;
+    electrical  Net_2471;
+    electrical  Net_2470;
+    electrical  Net_2469;
+    electrical  Net_2468;
+    electrical  Net_2467;
+    electrical  Net_2466;
+    electrical  Net_2465;
+    electrical  Net_2464;
+    electrical  Net_2463;
+    electrical  Net_2462;
+    electrical  Net_2461;
+    electrical  Net_2460;
+    electrical  Net_2459;
+          wire  Net_2508;
+          wire  Net_19;
+          wire  Net_2532;
+          wire  Net_23;
+          wire  Net_2523;
+          wire  Net_60;
     electrical  Net_2350;
     electrical  Net_2404;
     electrical  Net_41;
@@ -746,7 +822,6 @@ module top ;
           wire  Net_149;
           wire  Net_78;
           wire  Net_83;
-          wire  Net_61;
           wire  Net_1357;
           wire  Net_692;
           wire  Net_384;
@@ -759,68 +834,67 @@ module top ;
     electrical  Net_1143;
     electrical  Net_985;
     electrical  Net_682;
-          wire  Net_60;
 
     cy_annotation_universal_v1_0 KIT_059_1 (
         .connect({
-            Net_2406,
-            Net_2407,
-            Net_2408,
-            Net_2409,
-            Net_2410,
+            Net_2459,
+            Net_2460,
+            Net_2461,
+            Net_2462,
+            Net_2463,
             Net_2303,
             Net_2304,
-            Net_2411,
-            Net_2442,
-            Net_2441,
-            Net_2440,
+            Net_2464,
+            Net_2494,
+            Net_2493,
+            Net_2492,
             Net_35,
             Net_36,
             Net_37,
             Net_76,
             Net_75,
-            Net_2434,
+            Net_2486,
             Net_41,
             Net_2404,
-            Net_2439,
-            Net_2438,
-            Net_2437,
-            Net_2412,
-            Net_2413,
-            Net_2414,
-            Net_2415,
-            Net_2416,
-            Net_2417,
-            Net_2436,
-            Net_2435,
+            Net_2491,
+            Net_2490,
+            Net_2489,
+            Net_2465,
+            Net_2466,
+            Net_2467,
+            Net_2468,
+            Net_2469,
+            Net_2470,
+            Net_2488,
+            Net_2487,
             Net_2350,
-            Net_2432,
-            Net_2431,
-            Net_2430,
+            Net_2485,
+            Net_2484,
+            Net_2483,
             Net_2324,
-            Net_2429,
-            Net_2428,
-            Net_2427,
-            Net_2418,
-            Net_2419,
-            Net_2420,
-            Net_2421,
-            Net_2422,
+            Net_2482,
+            Net_2481,
+            Net_2480,
+            Net_2471,
+            Net_2472,
+            Net_2473,
+            Net_2474,
+            Net_2475,
             Net_680,
             Net_1143,
             Net_1100,
-            Net_2446,
-            Net_2447,
-            Net_2448,
-            Net_2449,
-            Net_2450,
-            Net_2425,
-            Net_2444,
-            Net_2423,
-            Net_2424,
-            Net_2426,
-            Net_2443,
-            Net_2445[1:0]
+            Net_2498,
+            Net_2499,
+            Net_2500,
+            Net_2501,
+            Net_2502,
+            Net_2478,
+            Net_2496,
+            Net_2476,
+            Net_2477,
+            Net_2479,
+            Net_2495,
+            Net_2497[1:0]
         })
     );
     defparam KIT_059_1.comp_name = "KIT_059_v1_0";
@@ -888,7 +962,7 @@ module top ;
 		MISO_1
 		 (.oe(tmpOE__MISO_1_net),
 		  .y({1'b0}),
-		  .fb({Net_2454}),
+		  .fb({Net_2508}),
 		  .io({tmpIO_0__MISO_1_net[0:0]}),
 		  .siovref(tmpSIOVREF__MISO_1_net),
 		  .interrupt({tmpINTERRUPT_0__MISO_1_net[0:0]}),
@@ -1039,7 +1113,7 @@ module top ;
 		  .input_buffer_sel(2'b00))
 		SCLK_1
 		 (.oe(tmpOE__SCLK_1_net),
-		  .y({Net_61}),
+		  .y({Net_2523}),
 		  .fb({tmpFB_0__SCLK_1_net[0:0]}),
 		  .io({tmpIO_0__SCLK_1_net[0:0]}),
 		  .siovref(tmpSIOVREF__SCLK_1_net),
@@ -1056,14 +1130,14 @@ module top ;
 
     SPI_Master_v2_50_0 SPIM_1 (
         .mosi(Net_60),
-        .sclk(Net_61),
-        .ss(Net_464),
-        .miso(Net_59),
+        .sclk(Net_2523),
+        .ss(Net_2525),
+        .miso(Net_2508),
         .clock(1'b0),
         .reset(1'b0),
-        .rx_interrupt(Net_467),
-        .sdat(Net_468),
-        .tx_interrupt(Net_469));
+        .rx_interrupt(Net_2528),
+        .sdat(Net_2529),
+        .tx_interrupt(Net_2530));
     defparam SPIM_1.BidirectMode = 0;
     defparam SPIM_1.HighSpeedMode = 0;
     defparam SPIM_1.NumberOfDataBits = 8;
@@ -1831,7 +1905,7 @@ module top ;
 		  .input_buffer_sel(2'b00))
 		MOSI_2
 		 (.oe(tmpOE__MOSI_2_net),
-		  .y({Net_60}),
+		  .y({Net_23}),
 		  .fb({tmpFB_0__MOSI_2_net[0:0]}),
 		  .io({tmpIO_0__MOSI_2_net[0:0]}),
 		  .siovref(tmpSIOVREF__MOSI_2_net),
@@ -1907,7 +1981,7 @@ module top ;
 		  .input_buffer_sel(2'b00))
 		SCKL_2
 		 (.oe(tmpOE__SCKL_2_net),
-		  .y({Net_2347}),
+		  .y({Net_2532}),
 		  .fb({tmpFB_0__SCKL_2_net[0:0]}),
 		  .io({tmpIO_0__SCKL_2_net[0:0]}),
 		  .siovref(tmpSIOVREF__SCKL_2_net),
@@ -2059,7 +2133,7 @@ module top ;
 		MISO_2
 		 (.oe(tmpOE__MISO_2_net),
 		  .y({1'b0}),
-		  .fb({Net_2458}),
+		  .fb({Net_19}),
 		  .io({tmpIO_0__MISO_2_net[0:0]}),
 		  .siovref(tmpSIOVREF__MISO_2_net),
 		  .interrupt({tmpINTERRUPT_0__MISO_2_net[0:0]}),
@@ -2073,11 +2147,20 @@ module top ;
 
 	assign tmpOE__MISO_2_net = (`CYDEV_CHIP_MEMBER_USED == `CYDEV_CHIP_MEMBER_3A && `CYDEV_CHIP_REVISION_USED < `CYDEV_CHIP_REVISION_3A_ES3) ? ~{1'b1} : {1'b1};
 
-
-    assign Net_2347 = ~Net_61;
-
-
-    assign Net_59 = Net_2454 | Net_2458;
+    SPI_Master_v2_50_4 SPIM_2 (
+        .mosi(Net_23),
+        .sclk(Net_2532),
+        .ss(Net_2533),
+        .miso(Net_19),
+        .clock(1'b0),
+        .reset(1'b0),
+        .rx_interrupt(Net_2536),
+        .sdat(Net_2537),
+        .tx_interrupt(Net_2538));
+    defparam SPIM_2.BidirectMode = 0;
+    defparam SPIM_2.HighSpeedMode = 0;
+    defparam SPIM_2.NumberOfDataBits = 8;
+    defparam SPIM_2.ShiftDir = 0;
 
 
 
