@@ -1,6 +1,6 @@
 // ======================================================================
 // Final_assignment_01.v generated from TopDesign.cysch
-// 05/22/2020 at 15:08
+// 05/22/2020 at 16:04
 // This file is auto generated. ANY EDITS YOU MAKE MAY BE LOST WHEN THIS FILE IS REGENERATED!!!
 // ======================================================================
 
@@ -775,6 +775,11 @@ module top ;
     electrical  Net_2488;
     electrical  Net_2487;
     electrical  Net_2486;
+    electrical  Net_2543;
+    electrical  Net_2542;
+    electrical  Net_2541;
+    electrical  Net_2540;
+    electrical  Net_2539;
     electrical  Net_2485;
     electrical  Net_2484;
     electrical  Net_2483;
@@ -802,23 +807,18 @@ module top ;
     electrical  Net_2461;
     electrical  Net_2460;
     electrical  Net_2459;
+          wire  Net_60;
           wire  Net_2508;
+          wire  Net_2523;
           wire  Net_19;
           wire  Net_2532;
           wire  Net_23;
-          wire  Net_2523;
-          wire  Net_60;
     electrical  Net_2350;
     electrical  Net_2404;
     electrical  Net_41;
     electrical  Net_2324;
     electrical  Net_2303;
     electrical  Net_2304;
-    electrical  Net_35;
-    electrical  Net_36;
-    electrical  Net_37;
-    electrical  Net_76;
-    electrical  Net_75;
           wire  Net_149;
           wire  Net_78;
           wire  Net_83;
@@ -848,11 +848,11 @@ module top ;
             Net_2494,
             Net_2493,
             Net_2492,
-            Net_35,
-            Net_36,
-            Net_37,
-            Net_76,
-            Net_75,
+            Net_2539,
+            Net_2540,
+            Net_2541,
+            Net_2542,
+            Net_2543,
             Net_2486,
             Net_41,
             Net_2404,
@@ -952,7 +952,7 @@ module top ;
 		  .sio_vohsel(""),
 		  .slew_rate(1'b0),
 		  .spanning(0),
-		  .use_annotation(1'b1),
+		  .use_annotation(1'b0),
 		  .vtrip(2'b00),
 		  .width(1),
 		  .ovt_hyst_trim(1'b0),
@@ -966,7 +966,6 @@ module top ;
 		  .io({tmpIO_0__MISO_1_net[0:0]}),
 		  .siovref(tmpSIOVREF__MISO_1_net),
 		  .interrupt({tmpINTERRUPT_0__MISO_1_net[0:0]}),
-		  .annotation({Net_37}),
 		  .in_clock({1'b0}),
 		  .in_clock_en({1'b1}),
 		  .in_reset({1'b0}),
@@ -1028,7 +1027,7 @@ module top ;
 		  .sio_vohsel(""),
 		  .slew_rate(1'b0),
 		  .spanning(0),
-		  .use_annotation(1'b1),
+		  .use_annotation(1'b0),
 		  .vtrip(2'b10),
 		  .width(1),
 		  .ovt_hyst_trim(1'b0),
@@ -1042,7 +1041,6 @@ module top ;
 		  .io({tmpIO_0__MOSI_1_net[0:0]}),
 		  .siovref(tmpSIOVREF__MOSI_1_net),
 		  .interrupt({tmpINTERRUPT_0__MOSI_1_net[0:0]}),
-		  .annotation({Net_36}),
 		  .in_clock({1'b0}),
 		  .in_clock_en({1'b1}),
 		  .in_reset({1'b0}),
@@ -1104,7 +1102,7 @@ module top ;
 		  .sio_vohsel(""),
 		  .slew_rate(1'b0),
 		  .spanning(0),
-		  .use_annotation(1'b1),
+		  .use_annotation(1'b0),
 		  .vtrip(2'b10),
 		  .width(1),
 		  .ovt_hyst_trim(1'b0),
@@ -1118,7 +1116,6 @@ module top ;
 		  .io({tmpIO_0__SCLK_1_net[0:0]}),
 		  .siovref(tmpSIOVREF__SCLK_1_net),
 		  .interrupt({tmpINTERRUPT_0__SCLK_1_net[0:0]}),
-		  .annotation({Net_35}),
 		  .in_clock({1'b0}),
 		  .in_clock_en({1'b1}),
 		  .in_reset({1'b0}),
@@ -1195,7 +1192,7 @@ module top ;
 		  .sio_vohsel(""),
 		  .slew_rate(1'b0),
 		  .spanning(0),
-		  .use_annotation(1'b1),
+		  .use_annotation(1'b0),
 		  .vtrip(2'b10),
 		  .width(1),
 		  .ovt_hyst_trim(1'b0),
@@ -1209,7 +1206,6 @@ module top ;
 		  .io({tmpIO_0__CS_1_net[0:0]}),
 		  .siovref(tmpSIOVREF__CS_1_net),
 		  .interrupt({tmpINTERRUPT_0__CS_1_net[0:0]}),
-		  .annotation({Net_76}),
 		  .in_clock({1'b0}),
 		  .in_clock_en({1'b1}),
 		  .in_reset({1'b0}),
@@ -1270,7 +1266,7 @@ module top ;
 		  .sio_vohsel(""),
 		  .slew_rate(1'b0),
 		  .spanning(0),
-		  .use_annotation(1'b1),
+		  .use_annotation(1'b0),
 		  .vtrip(2'b00),
 		  .width(1),
 		  .ovt_hyst_trim(1'b0),
@@ -1284,7 +1280,6 @@ module top ;
 		  .io({tmpIO_0__Pin_ISR_net[0:0]}),
 		  .siovref(tmpSIOVREF__Pin_ISR_net),
 		  .interrupt({Net_149}),
-		  .annotation({Net_75}),
 		  .in_clock({1'b0}),
 		  .in_clock_en({1'b1}),
 		  .in_reset({1'b0}),
