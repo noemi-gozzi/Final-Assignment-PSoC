@@ -29,7 +29,7 @@ uint8_t LIS3DH_readByte(uint8_t addr) {
 	
 	/* Read 1 byte from addr */
     
-	SPI_Interface_Multi_RW(packet, 1, &dataRX, 1);
+	SPI_Interface_Multi_RW(packet, 1, &dataRX, 1, CS_LIS3DH);
 	
 	return dataRX;
     
@@ -45,7 +45,7 @@ void LIS3DH_writeByte(uint8_t addr, uint8_t dataByte) {
 	/* Nothing to RX... */
 	uint8_t temp = 0;
 	/* Write 1 byte to addr */
-	SPI_Interface_Multi_RW(dataTX, 2, &temp, 0);
+	SPI_Interface_Multi_RW(dataTX, 2, &temp, 0, CS_LIS3DH);
 	    
 }
 
@@ -58,7 +58,7 @@ void LIS3DH_readPage(uint8_t addr, uint8_t* dataRX, uint8_t nBytes) {
 	
 	
 	/* Read the nBytes */
-	SPI_Interface_Multi_RW(dataTX, 1, dataRX, nBytes);
+	SPI_Interface_Multi_RW(dataTX, 1, dataRX, nBytes, CS_LIS3DH);
 		
 }
 
@@ -78,7 +78,7 @@ void LIS3DH_writePage(uint8_t addr, uint8_t* data, uint8_t nBytes) {
 	/* Nothing to RX: point to a dummy variable */
 	uint8_t temp = 0;
 	
-	SPI_Interface_Multi_RW(dataTX, 1+nBytes, &temp, 0);
+	SPI_Interface_Multi_RW(dataTX, 1+nBytes, &temp, 0, CS_LIS3DH);
 	
 }
 //

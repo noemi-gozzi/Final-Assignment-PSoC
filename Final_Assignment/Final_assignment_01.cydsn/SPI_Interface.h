@@ -21,6 +21,7 @@
 
 #include <cytypes.h>
 #include "CS_1.h"
+#include "CS_2.h"
 #include "SPIM_1.h"
 
 #define SPI_DUMMY_BYTE  0x00
@@ -84,6 +85,6 @@ void SPI_Interface_Multi_Trade(uint8_t* dataTX, uint8_t* dataRX, uint8_t nBytes)
 * @param[out]: uint8_t* dataRX > Pointer to the output (RX) data array
 * @param[in]:  uint8_t bytesRX  > Number of bytes to receive
 */
-void SPI_Interface_Multi_RW(uint8_t* dataTX, uint8_t bytesTX, uint8_t* dataRX, uint8_t bytesRX);
+void SPI_Interface_Multi_RW(uint8_t* dataTX, uint8_t bytesTX, uint8_t* dataRX, uint8_t bytesRX, uint8_t CS_value);
 
 /* [] END OF FILE */

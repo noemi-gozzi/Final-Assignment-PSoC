@@ -85,9 +85,15 @@ void SPI_Interface_Multi_Trade(uint8_t* dataTX, uint8_t* dataRX, uint8_t nBytes)
 /*
 * @brief RX-only, Dual-Operation Multi-Byte READ/WRITE
 */
-void SPI_Interface_Multi_RW(uint8_t* dataTX, uint8_t bytesTX, uint8_t* dataRX, uint8_t bytesRX) {
+void SPI_Interface_Multi_RW(uint8_t* dataTX, uint8_t bytesTX, uint8_t* dataRX, uint8_t bytesRX, uint8_t CS_value) {
 	
-        /* Enable the Slave */
+    if (CS_value==1){
+        CS_1_Write(0);
+    }
+    else if (CS_value==2){
+        CS_2_Write(0);
+    }
+//	        /* Enable the Slave */
         SLAVE_CS_Write(0);
             
         int8_t count = bytesTX, index = 0;
@@ -136,7 +142,12 @@ void SPI_Interface_Multi_RW(uint8_t* dataTX, uint8_t bytesTX, uint8_t* dataRX, u
         }
             
         /* Disable the Slave */
-        SLAVE_CS_Write(1);
+    if (CS_value==1){
+        CS_1_Write(1);
+    }
+    else if (CS_value==2){
+        CS_2_Write(1);
+    }
         	
         /* Clear */
         SPIM_1_ClearFIFO();

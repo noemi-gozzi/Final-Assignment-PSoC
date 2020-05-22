@@ -28,7 +28,7 @@
 #define address_mask6 0b00111111
 
 #define SPI_LIS3DH_MS 0b01000000 //if 1 autoincrement 
-
+#define CS_LIS3DH 1
 uint8_t LIS3DH_readByte(uint8_t addr);
 
 /*
