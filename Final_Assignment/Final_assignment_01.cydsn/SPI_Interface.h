@@ -5,8 +5,7 @@
  * This header file contains macros and function prototypes to interface
  * with the SPI Master (SPIM) of the PSoC.
  *
- * @author Mattia Pesenti
- * @date 9 April, 2020
+
 */
 
 /*											 
@@ -41,7 +40,7 @@
 *
 * @return: uint8_t > received 1-byte word 
 */
-uint8_t SPI_Interface_tradeByte(uint8_t byte);
+uint8_t SPI_Interface_tradeByte(uint8_t byte, uint8_t CS_value);
 
 /*
 * @brief RX-only, Dual-Operation 1-Byte READ
@@ -57,7 +56,7 @@ uint8_t SPI_Interface_tradeByte(uint8_t byte);
 *
 * @return: uint8_t > received 1-byte word 
 */
-uint8_t SPI_Interface_ReadByte(uint8_t addr);
+uint8_t SPI_Interface_ReadByte(uint8_t addr, uint8_t CS_value);
 
 /*
 * @brief Full-Duplex, Multi-Byte Trade (RX/TX)

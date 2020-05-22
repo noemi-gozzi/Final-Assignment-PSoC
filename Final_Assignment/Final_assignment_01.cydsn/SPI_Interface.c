@@ -4,9 +4,7 @@
  * 
  * This source code file contains macros and functions to interface
  * with the SPI Master (SPIM) of the PSoC.
- *
- * @author Mattia Pesenti
- * @date April 9, 2020
+
 */
 
 /*											 
@@ -19,17 +17,19 @@
 
 #include "SPI_Interface.h"
 
-#ifndef SLAVE_CS_Write
-    #define SLAVE_CS_Write CS_1_Write
-#endif
 
 /*
 * @brief Full-Duplex, Single-Operation 1-Byte Trade
 */
-uint8_t SPI_Interface_tradeByte(uint8_t byte) {
+uint8_t SPI_Interface_tradeByte(uint8_t byte, uint8_t CS_value) {
 	
-	/* Enable the Slave */
-	SLAVE_CS_Write(0);
+	
+    if (CS_value==1){
+        CS_1_Write(0);
+    }
+    else if (CS_value==2){
+        CS_2_Write(0);
+    }
 	
 	/* Load the TX Buffer */
 	SPIM_1_WriteTxData(byte);
@@ -41,7 +41,12 @@ uint8_t SPI_Interface_tradeByte(uint8_t byte) {
 	uint8_t data = SPIM_1_ReadRxData();
 	
 	/* Disable the Slave */
-	SLAVE_CS_Write(1);
+	if (CS_value==1){
+        CS_1_Write(1);
+    }
+    else if (CS_value==2){
+        CS_2_Write(1);
+    }
 	
 	return data;
     
@@ -51,10 +56,15 @@ uint8_t SPI_Interface_tradeByte(uint8_t byte) {
 /*
 * @brief RX-only, Dual-Operation 1-Byte READ
 */
-uint8_t SPI_Interface_ReadByte(uint8_t byteTX) {
+uint8_t SPI_Interface_ReadByte(uint8_t byteTX, uint8_t CS_value) {
 	
 	/* Enable the Slave */
-	SLAVE_CS_Write(0);
+	if (CS_value==1){
+        CS_1_Write(0);
+    }
+    else if (CS_value==2){
+        CS_2_Write(0);
+    }
     
     SPIM_1_WriteTxData(byteTX);
     
@@ -65,7 +75,12 @@ uint8_t SPI_Interface_ReadByte(uint8_t byteTX) {
     uint8_t byteRX = SPIM_1_ReadRxData();
         
     
-    SLAVE_CS_Write(1);
+    if (CS_value==1){
+        CS_1_Write(1);
+    }
+    else if (CS_value==2){
+        CS_2_Write(1);
+    }
     return byteRX;
     
 	
@@ -94,7 +109,7 @@ void SPI_Interface_Multi_RW(uint8_t* dataTX, uint8_t bytesTX, uint8_t* dataRX, u
         CS_2_Write(0);
     }
 //	        /* Enable the Slave */
-        SLAVE_CS_Write(0);
+
             
         int8_t count = bytesTX, index = 0;
         	

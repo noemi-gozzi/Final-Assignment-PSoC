@@ -15,6 +15,8 @@ Gozzi Noemi
 #include <stdlib.h>
 #include "InterruptRoutines.h"
 #include "RGBLedDriver.h"
+#include "25LC256.h"
+
 
 #define UART_1_PutBuffer UART_1_PutString(bufferUART)
 #define DATA_SIZE 6
@@ -39,6 +41,32 @@ int main(void)
     SPIM_1_Start();
     RGBLed_Start();
     CyDelay(10);
+    
+    UART_1_PutString("*********    EEPROM TEST    *********\r\n");
+    
+    /* Definition of the extern from 25LC256.c */
+    //uint8_t eeprom_Status = 0;
+    
+    /* Data to Write */
+    int16_t data[3] = {15, -32, 258};
+    
+    /**** PROJECT 3 *****/
+    
+    /* Write */
+    EEPROM_writePage(0x0001, (uint8_t*) data, DATA_BYTES);
+    EEPROM_waitForWriteComplete();
+    
+    /**** PROJECT 4 ****/
+    /* Read */
+    int16_t data_EEPROM[DATA_SIZE];
+    EEPROM_readPage(0x0001, (uint8_t*) data_EEPROM, DATA_BYTES);
+    
+    
+    
+    sprintf(bufferUART, "** EEPROM Read = %d %d %d \r\n", data_EEPROM[0], data_EEPROM[1], data_EEPROM[2]);
+    UART_1_PutBuffer;
+    
+    UART_1_PutString("*************************************\r\n");
     
     uint8_t data_read;
     
