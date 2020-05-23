@@ -24,5 +24,8 @@
     
     volatile uint8 PacketReadyFlag; //Flag to communicate when new data are available and read, to be sent then with UART
     uint8 data_water;
+    
+   
+    CY_ISR_PROTO(Custom_Pin_Button);
 #endif
 /* [] END OF FILE */

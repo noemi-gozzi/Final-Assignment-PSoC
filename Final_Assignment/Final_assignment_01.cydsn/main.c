@@ -204,6 +204,9 @@ int main(void)
     PacketReadyFlag = 0;
     isr_ACC_StartEx(Custom_Pin_ISR);
     
+    isr_DEBOUNCER_StartEx(Custom_Pin_Button);
+    
+    
     for(;;)
     {
 
