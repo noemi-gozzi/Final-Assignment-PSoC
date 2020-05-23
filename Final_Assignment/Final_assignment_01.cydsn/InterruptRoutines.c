@@ -81,6 +81,7 @@ CY_ISR(Custom_Pin_Button){
         i=i+1;
         
     }
+
     if (i>150){
         //LONG PRESSURE: configuration mode
         if (configuration_status==0){
@@ -98,7 +99,7 @@ CY_ISR(Custom_Pin_Button){
             }
         }
     }
-    
+    i=0;
     switch (TimerFlag)
 	{
 		case 0: 
@@ -135,7 +136,7 @@ CY_ISR(Custom_Pin_Button){
     }
     
     TIMER_button_Start();
-    i=0;
+
     
     
 }
