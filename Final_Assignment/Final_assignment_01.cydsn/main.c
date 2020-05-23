@@ -205,6 +205,7 @@ int main(void)
     isr_ACC_StartEx(Custom_Pin_ISR);
     
     isr_DEBOUNCER_StartEx(Custom_Pin_Button);
+    isr_TIMER_StartEx(Custom_Timer_Button);
     
     
     for(;;)

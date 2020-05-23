@@ -2,7 +2,7 @@
 --	Conversion of Final_assignment_01.v to vh2:
 --
 --	Cypress Semiconductor - WARP Version 6.3 IR 41
---	Sat May 23 15:05:01 2020
+--	Sat May 23 16:39:30 2020
 --
 
 USE cypress.cypress.all;
@@ -1456,6 +1456,16 @@ SIGNAL tmpFB_0__Pin_Led_Blue_net_0 : bit;
 SIGNAL tmpIO_0__Pin_Led_Blue_net_0 : bit;
 TERMINAL tmpSIOVREF__Pin_Led_Blue_net_0 : bit;
 SIGNAL tmpINTERRUPT_0__Pin_Led_Blue_net_0 : bit;
+SIGNAL Net_10 : bit;
+SIGNAL Net_12 : bit;
+SIGNAL \TIMER_button:Net_260\ : bit;
+SIGNAL \TIMER_button:Net_266\ : bit;
+SIGNAL \TIMER_button:Net_51\ : bit;
+SIGNAL \TIMER_button:Net_261\ : bit;
+SIGNAL \TIMER_button:Net_57\ : bit;
+SIGNAL Net_2610 : bit;
+SIGNAL Net_2615 : bit;
+SIGNAL \TIMER_button:Net_102\ : bit;
 SIGNAL Net_2523D : bit;
 SIGNAL \SPIM_1:BSPIM:so_send_reg\\D\ : bit;
 SIGNAL \SPIM_1:BSPIM:mosi_reg\\D\ : bit;
@@ -1573,10 +1583,10 @@ tmpOE__MISO_1_net_0 <=  ('1') ;
 \SPIM_1:BSPIM:state_2\\D\ <= ((not \SPIM_1:BSPIM:state_2\ and not \SPIM_1:BSPIM:state_0\ and not \SPIM_1:BSPIM:count_4\ and not \SPIM_1:BSPIM:count_3\ and not \SPIM_1:BSPIM:count_2\ and not \SPIM_1:BSPIM:count_0\ and not \SPIM_1:BSPIM:tx_status_1\ and \SPIM_1:BSPIM:state_1\ and \SPIM_1:BSPIM:count_1\)
 	OR (not \SPIM_1:BSPIM:state_2\ and not \SPIM_1:BSPIM:count_4\ and not \SPIM_1:BSPIM:count_3\ and not \SPIM_1:BSPIM:count_2\ and not \SPIM_1:BSPIM:count_1\ and \SPIM_1:BSPIM:state_1\ and \SPIM_1:BSPIM:state_0\ and \SPIM_1:BSPIM:count_0\));
 
-\SPIM_1:BSPIM:state_1\\D\ <= ((not \SPIM_1:BSPIM:state_2\ and not \SPIM_1:BSPIM:count_0\ and \SPIM_1:BSPIM:state_1\ and \SPIM_1:BSPIM:tx_status_1\)
-	OR (not \SPIM_1:BSPIM:state_2\ and not \SPIM_1:BSPIM:count_1\ and not \SPIM_1:BSPIM:count_0\ and \SPIM_1:BSPIM:state_1\)
+\SPIM_1:BSPIM:state_1\\D\ <= ((not \SPIM_1:BSPIM:state_2\ and not \SPIM_1:BSPIM:count_1\ and not \SPIM_1:BSPIM:count_0\ and \SPIM_1:BSPIM:state_1\)
 	OR (not \SPIM_1:BSPIM:state_2\ and not \SPIM_1:BSPIM:state_0\ and \SPIM_1:BSPIM:state_1\ and \SPIM_1:BSPIM:count_0\)
 	OR (not \SPIM_1:BSPIM:state_2\ and \SPIM_1:BSPIM:state_0\ and \SPIM_1:BSPIM:count_1\)
+	OR (not \SPIM_1:BSPIM:state_2\ and not \SPIM_1:BSPIM:count_0\ and \SPIM_1:BSPIM:state_1\ and \SPIM_1:BSPIM:tx_status_1\)
 	OR (not \SPIM_1:BSPIM:state_1\ and not \SPIM_1:BSPIM:state_0\ and \SPIM_1:BSPIM:state_2\)
 	OR (not \SPIM_1:BSPIM:state_2\ and not \SPIM_1:BSPIM:state_1\ and \SPIM_1:BSPIM:state_0\)
 	OR (not \SPIM_1:BSPIM:state_2\ and \SPIM_1:BSPIM:state_1\ and \SPIM_1:BSPIM:count_2\)
@@ -3869,6 +3879,30 @@ isr_DEBOUNCER:cy_isr_v1_0
 	GENERIC MAP(int_type=>"00",
 		is_nmi=>'0')
 	PORT MAP(int_signal=>Net_316);
+timer_clock:cy_clock_v1_0
+	GENERIC MAP(cy_registers=>"",
+		id=>"c0fb34bd-1044-4931-9788-16b01ce89812",
+		source_clock_id=>"",
+		divisor=>0,
+		period=>"5000000000000",
+		is_direct=>'0',
+		is_digital=>'1')
+	PORT MAP(clock_out=>Net_10,
+		dig_domain_out=>open);
+\TIMER_button:TimerHW\:cy_psoc3_timer_v1_0
+	GENERIC MAP(cy_registers=>"")
+	PORT MAP(clock=>Net_10,
+		kill=>zero,
+		enable=>tmpOE__MISO_1_net_0,
+		capture=>zero,
+		timer_reset=>zero,
+		tc=>Net_2615,
+		compare=>\TIMER_button:Net_261\,
+		interrupt=>\TIMER_button:Net_57\);
+isr_TIMER:cy_isr_v1_0
+	GENERIC MAP(int_type=>"01",
+		is_nmi=>'0')
+	PORT MAP(int_signal=>Net_2615);
 Net_2523:cy_dff
 	PORT MAP(d=>Net_2523D,
 		clk=>\SPIM_1:BSPIM:clk_fin\,
