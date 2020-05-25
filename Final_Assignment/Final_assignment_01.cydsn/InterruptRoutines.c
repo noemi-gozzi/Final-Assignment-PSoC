@@ -152,9 +152,13 @@ CY_ISR(Custom_Pin_Button_Positive){
     	{
     		case 0: 
             //first time that the button has been pressed. normal pressure, SINGLE. Nothing to do.
-            
-                TimerFlag=1;
-            
+            TimerFlag=1;
+            /*
+            if the button has been released, and it was not a long pressure, that is identified as click.
+            TIMER button start, that is the one used to measure the time intercurring between two clicks, is re-started.
+            it will be stopped in the NEGATIVE isr of the next debounced pressure
+            */
+            TIMER_button_Start();
     		break;
     		case 1:
             /*button has been pressed for (at least) two times.
@@ -199,17 +203,17 @@ CY_ISR(Custom_Pin_Button_Positive){
             so the system will check the second pressing if it is before 500 ms.
             */
             TimerFlag=1;
+            /*
+            if the button has been released, and it was not a long pressure, that is identified as click.
+            TIMER button start, that is the one used to measure the time intercurring between two clicks, is re-started.
+            it will be stopped in the NEGATIVE isr of the next debounced pressure
+            */
+            TIMER_button_Start();
     		    
     		break;
             
         }
-        /*
-        if the button has been released, and it was not a long pressure, that is identified as click.
-        TIMER button start, that is the one used to measure the time intercurring between two clicks, is re-started.
-        it will be stopped in the NEGATIVE isr of the next debounced pressure
-        */
-        
-        TIMER_button_Start();
+
     }
 }
 

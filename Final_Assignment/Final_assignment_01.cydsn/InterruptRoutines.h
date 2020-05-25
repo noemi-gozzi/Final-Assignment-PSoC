@@ -21,7 +21,7 @@
     
     CY_ISR_PROTO(Custom_Pin_ISR); 
     
-    uint8_t AccData[6]; // Acceleration data, 2 for each of the 3 direction (X, Y, Z)
+    //uint8_t AccData[6]; // Acceleration data, 2 for each of the 3 direction (X, Y, Z)
     
     volatile uint8 PacketReadyFlag; //Flag to communicate when new data are available and read, to be sent then with UART
     uint8 data_water;
