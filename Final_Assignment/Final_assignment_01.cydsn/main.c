@@ -167,18 +167,11 @@ int main(void)
     data_read = LIS3DH_readByte(LIS3DH_INT1_DURATION);
     sprintf(bufferUART, "** LIS3DH DURATION REGISTER= 0x%02X\r\n", data_read);
     UART_1_PutBuffer;
- 
-    /******TEST READ WRITE PAGE************/
-//    uint8_t data[3];
-//    LIS3DH_readPage(LIS3DH_CTRL_REG1, (uint8_t*)data, 3);
-//    sprintf(bufferUART, "** LIS3DH CTRL REGISTER 6=  0x%02X 0x%02X 0x%02X \r\n", data[0], data[1], data[2]);
-//    UART_1_PutBuffer;
-    /* Write */
-//    uint8_t datapage[1];
-//    datapage[0]= 0x37;
-//    
-//    LIS3DH_writePage(LIS3DH_CTRL_REG1, (uint8_t*) datapage, DATA_BYTES);
-
+    
+    SPIM_1_Stop();
+    SPIM_2_Stop();
+    UART_1_Stop();
+    
 
     //Variables declaration
 //    int8_t AccData[DATA_SIZE];
@@ -206,7 +199,10 @@ int main(void)
     
     isr_DEBOUNCER_StartEx(Custom_Pin_Button);
     isr_TIMER_StartEx(Custom_Timer_Button);
+    isr_BLINKING_StartEx(Custom_LED_Blinking);
+
     
+    Timer_Blinking_Start();
     
     for(;;)
     {

@@ -2,7 +2,7 @@
 --	Conversion of Final_assignment_01.v to vh2:
 --
 --	Cypress Semiconductor - WARP Version 6.3 IR 41
---	Sat May 23 17:31:41 2020
+--	Mon May 25 13:09:50 2020
 --
 
 USE cypress.cypress.all;
@@ -1398,9 +1398,29 @@ SIGNAL \TIMER_button:Net_266\ : bit;
 SIGNAL \TIMER_button:Net_51\ : bit;
 SIGNAL \TIMER_button:Net_261\ : bit;
 SIGNAL \TIMER_button:Net_57\ : bit;
-SIGNAL Net_2610 : bit;
+SIGNAL Net_2680 : bit;
 SIGNAL Net_2615 : bit;
 SIGNAL \TIMER_button:Net_102\ : bit;
+SIGNAL Net_2669 : bit;
+SIGNAL Net_2671 : bit;
+SIGNAL \Timer_Configuration:Net_260\ : bit;
+SIGNAL \Timer_Configuration:Net_266\ : bit;
+SIGNAL \Timer_Configuration:Net_51\ : bit;
+SIGNAL \Timer_Configuration:Net_261\ : bit;
+SIGNAL \Timer_Configuration:Net_57\ : bit;
+SIGNAL Net_2672 : bit;
+SIGNAL Net_2677 : bit;
+SIGNAL \Timer_Configuration:Net_102\ : bit;
+SIGNAL Net_2688 : bit;
+SIGNAL Net_2690 : bit;
+SIGNAL \Timer_Blinking:Net_260\ : bit;
+SIGNAL \Timer_Blinking:Net_266\ : bit;
+SIGNAL \Timer_Blinking:Net_51\ : bit;
+SIGNAL \Timer_Blinking:Net_261\ : bit;
+SIGNAL \Timer_Blinking:Net_57\ : bit;
+SIGNAL Net_2691 : bit;
+SIGNAL Net_2696 : bit;
+SIGNAL \Timer_Blinking:Net_102\ : bit;
 SIGNAL Net_2523D : bit;
 SIGNAL \SPIM_1:BSPIM:so_send_reg\\D\ : bit;
 SIGNAL \SPIM_1:BSPIM:mosi_reg\\D\ : bit;
@@ -3767,13 +3787,57 @@ timer_clock:cy_clock_v1_0
 		enable=>tmpOE__MISO_1_net_0,
 		capture=>zero,
 		timer_reset=>zero,
-		tc=>Net_2615,
+		tc=>\TIMER_button:Net_51\,
 		compare=>\TIMER_button:Net_261\,
-		interrupt=>\TIMER_button:Net_57\);
+		interrupt=>Net_2680);
 isr_TIMER:cy_isr_v1_0
 	GENERIC MAP(int_type=>"01",
 		is_nmi=>'0')
-	PORT MAP(int_signal=>Net_2615);
+	PORT MAP(int_signal=>Net_2680);
+timer_clock_1:cy_clock_v1_0
+	GENERIC MAP(cy_registers=>"",
+		id=>"4d5ac13e-83cb-47ea-819d-b537d6cf01d7",
+		source_clock_id=>"",
+		divisor=>0,
+		period=>"20000000000000",
+		is_direct=>'0',
+		is_digital=>'1')
+	PORT MAP(clock_out=>Net_2669,
+		dig_domain_out=>open);
+\Timer_Configuration:TimerHW\:cy_psoc3_timer_v1_0
+	GENERIC MAP(cy_registers=>"")
+	PORT MAP(clock=>Net_2669,
+		kill=>zero,
+		enable=>tmpOE__MISO_1_net_0,
+		capture=>zero,
+		timer_reset=>zero,
+		tc=>\Timer_Configuration:Net_51\,
+		compare=>\Timer_Configuration:Net_261\,
+		interrupt=>\Timer_Configuration:Net_57\);
+timer_clock_2:cy_clock_v1_0
+	GENERIC MAP(cy_registers=>"",
+		id=>"eb84d758-a131-47ac-bc72-8a50ac5a4e11",
+		source_clock_id=>"",
+		divisor=>0,
+		period=>"10000000000000",
+		is_direct=>'0',
+		is_digital=>'1')
+	PORT MAP(clock_out=>Net_2688,
+		dig_domain_out=>open);
+\Timer_Blinking:TimerHW\:cy_psoc3_timer_v1_0
+	GENERIC MAP(cy_registers=>"")
+	PORT MAP(clock=>Net_2688,
+		kill=>zero,
+		enable=>tmpOE__MISO_1_net_0,
+		capture=>zero,
+		timer_reset=>zero,
+		tc=>\Timer_Blinking:Net_51\,
+		compare=>\Timer_Blinking:Net_261\,
+		interrupt=>Net_2691);
+isr_BLINKING:cy_isr_v1_0
+	GENERIC MAP(int_type=>"10",
+		is_nmi=>'0')
+	PORT MAP(int_signal=>Net_2691);
 Net_2523:cy_dff
 	PORT MAP(d=>Net_2523D,
 		clk=>\SPIM_1:BSPIM:clk_fin\,

@@ -1,5 +1,5 @@
 -- Project:   Final_assignment_01
--- Generated: 05/23/2020 17:31:42
+-- Generated: 05/25/2020 13:09:51
 -- PSoC Creator  4.3
 
 ENTITY Final_assignment_01 IS
@@ -74,7 +74,14 @@ ARCHITECTURE __DEFAULT__ OF Final_assignment_01 IS
     SIGNAL Net_2533 : bit;
     SIGNAL Net_2536 : bit;
     SIGNAL Net_2538 : bit;
-    SIGNAL Net_2615 : bit;
+    SIGNAL Net_2669 : bit;
+    ATTRIBUTE global_signal OF Net_2669 : SIGNAL IS true;
+    SIGNAL Net_2669_local : bit;
+    SIGNAL Net_2680 : bit;
+    SIGNAL Net_2688 : bit;
+    ATTRIBUTE global_signal OF Net_2688 : SIGNAL IS true;
+    SIGNAL Net_2688_local : bit;
+    SIGNAL Net_2691 : bit;
     SIGNAL Net_316 : bit;
     SIGNAL Net_384 : bit;
     ATTRIBUTE udbclken_assigned OF Net_384 : SIGNAL IS "True";
@@ -180,7 +187,12 @@ ARCHITECTURE __DEFAULT__ OF Final_assignment_01 IS
     ATTRIBUTE global_signal OF \SPIM_2:Net_276\ : SIGNAL IS true;
     SIGNAL \SPIM_2:Net_276_local\ : bit;
     SIGNAL \TIMER_button:Net_261\ : bit;
-    SIGNAL \TIMER_button:Net_57\ : bit;
+    SIGNAL \TIMER_button:Net_51\ : bit;
+    SIGNAL \Timer_Blinking:Net_261\ : bit;
+    SIGNAL \Timer_Blinking:Net_51\ : bit;
+    SIGNAL \Timer_Configuration:Net_261\ : bit;
+    SIGNAL \Timer_Configuration:Net_51\ : bit;
+    SIGNAL \Timer_Configuration:Net_57\ : bit;
     SIGNAL \UART_1:BUART:counter_load_not\ : bit;
     SIGNAL \UART_1:BUART:pollcount_0\ : bit;
     SIGNAL \UART_1:BUART:pollcount_1\ : bit;
@@ -232,6 +244,8 @@ ARCHITECTURE __DEFAULT__ OF Final_assignment_01 IS
     SIGNAL zero : bit;
     ATTRIBUTE GROUND OF zero : SIGNAL IS true;
     SIGNAL \ClockBlock.dclk_glb_ff_4__sig\ : bit;
+    SIGNAL \ClockBlock.dclk_glb_ff_6__sig\ : bit;
+    SIGNAL \ClockBlock.dclk_glb_ff_7__sig\ : bit;
     ATTRIBUTE lib_model OF MISO_1(0) : LABEL IS "iocell1";
     ATTRIBUTE Location OF MISO_1(0) : LABEL IS "P1[6]";
     ATTRIBUTE lib_model OF MOSI_1(0) : LABEL IS "iocell2";
@@ -711,7 +725,13 @@ BEGIN
             dclk_4 => Net_10_local,
             dclk_glb_5 => Net_136,
             dclk_5 => Net_136_local,
-            dclk_glb_ff_4 => \ClockBlock.dclk_glb_ff_4__sig\);
+            dclk_glb_6 => Net_2688,
+            dclk_6 => Net_2688_local,
+            dclk_glb_7 => Net_2669,
+            dclk_7 => Net_2669_local,
+            dclk_glb_ff_4 => \ClockBlock.dclk_glb_ff_4__sig\,
+            dclk_glb_ff_6 => \ClockBlock.dclk_glb_ff_6__sig\,
+            dclk_glb_ff_7 => \ClockBlock.dclk_glb_ff_7__sig\);
 
     MISO_1:logicalport
         GENERIC MAP(
@@ -2962,16 +2982,50 @@ BEGIN
             enable => __ONE__,
             capture => open,
             timer_reset => open,
-            tc => Net_2615,
+            tc => \TIMER_button:Net_51\,
             cmp => \TIMER_button:Net_261\,
-            irq => \TIMER_button:Net_57\);
+            irq => Net_2680);
 
     isr_TIMER:interrupt
         GENERIC MAP(
             int_type => "01",
             is_nmi => 0)
         PORT MAP(
-            interrupt => Net_2615,
+            interrupt => Net_2680,
+            clock => ClockBlock_BUS_CLK);
+
+    \Timer_Configuration:TimerHW\:timercell
+        GENERIC MAP(
+            cy_registers => "")
+        PORT MAP(
+            clock => \ClockBlock.dclk_glb_ff_7__sig\,
+            kill => open,
+            enable => __ONE__,
+            capture => open,
+            timer_reset => open,
+            tc => \Timer_Configuration:Net_51\,
+            cmp => \Timer_Configuration:Net_261\,
+            irq => \Timer_Configuration:Net_57\);
+
+    \Timer_Blinking:TimerHW\:timercell
+        GENERIC MAP(
+            cy_registers => "")
+        PORT MAP(
+            clock => \ClockBlock.dclk_glb_ff_6__sig\,
+            kill => open,
+            enable => __ONE__,
+            capture => open,
+            timer_reset => open,
+            tc => \Timer_Blinking:Net_51\,
+            cmp => \Timer_Blinking:Net_261\,
+            irq => Net_2691);
+
+    isr_BLINKING:interrupt
+        GENERIC MAP(
+            int_type => "10",
+            is_nmi => 0)
+        PORT MAP(
+            interrupt => Net_2691,
             clock => ClockBlock_BUS_CLK);
 
     Net_2523:macrocell

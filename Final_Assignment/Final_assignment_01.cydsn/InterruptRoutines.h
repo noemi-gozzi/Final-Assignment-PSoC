@@ -29,6 +29,8 @@
    
     CY_ISR_PROTO(Custom_Pin_Button);
     CY_ISR_PROTO(Custom_Timer_Button);
+    CY_ISR_PROTO(Custom_Configuration);
+    CY_ISR_PROTO(Custom_LED_Blinking);
     
 #endif
 /* [] END OF FILE */
