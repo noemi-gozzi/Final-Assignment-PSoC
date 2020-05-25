@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccu7qXaU.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
   28:Generated_Source\PSoC5/SPIM_2.c ****     volatile uint8 SPIM_2_rxBuffer[SPIM_2_RX_BUFFER_SIZE];
   29:Generated_Source\PSoC5/SPIM_2.c ****     volatile uint8 SPIM_2_rxBufferFull;
   30:Generated_Source\PSoC5/SPIM_2.c ****     volatile uint8 SPIM_2_rxBufferRead;
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 2
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccu7qXaU.s 			page 2
 
 
   31:Generated_Source\PSoC5/SPIM_2.c ****     volatile uint8 SPIM_2_rxBufferWrite;
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
   85:Generated_Source\PSoC5/SPIM_2.c ****     #if(SPIM_2_RX_SOFTWARE_BUF_ENABLED)
   86:Generated_Source\PSoC5/SPIM_2.c ****         SPIM_2_rxBufferFull  = 0u;
   87:Generated_Source\PSoC5/SPIM_2.c ****         SPIM_2_rxBufferRead  = 0u;
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 3
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccu7qXaU.s 			page 3
 
 
   88:Generated_Source\PSoC5/SPIM_2.c ****         SPIM_2_rxBufferWrite = 0u;
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  142:Generated_Source\PSoC5/SPIM_2.c **** *
  143:Generated_Source\PSoC5/SPIM_2.c **** * Summary:
  144:Generated_Source\PSoC5/SPIM_2.c **** *  Initialize and Enable the SPI Master component.
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 4
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccu7qXaU.s 			page 4
 
 
  145:Generated_Source\PSoC5/SPIM_2.c **** *
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  199:Generated_Source\PSoC5/SPIM_2.c ****     CyExitCriticalSection(enableInterrupts);
  200:Generated_Source\PSoC5/SPIM_2.c **** 
  201:Generated_Source\PSoC5/SPIM_2.c ****     #if(0u != SPIM_2_INTERNAL_CLOCK)
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 5
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccu7qXaU.s 			page 5
 
 
  202:Generated_Source\PSoC5/SPIM_2.c ****         SPIM_2_IntClock_Disable();
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  231:Generated_Source\PSoC5/SPIM_2.c ****     #endif /* (0u != SPIM_2_INTERNAL_TX_INT_ENABLED) */
  232:Generated_Source\PSoC5/SPIM_2.c **** }
  233:Generated_Source\PSoC5/SPIM_2.c **** 
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 6
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccu7qXaU.s 			page 6
 
 
  234:Generated_Source\PSoC5/SPIM_2.c **** 
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
   84              		.cfi_offset 3, -8
   85              		.cfi_offset 14, -4
  124:Generated_Source\PSoC5/SPIM_2.c ****     SPIM_2_COUNTER_CONTROL_REG |= SPIM_2_CNTR_ENABLE;
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 7
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccu7qXaU.s 			page 7
 
 
   86              		.loc 1 124 0
@@ -372,37 +372,37 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
   93 000e 1370     		strb	r3, [r2]
  126:Generated_Source\PSoC5/SPIM_2.c ****     SPIM_2_RX_STATUS_ACTL_REG  |= SPIM_2_INT_ENABLE;
   94              		.loc 1 126 0
-  95 0010 02F20112 		addw	r2, r2, #257
-  96 0014 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
-  97 0016 43F01003 		orr	r3, r3, #16
-  98 001a 1370     		strb	r3, [r2]
+  95 0010 033A     		subs	r2, r2, #3
+  96 0012 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+  97 0014 43F01003 		orr	r3, r3, #16
+  98 0018 1370     		strb	r3, [r2]
  127:Generated_Source\PSoC5/SPIM_2.c ****     CyExitCriticalSection(enableInterrupts);
   99              		.loc 1 127 0
- 100 001c 0232     		adds	r2, r2, #2
- 101 001e 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
- 102 0020 43F01003 		orr	r3, r3, #16
- 103 0024 1370     		strb	r3, [r2]
+ 100 001a 0232     		adds	r2, r2, #2
+ 101 001c 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 102 001e 43F01003 		orr	r3, r3, #16
+ 103 0022 1370     		strb	r3, [r2]
  128:Generated_Source\PSoC5/SPIM_2.c **** 
  104              		.loc 1 128 0
- 105 0026 FFF7FEFF 		bl	CyExitCriticalSection
+ 105 0024 FFF7FEFF 		bl	CyExitCriticalSection
  106              	.LVL1:
  131:Generated_Source\PSoC5/SPIM_2.c ****     #endif /* (0u != SPIM_2_INTERNAL_CLOCK) */
  107              		.loc 1 131 0
- 108 002a FFF7FEFF 		bl	SPIM_2_IntClock_Start
+ 108 0028 FFF7FEFF 		bl	SPIM_2_IntClock_Start
  109              	.LVL2:
  134:Generated_Source\PSoC5/SPIM_2.c ****     SPIM_2_EnableRxInt();
  110              		.loc 1 134 0
- 111 002e FFF7FEFF 		bl	SPIM_2_EnableTxInt
+ 111 002c FFF7FEFF 		bl	SPIM_2_EnableTxInt
  112              	.LVL3:
  135:Generated_Source\PSoC5/SPIM_2.c **** }
  113              		.loc 1 135 0
- 114 0032 FFF7FEFF 		bl	SPIM_2_EnableRxInt
+ 114 0030 FFF7FEFF 		bl	SPIM_2_EnableRxInt
  115              	.LVL4:
- 116 0036 08BD     		pop	{r3, pc}
+ 116 0034 08BD     		pop	{r3, pc}
  117              	.L10:
- 118              		.align	2
+ 118 0036 00BF     		.align	2
  119              	.L9:
- 120 0038 95640040 		.word	1073767573
+ 120 0038 9B640040 		.word	1073767579
  121              		.cfi_endproc
  122              	.LFE1:
  123              		.size	SPIM_2_Enable, .-SPIM_2_Enable
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  257:Generated_Source\PSoC5/SPIM_2.c **** }
  258:Generated_Source\PSoC5/SPIM_2.c **** 
  259:Generated_Source\PSoC5/SPIM_2.c **** 
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 8
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccu7qXaU.s 			page 8
 
 
  260:Generated_Source\PSoC5/SPIM_2.c **** /*******************************************************************************
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  289:Generated_Source\PSoC5/SPIM_2.c **** * Summary:
  290:Generated_Source\PSoC5/SPIM_2.c **** *  Disable internal Rx interrupt generation.
  291:Generated_Source\PSoC5/SPIM_2.c **** *
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 9
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccu7qXaU.s 			page 9
 
 
  292:Generated_Source\PSoC5/SPIM_2.c **** * Parameters:
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  194 0006 094A     		ldr	r2, .L19
  195 0008 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
  196 000a 03F0EF03 		and	r3, r3, #239
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 10
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccu7qXaU.s 			page 10
 
 
  197 000e 1370     		strb	r3, [r2]
@@ -568,7 +568,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  216              	.L20:
  217              		.align	2
  218              	.L19:
- 219 002c 96650040 		.word	1073767830
+ 219 002c 98640040 		.word	1073767576
  220              		.cfi_endproc
  221              	.LFE3:
  222              		.size	SPIM_2_Stop, .-SPIM_2_Stop
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  321:Generated_Source\PSoC5/SPIM_2.c **** * Return:
  322:Generated_Source\PSoC5/SPIM_2.c **** *  None.
  323:Generated_Source\PSoC5/SPIM_2.c **** *
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 11
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccu7qXaU.s 			page 11
 
 
  324:Generated_Source\PSoC5/SPIM_2.c **** * Theory:
@@ -621,7 +621,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  241              	.L23:
  242 0006 00BF     		.align	2
  243              	.L22:
- 244 0008 86650040 		.word	1073767814
+ 244 0008 88640040 		.word	1073767560
  245              		.cfi_endproc
  246              	.LFE8:
  247              		.size	SPIM_2_SetTxInterruptMode, .-SPIM_2_SetTxInterruptMode
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  353:Generated_Source\PSoC5/SPIM_2.c **** {
  256              		.loc 1 353 0
  257              		.cfi_startproc
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 12
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccu7qXaU.s 			page 12
 
 
  258              		@ args = 0, pretend = 0, frame = 0
@@ -673,7 +673,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  266              	.L26:
  267 0006 00BF     		.align	2
  268              	.L25:
- 269 0008 88650040 		.word	1073767816
+ 269 0008 8A640040 		.word	1073767562
  270              		.cfi_endproc
  271              	.LFE9:
  272              		.size	SPIM_2_SetRxInterruptMode, .-SPIM_2_SetRxInterruptMode
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  385:Generated_Source\PSoC5/SPIM_2.c **** *******************************************************************************/
  386:Generated_Source\PSoC5/SPIM_2.c **** uint8 SPIM_2_ReadTxStatus(void) 
  387:Generated_Source\PSoC5/SPIM_2.c **** {
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 13
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccu7qXaU.s 			page 13
 
 
  281              		.loc 1 387 0
@@ -772,13 +772,13 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  310              	.L30:
  311              		.align	2
  312              	.L29:
- 313 0020 66650040 		.word	1073767782
+ 313 0020 68640040 		.word	1073767528
  314 0024 00000000 		.word	SPIM_2_swStatusTx
  315              		.cfi_endproc
  316              	.LFE10:
  317              		.size	SPIM_2_ReadTxStatus, .-SPIM_2_ReadTxStatus
  318              		.section	.text.SPIM_2_ReadRxStatus,"ax",%progbits
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 14
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccu7qXaU.s 			page 14
 
 
  319              		.align	2
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  336              	.LVL16:
  444:Generated_Source\PSoC5/SPIM_2.c **** 
  445:Generated_Source\PSoC5/SPIM_2.c ****         tmpStatus = SPIM_2_GET_STATUS_RX(SPIM_2_swStatusRx);
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 15
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccu7qXaU.s 			page 15
 
 
  337              		.loc 1 445 0
@@ -874,7 +874,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  355              	.L34:
  356              		.align	2
  357              	.L33:
- 358 0020 68650040 		.word	1073767784
+ 358 0020 6A640040 		.word	1073767530
  359 0024 00000000 		.word	SPIM_2_swStatusRx
  360              		.cfi_endproc
  361              	.LFE11:
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  466:Generated_Source\PSoC5/SPIM_2.c **** *
  467:Generated_Source\PSoC5/SPIM_2.c **** * Parameters:
  468:Generated_Source\PSoC5/SPIM_2.c **** *  txDataByte: The data value to send across the SPI.
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 16
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccu7qXaU.s 			page 16
 
 
  469:Generated_Source\PSoC5/SPIM_2.c **** *
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  388 000c 12B1     		cbz	r2, .L43
  506:Generated_Source\PSoC5/SPIM_2.c ****             {
  507:Generated_Source\PSoC5/SPIM_2.c ****                 tmpTxBufferRead = (SPIM_2_TX_BUFFER_SIZE - 1u);
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 17
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccu7qXaU.s 			page 17
 
 
  508:Generated_Source\PSoC5/SPIM_2.c ****             }
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  426 003e DBB2     		uxtb	r3, r3
  427 0040 9A42     		cmp	r2, r3
  428 0042 07D1     		bne	.L38
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 18
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccu7qXaU.s 			page 18
 
 
  524:Generated_Source\PSoC5/SPIM_2.c ****            (0u != (SPIM_2_swStatusTx & SPIM_2_STS_TX_FIFO_NOT_FULL)))
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  467 007a 0ED1     		bne	.L41
  539:Generated_Source\PSoC5/SPIM_2.c ****             {
  540:Generated_Source\PSoC5/SPIM_2.c ****                 SPIM_2_txBufferRead++;
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 19
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccu7qXaU.s 			page 19
 
 
  468              		.loc 1 540 0
@@ -1136,15 +1136,15 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  507              	.L45:
  508 00b4 00000000 		.word	SPIM_2_txBufferRead
  509 00b8 00000000 		.word	SPIM_2_txBufferWrite
- 510 00bc 66650040 		.word	1073767782
+ 510 00bc 68640040 		.word	1073767528
  511 00c0 00000000 		.word	SPIM_2_swStatusTx
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 20
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccu7qXaU.s 			page 20
 
 
- 512 00c4 46640040 		.word	1073767494
+ 512 00c4 4B640040 		.word	1073767499
  513 00c8 00000000 		.word	SPIM_2_txBufferFull
  514 00cc 00000000 		.word	SPIM_2_txBuffer
- 515 00d0 86650040 		.word	1073767814
+ 515 00d0 88640040 		.word	1073767560
  516              		.cfi_endproc
  517              	.LFE12:
  518              		.size	SPIM_2_WriteTxData, .-SPIM_2_WriteTxData
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  593:Generated_Source\PSoC5/SPIM_2.c **** * Side Effects:
  594:Generated_Source\PSoC5/SPIM_2.c **** *  Will return invalid data if the FIFO is empty. The user should Call
  595:Generated_Source\PSoC5/SPIM_2.c **** *  GetRxBufferSize() and if it returns a non-zero value then it is safe to call
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 21
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccu7qXaU.s 			page 21
 
 
  596:Generated_Source\PSoC5/SPIM_2.c **** *  ReadByte() function.
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  560 002c DBB2     		uxtb	r3, r3
  561 002e 072B     		cmp	r3, #7
  562 0030 06D9     		bls	.L48
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 22
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccu7qXaU.s 			page 22
 
 
  617:Generated_Source\PSoC5/SPIM_2.c ****                 {
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  595 0060 00000000 		.word	SPIM_2_rxBuffer
  596              		.cfi_endproc
  597              	.LFE13:
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 23
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccu7qXaU.s 			page 23
 
 
  598              		.size	SPIM_2_ReadRxData, .-SPIM_2_ReadRxData
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  617              	.LVL36:
  674:Generated_Source\PSoC5/SPIM_2.c **** 
  675:Generated_Source\PSoC5/SPIM_2.c ****         if(SPIM_2_rxBufferRead == SPIM_2_rxBufferWrite)
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 24
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccu7qXaU.s 			page 24
 
 
  618              		.loc 1 675 0
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  661              	.L54:
  662              	.LVL41:
  686:Generated_Source\PSoC5/SPIM_2.c ****         }
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 25
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccu7qXaU.s 			page 25
 
 
  687:Generated_Source\PSoC5/SPIM_2.c **** 
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  718:Generated_Source\PSoC5/SPIM_2.c **** *  SPIM_2_txBufferWrite - used for the account of the bytes which
  719:Generated_Source\PSoC5/SPIM_2.c **** *  have been written down in the TX software buffer.
  720:Generated_Source\PSoC5/SPIM_2.c **** *  SPIM_2_txBufferRead - used for the account of the bytes which
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 26
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccu7qXaU.s 			page 26
 
 
  721:Generated_Source\PSoC5/SPIM_2.c **** *  have been read from the TX software buffer.
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  719 002c 1478     		ldrb	r4, [r2]	@ zero_extendqisi2
  720 002e 1C1B     		subs	r4, r3, r4
  721 0030 E4B2     		uxtb	r4, r4
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 27
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccu7qXaU.s 			page 27
 
 
  722              	.LVL45:
@@ -1618,7 +1618,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  746 004a 2046     		mov	r0, r4
  747 004c 10BD     		pop	{r4, pc}
  748              	.LVL51:
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 28
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccu7qXaU.s 			page 28
 
 
  749              	.L66:
@@ -1678,7 +1678,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  766              		.cfi_startproc
  767              		@ args = 0, pretend = 0, frame = 0
  768              		@ frame_needed = 0, uses_anonymous_args = 0
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 29
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccu7qXaU.s 			page 29
 
 
  769 0000 08B5     		push	{r3, lr}
@@ -1733,12 +1733,12 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  802              	.L72:
  803 002a 00BF     		.align	2
  804              	.L71:
- 805 002c 56640040 		.word	1073767510
- 806 0030 68650040 		.word	1073767784
+ 805 002c 5B640040 		.word	1073767515
+ 806 0030 6A640040 		.word	1073767530
  807 0034 00000000 		.word	SPIM_2_rxBufferFull
  808 0038 00000000 		.word	SPIM_2_rxBufferRead
  809 003c 00000000 		.word	SPIM_2_rxBufferWrite
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 30
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccu7qXaU.s 			page 30
 
 
  810              		.cfi_endproc
@@ -1798,7 +1798,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  824              		@ frame_needed = 0, uses_anonymous_args = 0
  825 0000 08B5     		push	{r3, lr}
  826              		.cfi_def_cfa_offset 8
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 31
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccu7qXaU.s 			page 31
 
 
  827              		.cfi_offset 3, -8
@@ -1858,7 +1858,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  857              		.loc 1 886 0
  858 002e 084A     		ldr	r2, .L75+16
  859 0030 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 32
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccu7qXaU.s 			page 32
 
 
  860 0032 03F0FB03 		and	r3, r3, #251
@@ -1872,11 +1872,11 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  866              	.L76:
  867 003e 00BF     		.align	2
  868              	.L75:
- 869 0040 96640040 		.word	1073767574
+ 869 0040 9B640040 		.word	1073767579
  870 0044 00000000 		.word	SPIM_2_txBufferFull
  871 0048 00000000 		.word	SPIM_2_txBufferRead
  872 004c 00000000 		.word	SPIM_2_txBufferWrite
- 873 0050 86650040 		.word	1073767814
+ 873 0050 88640040 		.word	1073767560
  874              		.cfi_endproc
  875              	.LFE17:
  876              		.size	SPIM_2_ClearTxBuffer, .-SPIM_2_ClearTxBuffer
@@ -1918,7 +1918,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  916:Generated_Source\PSoC5/SPIM_2.c ****     * Function Name: SPIM_2_TxDisable
  917:Generated_Source\PSoC5/SPIM_2.c ****     ********************************************************************************
  918:Generated_Source\PSoC5/SPIM_2.c ****     *
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 33
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccu7qXaU.s 			page 33
 
 
  919:Generated_Source\PSoC5/SPIM_2.c ****     * Summary:
@@ -1978,7 +1978,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  893              		.cfi_offset 5, -12
  894              		.cfi_offset 6, -8
  895              		.cfi_offset 14, -4
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 34
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccu7qXaU.s 			page 34
 
 
  896 0002 0646     		mov	r6, r0
@@ -2038,7 +2038,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  978:Generated_Source\PSoC5/SPIM_2.c **** /*******************************************************************************
  979:Generated_Source\PSoC5/SPIM_2.c **** * Function Name: SPIM_2_ClearFIFO
  980:Generated_Source\PSoC5/SPIM_2.c **** ********************************************************************************
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 35
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccu7qXaU.s 			page 35
 
 
  981:Generated_Source\PSoC5/SPIM_2.c **** *
@@ -2098,7 +2098,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  962 001a 42F00102 		orr	r2, r2, #1
  963 001e 1A70     		strb	r2, [r3]
 1008:Generated_Source\PSoC5/SPIM_2.c ****     SPIM_2_AUX_CONTROL_DP0_REG &= ((uint8) ~SPIM_2_TX_FIFO_CLR);
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 36
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccu7qXaU.s 			page 36
 
 
  964              		.loc 1 1008 0
@@ -2119,9 +2119,9 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  972              	.L86:
  973 002e 00BF     		.align	2
  974              	.L85:
- 975 0030 56640040 		.word	1073767510
- 976 0034 68650040 		.word	1073767784
- 977 0038 96640040 		.word	1073767574
+ 975 0030 5B640040 		.word	1073767515
+ 976 0034 6A640040 		.word	1073767530
+ 977 0038 9B640040 		.word	1073767579
  978              		.cfi_endproc
  979              	.LFE19:
  980              		.size	SPIM_2_ClearFIFO, .-SPIM_2_ClearFIFO
@@ -2158,7 +2158,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  1007 0010 0320     		movs	r0, #3
  1008 0012 FFF7FEFF 		bl	CyIntSetPriority
  1009              	.LVL68:
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 37
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccu7qXaU.s 			page 37
 
 
   72:Generated_Source\PSoC5/SPIM_2.c ****     #endif /* (0u != SPIM_2_INTERNAL_TX_INT_ENABLED) */
@@ -2218,7 +2218,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  1052              	.LVL73:
   98:Generated_Source\PSoC5/SPIM_2.c **** 
  1053              		.loc 1 98 0
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 38
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccu7qXaU.s 			page 38
 
 
  1054 0054 FFF7FEFF 		bl	SPIM_2_ReadRxStatus
@@ -2236,7 +2236,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  1064              	.L90:
  1065              		.align	2
  1066              	.L89:
- 1067 0064 85640040 		.word	1073767557
+ 1067 0064 8B640040 		.word	1073767563
  1068 0068 80E100E0 		.word	-536813184
  1069 006c 00000000 		.word	SPIM_2_TX_ISR
  1070 0070 00000000 		.word	SPIM_2_RX_ISR
@@ -2246,7 +2246,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  1074 0080 00000000 		.word	SPIM_2_txBufferFull
  1075 0084 00000000 		.word	SPIM_2_txBufferRead
  1076 0088 00000000 		.word	SPIM_2_txBufferWrite
- 1077 008c 86650040 		.word	1073767814
+ 1077 008c 88640040 		.word	1073767560
  1078              		.cfi_endproc
  1079              	.LFE0:
  1080              		.size	SPIM_2_Init, .-SPIM_2_Init
@@ -2278,7 +2278,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  1103              	.LVL75:
  168:Generated_Source\PSoC5/SPIM_2.c ****     }
  1104              		.loc 1 168 0
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 39
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccu7qXaU.s 			page 39
 
 
  1105 000c 0122     		movs	r2, #1
@@ -2338,7 +2338,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  1131              		@ frame_needed = 0, uses_anonymous_args = 0
  1132 0000 08B5     		push	{r3, lr}
  1133              		.cfi_def_cfa_offset 8
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 40
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccu7qXaU.s 			page 40
 
 
  1134              		.cfi_offset 3, -8
@@ -2398,7 +2398,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  1163 0002 FFF7FEFF 		bl	SPIM_2_DisableTxInt
  1164              	.LVL79:
 1068:Generated_Source\PSoC5/SPIM_2.c ****     SPIM_2_DisableRxInt();
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 41
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccu7qXaU.s 			page 41
 
 
  1165              		.loc 1 1068 0
@@ -2458,10 +2458,10 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  1194              	.L102:
  1195 000e 00BF     		.align	2
  1196              	.L101:
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 42
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccu7qXaU.s 			page 42
 
 
- 1197 0010 86650040 		.word	1073767814
+ 1197 0010 88640040 		.word	1073767560
  1198              		.cfi_endproc
  1199              	.LFE22:
  1200              		.size	SPIM_2_SetInterruptMode, .-SPIM_2_SetInterruptMode
@@ -2518,7 +2518,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
 1128:Generated_Source\PSoC5/SPIM_2.c **** 
 1129:Generated_Source\PSoC5/SPIM_2.c ****     #if(SPIM_2_TX_SOFTWARE_BUF_ENABLED || SPIM_2_RX_SOFTWARE_BUF_ENABLED)
 1130:Generated_Source\PSoC5/SPIM_2.c **** 
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 43
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccu7qXaU.s 			page 43
 
 
 1131:Generated_Source\PSoC5/SPIM_2.c ****         SPIM_2_DisableInt();
@@ -2578,14 +2578,14 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  1250 0034 10BD     		pop	{r4, pc}
  1251              	.LVL87:
  1252              	.L106:
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 44
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccu7qXaU.s 			page 44
 
 
  1253 0036 00BF     		.align	2
  1254              	.L105:
- 1255 0038 68650040 		.word	1073767784
+ 1255 0038 6A640040 		.word	1073767530
  1256 003c 00000000 		.word	SPIM_2_swStatusRx
- 1257 0040 66650040 		.word	1073767782
+ 1257 0040 68640040 		.word	1073767528
  1258 0044 00000000 		.word	SPIM_2_swStatusTx
  1259              		.cfi_endproc
  1260              	.LFE23:
@@ -2638,7 +2638,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  1307 0034 02       		.byte	0x2
  1308 0035 05       		.byte	0x5
  1309 0036 FE030000 		.4byte	.LASF2
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 45
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccu7qXaU.s 			page 45
 
 
  1310 003a 02       		.uleb128 0x2
@@ -2698,7 +2698,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  1364 00a0 A4000000 		.4byte	0xa4
  1365 00a4 05       		.uleb128 0x5
  1366 00a5 6B000000 		.4byte	0x6b
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 46
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccu7qXaU.s 			page 46
 
 
  1367 00a9 04       		.uleb128 0x4
@@ -2751,19 +2751,19 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  1414 010f 06000000 		.4byte	.LVL0
  1415 0113 C6060000 		.4byte	0x6c6
  1416 0117 09       		.uleb128 0x9
- 1417 0118 2A000000 		.4byte	.LVL1
+ 1417 0118 28000000 		.4byte	.LVL1
  1418 011c D1060000 		.4byte	0x6d1
  1419 0120 09       		.uleb128 0x9
- 1420 0121 2E000000 		.4byte	.LVL2
+ 1420 0121 2C000000 		.4byte	.LVL2
  1421 0125 DC060000 		.4byte	0x6dc
  1422 0129 09       		.uleb128 0x9
- 1423 012a 32000000 		.4byte	.LVL3
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 47
+ 1423 012a 30000000 		.4byte	.LVL3
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccu7qXaU.s 			page 47
 
 
  1424 012e C8000000 		.4byte	0xc8
  1425 0132 09       		.uleb128 0x9
- 1426 0133 36000000 		.4byte	.LVL4
+ 1426 0133 34000000 		.4byte	.LVL4
  1427 0137 D9000000 		.4byte	0xd9
  1428 013b 00       		.byte	0
  1429 013c 0A       		.uleb128 0xa
@@ -2818,7 +2818,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  1478 01b7 01       		.byte	0x1
  1479 01b8 4801     		.2byte	0x148
  1480 01ba 00000000 		.4byte	.LFB8
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 48
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccu7qXaU.s 			page 48
 
 
  1481 01be 0C000000 		.4byte	.LFE8-.LFB8
@@ -2878,7 +2878,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  1535 023e 01       		.byte	0x1
  1536 023f B501     		.2byte	0x1b5
  1537 0241 6B000000 		.4byte	0x6b
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 49
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccu7qXaU.s 			page 49
 
 
  1538 0245 00000000 		.4byte	.LFB11
@@ -2938,7 +2938,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  1592 02d4 01       		.byte	0x1
  1593 02d5 5A02     		.2byte	0x25a
  1594 02d7 6B000000 		.4byte	0x6b
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 50
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccu7qXaU.s 			page 50
 
 
  1595 02db 00000000 		.4byte	.LFB13
@@ -2998,7 +2998,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  1649 0369 D902     		.2byte	0x2d9
  1650 036b 6B000000 		.4byte	0x6b
  1651 036f 2F010000 		.4byte	.LLST9
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 51
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccu7qXaU.s 			page 51
 
 
  1652 0373 09       		.uleb128 0x9
@@ -3058,7 +3058,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  1706 0400 C203     		.2byte	0x3c2
  1707 0402 00000000 		.4byte	.LFB18
  1708 0406 1E000000 		.4byte	.LFE18-.LFB18
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 52
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccu7qXaU.s 			page 52
 
 
  1709 040a 01       		.uleb128 0x1
@@ -3118,7 +3118,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  1763 0493 01       		.byte	0x1
  1764 0494 3F       		.byte	0x3f
  1765 0495 00000000 		.4byte	.LFB0
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 53
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccu7qXaU.s 			page 53
 
 
  1766 0499 90000000 		.4byte	.LFE0-.LFB0
@@ -3178,7 +3178,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  1820 04f9 09       		.uleb128 0x9
  1821 04fa 36000000 		.4byte	.LVL72
  1822 04fe 55040000 		.4byte	0x455
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 54
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccu7qXaU.s 			page 54
 
 
  1823 0502 09       		.uleb128 0x9
@@ -3238,7 +3238,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  1877 058e 00       		.byte	0
  1878 058f 0B       		.uleb128 0xb
  1879 0590 94000000 		.4byte	.LASF51
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 55
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccu7qXaU.s 			page 55
 
 
  1880 0594 01       		.byte	0x1
@@ -3298,7 +3298,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  1934 0613 14       		.uleb128 0x14
  1935 0614 EC030000 		.4byte	.LASF55
  1936 0618 01       		.byte	0x1
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 56
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccu7qXaU.s 			page 56
 
 
  1937 0619 25       		.byte	0x25
@@ -3358,7 +3358,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  1991 068e 05       		.uleb128 0x5
  1992 068f 24060000 		.4byte	0x624
  1993 0693 14       		.uleb128 0x14
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 57
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccu7qXaU.s 			page 57
 
 
  1994 0694 2D050000 		.4byte	.LASF61
@@ -3418,7 +3418,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  2048              		.section	.debug_abbrev,"",%progbits
  2049              	.Ldebug_abbrev0:
  2050 0000 01       		.uleb128 0x1
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 58
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccu7qXaU.s 			page 58
 
 
  2051 0001 11       		.uleb128 0x11
@@ -3478,7 +3478,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  2105 0037 35       		.uleb128 0x35
  2106 0038 00       		.byte	0
  2107 0039 49       		.uleb128 0x49
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 59
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccu7qXaU.s 			page 59
 
 
  2108 003a 13       		.uleb128 0x13
@@ -3538,7 +3538,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  2162 0072 03       		.uleb128 0x3
  2163 0073 0E       		.uleb128 0xe
  2164 0074 3A       		.uleb128 0x3a
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 60
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccu7qXaU.s 			page 60
 
 
  2165 0075 0B       		.uleb128 0xb
@@ -3598,7 +3598,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  2219 00ae 11       		.uleb128 0x11
  2220 00af 01       		.uleb128 0x1
  2221 00b0 12       		.uleb128 0x12
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 61
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccu7qXaU.s 			page 61
 
 
  2222 00b1 06       		.uleb128 0x6
@@ -3658,7 +3658,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  2276 00e9 03       		.uleb128 0x3
  2277 00ea 0E       		.uleb128 0xe
  2278 00eb 3A       		.uleb128 0x3a
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 62
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccu7qXaU.s 			page 62
 
 
  2279 00ec 0B       		.uleb128 0xb
@@ -3718,7 +3718,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  2333 0126 02       		.uleb128 0x2
  2334 0127 18       		.uleb128 0x18
  2335 0128 9142     		.uleb128 0x2111
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 63
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccu7qXaU.s 			page 63
 
 
  2336 012a 18       		.uleb128 0x18
@@ -3778,13 +3778,13 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  2390 0160 00       		.byte	0
  2391 0161 00       		.byte	0
  2392              		.section	.debug_loc,"",%progbits
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 64
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccu7qXaU.s 			page 64
 
 
  2393              	.Ldebug_loc0:
  2394              	.LLST0:
  2395 0000 06000000 		.4byte	.LVL0
- 2396 0004 29000000 		.4byte	.LVL1-1
+ 2396 0004 27000000 		.4byte	.LVL1-1
  2397 0008 0100     		.2byte	0x1
  2398 000a 50       		.byte	0x50
  2399 000b 00000000 		.4byte	0
@@ -3838,7 +3838,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  2447 008b 0100     		.2byte	0x1
  2448 008d 53       		.byte	0x53
  2449 008e 36000000 		.4byte	.LVL27
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 65
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccu7qXaU.s 			page 65
 
 
  2450 0092 52000000 		.4byte	.LVL28
@@ -3898,7 +3898,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  2504 0127 00000000 		.4byte	0
  2505 012b 00000000 		.4byte	0
  2506              	.LLST9:
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 66
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccu7qXaU.s 			page 66
 
 
  2507 012f 32000000 		.4byte	.LVL45
@@ -3958,7 +3958,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  2561 01c2 12000000 		.4byte	.LVL62
  2562 01c6 0100     		.2byte	0x1
  2563 01c8 55       		.byte	0x55
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 67
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccu7qXaU.s 			page 67
 
 
  2564 01c9 14000000 		.4byte	.LVL63
@@ -4018,7 +4018,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  2618 0068 00000000 		.4byte	.LFB13
  2619 006c 64000000 		.4byte	.LFE13-.LFB13
  2620 0070 00000000 		.4byte	.LFB14
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 68
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccu7qXaU.s 			page 68
 
 
  2621 0074 58000000 		.4byte	.LFE14-.LFB14
@@ -4078,7 +4078,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  2675 006c 58000000 		.4byte	.LFE15
  2676 0070 00000000 		.4byte	.LFB16
  2677 0074 40000000 		.4byte	.LFE16
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 69
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccu7qXaU.s 			page 69
 
 
  2678 0078 00000000 		.4byte	.LFB17
@@ -4138,7 +4138,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  2710      78537461 
  2710      74757300 
  2711              	.LASF49:
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 70
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccu7qXaU.s 			page 70
 
 
  2712 006e 5350494D 		.ascii	"SPIM_2_EnableInt\000"
@@ -4198,7 +4198,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  2732 011c 5350494D 		.ascii	"SPIM_2_DisableInt\000"
  2732      5F325F44 
  2732      69736162 
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 71
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccu7qXaU.s 			page 71
 
 
  2732      6C65496E 
@@ -4258,7 +4258,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  2755              	.LASF31:
  2756 01cc 5350494D 		.ascii	"SPIM_2_WriteTxData\000"
  2756      5F325F57 
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 72
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccu7qXaU.s 			page 72
 
 
  2756      72697465 
@@ -4318,7 +4318,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  2777              	.LASF27:
  2778 027c 696E7453 		.ascii	"intSrc\000"
  2778      726300
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 73
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccu7qXaU.s 			page 73
 
 
  2779              	.LASF29:
@@ -4378,7 +4378,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  2799      6E61626C 
  2799      65527849 
  2799      6E7400
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 74
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccu7qXaU.s 			page 74
 
 
  2800              	.LASF33:
@@ -4438,7 +4438,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  2821      66756E63 
  2821      74696F6E 
  2821      2D736563 
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 75
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccu7qXaU.s 			page 75
 
 
  2821      74696F6E 
@@ -4498,7 +4498,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 1
  2843      66657252 
  2843      65616400 
  2844              	.LASF23:
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc2BKqUL.s 			page 76
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccu7qXaU.s 			page 76
 
 
  2845 0541 5350494D 		.ascii	"SPIM_2_Stop\000"

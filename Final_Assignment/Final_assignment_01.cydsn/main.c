@@ -168,6 +168,8 @@ int main(void)
     sprintf(bufferUART, "** LIS3DH DURATION REGISTER= 0x%02X\r\n", data_read);
     UART_1_PutBuffer;
     
+    CyDelay(10);
+    
     SPIM_1_Stop();
     SPIM_2_Stop();
     UART_1_Stop();
@@ -211,8 +213,7 @@ int main(void)
 //        data_read = LIS3DH_readByte(LIS3DH_FIFO_SRC_REG);
 //        sprintf(bufferUART, "** LIS3DH FIFO SRC REG= 0x%02X\r\n", data_read);
 //        UART_1_PutBuffer;
-
-
+        
         if (PacketReadyFlag==1){
             uint8_t data = LIS3DH_readByte(LIS3DH_INT1_SRC);
             if(data&0x40){

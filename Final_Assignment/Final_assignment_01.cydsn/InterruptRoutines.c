@@ -103,25 +103,35 @@ CY_ISR(Custom_Pin_Button_Positive){
         /*LONG PRESSURE: configuration mode. depending on the current configuration state
         enter or exit configuration mode
         */
-        if (configuration_status==0){
-            configuration_status=1;
+        if (configuration_status==OFF){
+            configuration_status=ON;
+            RGBLed_WriteColor(OFF, OFF, OFF);
+            SPIM_1_Stop();
+            SPIM_2_Stop();
+            UART_1_Stop();
         }
-        else if (configuration_status==1){
+        else if (configuration_status==ON){
 
-            configuration_status=0;
+            configuration_status=OFF;
             
             /*
-            if the system is exiting the configuration mode, configure LED as returning to the current
+            if the system is exiting the configuration mode, RETURN to the previous
             system status.
             i.e. I can enter configuration mode both from system ON and system OFF. then, when i decide to 
             close CONFIGURATION mode the system is going back to ON or OFF. 
             */
             
-            if (system_status==0){
-                Pin_Led_Blue_Write(0);
+            if (system_status==OFF){
+                Pin_Led_Blue_Write(OFF);
             }
-            else if (system_status==1){
-                Pin_Led_Blue_Write(1);
+            else if (system_status==ON){
+                Pin_Led_Blue_Write(ON);
+                
+                UART_1_Start();
+                SPIM_1_Start();
+                SPIM_2_Start();
+                RGBLed_Start();
+                
             }
         }
         /*flag for switch case for double click detection. if i'm in long pressure,
@@ -137,7 +147,7 @@ CY_ISR(Custom_Pin_Button_Positive){
     - the system is not in CONFIGURATION mode
     */
     
-    else if (i<TIME_FACTOR && configuration_status==0) {
+    else if (i<TIME_FACTOR && configuration_status==OFF) {
         switch (TimerFlag)
     	{
     		case 0: 
@@ -154,26 +164,29 @@ CY_ISR(Custom_Pin_Button_Positive){
             
             /* CHECK THE PREVIOUS SYSTEM STATUS */
             
-            if (system_status==0){
+            if (system_status==OFF){
                 /******************* SYSTEM START ACQUISITION ******************/
                           
-                system_status=1;
-                Pin_Led_Blue_Write(1);
+                system_status=ON;
+                Pin_Led_Blue_Write(ON);
                  
                 UART_1_Start();
                 SPIM_1_Start();
                 SPIM_2_Start();
                 RGBLed_Start();
-            }
-            else if (system_status==1){
-                /******************* SYSTEM STOP ACQUISITION ******************/
-                system_status=0;
-                Pin_Led_Blue_Write(0);
                 
+                EEPROM_writeByte(0x0000, system_status);
+            }
+            else if (system_status==ON){
+                /******************* SYSTEM STOP ACQUISITION ******************/
+                system_status=OFF;
+                Pin_Led_Blue_Write(OFF);
+                EEPROM_writeByte(0x0000, system_status);
+                RGBLed_WriteColor(OFF, OFF, OFF);
                 SPIM_1_Stop();
                 SPIM_2_Stop();
                 UART_1_Stop();
-                RGBLed_Stop();
+                //RGBLed_Stop();
             }
             //flag cleared
             TimerFlag=0;  

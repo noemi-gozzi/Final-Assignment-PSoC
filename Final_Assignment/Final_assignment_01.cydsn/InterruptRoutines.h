@@ -17,6 +17,7 @@
     #include "project.h"
     #include "LIS3DH.h"
     #include "LIS3DH_SPI.h"
+    #include "25LC256.h"
     
     CY_ISR_PROTO(Custom_Pin_ISR); 
     

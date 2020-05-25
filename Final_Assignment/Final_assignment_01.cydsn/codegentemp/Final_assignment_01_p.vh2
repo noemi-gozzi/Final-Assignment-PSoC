@@ -1,5 +1,5 @@
 -- Project:   Final_assignment_01
--- Generated: 05/25/2020 15:12:23
+-- Generated: 05/25/2020 15:43:45
 -- PSoC Creator  4.3
 
 ENTITY Final_assignment_01 IS
@@ -98,6 +98,7 @@ ARCHITECTURE __DEFAULT__ OF Final_assignment_01 IS
     SIGNAL Tx_1(0)__PA : bit;
     SIGNAL \DEBOUNCER_switch:DEBOUNCER[0]:d_sync_0\ : bit;
     SIGNAL \DEBOUNCER_switch:DEBOUNCER[0]:d_sync_1\ : bit;
+    SIGNAL \PWM_B:PWMUDB:cmp1_eq\ : bit;
     SIGNAL \PWM_B:PWMUDB:cmp1_less\ : bit;
     SIGNAL \PWM_B:PWMUDB:control_0\ : bit;
     SIGNAL \PWM_B:PWMUDB:control_1\ : bit;
@@ -113,7 +114,9 @@ ARCHITECTURE __DEFAULT__ OF Final_assignment_01 IS
     SIGNAL \PWM_B:PWMUDB:status_2\ : bit;
     SIGNAL \PWM_B:PWMUDB:status_3\ : bit;
     SIGNAL \PWM_B:PWMUDB:tc_i\ : bit;
+    SIGNAL \PWM_RG:PWMUDB:cmp1_eq\ : bit;
     SIGNAL \PWM_RG:PWMUDB:cmp1_less\ : bit;
+    SIGNAL \PWM_RG:PWMUDB:cmp2_eq\ : bit;
     SIGNAL \PWM_RG:PWMUDB:cmp2_less\ : bit;
     SIGNAL \PWM_RG:PWMUDB:control_0\ : bit;
     SIGNAL \PWM_RG:PWMUDB:control_1\ : bit;
@@ -2762,8 +2765,10 @@ BEGIN
             clock => Net_384,
             cs_addr_2 => \PWM_RG:PWMUDB:tc_i\,
             cs_addr_1 => \PWM_RG:PWMUDB:runmode_enable\,
+            ce0_comb => \PWM_RG:PWMUDB:cmp1_eq\,
             cl0_comb => \PWM_RG:PWMUDB:cmp1_less\,
             z0_comb => \PWM_RG:PWMUDB:tc_i\,
+            ce1_comb => \PWM_RG:PWMUDB:cmp2_eq\,
             cl1_comb => \PWM_RG:PWMUDB:cmp2_less\,
             f1_blk_stat_comb => \PWM_RG:PWMUDB:status_3\,
             busclk => ClockBlock_BUS_CLK);
@@ -2837,6 +2842,7 @@ BEGIN
             clock => Net_384,
             cs_addr_2 => \PWM_B:PWMUDB:tc_i\,
             cs_addr_1 => \PWM_B:PWMUDB:runmode_enable\,
+            ce0_comb => \PWM_B:PWMUDB:cmp1_eq\,
             cl0_comb => \PWM_B:PWMUDB:cmp1_less\,
             z0_comb => \PWM_B:PWMUDB:tc_i\,
             f1_blk_stat_comb => \PWM_B:PWMUDB:status_3\,
@@ -3416,29 +3422,31 @@ BEGIN
 
     \PWM_RG:PWMUDB:prevCompare1\:macrocell
         GENERIC MAP(
-            eqn_main => "(main_0)",
+            eqn_main => "(!main_0 * !main_1)",
             regmode => 1,
             clk_inv => '0',
             clken_mode => 1)
         PORT MAP(
             q => \PWM_RG:PWMUDB:prevCompare1\,
             clock_0 => Net_384,
-            main_0 => \PWM_RG:PWMUDB:cmp1_less\);
+            main_0 => \PWM_RG:PWMUDB:cmp1_eq\,
+            main_1 => \PWM_RG:PWMUDB:cmp1_less\);
 
     \PWM_RG:PWMUDB:prevCompare2\:macrocell
         GENERIC MAP(
-            eqn_main => "(main_0)",
+            eqn_main => "(!main_0 * !main_1)",
             regmode => 1,
             clk_inv => '0',
             clken_mode => 1)
         PORT MAP(
             q => \PWM_RG:PWMUDB:prevCompare2\,
             clock_0 => Net_384,
-            main_0 => \PWM_RG:PWMUDB:cmp2_less\);
+            main_0 => \PWM_RG:PWMUDB:cmp2_eq\,
+            main_1 => \PWM_RG:PWMUDB:cmp2_less\);
 
     \PWM_RG:PWMUDB:status_0\:macrocell
         GENERIC MAP(
-            eqn_main => "(!main_0 * main_1)",
+            eqn_main => "(!main_0 * !main_1 * !main_2)",
             regmode => 1,
             clk_inv => '0',
             clken_mode => 1)
@@ -3446,11 +3454,12 @@ BEGIN
             q => \PWM_RG:PWMUDB:status_0\,
             clock_0 => Net_384,
             main_0 => \PWM_RG:PWMUDB:prevCompare1\,
-            main_1 => \PWM_RG:PWMUDB:cmp1_less\);
+            main_1 => \PWM_RG:PWMUDB:cmp1_eq\,
+            main_2 => \PWM_RG:PWMUDB:cmp1_less\);
 
     \PWM_RG:PWMUDB:status_1\:macrocell
         GENERIC MAP(
-            eqn_main => "(!main_0 * main_1)",
+            eqn_main => "(!main_0 * !main_1 * !main_2)",
             regmode => 1,
             clk_inv => '0',
             clken_mode => 1)
@@ -3458,11 +3467,12 @@ BEGIN
             q => \PWM_RG:PWMUDB:status_1\,
             clock_0 => Net_384,
             main_0 => \PWM_RG:PWMUDB:prevCompare2\,
-            main_1 => \PWM_RG:PWMUDB:cmp2_less\);
+            main_1 => \PWM_RG:PWMUDB:cmp2_eq\,
+            main_2 => \PWM_RG:PWMUDB:cmp2_less\);
 
     Net_2067:macrocell
         GENERIC MAP(
-            eqn_main => "(main_0 * main_1)",
+            eqn_main => "(main_0 * !main_1 * !main_2)",
             regmode => 1,
             clk_inv => '0',
             clken_mode => 1)
@@ -3470,11 +3480,12 @@ BEGIN
             q => Net_2067,
             clock_0 => Net_384,
             main_0 => \PWM_RG:PWMUDB:runmode_enable\,
-            main_1 => \PWM_RG:PWMUDB:cmp1_less\);
+            main_1 => \PWM_RG:PWMUDB:cmp1_eq\,
+            main_2 => \PWM_RG:PWMUDB:cmp1_less\);
 
     Net_2045:macrocell
         GENERIC MAP(
-            eqn_main => "(main_0 * main_1)",
+            eqn_main => "(main_0 * !main_1 * !main_2)",
             regmode => 1,
             clk_inv => '0',
             clken_mode => 1)
@@ -3482,7 +3493,8 @@ BEGIN
             q => Net_2045,
             clock_0 => Net_384,
             main_0 => \PWM_RG:PWMUDB:runmode_enable\,
-            main_1 => \PWM_RG:PWMUDB:cmp2_less\);
+            main_1 => \PWM_RG:PWMUDB:cmp2_eq\,
+            main_2 => \PWM_RG:PWMUDB:cmp2_less\);
 
     \PWM_B:PWMUDB:runmode_enable\:macrocell
         GENERIC MAP(
@@ -3497,18 +3509,19 @@ BEGIN
 
     \PWM_B:PWMUDB:prevCompare1\:macrocell
         GENERIC MAP(
-            eqn_main => "(main_0)",
+            eqn_main => "(!main_0 * !main_1)",
             regmode => 1,
             clk_inv => '0',
             clken_mode => 1)
         PORT MAP(
             q => \PWM_B:PWMUDB:prevCompare1\,
             clock_0 => Net_384,
-            main_0 => \PWM_B:PWMUDB:cmp1_less\);
+            main_0 => \PWM_B:PWMUDB:cmp1_eq\,
+            main_1 => \PWM_B:PWMUDB:cmp1_less\);
 
     \PWM_B:PWMUDB:status_0\:macrocell
         GENERIC MAP(
-            eqn_main => "(!main_0 * main_1)",
+            eqn_main => "(!main_0 * !main_1 * !main_2)",
             regmode => 1,
             clk_inv => '0',
             clken_mode => 1)
@@ -3516,11 +3529,12 @@ BEGIN
             q => \PWM_B:PWMUDB:status_0\,
             clock_0 => Net_384,
             main_0 => \PWM_B:PWMUDB:prevCompare1\,
-            main_1 => \PWM_B:PWMUDB:cmp1_less\);
+            main_1 => \PWM_B:PWMUDB:cmp1_eq\,
+            main_2 => \PWM_B:PWMUDB:cmp1_less\);
 
     Net_1356:macrocell
         GENERIC MAP(
-            eqn_main => "(main_0 * main_1)",
+            eqn_main => "(main_0 * !main_1 * !main_2)",
             regmode => 1,
             clk_inv => '0',
             clken_mode => 1)
@@ -3528,7 +3542,8 @@ BEGIN
             q => Net_1356,
             clock_0 => Net_384,
             main_0 => \PWM_B:PWMUDB:runmode_enable\,
-            main_1 => \PWM_B:PWMUDB:cmp1_less\);
+            main_1 => \PWM_B:PWMUDB:cmp1_eq\,
+            main_2 => \PWM_B:PWMUDB:cmp1_less\);
 
     Net_2532:macrocell
         GENERIC MAP(
