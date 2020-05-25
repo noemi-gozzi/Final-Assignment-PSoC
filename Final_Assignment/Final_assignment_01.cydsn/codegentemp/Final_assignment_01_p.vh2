@@ -1,5 +1,5 @@
 -- Project:   Final_assignment_01
--- Generated: 05/25/2020 13:09:51
+-- Generated: 05/25/2020 15:12:23
 -- PSoC Creator  4.3
 
 ENTITY Final_assignment_01 IS
@@ -74,9 +74,7 @@ ARCHITECTURE __DEFAULT__ OF Final_assignment_01 IS
     SIGNAL Net_2533 : bit;
     SIGNAL Net_2536 : bit;
     SIGNAL Net_2538 : bit;
-    SIGNAL Net_2669 : bit;
-    ATTRIBUTE global_signal OF Net_2669 : SIGNAL IS true;
-    SIGNAL Net_2669_local : bit;
+    SIGNAL Net_2601 : bit;
     SIGNAL Net_2680 : bit;
     SIGNAL Net_2688 : bit;
     ATTRIBUTE global_signal OF Net_2688 : SIGNAL IS true;
@@ -190,9 +188,6 @@ ARCHITECTURE __DEFAULT__ OF Final_assignment_01 IS
     SIGNAL \TIMER_button:Net_51\ : bit;
     SIGNAL \Timer_Blinking:Net_261\ : bit;
     SIGNAL \Timer_Blinking:Net_51\ : bit;
-    SIGNAL \Timer_Configuration:Net_261\ : bit;
-    SIGNAL \Timer_Configuration:Net_51\ : bit;
-    SIGNAL \Timer_Configuration:Net_57\ : bit;
     SIGNAL \UART_1:BUART:counter_load_not\ : bit;
     SIGNAL \UART_1:BUART:pollcount_0\ : bit;
     SIGNAL \UART_1:BUART:pollcount_1\ : bit;
@@ -244,8 +239,7 @@ ARCHITECTURE __DEFAULT__ OF Final_assignment_01 IS
     SIGNAL zero : bit;
     ATTRIBUTE GROUND OF zero : SIGNAL IS true;
     SIGNAL \ClockBlock.dclk_glb_ff_4__sig\ : bit;
-    SIGNAL \ClockBlock.dclk_glb_ff_6__sig\ : bit;
-    SIGNAL \ClockBlock.dclk_glb_ff_7__sig\ : bit;
+    SIGNAL \ClockBlock.dclk_glb_ff_5__sig\ : bit;
     ATTRIBUTE lib_model OF MISO_1(0) : LABEL IS "iocell1";
     ATTRIBUTE Location OF MISO_1(0) : LABEL IS "P1[6]";
     ATTRIBUTE lib_model OF MOSI_1(0) : LABEL IS "iocell2";
@@ -360,7 +354,8 @@ ARCHITECTURE __DEFAULT__ OF Final_assignment_01 IS
     ATTRIBUTE lib_model OF \SPIM_2:BSPIM:cnt_enable\ : LABEL IS "macrocell63";
     ATTRIBUTE lib_model OF \DEBOUNCER_switch:DEBOUNCER[0]:d_sync_0\ : LABEL IS "macrocell64";
     ATTRIBUTE lib_model OF \DEBOUNCER_switch:DEBOUNCER[0]:d_sync_1\ : LABEL IS "macrocell65";
-    ATTRIBUTE lib_model OF Net_316 : LABEL IS "macrocell66";
+    ATTRIBUTE lib_model OF Net_2601 : LABEL IS "macrocell66";
+    ATTRIBUTE lib_model OF Net_316 : LABEL IS "macrocell67";
     COMPONENT clockblockcell
         PORT (
             dclk_0 : OUT std_ulogic;
@@ -723,15 +718,12 @@ BEGIN
             dclk_3 => Net_384_local,
             dclk_glb_4 => Net_10,
             dclk_4 => Net_10_local,
-            dclk_glb_5 => Net_136,
-            dclk_5 => Net_136_local,
-            dclk_glb_6 => Net_2688,
-            dclk_6 => Net_2688_local,
-            dclk_glb_7 => Net_2669,
-            dclk_7 => Net_2669_local,
+            dclk_glb_5 => Net_2688,
+            dclk_5 => Net_2688_local,
+            dclk_glb_6 => Net_136,
+            dclk_6 => Net_136_local,
             dclk_glb_ff_4 => \ClockBlock.dclk_glb_ff_4__sig\,
-            dclk_glb_ff_6 => \ClockBlock.dclk_glb_ff_6__sig\,
-            dclk_glb_ff_7 => \ClockBlock.dclk_glb_ff_7__sig\);
+            dclk_glb_ff_5 => \ClockBlock.dclk_glb_ff_5__sig\);
 
     MISO_1:logicalport
         GENERIC MAP(
@@ -2994,24 +2986,11 @@ BEGIN
             interrupt => Net_2680,
             clock => ClockBlock_BUS_CLK);
 
-    \Timer_Configuration:TimerHW\:timercell
-        GENERIC MAP(
-            cy_registers => "")
-        PORT MAP(
-            clock => \ClockBlock.dclk_glb_ff_7__sig\,
-            kill => open,
-            enable => __ONE__,
-            capture => open,
-            timer_reset => open,
-            tc => \Timer_Configuration:Net_51\,
-            cmp => \Timer_Configuration:Net_261\,
-            irq => \Timer_Configuration:Net_57\);
-
     \Timer_Blinking:TimerHW\:timercell
         GENERIC MAP(
             cy_registers => "")
         PORT MAP(
-            clock => \ClockBlock.dclk_glb_ff_6__sig\,
+            clock => \ClockBlock.dclk_glb_ff_5__sig\,
             kill => open,
             enable => __ONE__,
             capture => open,
@@ -3026,6 +3005,14 @@ BEGIN
             is_nmi => 0)
         PORT MAP(
             interrupt => Net_2691,
+            clock => ClockBlock_BUS_CLK);
+
+    isr_positive:interrupt
+        GENERIC MAP(
+            int_type => "00",
+            is_nmi => 0)
+        PORT MAP(
+            interrupt => Net_2601,
             clock => ClockBlock_BUS_CLK);
 
     Net_2523:macrocell
@@ -3719,6 +3706,18 @@ BEGIN
             q => \DEBOUNCER_switch:DEBOUNCER[0]:d_sync_1\,
             clock_0 => Net_136,
             main_0 => \DEBOUNCER_switch:DEBOUNCER[0]:d_sync_0\);
+
+    Net_2601:macrocell
+        GENERIC MAP(
+            eqn_main => "(main_0 * !main_1)",
+            regmode => 1,
+            clk_inv => '0',
+            clken_mode => 1)
+        PORT MAP(
+            q => Net_2601,
+            clock_0 => Net_136,
+            main_0 => \DEBOUNCER_switch:DEBOUNCER[0]:d_sync_0\,
+            main_1 => \DEBOUNCER_switch:DEBOUNCER[0]:d_sync_1\);
 
     Net_316:macrocell
         GENERIC MAP(
