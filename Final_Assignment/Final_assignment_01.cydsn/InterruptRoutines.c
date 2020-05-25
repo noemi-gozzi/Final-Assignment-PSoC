@@ -79,7 +79,7 @@ CY_ISR(Custom_Pin_Button){
     */
     
     TIMER_button_Stop();
-    
+    Timer_Blinking_Start();
     /*
     index i is increased with a timer (overflow 250 ms) that is used for counting the time between
     negative edge and positive edge --> duration of pressing. everytime a negative edge is detected this index is initialized.
@@ -109,6 +109,7 @@ CY_ISR(Custom_Pin_Button_Positive){
             SPIM_1_Stop();
             SPIM_2_Stop();
             UART_1_Stop();
+            Timer_Blinking_Start();
         }
         else if (configuration_status==ON){
 
@@ -131,6 +132,7 @@ CY_ISR(Custom_Pin_Button_Positive){
                 SPIM_1_Start();
                 SPIM_2_Start();
                 RGBLed_Start();
+                Timer_Blinking_Stop();
                 
             }
         }
@@ -178,7 +180,7 @@ CY_ISR(Custom_Pin_Button_Positive){
                 SPIM_1_Start();
                 SPIM_2_Start();
                 RGBLed_Start();
-                
+                Timer_Blinking_Stop();
                 EEPROM_writeByte(0x0000, system_status);
             }
             else if (system_status==ON){

@@ -28,7 +28,7 @@ Gozzi Noemi
 // New value check
 #define LIS3DH_STATUS_REG_NEW_VALUE 0x08 //00001000
 
-#define CONVERSION_MG_RGB 255/4000
+#define CONVERSION_MG_RGB 255/2000
 char bufferUART[100];
 
 int main(void)
@@ -177,9 +177,9 @@ int main(void)
 
     //Variables declaration
     uint8_t AccData[DATA_SIZE];
-    int16_t OutAccX;
-    int16_t OutAccY;
-    int16_t OutAccZ;
+    int16 OutAccX;
+    int16 OutAccY;
+    int16 OutAccZ;
     uint8_t header = 0xA0;
     uint8_t footer = 0xC0;
     uint8_t OutArray[TRANSMIT_BUFFER_SIZE];
@@ -206,16 +206,18 @@ int main(void)
     
     Timer_Blinking_Start();
     
-    for(;;)
+        for(;;)
     {
 
         
 //        data_read = LIS3DH_readByte(LIS3DH_FIFO_SRC_REG);
 //        sprintf(bufferUART, "** LIS3DH FIFO SRC REG= 0x%02X\r\n", data_read);
 //        UART_1_PutBuffer;
-        
+            Acc_x = 0;
+            Acc_y = 0;
+            Acc_z = 0;
+
         if (PacketReadyFlag==1){
-            PacketReadyFlag=0;
             uint8_t data = LIS3DH_readByte(LIS3DH_INT1_SRC);
             if(data&0x40){
                 sprintf(bufferUART, "THRESH 0x%02X\r\n", data);
@@ -224,38 +226,29 @@ int main(void)
             else{
                 sprintf(bufferUART, "watermark \r\n");
                 UART_1_PutBuffer;
-
-                for (int i=0; i<7; i++){
-                    LIS3DH_readPage(LIS3DH_OUT_X_L, AccData, DATA_BYTES);
-//                    Acc_x = Acc_x + (((AccData[0]) | ((AccData[1])<<8))>>6);
-//                    Acc_y = Acc_y + (((AccData[2]) | ((AccData[3])<<8))>>6);
-//                    Acc_z = Acc_z + (((AccData[4]) | ((AccData[5])<<8))>>6);
-//                    Acc_x =(int16)(((AccData[0]) | ((AccData[1])<<8))>>6);
-//                    Acc_y = (int16)(((AccData[2]) | ((AccData[3])<<8))>>6);
-//                    Acc_z =(int16)(((AccData[4]) | ((AccData[5])<<8))>>6);
-                                    OutAccX = ((int16)((AccData[0]) | ((AccData[1])<<8))>>6)*CONVERSION_FACTOR_DIGIT_MG;
-                OutAccY = ((int16)((AccData[2]) | ((AccData[3])<<8))>>6)*CONVERSION_FACTOR_DIGIT_MG;
-                OutAccZ = ((int16)((AccData[4]) | ((AccData[5])<<8))>>6)*CONVERSION_FACTOR_DIGIT_MG;
-                }
-
-//                Acc_x = Acc_x/7;
-//                Acc_y = Acc_y/7;
-//                Acc_z = Acc_z/7;
-//                
-                OutAccX = OutAccX * CONVERSION_FACTOR_DIGIT_MG;
-                OutAccY = OutAccY * CONVERSION_FACTOR_DIGIT_MG;
-                OutAccZ = OutAccZ * CONVERSION_FACTOR_DIGIT_MG;
                 
-//                LIS3DH_readPage(0x28, (uint8_t*)AccData, 6);
+                for (int i=0; i<7; i++){
+                    LIS3DH_readPage(LIS3DH_OUT_X_L, (uint8_t*) AccData, DATA_BYTES);
+                    Acc_x = Acc_x + ((int16)((AccData[0]) | ((AccData[1])<<8))>>6);
+                    Acc_y = Acc_y + ((int16)((AccData[2]) | ((AccData[3])<<8))>>6);
+                    Acc_z = Acc_z + ((int16)((AccData[4]) | ((AccData[5])<<8))>>6);
+                    
+                }
+                Acc_x = Acc_x/7;
+                Acc_y = Acc_y/7;
+                Acc_z = Acc_z/7;
+                
+                OutAccX = Acc_x * CONVERSION_FACTOR_DIGIT_MG;
+                OutAccY = Acc_y * CONVERSION_FACTOR_DIGIT_MG;
+                OutAccZ = Acc_z * CONVERSION_FACTOR_DIGIT_MG;
+                sprintf(bufferUART, "RED value: %d, GREEN value: %d, BLUE value: %d \r\n", OutAccX, OutAccY, OutAccZ);
+                UART_1_PutBuffer;
 //                OutAccX = ((int16)((AccData[0]) | ((AccData[1])<<8))>>6)*CONVERSION_FACTOR_DIGIT_MG;
 //                OutAccY = ((int16)((AccData[2]) | ((AccData[3])<<8))>>6)*CONVERSION_FACTOR_DIGIT_MG;
 //                OutAccZ = ((int16)((AccData[4]) | ((AccData[5])<<8))>>6)*CONVERSION_FACTOR_DIGIT_MG;
-                sprintf(bufferUART, "RED value: %d, GREEN value: %d, BLUE value: %d \r\n", OutAccX, OutAccY, OutAccZ);
-                UART_1_PutBuffer;
-                LIS3DH_writeByte(LIS3DH_FIFO_CTRL_REG,0x00);
-                LIS3DH_writeByte(LIS3DH_FIFO_CTRL_REG,0x47);
                 
                 
+            
                 //data preparing for UART serial Communication
                 OutArray[1] = (uint8_t)(OutAccX & 0xFF); 
                 OutArray[2] = (uint8_t)(OutAccX >> 8);
@@ -270,14 +263,15 @@ int main(void)
                 red_x= (uint8_t)(abs(OutAccX*CONVERSION_MG_RGB));
                 green_y=(uint8_t)(abs(OutAccY*CONVERSION_MG_RGB));
                 blue_z=(uint8_t)(abs(OutAccZ*CONVERSION_MG_RGB));
-//                sprintf(bufferUART, "RED value: %d, GREEN value: %d, BLUE value: %d \r\n", red_x, green_y, blue_z);
-//                UART_1_PutBuffer;
+                sprintf(bufferUART, "RED value: %d, GREEN value: %d, BLUE value: %d \r\n", red_x, green_y, blue_z);
+                UART_1_PutBuffer;
                 RGBLed_WriteColor(red_x, green_y, blue_z);
             }
         
             
-
-
+        PacketReadyFlag=0;
+        LIS3DH_writeByte(LIS3DH_FIFO_CTRL_REG,0x00);
+        LIS3DH_writeByte(LIS3DH_FIFO_CTRL_REG,0x47);
         
         }
     
