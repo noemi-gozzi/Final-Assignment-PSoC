@@ -37,4 +37,14 @@ The main objectives of this system are:
  • process the raw acceleration data to control the blinking frequency of the RGB LED 
 
  • provide the end user with a hardware menu to configure some settings related to the program 
- 
+
+## CONFIGURATION COMMANDS
+***double click*** (interval time interclicks<500ms): START/STOP conditions
+
+***long pressure click*** (duration time single click>1500ms) : CONFIGURATION mode. If the system is in configuration it is necessary to exit this modality before starting/stopping the device again. Another long pressure click will exit configuration mode, and the system will go back to the previous state (START or STOP)
+
+In Configuration mode, the value of the potentiometer is used to set a verbose flag to send raw sensors data via UART to the Bridge Control Panel (default to 0, set to 1 for verbose data logging). If the value is higher than FSR/2, the verbose flag is set to 1, otherwise is set to 0.
+
+
+
+
