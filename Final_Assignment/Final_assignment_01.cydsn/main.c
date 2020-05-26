@@ -187,9 +187,14 @@ int main(void)
     isr_TIMER_StartEx(Custom_Timer_Button);
     isr_BLINKING_StartEx(Custom_LED_Blinking);
     isr_positive_StartEx(Custom_Pin_Button_Positive);
-    isr_EnableDisable_StartEx(Custom_Pin_EnableDisable);
-    
+     
+
     FlagEnableDisable=Pin_EnableDisable_Read();
+    CyDelay(20);
+    isr_EnableDisable_StartEx(Custom_Pin_EnableDisable);
+
+    
+
     ADC_DelSig_StartConvert();
 
 //    uint8_t reading_eeprom;
