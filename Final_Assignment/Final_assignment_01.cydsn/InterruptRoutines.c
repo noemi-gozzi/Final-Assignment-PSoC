@@ -23,10 +23,14 @@ char bufferUART[100];
 #define OFF 0
 #define ON 1
 #define TIME_FACTOR 6
+#define FULL_SCALE_RANGE_LOW 0
+#define FULL_SCALE_RANGE_HIGH 65535
+#define FULL_SCALE_RANGE_HALF 32767 
 
 uint8_t system_status=OFF;
 uint8_t configuration_status=OFF;
 uint8 TimerFlag=0; 
+int32 value_POT;
 
 uint8_t i=0;
 
@@ -104,12 +108,15 @@ CY_ISR(Custom_Pin_Button_Positive){
         enter or exit configuration mode
         */
         if (configuration_status==OFF){
+            
             configuration_status=ON;
+            
             RGBLed_WriteColor(OFF, OFF, OFF);
             SPIM_1_Stop();
             SPIM_2_Stop();
             UART_1_Stop();
             Timer_Blinking_Start();
+            
         }
         else if (configuration_status==ON){
 
@@ -239,6 +246,20 @@ CY_ISR(Custom_LED_Blinking){
     i=i+1;
     if (configuration_status==1){
         Pin_Led_Blue_Write(!Pin_Led_Blue_Read());
+        value_POT = ADC_DelSig_Read32();
+        
+        
+        if (value_POT < FULL_SCALE_RANGE_LOW) value_POT = FULL_SCALE_RANGE_LOW;
+        if (value_POT > FULL_SCALE_RANGE_HIGH) value_POT = FULL_SCALE_RANGE_HIGH;
+        
+        if (value_POT < FULL_SCALE_RANGE_HALF){
+            UARTVerboseFlag = OFF;
+            Pin_RED_UARTVerboseFlag_Write(OFF);
+        }
+        else{
+            UARTVerboseFlag = ON;
+            Pin_RED_UARTVerboseFlag_Write(ON);
+        }
     }    
     
 }

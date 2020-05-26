@@ -19,15 +19,14 @@
     #include "LIS3DH_SPI.h"
     #include "25LC256.h"
     
-    CY_ISR_PROTO(Custom_Pin_ISR); 
-    
     //uint8_t AccData[6]; // Acceleration data, 2 for each of the 3 direction (X, Y, Z)
     
     volatile uint8 PacketReadyFlag; //Flag to communicate when new data are available and read, to be sent then with UART
+    uint8 UARTVerboseFlag;
     uint8 data_water;
     
     
-   
+    CY_ISR_PROTO(Custom_Pin_ISR); 
     CY_ISR_PROTO(Custom_Pin_Button);
     CY_ISR_PROTO(Custom_Timer_Button);
     CY_ISR_PROTO(Custom_LED_Blinking);

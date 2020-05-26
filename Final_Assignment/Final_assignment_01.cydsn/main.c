@@ -42,6 +42,7 @@ int main(void)
     SPIM_1_Start();
     SPIM_2_Start();
     RGBLed_Start();
+    ADC_DelSig_Start();
     CyDelay(10);
     
     UART_1_PutString("*********    EEPROM TEST    *********\r\n");
@@ -204,9 +205,10 @@ int main(void)
     isr_BLINKING_StartEx(Custom_LED_Blinking);
     isr_positive_StartEx(Custom_Pin_Button_Positive);
     
+    ADC_DelSig_StartConvert();
     Timer_Blinking_Start();
     
-        for(;;)
+    for(;;)
     {
 
         
@@ -243,22 +245,18 @@ int main(void)
                 OutAccZ = Acc_z * CONVERSION_FACTOR_DIGIT_MG;
                 sprintf(bufferUART, "RED value: %d, GREEN value: %d, BLUE value: %d \r\n", OutAccX, OutAccY, OutAccZ);
                 UART_1_PutBuffer;
-//                OutAccX = ((int16)((AccData[0]) | ((AccData[1])<<8))>>6)*CONVERSION_FACTOR_DIGIT_MG;
-//                OutAccY = ((int16)((AccData[2]) | ((AccData[3])<<8))>>6)*CONVERSION_FACTOR_DIGIT_MG;
-//                OutAccZ = ((int16)((AccData[4]) | ((AccData[5])<<8))>>6)*CONVERSION_FACTOR_DIGIT_MG;
                 
-                
-            
-                //data preparing for UART serial Communication
-                OutArray[1] = (uint8_t)(OutAccX & 0xFF); 
-                OutArray[2] = (uint8_t)(OutAccX >> 8);
-                OutArray[3] = (uint8_t)(OutAccY & 0xFF);
-                OutArray[4] = (uint8_t)(OutAccY >> 8);
-                OutArray[5] = (uint8_t)(OutAccZ & 0xFF);
-                OutArray[6] = (uint8_t)(OutAccZ >> 8);
-                
-                UART_1_PutArray(OutArray, TRANSMIT_BUFFER_SIZE);
-
+                if (UARTVerboseFlag){
+                    //data preparing for UART serial Communication
+                    OutArray[1] = (uint8_t)(OutAccX & 0xFF); 
+                    OutArray[2] = (uint8_t)(OutAccX >> 8);
+                    OutArray[3] = (uint8_t)(OutAccY & 0xFF);
+                    OutArray[4] = (uint8_t)(OutAccY >> 8);
+                    OutArray[5] = (uint8_t)(OutAccZ & 0xFF);
+                    OutArray[6] = (uint8_t)(OutAccZ >> 8);
+                    
+                    UART_1_PutArray(OutArray, TRANSMIT_BUFFER_SIZE);
+                }
                 
                 red_x= (uint8_t)(abs(OutAccX*CONVERSION_MG_RGB));
                 green_y=(uint8_t)(abs(OutAccY*CONVERSION_MG_RGB));
