@@ -15,8 +15,16 @@ Students:
   2. EEPROM 25LC256 <a href="http://ww1.microchip.com/downloads/en/DeviceDoc/25AA256-25LC256-256K-SPI-Bus-Serial-EEPROM-20001822H.pdf"> [<i>25LC256 datasheet</i>] </a> 
   3. RGB common anode led
   4. 3 resistors 330/220 Ohm
+  5. Potentiometer
+  6. On Board button
+  7. On board Blue LED
+  8. Additional external RED LED
   
-  Additional softwares tools: <a href=https://freeware.the-meiers.org/> [<i>Cool Term</i>] </a>  
+  Additional softwares tools: <a href=https://freeware.the-meiers.org/> [<i>Cool Term</i>] </a>  , Bridge Control Panel 1.20.0
+                  
+                              
+## Hardware 
+ ![alt text](https://github.com/noemi-gozzi/Final-Assignment-PSoC/blob/master/Images/HW_picture.jpg)
 
 ## System overview
 
@@ -29,3 +37,4 @@ The main objectives of this system are:
  • process the raw acceleration data to control the blinking frequency of the RGB LED 
 
  • provide the end user with a hardware menu to configure some settings related to the program 
+ 
