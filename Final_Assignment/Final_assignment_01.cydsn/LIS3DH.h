@@ -72,6 +72,10 @@
     */
     #define LIS3DH_CTRL_REG4_HIGH_RES 0x18
     
+    #define LIS3DH_CTRL_REG1_10HZ 0x27
+    
+    #define LIS3DH_CTRL_REG4_2G_NORMAL 0x00
+    
     #define LIS3DH_CTRL_REG5 0x24
     
     #define LIS3DH_CTRL_REG6 0x25
@@ -80,11 +84,15 @@
     
     #define LIS3DH_FIFO_CTRL_REG 0x2E
     
-    #define LIS3DH_FIFO_CTRL_REG_FIFO_MODE_WTM_1 0X41
+    #define LIS3DH_FIFO_CTRL_REG_FIFO_MODE_WTM_1 0x41
+    
+    #define LIS3DH_FIFO_CTRL_REG_FIFO_MODE_WTM_7 0x47
     
     #define LIS3DH_CTRL_REG3 0x22
     
     #define LIS3DH_CTRL_REG3_WTM_INT 0x04
+    
+    #define LIS3DH_CTRL_REG3_IA1_WTM_INT 0x44
     
     #define LIS3DH_FIFO_SRC_REG 0x2F
     
@@ -95,6 +103,8 @@
     #define LIS3DH_INT1_DURATION 0x33
     
     #define LIS3DH_INT1_CFG 0x30
+    
+    #define LIS3DH_INT1_CFG_OR_XYZIHE 0x2A
     
     
 #endif
