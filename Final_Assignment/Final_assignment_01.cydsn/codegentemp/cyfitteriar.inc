@@ -1251,11 +1251,11 @@ Clock_debouncer__PM_STBY_CFG EQU CYREG_PM_STBY_CFG2
 Clock_debouncer__PM_STBY_MSK EQU 0x80
 
 /* Pin_EnableDisable */
-Pin_EnableDisable__0__INTTYPE EQU CYREG_PICU3_INTTYPE2
-Pin_EnableDisable__0__MASK EQU 0x04
-Pin_EnableDisable__0__PC EQU CYREG_PRT3_PC2
+Pin_EnableDisable__0__INTTYPE EQU CYREG_PICU3_INTTYPE1
+Pin_EnableDisable__0__MASK EQU 0x02
+Pin_EnableDisable__0__PC EQU CYREG_PRT3_PC1
 Pin_EnableDisable__0__PORT EQU 3
-Pin_EnableDisable__0__SHIFT EQU 2
+Pin_EnableDisable__0__SHIFT EQU 1
 Pin_EnableDisable__AG EQU CYREG_PRT3_AG
 Pin_EnableDisable__AMUX EQU CYREG_PRT3_AMUX
 Pin_EnableDisable__BIE EQU CYREG_PRT3_BIE
@@ -1271,7 +1271,7 @@ Pin_EnableDisable__INTSTAT EQU CYREG_PICU3_INTSTAT
 Pin_EnableDisable__INTTYPE_BASE EQU CYDEV_PICU_INTTYPE_PICU3_BASE
 Pin_EnableDisable__LCD_COM_SEG EQU CYREG_PRT3_LCD_COM_SEG
 Pin_EnableDisable__LCD_EN EQU CYREG_PRT3_LCD_EN
-Pin_EnableDisable__MASK EQU 0x04
+Pin_EnableDisable__MASK EQU 0x02
 Pin_EnableDisable__PORT EQU 3
 Pin_EnableDisable__PRT EQU CYREG_PRT3_PRT
 Pin_EnableDisable__PRTDSI__CAPS_SEL EQU CYREG_PRT3_CAPS_SEL
@@ -1282,7 +1282,7 @@ Pin_EnableDisable__PRTDSI__OUT_SEL0 EQU CYREG_PRT3_OUT_SEL0
 Pin_EnableDisable__PRTDSI__OUT_SEL1 EQU CYREG_PRT3_OUT_SEL1
 Pin_EnableDisable__PRTDSI__SYNC_OUT EQU CYREG_PRT3_SYNC_OUT
 Pin_EnableDisable__PS EQU CYREG_PRT3_PS
-Pin_EnableDisable__SHIFT EQU 2
+Pin_EnableDisable__SHIFT EQU 1
 Pin_EnableDisable__SLW EQU CYREG_PRT3_SLW
 Pin_EnableDisable__SNAP EQU CYREG_PICU3_SNAP
 

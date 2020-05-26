@@ -157,11 +157,16 @@ int main(void)
     UART_1_PutBuffer;
     
     CyDelay(10);
-    
-    SPIM_1_Stop();
-    //SPIM_2_Stop();
-    UART_1_Stop();
-    
+    FlagEnableDisable = 0;
+    FlagEnableDisable= (uint8_t)Pin_EnableDisable_Read();
+
+//    CyDelay(20);
+    EEPROM_writeByte(0x0001, FlagEnableDisable);
+    CyDelay(100);
+//    EEPROM_waitForWriteComplete();
+    data_read = EEPROM_readByte(0x0001);
+    sprintf(bufferUART, " --> FlagEnable: %d\r\n", data_read);
+    UART_1_PutBuffer;   
 
     //Variables declaration
     uint8_t AccData[DATA_BYTES];
@@ -187,17 +192,21 @@ int main(void)
     isr_TIMER_StartEx(Custom_Timer_Button);
     isr_BLINKING_StartEx(Custom_LED_Blinking);
     isr_positive_StartEx(Custom_Pin_Button_Positive);
-     
+    
 
-    FlagEnableDisable=Pin_EnableDisable_Read();
-    CyDelay(20);
     isr_EnableDisable_StartEx(Custom_Pin_EnableDisable);
-
+//    CyDelay(20);
     
 
     ADC_DelSig_StartConvert();
 
 //    uint8_t reading_eeprom;
+    sprintf(bufferUART, "READY\r\n");
+    UART_1_PutBuffer;
+    CyDelay(20);
+    SPIM_1_Stop();
+    //SPIM_2_Stop();
+    UART_1_Stop();
     
     for(;;)
     {
@@ -239,7 +248,7 @@ int main(void)
                 OutAccX = Acc_x * CONVERSION_FACTOR_DIGIT_MG;
                 OutAccY = Acc_y * CONVERSION_FACTOR_DIGIT_MG;
                 OutAccZ = Acc_z * CONVERSION_FACTOR_DIGIT_MG;
-                sprintf(bufferUART, "RED value: %d, GREEN value: %d, BLUE value: %d \r\n", OutAccX, OutAccY, OutAccZ);
+                sprintf(bufferUART, "X value: %d [mg], Y value: %d [mg], Z value: %d [mg]\r\n", OutAccX, OutAccY, OutAccZ);
                 UART_1_PutBuffer;
                 
                 if (UARTVerboseFlag){
@@ -257,8 +266,7 @@ int main(void)
                 red_x= (uint8_t)(abs(OutAccX*CONVERSION_MG_RGB));
                 green_y=(uint8_t)(abs(OutAccY*CONVERSION_MG_RGB));
                 blue_z=(uint8_t)(abs(OutAccZ*CONVERSION_MG_RGB));
-                sprintf(bufferUART, "RED value: %d, GREEN value: %d, BLUE value: %d \r\n", red_x, green_y, blue_z);
-                UART_1_PutBuffer;
+
                 RGBLed_WriteColor(red_x, green_y, blue_z);
             }
         

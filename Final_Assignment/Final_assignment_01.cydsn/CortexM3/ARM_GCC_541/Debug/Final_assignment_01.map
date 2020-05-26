@@ -200,8 +200,6 @@ Discarded input sections
  .text          0x00000000        0x0 .\CortexM3\ARM_GCC_541\Debug\25LC256.o
  .data          0x00000000        0x0 .\CortexM3\ARM_GCC_541\Debug\25LC256.o
  .bss           0x00000000        0x0 .\CortexM3\ARM_GCC_541\Debug\25LC256.o
- .text.EEPROM_readByte
-                0x00000000       0x30 .\CortexM3\ARM_GCC_541\Debug\25LC256.o
  COMMON         0x00000000        0x1 .\CortexM3\ARM_GCC_541\Debug\25LC256.o
  .text          0x00000000        0x0 .\CortexM3\ARM_GCC_541\Debug\SPI_Interface_EEPROM.o
  .data          0x00000000        0x0 .\CortexM3\ARM_GCC_541\Debug\SPI_Interface_EEPROM.o
@@ -1090,7 +1088,7 @@ END GROUP
                 0x00000800                ee_size = (CY_APPL_LOADABLE && ! (CY_EE_IN_BTLDR))?(CY_EE_SIZE / CY_APPL_MAX):CY_EE_SIZE
                 [!provide]                PROVIDE (CY_ECC_OFFSET, ecc_offset)
 
-.text           0x00000000     0x3098
+.text           0x00000000     0x30f8
  CREATE_OBJECT_SYMBOLS
                 0x00000000                PROVIDE (__cy_interrupt_vector, RomVectors)
  *(.romvectors)
@@ -1107,703 +1105,707 @@ END GROUP
                 0x00000001                ASSERT ((((appl_start + .) <= 0x10000) || 0x1), DMA Init must be within the first 64k of flash)
  *(.text .text.* .gnu.linkonce.t.*)
  .text          0x00000028       0x5c c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtbegin.o
- .text.main     0x00000084      0x420 .\CortexM3\ARM_GCC_541\Debug\main.o
+ .text.main     0x00000084      0x440 .\CortexM3\ARM_GCC_541\Debug\main.o
                 0x00000084                main
  .text.SPI_Interface_Multi_RW
-                0x000004a4       0xb8 .\CortexM3\ARM_GCC_541\Debug\SPI_Interface.o
-                0x000004a4                SPI_Interface_Multi_RW
+                0x000004c4       0xb8 .\CortexM3\ARM_GCC_541\Debug\SPI_Interface.o
+                0x000004c4                SPI_Interface_Multi_RW
  .text.LIS3DH_readByte
-                0x0000055c       0x2c .\CortexM3\ARM_GCC_541\Debug\LIS3DH_SPI.o
-                0x0000055c                LIS3DH_readByte
+                0x0000057c       0x2c .\CortexM3\ARM_GCC_541\Debug\LIS3DH_SPI.o
+                0x0000057c                LIS3DH_readByte
  .text.LIS3DH_writeByte
-                0x00000588       0x28 .\CortexM3\ARM_GCC_541\Debug\LIS3DH_SPI.o
-                0x00000588                LIS3DH_writeByte
+                0x000005a8       0x28 .\CortexM3\ARM_GCC_541\Debug\LIS3DH_SPI.o
+                0x000005a8                LIS3DH_writeByte
  .text.LIS3DH_readPage
-                0x000005b0       0x20 .\CortexM3\ARM_GCC_541\Debug\LIS3DH_SPI.o
-                0x000005b0                LIS3DH_readPage
+                0x000005d0       0x20 .\CortexM3\ARM_GCC_541\Debug\LIS3DH_SPI.o
+                0x000005d0                LIS3DH_readPage
  .text.Custom_Pin_ISR
-                0x000005d0       0x14 .\CortexM3\ARM_GCC_541\Debug\InterruptRoutines.o
-                0x000005d0                Custom_Pin_ISR
+                0x000005f0       0x14 .\CortexM3\ARM_GCC_541\Debug\InterruptRoutines.o
+                0x000005f0                Custom_Pin_ISR
  .text.Custom_Pin_Button
-                0x000005e4       0x18 .\CortexM3\ARM_GCC_541\Debug\InterruptRoutines.o
-                0x000005e4                Custom_Pin_Button
+                0x00000604       0x18 .\CortexM3\ARM_GCC_541\Debug\InterruptRoutines.o
+                0x00000604                Custom_Pin_Button
  .text.Custom_Pin_Button_Positive
-                0x000005fc      0x130 .\CortexM3\ARM_GCC_541\Debug\InterruptRoutines.o
-                0x000005fc                Custom_Pin_Button_Positive
+                0x0000061c      0x134 .\CortexM3\ARM_GCC_541\Debug\InterruptRoutines.o
+                0x0000061c                Custom_Pin_Button_Positive
  .text.Custom_Timer_Button
-                0x0000072c       0x14 .\CortexM3\ARM_GCC_541\Debug\InterruptRoutines.o
-                0x0000072c                Custom_Timer_Button
+                0x00000750       0x14 .\CortexM3\ARM_GCC_541\Debug\InterruptRoutines.o
+                0x00000750                Custom_Timer_Button
  .text.Custom_LED_Blinking
-                0x00000740       0x80 .\CortexM3\ARM_GCC_541\Debug\InterruptRoutines.o
-                0x00000740                Custom_LED_Blinking
+                0x00000764       0x80 .\CortexM3\ARM_GCC_541\Debug\InterruptRoutines.o
+                0x00000764                Custom_LED_Blinking
  .text.Custom_Pin_EnableDisable
-                0x000007c0       0x14 .\CortexM3\ARM_GCC_541\Debug\InterruptRoutines.o
-                0x000007c0                Custom_Pin_EnableDisable
+                0x000007e4       0x20 .\CortexM3\ARM_GCC_541\Debug\InterruptRoutines.o
+                0x000007e4                Custom_Pin_EnableDisable
  .text.RGBLed_WriteRed
-                0x000007d4        0x8 .\CortexM3\ARM_GCC_541\Debug\RGBLedDriver.o
+                0x00000804        0x8 .\CortexM3\ARM_GCC_541\Debug\RGBLedDriver.o
  .text.RGBLed_WriteGreen
-                0x000007dc        0x8 .\CortexM3\ARM_GCC_541\Debug\RGBLedDriver.o
+                0x0000080c        0x8 .\CortexM3\ARM_GCC_541\Debug\RGBLedDriver.o
  .text.RGBLed_WriteBlu
-                0x000007e4        0x8 .\CortexM3\ARM_GCC_541\Debug\RGBLedDriver.o
+                0x00000814        0x8 .\CortexM3\ARM_GCC_541\Debug\RGBLedDriver.o
  .text.RGBLed_Start
-                0x000007ec        0xc .\CortexM3\ARM_GCC_541\Debug\RGBLedDriver.o
-                0x000007ec                RGBLed_Start
+                0x0000081c        0xc .\CortexM3\ARM_GCC_541\Debug\RGBLedDriver.o
+                0x0000081c                RGBLed_Start
  .text.RGBLed_WriteColor
-                0x000007f8       0x18 .\CortexM3\ARM_GCC_541\Debug\RGBLedDriver.o
-                0x000007f8                RGBLed_WriteColor
+                0x00000828       0x18 .\CortexM3\ARM_GCC_541\Debug\RGBLedDriver.o
+                0x00000828                RGBLed_WriteColor
  .text.EEPROM_readStatus
-                0x00000810        0xc .\CortexM3\ARM_GCC_541\Debug\25LC256.o
-                0x00000810                EEPROM_readStatus
+                0x00000840        0xc .\CortexM3\ARM_GCC_541\Debug\25LC256.o
+                0x00000840                EEPROM_readStatus
  .text.EEPROM_writeEnable
-                0x0000081c        0xc .\CortexM3\ARM_GCC_541\Debug\25LC256.o
-                0x0000081c                EEPROM_writeEnable
+                0x0000084c        0xc .\CortexM3\ARM_GCC_541\Debug\25LC256.o
+                0x0000084c                EEPROM_writeEnable
+ .text.EEPROM_readByte
+                0x00000858       0x30 .\CortexM3\ARM_GCC_541\Debug\25LC256.o
+                0x00000858                EEPROM_readByte
  .text.EEPROM_writeByte
-                0x00000828       0x38 .\CortexM3\ARM_GCC_541\Debug\25LC256.o
-                0x00000828                EEPROM_writeByte
+                0x00000888       0x38 .\CortexM3\ARM_GCC_541\Debug\25LC256.o
+                0x00000888                EEPROM_writeByte
  .text.EEPROM_readPage
-                0x00000860       0x24 .\CortexM3\ARM_GCC_541\Debug\25LC256.o
-                0x00000860                EEPROM_readPage
+                0x000008c0       0x24 .\CortexM3\ARM_GCC_541\Debug\25LC256.o
+                0x000008c0                EEPROM_readPage
  .text.EEPROM_writePage
-                0x00000884       0x5c .\CortexM3\ARM_GCC_541\Debug\25LC256.o
-                0x00000884                EEPROM_writePage
+                0x000008e4       0x5c .\CortexM3\ARM_GCC_541\Debug\25LC256.o
+                0x000008e4                EEPROM_writePage
  .text.EEPROM_waitForWriteComplete
-                0x000008e0       0x10 .\CortexM3\ARM_GCC_541\Debug\25LC256.o
-                0x000008e0                EEPROM_waitForWriteComplete
+                0x00000940       0x10 .\CortexM3\ARM_GCC_541\Debug\25LC256.o
+                0x00000940                EEPROM_waitForWriteComplete
  .text.SPI_Interface_EEPROM_tradeByte
-                0x000008f0       0x2c .\CortexM3\ARM_GCC_541\Debug\SPI_Interface_EEPROM.o
-                0x000008f0                SPI_Interface_EEPROM_tradeByte
+                0x00000950       0x2c .\CortexM3\ARM_GCC_541\Debug\SPI_Interface_EEPROM.o
+                0x00000950                SPI_Interface_EEPROM_tradeByte
  .text.SPI_Interface_EEPROM_ReadByte
-                0x0000091c       0x34 .\CortexM3\ARM_GCC_541\Debug\SPI_Interface_EEPROM.o
-                0x0000091c                SPI_Interface_EEPROM_ReadByte
+                0x0000097c       0x34 .\CortexM3\ARM_GCC_541\Debug\SPI_Interface_EEPROM.o
+                0x0000097c                SPI_Interface_EEPROM_ReadByte
  .text.SPI_Interface_EEPROM_Multi_RW
-                0x00000950       0xb8 .\CortexM3\ARM_GCC_541\Debug\SPI_Interface_EEPROM.o
-                0x00000950                SPI_Interface_EEPROM_Multi_RW
+                0x000009b0       0xb8 .\CortexM3\ARM_GCC_541\Debug\SPI_Interface_EEPROM.o
+                0x000009b0                SPI_Interface_EEPROM_Multi_RW
  .text.CyClockStartupError
-                0x00000a08        0x4 .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
+                0x00000a68        0x4 .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
  .text.cfg_write_bytes32
-                0x00000a0c       0x34 .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
+                0x00000a6c       0x34 .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
  .text.AnalogSetDefault
-                0x00000a40       0x40 .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
+                0x00000aa0       0x40 .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
  .text.CYMEMZERO
-                0x00000a80        0xc .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
+                0x00000ae0        0xc .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
  .text.CYCONFIGCPY
-                0x00000a8c        0x8 .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
+                0x00000aec        0x8 .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
  .text.ClockSetup
-                0x00000a94      0x138 .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
+                0x00000af4      0x138 .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
  .text.ADC_DelSig_AMux_Set
-                0x00000bcc       0x1c .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
-                0x00000bcc                ADC_DelSig_AMux_Set
+                0x00000c2c       0x1c .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
+                0x00000c2c                ADC_DelSig_AMux_Set
  .text.ADC_DelSig_AMux_Unset
-                0x00000be8       0x1c .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
-                0x00000be8                ADC_DelSig_AMux_Unset
+                0x00000c48       0x1c .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
+                0x00000c48                ADC_DelSig_AMux_Unset
  .text.cyfitter_cfg
-                0x00000c04      0x13c .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
-                0x00000c04                cyfitter_cfg
+                0x00000c64      0x13c .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
+                0x00000c64                cyfitter_cfg
  .text.IntDefaultHandler
-                0x00000d40       0x10 .\CortexM3\ARM_GCC_541\Debug\Cm3Start.o
-                0x00000d40                IntDefaultHandler
- .text._sbrk    0x00000d50       0x30 .\CortexM3\ARM_GCC_541\Debug\Cm3Start.o
-                0x00000d50                _sbrk
- .text.Start_c  0x00000d80       0x4c .\CortexM3\ARM_GCC_541\Debug\Cm3Start.o
-                0x00000d80                Start_c
+                0x00000da0       0x10 .\CortexM3\ARM_GCC_541\Debug\Cm3Start.o
+                0x00000da0                IntDefaultHandler
+ .text._sbrk    0x00000db0       0x30 .\CortexM3\ARM_GCC_541\Debug\Cm3Start.o
+                0x00000db0                _sbrk
+ .text.Start_c  0x00000de0       0x4c .\CortexM3\ARM_GCC_541\Debug\Cm3Start.o
+                0x00000de0                Start_c
  .text.initialize_psoc
-                0x00000dcc       0x68 .\CortexM3\ARM_GCC_541\Debug\Cm3Start.o
-                0x00000dcc                initialize_psoc
+                0x00000e2c       0x68 .\CortexM3\ARM_GCC_541\Debug\Cm3Start.o
+                0x00000e2c                initialize_psoc
  .text.SPIM_1_EnableTxInt
-                0x00000e34        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_1.o)
-                0x00000e34                SPIM_1_EnableTxInt
- .text.SPIM_1_EnableRxInt
-                0x00000e40        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_1.o)
-                0x00000e40                SPIM_1_EnableRxInt
- .text.SPIM_1_Enable
-                0x00000e4c       0x3c .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_1.o)
-                0x00000e4c                SPIM_1_Enable
- .text.SPIM_1_DisableTxInt
-                0x00000e88        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_1.o)
-                0x00000e88                SPIM_1_DisableTxInt
- .text.SPIM_1_DisableRxInt
                 0x00000e94        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_1.o)
-                0x00000e94                SPIM_1_DisableRxInt
+                0x00000e94                SPIM_1_EnableTxInt
+ .text.SPIM_1_EnableRxInt
+                0x00000ea0        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_1.o)
+                0x00000ea0                SPIM_1_EnableRxInt
+ .text.SPIM_1_Enable
+                0x00000eac       0x3c .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_1.o)
+                0x00000eac                SPIM_1_Enable
+ .text.SPIM_1_DisableTxInt
+                0x00000ee8        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_1.o)
+                0x00000ee8                SPIM_1_DisableTxInt
+ .text.SPIM_1_DisableRxInt
+                0x00000ef4        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_1.o)
+                0x00000ef4                SPIM_1_DisableRxInt
  .text.SPIM_1_Stop
-                0x00000ea0       0x30 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_1.o)
-                0x00000ea0                SPIM_1_Stop
+                0x00000f00       0x30 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_1.o)
+                0x00000f00                SPIM_1_Stop
  .text.SPIM_1_ReadTxStatus
-                0x00000ed0       0x28 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_1.o)
-                0x00000ed0                SPIM_1_ReadTxStatus
+                0x00000f30       0x28 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_1.o)
+                0x00000f30                SPIM_1_ReadTxStatus
  .text.SPIM_1_ReadRxStatus
-                0x00000ef8       0x28 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_1.o)
-                0x00000ef8                SPIM_1_ReadRxStatus
+                0x00000f58       0x28 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_1.o)
+                0x00000f58                SPIM_1_ReadRxStatus
  .text.SPIM_1_WriteTxData
-                0x00000f20       0xd4 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_1.o)
-                0x00000f20                SPIM_1_WriteTxData
+                0x00000f80       0xd4 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_1.o)
+                0x00000f80                SPIM_1_WriteTxData
  .text.SPIM_1_ReadRxData
-                0x00000ff4       0x64 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_1.o)
-                0x00000ff4                SPIM_1_ReadRxData
+                0x00001054       0x64 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_1.o)
+                0x00001054                SPIM_1_ReadRxData
  .text.SPIM_1_ClearRxBuffer
-                0x00001058       0x40 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_1.o)
-                0x00001058                SPIM_1_ClearRxBuffer
+                0x000010b8       0x40 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_1.o)
+                0x000010b8                SPIM_1_ClearRxBuffer
  .text.SPIM_1_ClearTxBuffer
-                0x00001098       0x54 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_1.o)
-                0x00001098                SPIM_1_ClearTxBuffer
+                0x000010f8       0x54 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_1.o)
+                0x000010f8                SPIM_1_ClearTxBuffer
  .text.SPIM_1_PutArray
-                0x000010ec       0x20 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_1.o)
-                0x000010ec                SPIM_1_PutArray
+                0x0000114c       0x20 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_1.o)
+                0x0000114c                SPIM_1_PutArray
  .text.SPIM_1_ClearFIFO
-                0x0000110c       0x3c .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_1.o)
-                0x0000110c                SPIM_1_ClearFIFO
+                0x0000116c       0x3c .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_1.o)
+                0x0000116c                SPIM_1_ClearFIFO
  .text.SPIM_1_Init
-                0x00001148       0x90 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_1.o)
-                0x00001148                SPIM_1_Init
+                0x000011a8       0x90 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_1.o)
+                0x000011a8                SPIM_1_Init
  .text.SPIM_1_Start
-                0x000011d8       0x1c .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_1.o)
-                0x000011d8                SPIM_1_Start
+                0x00001238       0x1c .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_1.o)
+                0x00001238                SPIM_1_Start
  .text.SPIM_1_TX_ISR
-                0x000011f4       0xa0 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_1_INT.o)
-                0x000011f4                SPIM_1_TX_ISR
+                0x00001254       0xa0 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_1_INT.o)
+                0x00001254                SPIM_1_TX_ISR
  .text.SPIM_1_RX_ISR
-                0x00001294       0xa0 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_1_INT.o)
-                0x00001294                SPIM_1_RX_ISR
+                0x000012f4       0xa0 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_1_INT.o)
+                0x000012f4                SPIM_1_RX_ISR
  .text.CS_1_Write
-                0x00001334       0x18 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(CS_1.o)
-                0x00001334                CS_1_Write
+                0x00001394       0x18 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(CS_1.o)
+                0x00001394                CS_1_Write
  .text.Pin_ISR_ClearInterrupt
-                0x0000134c       0x10 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(Pin_ISR.o)
-                0x0000134c                Pin_ISR_ClearInterrupt
+                0x000013ac       0x10 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(Pin_ISR.o)
+                0x000013ac                Pin_ISR_ClearInterrupt
  .text.isr_ACC_SetVector
-                0x0000135c        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_ACC.o)
-                0x0000135c                isr_ACC_SetVector
+                0x000013bc        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_ACC.o)
+                0x000013bc                isr_ACC_SetVector
  .text.isr_ACC_SetPriority
-                0x00001368       0x10 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_ACC.o)
-                0x00001368                isr_ACC_SetPriority
+                0x000013c8       0x10 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_ACC.o)
+                0x000013c8                isr_ACC_SetPriority
  .text.isr_ACC_Enable
-                0x00001378       0x10 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_ACC.o)
-                0x00001378                isr_ACC_Enable
+                0x000013d8       0x10 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_ACC.o)
+                0x000013d8                isr_ACC_Enable
  .text.isr_ACC_Disable
-                0x00001388       0x10 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_ACC.o)
-                0x00001388                isr_ACC_Disable
+                0x000013e8       0x10 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_ACC.o)
+                0x000013e8                isr_ACC_Disable
  .text.isr_ACC_StartEx
-                0x00001398       0x1c .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_ACC.o)
-                0x00001398                isr_ACC_StartEx
+                0x000013f8       0x1c .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_ACC.o)
+                0x000013f8                isr_ACC_StartEx
  .text.SPIM_1_IntClock_Start
-                0x000013b4       0x1c .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_1_IntClock.o)
-                0x000013b4                SPIM_1_IntClock_Start
+                0x00001414       0x1c .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_1_IntClock.o)
+                0x00001414                SPIM_1_IntClock_Start
  .text.SPIM_1_IntClock_Stop
-                0x000013d0       0x1c .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_1_IntClock.o)
-                0x000013d0                SPIM_1_IntClock_Stop
- .text.CyHalt   0x000013ec        0x4 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(CyLib.o)
-                0x000013ec                CyHalt
- .text.CyDelay  0x000013f0       0x2c .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(CyLib.o)
-                0x000013f0                CyDelay
+                0x00001430       0x1c .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_1_IntClock.o)
+                0x00001430                SPIM_1_IntClock_Stop
+ .text.CyHalt   0x0000144c        0x4 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(CyLib.o)
+                0x0000144c                CyHalt
+ .text.CyDelay  0x00001450       0x2c .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(CyLib.o)
+                0x00001450                CyDelay
  .text.CyDelayUs
-                0x0000141c       0x14 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(CyLib.o)
-                0x0000141c                CyDelayUs
+                0x0000147c       0x14 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(CyLib.o)
+                0x0000147c                CyDelayUs
  .text.CyIntSetVector
-                0x00001430       0x28 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(CyLib.o)
-                0x00001430                CyIntSetVector
+                0x00001490       0x28 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(CyLib.o)
+                0x00001490                CyIntSetVector
  .text.CyIntSetPriority
-                0x00001458       0x30 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(CyLib.o)
-                0x00001458                CyIntSetPriority
+                0x000014b8       0x30 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(CyLib.o)
+                0x000014b8                CyIntSetPriority
  .text.UART_1_Init
-                0x00001488       0x28 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(UART_1.o)
-                0x00001488                UART_1_Init
+                0x000014e8       0x28 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(UART_1.o)
+                0x000014e8                UART_1_Init
  .text.UART_1_Enable
-                0x000014b0       0x38 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(UART_1.o)
-                0x000014b0                UART_1_Enable
+                0x00001510       0x38 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(UART_1.o)
+                0x00001510                UART_1_Enable
  .text.UART_1_Start
-                0x000014e8       0x1c .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(UART_1.o)
-                0x000014e8                UART_1_Start
+                0x00001548       0x1c .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(UART_1.o)
+                0x00001548                UART_1_Start
  .text.UART_1_Stop
-                0x00001504       0x3c .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(UART_1.o)
-                0x00001504                UART_1_Stop
+                0x00001564       0x3c .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(UART_1.o)
+                0x00001564                UART_1_Stop
  .text.UART_1_PutChar
-                0x00001540       0x18 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(UART_1.o)
-                0x00001540                UART_1_PutChar
+                0x000015a0       0x18 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(UART_1.o)
+                0x000015a0                UART_1_PutChar
  .text.UART_1_PutString
-                0x00001558       0x24 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(UART_1.o)
-                0x00001558                UART_1_PutString
+                0x000015b8       0x24 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(UART_1.o)
+                0x000015b8                UART_1_PutString
  .text.UART_1_PutArray
-                0x0000157c       0x28 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(UART_1.o)
-                0x0000157c                UART_1_PutArray
+                0x000015dc       0x28 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(UART_1.o)
+                0x000015dc                UART_1_PutArray
  .text.UART_1_IntClock_Start
-                0x000015a4       0x1c .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(UART_1_IntClock.o)
-                0x000015a4                UART_1_IntClock_Start
+                0x00001604       0x1c .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(UART_1_IntClock.o)
+                0x00001604                UART_1_IntClock_Start
  .text.UART_1_IntClock_Stop
-                0x000015c0       0x1c .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(UART_1_IntClock.o)
-                0x000015c0                UART_1_IntClock_Stop
+                0x00001620       0x1c .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(UART_1_IntClock.o)
+                0x00001620                UART_1_IntClock_Stop
  .text.PWM_RG_Enable
-                0x000015dc       0x10 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(PWM_RG.o)
-                0x000015dc                PWM_RG_Enable
+                0x0000163c       0x10 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(PWM_RG.o)
+                0x0000163c                PWM_RG_Enable
  .text.PWM_RG_WriteCounter
-                0x000015ec        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(PWM_RG.o)
-                0x000015ec                PWM_RG_WriteCounter
+                0x0000164c        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(PWM_RG.o)
+                0x0000164c                PWM_RG_WriteCounter
  .text.PWM_RG_WritePeriod
-                0x000015f8        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(PWM_RG.o)
-                0x000015f8                PWM_RG_WritePeriod
+                0x00001658        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(PWM_RG.o)
+                0x00001658                PWM_RG_WritePeriod
  .text.PWM_RG_WriteCompare1
-                0x00001604        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(PWM_RG.o)
-                0x00001604                PWM_RG_WriteCompare1
+                0x00001664        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(PWM_RG.o)
+                0x00001664                PWM_RG_WriteCompare1
  .text.PWM_RG_WriteCompare2
-                0x00001610        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(PWM_RG.o)
-                0x00001610                PWM_RG_WriteCompare2
+                0x00001670        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(PWM_RG.o)
+                0x00001670                PWM_RG_WriteCompare2
  .text.PWM_RG_SetInterruptMode
-                0x0000161c        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(PWM_RG.o)
-                0x0000161c                PWM_RG_SetInterruptMode
+                0x0000167c        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(PWM_RG.o)
+                0x0000167c                PWM_RG_SetInterruptMode
  .text.PWM_RG_ReadStatusRegister
-                0x00001628        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(PWM_RG.o)
-                0x00001628                PWM_RG_ReadStatusRegister
+                0x00001688        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(PWM_RG.o)
+                0x00001688                PWM_RG_ReadStatusRegister
  .text.PWM_RG_ReadCapture
-                0x00001634        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(PWM_RG.o)
-                0x00001634                PWM_RG_ReadCapture
+                0x00001694        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(PWM_RG.o)
+                0x00001694                PWM_RG_ReadCapture
  .text.PWM_RG_ClearFIFO
-                0x00001640       0x14 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(PWM_RG.o)
-                0x00001640                PWM_RG_ClearFIFO
+                0x000016a0       0x14 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(PWM_RG.o)
+                0x000016a0                PWM_RG_ClearFIFO
  .text.PWM_RG_Init
-                0x00001654       0x58 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(PWM_RG.o)
-                0x00001654                PWM_RG_Init
+                0x000016b4       0x58 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(PWM_RG.o)
+                0x000016b4                PWM_RG_Init
  .text.PWM_RG_Start
-                0x000016ac       0x1c .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(PWM_RG.o)
-                0x000016ac                PWM_RG_Start
+                0x0000170c       0x1c .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(PWM_RG.o)
+                0x0000170c                PWM_RG_Start
  .text.PWM_B_Enable
-                0x000016c8       0x10 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(PWM_B.o)
-                0x000016c8                PWM_B_Enable
+                0x00001728       0x10 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(PWM_B.o)
+                0x00001728                PWM_B_Enable
  .text.PWM_B_WriteCounter
-                0x000016d8        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(PWM_B.o)
-                0x000016d8                PWM_B_WriteCounter
+                0x00001738        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(PWM_B.o)
+                0x00001738                PWM_B_WriteCounter
  .text.PWM_B_WritePeriod
-                0x000016e4        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(PWM_B.o)
-                0x000016e4                PWM_B_WritePeriod
+                0x00001744        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(PWM_B.o)
+                0x00001744                PWM_B_WritePeriod
  .text.PWM_B_WriteCompare
-                0x000016f0        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(PWM_B.o)
-                0x000016f0                PWM_B_WriteCompare
+                0x00001750        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(PWM_B.o)
+                0x00001750                PWM_B_WriteCompare
  .text.PWM_B_SetInterruptMode
-                0x000016fc        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(PWM_B.o)
-                0x000016fc                PWM_B_SetInterruptMode
+                0x0000175c        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(PWM_B.o)
+                0x0000175c                PWM_B_SetInterruptMode
  .text.PWM_B_ReadStatusRegister
-                0x00001708        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(PWM_B.o)
-                0x00001708                PWM_B_ReadStatusRegister
+                0x00001768        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(PWM_B.o)
+                0x00001768                PWM_B_ReadStatusRegister
  .text.PWM_B_ReadCapture
-                0x00001714        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(PWM_B.o)
-                0x00001714                PWM_B_ReadCapture
+                0x00001774        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(PWM_B.o)
+                0x00001774                PWM_B_ReadCapture
  .text.PWM_B_ClearFIFO
-                0x00001720       0x14 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(PWM_B.o)
-                0x00001720                PWM_B_ClearFIFO
+                0x00001780       0x14 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(PWM_B.o)
+                0x00001780                PWM_B_ClearFIFO
  .text.PWM_B_Init
-                0x00001734       0x54 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(PWM_B.o)
-                0x00001734                PWM_B_Init
+                0x00001794       0x54 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(PWM_B.o)
+                0x00001794                PWM_B_Init
  .text.PWM_B_Start
-                0x00001788       0x1c .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(PWM_B.o)
-                0x00001788                PWM_B_Start
+                0x000017e8       0x1c .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(PWM_B.o)
+                0x000017e8                PWM_B_Start
  .text.CS_2_Write
-                0x000017a4       0x18 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(CS_2.o)
-                0x000017a4                CS_2_Write
+                0x00001804       0x18 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(CS_2.o)
+                0x00001804                CS_2_Write
  .text.SPIM_2_EnableTxInt
-                0x000017bc        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_2.o)
-                0x000017bc                SPIM_2_EnableTxInt
- .text.SPIM_2_EnableRxInt
-                0x000017c8        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_2.o)
-                0x000017c8                SPIM_2_EnableRxInt
- .text.SPIM_2_Enable
-                0x000017d4       0x3c .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_2.o)
-                0x000017d4                SPIM_2_Enable
- .text.SPIM_2_DisableTxInt
-                0x00001810        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_2.o)
-                0x00001810                SPIM_2_DisableTxInt
- .text.SPIM_2_DisableRxInt
                 0x0000181c        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_2.o)
-                0x0000181c                SPIM_2_DisableRxInt
+                0x0000181c                SPIM_2_EnableTxInt
+ .text.SPIM_2_EnableRxInt
+                0x00001828        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_2.o)
+                0x00001828                SPIM_2_EnableRxInt
+ .text.SPIM_2_Enable
+                0x00001834       0x3c .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_2.o)
+                0x00001834                SPIM_2_Enable
+ .text.SPIM_2_DisableTxInt
+                0x00001870        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_2.o)
+                0x00001870                SPIM_2_DisableTxInt
+ .text.SPIM_2_DisableRxInt
+                0x0000187c        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_2.o)
+                0x0000187c                SPIM_2_DisableRxInt
  .text.SPIM_2_ReadTxStatus
-                0x00001828       0x28 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_2.o)
-                0x00001828                SPIM_2_ReadTxStatus
+                0x00001888       0x28 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_2.o)
+                0x00001888                SPIM_2_ReadTxStatus
  .text.SPIM_2_ReadRxStatus
-                0x00001850       0x28 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_2.o)
-                0x00001850                SPIM_2_ReadRxStatus
+                0x000018b0       0x28 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_2.o)
+                0x000018b0                SPIM_2_ReadRxStatus
  .text.SPIM_2_WriteTxData
-                0x00001878       0xd4 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_2.o)
-                0x00001878                SPIM_2_WriteTxData
+                0x000018d8       0xd4 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_2.o)
+                0x000018d8                SPIM_2_WriteTxData
  .text.SPIM_2_ReadRxData
-                0x0000194c       0x64 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_2.o)
-                0x0000194c                SPIM_2_ReadRxData
+                0x000019ac       0x64 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_2.o)
+                0x000019ac                SPIM_2_ReadRxData
  .text.SPIM_2_ClearRxBuffer
-                0x000019b0       0x40 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_2.o)
-                0x000019b0                SPIM_2_ClearRxBuffer
+                0x00001a10       0x40 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_2.o)
+                0x00001a10                SPIM_2_ClearRxBuffer
  .text.SPIM_2_ClearTxBuffer
-                0x000019f0       0x54 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_2.o)
-                0x000019f0                SPIM_2_ClearTxBuffer
+                0x00001a50       0x54 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_2.o)
+                0x00001a50                SPIM_2_ClearTxBuffer
  .text.SPIM_2_PutArray
-                0x00001a44       0x20 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_2.o)
-                0x00001a44                SPIM_2_PutArray
+                0x00001aa4       0x20 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_2.o)
+                0x00001aa4                SPIM_2_PutArray
  .text.SPIM_2_ClearFIFO
-                0x00001a64       0x3c .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_2.o)
-                0x00001a64                SPIM_2_ClearFIFO
+                0x00001ac4       0x3c .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_2.o)
+                0x00001ac4                SPIM_2_ClearFIFO
  .text.SPIM_2_Init
-                0x00001aa0       0x90 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_2.o)
-                0x00001aa0                SPIM_2_Init
+                0x00001b00       0x90 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_2.o)
+                0x00001b00                SPIM_2_Init
  .text.SPIM_2_Start
-                0x00001b30       0x1c .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_2.o)
-                0x00001b30                SPIM_2_Start
+                0x00001b90       0x1c .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_2.o)
+                0x00001b90                SPIM_2_Start
  .text.SPIM_2_TX_ISR
-                0x00001b4c       0xa0 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_2_INT.o)
-                0x00001b4c                SPIM_2_TX_ISR
+                0x00001bac       0xa0 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_2_INT.o)
+                0x00001bac                SPIM_2_TX_ISR
  .text.SPIM_2_RX_ISR
-                0x00001bec       0xa0 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_2_INT.o)
-                0x00001bec                SPIM_2_RX_ISR
+                0x00001c4c       0xa0 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_2_INT.o)
+                0x00001c4c                SPIM_2_RX_ISR
  .text.SPIM_2_IntClock_Start
-                0x00001c8c       0x1c .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_2_IntClock.o)
-                0x00001c8c                SPIM_2_IntClock_Start
+                0x00001cec       0x1c .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_2_IntClock.o)
+                0x00001cec                SPIM_2_IntClock_Start
  .text.isr_DEBOUNCER_SetVector
-                0x00001ca8        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_DEBOUNCER.o)
-                0x00001ca8                isr_DEBOUNCER_SetVector
+                0x00001d08        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_DEBOUNCER.o)
+                0x00001d08                isr_DEBOUNCER_SetVector
  .text.isr_DEBOUNCER_SetPriority
-                0x00001cb4       0x10 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_DEBOUNCER.o)
-                0x00001cb4                isr_DEBOUNCER_SetPriority
+                0x00001d14       0x10 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_DEBOUNCER.o)
+                0x00001d14                isr_DEBOUNCER_SetPriority
  .text.isr_DEBOUNCER_Enable
-                0x00001cc4        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_DEBOUNCER.o)
-                0x00001cc4                isr_DEBOUNCER_Enable
+                0x00001d24        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_DEBOUNCER.o)
+                0x00001d24                isr_DEBOUNCER_Enable
  .text.isr_DEBOUNCER_Disable
-                0x00001cd0        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_DEBOUNCER.o)
-                0x00001cd0                isr_DEBOUNCER_Disable
+                0x00001d30        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_DEBOUNCER.o)
+                0x00001d30                isr_DEBOUNCER_Disable
  .text.isr_DEBOUNCER_StartEx
-                0x00001cdc       0x1c .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_DEBOUNCER.o)
-                0x00001cdc                isr_DEBOUNCER_StartEx
+                0x00001d3c       0x1c .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_DEBOUNCER.o)
+                0x00001d3c                isr_DEBOUNCER_StartEx
  .text.Pin_Led_Blue_Write
-                0x00001cf8       0x18 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(Pin_Led_Blue.o)
-                0x00001cf8                Pin_Led_Blue_Write
+                0x00001d58       0x18 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(Pin_Led_Blue.o)
+                0x00001d58                Pin_Led_Blue_Write
  .text.Pin_Led_Blue_Read
-                0x00001d10       0x10 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(Pin_Led_Blue.o)
-                0x00001d10                Pin_Led_Blue_Read
+                0x00001d70       0x10 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(Pin_Led_Blue.o)
+                0x00001d70                Pin_Led_Blue_Read
  .text.TIMER_button_Enable
-                0x00001d20       0x28 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(TIMER_button.o)
-                0x00001d20                TIMER_button_Enable
+                0x00001d80       0x28 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(TIMER_button.o)
+                0x00001d80                TIMER_button_Enable
  .text.TIMER_button_Stop
-                0x00001d48       0x28 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(TIMER_button.o)
-                0x00001d48                TIMER_button_Stop
+                0x00001da8       0x28 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(TIMER_button.o)
+                0x00001da8                TIMER_button_Stop
  .text.TIMER_button_SetInterruptMode
-                0x00001d70        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(TIMER_button.o)
-                0x00001d70                TIMER_button_SetInterruptMode
+                0x00001dd0        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(TIMER_button.o)
+                0x00001dd0                TIMER_button_SetInterruptMode
  .text.TIMER_button_ReadStatusRegister
-                0x00001d7c        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(TIMER_button.o)
-                0x00001d7c                TIMER_button_ReadStatusRegister
+                0x00001ddc        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(TIMER_button.o)
+                0x00001ddc                TIMER_button_ReadStatusRegister
  .text.TIMER_button_WritePeriod
-                0x00001d88        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(TIMER_button.o)
-                0x00001d88                TIMER_button_WritePeriod
+                0x00001de8        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(TIMER_button.o)
+                0x00001de8                TIMER_button_WritePeriod
  .text.TIMER_button_WriteCounter
-                0x00001d94        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(TIMER_button.o)
-                0x00001d94                TIMER_button_WriteCounter
+                0x00001df4        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(TIMER_button.o)
+                0x00001df4                TIMER_button_WriteCounter
  .text.TIMER_button_Init
-                0x00001da0       0x64 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(TIMER_button.o)
-                0x00001da0                TIMER_button_Init
+                0x00001e00       0x64 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(TIMER_button.o)
+                0x00001e00                TIMER_button_Init
  .text.TIMER_button_Start
-                0x00001e04       0x1c .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(TIMER_button.o)
-                0x00001e04                TIMER_button_Start
+                0x00001e64       0x1c .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(TIMER_button.o)
+                0x00001e64                TIMER_button_Start
  .text.isr_TIMER_SetVector
-                0x00001e20       0x10 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_TIMER.o)
-                0x00001e20                isr_TIMER_SetVector
+                0x00001e80       0x10 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_TIMER.o)
+                0x00001e80                isr_TIMER_SetVector
  .text.isr_TIMER_SetPriority
-                0x00001e30       0x10 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_TIMER.o)
-                0x00001e30                isr_TIMER_SetPriority
+                0x00001e90       0x10 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_TIMER.o)
+                0x00001e90                isr_TIMER_SetPriority
  .text.isr_TIMER_Enable
-                0x00001e40       0x10 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_TIMER.o)
-                0x00001e40                isr_TIMER_Enable
+                0x00001ea0       0x10 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_TIMER.o)
+                0x00001ea0                isr_TIMER_Enable
  .text.isr_TIMER_Disable
-                0x00001e50       0x10 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_TIMER.o)
-                0x00001e50                isr_TIMER_Disable
+                0x00001eb0       0x10 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_TIMER.o)
+                0x00001eb0                isr_TIMER_Disable
  .text.isr_TIMER_StartEx
-                0x00001e60       0x1c .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_TIMER.o)
-                0x00001e60                isr_TIMER_StartEx
+                0x00001ec0       0x1c .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_TIMER.o)
+                0x00001ec0                isr_TIMER_StartEx
  .text.Timer_Blinking_Enable
-                0x00001e7c       0x28 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(Timer_Blinking.o)
-                0x00001e7c                Timer_Blinking_Enable
+                0x00001edc       0x28 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(Timer_Blinking.o)
+                0x00001edc                Timer_Blinking_Enable
  .text.Timer_Blinking_Stop
-                0x00001ea4       0x28 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(Timer_Blinking.o)
-                0x00001ea4                Timer_Blinking_Stop
+                0x00001f04       0x28 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(Timer_Blinking.o)
+                0x00001f04                Timer_Blinking_Stop
  .text.Timer_Blinking_SetInterruptMode
-                0x00001ecc        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(Timer_Blinking.o)
-                0x00001ecc                Timer_Blinking_SetInterruptMode
+                0x00001f2c        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(Timer_Blinking.o)
+                0x00001f2c                Timer_Blinking_SetInterruptMode
  .text.Timer_Blinking_ReadStatusRegister
-                0x00001ed8        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(Timer_Blinking.o)
-                0x00001ed8                Timer_Blinking_ReadStatusRegister
+                0x00001f38        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(Timer_Blinking.o)
+                0x00001f38                Timer_Blinking_ReadStatusRegister
  .text.Timer_Blinking_WritePeriod
-                0x00001ee4        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(Timer_Blinking.o)
-                0x00001ee4                Timer_Blinking_WritePeriod
+                0x00001f44        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(Timer_Blinking.o)
+                0x00001f44                Timer_Blinking_WritePeriod
  .text.Timer_Blinking_WriteCounter
-                0x00001ef0        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(Timer_Blinking.o)
-                0x00001ef0                Timer_Blinking_WriteCounter
+                0x00001f50        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(Timer_Blinking.o)
+                0x00001f50                Timer_Blinking_WriteCounter
  .text.Timer_Blinking_Init
-                0x00001efc       0x64 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(Timer_Blinking.o)
-                0x00001efc                Timer_Blinking_Init
+                0x00001f5c       0x64 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(Timer_Blinking.o)
+                0x00001f5c                Timer_Blinking_Init
  .text.Timer_Blinking_Start
-                0x00001f60       0x1c .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(Timer_Blinking.o)
-                0x00001f60                Timer_Blinking_Start
+                0x00001fc0       0x1c .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(Timer_Blinking.o)
+                0x00001fc0                Timer_Blinking_Start
  .text.isr_BLINKING_SetVector
-                0x00001f7c       0x10 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_BLINKING.o)
-                0x00001f7c                isr_BLINKING_SetVector
+                0x00001fdc       0x10 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_BLINKING.o)
+                0x00001fdc                isr_BLINKING_SetVector
  .text.isr_BLINKING_SetPriority
-                0x00001f8c       0x10 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_BLINKING.o)
-                0x00001f8c                isr_BLINKING_SetPriority
+                0x00001fec       0x10 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_BLINKING.o)
+                0x00001fec                isr_BLINKING_SetPriority
  .text.isr_BLINKING_Enable
-                0x00001f9c       0x10 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_BLINKING.o)
-                0x00001f9c                isr_BLINKING_Enable
+                0x00001ffc       0x10 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_BLINKING.o)
+                0x00001ffc                isr_BLINKING_Enable
  .text.isr_BLINKING_Disable
-                0x00001fac       0x10 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_BLINKING.o)
-                0x00001fac                isr_BLINKING_Disable
+                0x0000200c       0x10 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_BLINKING.o)
+                0x0000200c                isr_BLINKING_Disable
  .text.isr_BLINKING_StartEx
-                0x00001fbc       0x1c .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_BLINKING.o)
-                0x00001fbc                isr_BLINKING_StartEx
+                0x0000201c       0x1c .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_BLINKING.o)
+                0x0000201c                isr_BLINKING_StartEx
  .text.isr_positive_SetVector
-                0x00001fd8        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_positive.o)
-                0x00001fd8                isr_positive_SetVector
+                0x00002038        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_positive.o)
+                0x00002038                isr_positive_SetVector
  .text.isr_positive_SetPriority
-                0x00001fe4       0x10 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_positive.o)
-                0x00001fe4                isr_positive_SetPriority
+                0x00002044       0x10 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_positive.o)
+                0x00002044                isr_positive_SetPriority
  .text.isr_positive_Enable
-                0x00001ff4        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_positive.o)
-                0x00001ff4                isr_positive_Enable
+                0x00002054        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_positive.o)
+                0x00002054                isr_positive_Enable
  .text.isr_positive_Disable
-                0x00002000        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_positive.o)
-                0x00002000                isr_positive_Disable
+                0x00002060        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_positive.o)
+                0x00002060                isr_positive_Disable
  .text.isr_positive_StartEx
-                0x0000200c       0x1c .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_positive.o)
-                0x0000200c                isr_positive_StartEx
+                0x0000206c       0x1c .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_positive.o)
+                0x0000206c                isr_positive_StartEx
  .text.ADC_DelSig_GainCompensation
-                0x00002028       0xdc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig.o)
+                0x00002088       0xdc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig.o)
  .text.ADC_DelSig_SetDSMRef0Reg
-                0x00002104       0x4c .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig.o)
+                0x00002164       0x4c .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig.o)
  .text.ADC_DelSig_InitConfig
-                0x00002150       0xe0 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig.o)
+                0x000021b0       0xe0 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig.o)
  .text.ADC_DelSig_Init
-                0x00002230       0xc4 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig.o)
-                0x00002230                ADC_DelSig_Init
+                0x00002290       0xc4 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig.o)
+                0x00002290                ADC_DelSig_Init
  .text.ADC_DelSig_Enable
-                0x000022f4       0xd8 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig.o)
-                0x000022f4                ADC_DelSig_Enable
+                0x00002354       0xd8 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig.o)
+                0x00002354                ADC_DelSig_Enable
  .text.ADC_DelSig_Start
-                0x000023cc       0x28 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig.o)
-                0x000023cc                ADC_DelSig_Start
+                0x0000242c       0x28 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig.o)
+                0x0000242c                ADC_DelSig_Start
  .text.ADC_DelSig_StartConvert
-                0x000023f4       0x10 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig.o)
-                0x000023f4                ADC_DelSig_StartConvert
+                0x00002454       0x10 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig.o)
+                0x00002454                ADC_DelSig_StartConvert
  .text.ADC_DelSig_StopConvert
-                0x00002404       0x10 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig.o)
-                0x00002404                ADC_DelSig_StopConvert
+                0x00002464       0x10 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig.o)
+                0x00002464                ADC_DelSig_StopConvert
  .text.ADC_DelSig_IsEndConversion
-                0x00002414       0x30 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig.o)
-                0x00002414                ADC_DelSig_IsEndConversion
+                0x00002474       0x30 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig.o)
+                0x00002474                ADC_DelSig_IsEndConversion
  .text.ADC_DelSig_GetResult32
-                0x00002444       0x6c .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig.o)
-                0x00002444                ADC_DelSig_GetResult32
+                0x000024a4       0x6c .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig.o)
+                0x000024a4                ADC_DelSig_GetResult32
  .text.ADC_DelSig_Read32
-                0x000024b0       0x28 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig.o)
-                0x000024b0                ADC_DelSig_Read32
+                0x00002510       0x28 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig.o)
+                0x00002510                ADC_DelSig_Read32
  .text.ADC_DelSig_ISR1
-                0x000024d8        0x4 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig_INT.o)
-                0x000024d8                ADC_DelSig_ISR1
+                0x00002538        0x4 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig_INT.o)
+                0x00002538                ADC_DelSig_ISR1
  .text.ADC_DelSig_AMux_Start
-                0x000024dc       0x20 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig_AMux.o)
-                0x000024dc                ADC_DelSig_AMux_Start
+                0x0000253c       0x20 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig_AMux.o)
+                0x0000253c                ADC_DelSig_AMux_Start
  .text.ADC_DelSig_AMux_Select
-                0x000024fc       0x18 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig_AMux.o)
-                0x000024fc                ADC_DelSig_AMux_Select
+                0x0000255c       0x18 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig_AMux.o)
+                0x0000255c                ADC_DelSig_AMux_Select
  .text.ADC_DelSig_Ext_CP_Clk_GetDividerRegister
-                0x00002514        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig_Ext_CP_Clk.o)
-                0x00002514                ADC_DelSig_Ext_CP_Clk_GetDividerRegister
+                0x00002574        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig_Ext_CP_Clk.o)
+                0x00002574                ADC_DelSig_Ext_CP_Clk_GetDividerRegister
  .text.ADC_DelSig_Ext_CP_Clk_SetModeRegister
-                0x00002520       0x14 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig_Ext_CP_Clk.o)
-                0x00002520                ADC_DelSig_Ext_CP_Clk_SetModeRegister
+                0x00002580       0x14 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig_Ext_CP_Clk.o)
+                0x00002580                ADC_DelSig_Ext_CP_Clk_SetModeRegister
  .text.ADC_DelSig_Ext_CP_Clk_GetSourceRegister
-                0x00002534       0x10 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig_Ext_CP_Clk.o)
-                0x00002534                ADC_DelSig_Ext_CP_Clk_GetSourceRegister
+                0x00002594       0x10 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig_Ext_CP_Clk.o)
+                0x00002594                ADC_DelSig_Ext_CP_Clk_GetSourceRegister
  .text.ADC_DelSig_Ext_CP_Clk_SetDividerRegister
-                0x00002544       0xd8 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig_Ext_CP_Clk.o)
-                0x00002544                ADC_DelSig_Ext_CP_Clk_SetDividerRegister
+                0x000025a4       0xd8 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig_Ext_CP_Clk.o)
+                0x000025a4                ADC_DelSig_Ext_CP_Clk_SetDividerRegister
  .text.ADC_DelSig_theACLK_GetDividerRegister
-                0x0000261c        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig_theACLK.o)
-                0x0000261c                ADC_DelSig_theACLK_GetDividerRegister
+                0x0000267c        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig_theACLK.o)
+                0x0000267c                ADC_DelSig_theACLK_GetDividerRegister
  .text.ADC_DelSig_theACLK_SetModeRegister
-                0x00002628       0x14 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig_theACLK.o)
-                0x00002628                ADC_DelSig_theACLK_SetModeRegister
+                0x00002688       0x14 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig_theACLK.o)
+                0x00002688                ADC_DelSig_theACLK_SetModeRegister
  .text.ADC_DelSig_theACLK_GetSourceRegister
-                0x0000263c       0x10 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig_theACLK.o)
-                0x0000263c                ADC_DelSig_theACLK_GetSourceRegister
+                0x0000269c       0x10 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig_theACLK.o)
+                0x0000269c                ADC_DelSig_theACLK_GetSourceRegister
  .text.ADC_DelSig_theACLK_SetDividerRegister
-                0x0000264c       0xd8 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig_theACLK.o)
-                0x0000264c                ADC_DelSig_theACLK_SetDividerRegister
+                0x000026ac       0xd8 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig_theACLK.o)
+                0x000026ac                ADC_DelSig_theACLK_SetDividerRegister
  .text.Pin_RED_UARTVerboseFlag_Write
-                0x00002724       0x18 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(Pin_RED_UARTVerboseFlag.o)
-                0x00002724                Pin_RED_UARTVerboseFlag_Write
+                0x00002784       0x18 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(Pin_RED_UARTVerboseFlag.o)
+                0x00002784                Pin_RED_UARTVerboseFlag_Write
  .text.Pin_EnableDisable_Read
-                0x0000273c       0x10 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(Pin_EnableDisable.o)
-                0x0000273c                Pin_EnableDisable_Read
+                0x0000279c       0x10 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(Pin_EnableDisable.o)
+                0x0000279c                Pin_EnableDisable_Read
  .text.Pin_EnableDisable_ClearInterrupt
-                0x0000274c       0x10 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(Pin_EnableDisable.o)
-                0x0000274c                Pin_EnableDisable_ClearInterrupt
+                0x000027ac       0x10 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(Pin_EnableDisable.o)
+                0x000027ac                Pin_EnableDisable_ClearInterrupt
  .text.isr_EnableDisable_SetVector
-                0x0000275c        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_EnableDisable.o)
-                0x0000275c                isr_EnableDisable_SetVector
+                0x000027bc        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_EnableDisable.o)
+                0x000027bc                isr_EnableDisable_SetVector
  .text.isr_EnableDisable_SetPriority
-                0x00002768       0x10 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_EnableDisable.o)
-                0x00002768                isr_EnableDisable_SetPriority
+                0x000027c8       0x10 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_EnableDisable.o)
+                0x000027c8                isr_EnableDisable_SetPriority
  .text.isr_EnableDisable_Enable
-                0x00002778        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_EnableDisable.o)
-                0x00002778                isr_EnableDisable_Enable
+                0x000027d8        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_EnableDisable.o)
+                0x000027d8                isr_EnableDisable_Enable
  .text.isr_EnableDisable_Disable
-                0x00002784        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_EnableDisable.o)
-                0x00002784                isr_EnableDisable_Disable
+                0x000027e4        0xc .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_EnableDisable.o)
+                0x000027e4                isr_EnableDisable_Disable
  .text.isr_EnableDisable_StartEx
-                0x00002790       0x1c .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_EnableDisable.o)
-                0x00002790                isr_EnableDisable_StartEx
- *fill*         0x000027ac        0x4 
- .text          0x000027b0       0x20 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(CyBootAsmGnu.o)
-                0x000027b0                CyDelayCycles
-                0x000027c0                CyEnterCriticalSection
-                0x000027c8                CyExitCriticalSection
- .text.__errno  0x000027d0        0xc c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-errno.o)
-                0x000027d0                __errno
+                0x000027f0       0x1c .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_EnableDisable.o)
+                0x000027f0                isr_EnableDisable_StartEx
+ *fill*         0x0000280c        0x4 
+ .text          0x00002810       0x20 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(CyBootAsmGnu.o)
+                0x00002810                CyDelayCycles
+                0x00002820                CyEnterCriticalSection
+                0x00002828                CyExitCriticalSection
+ .text.__errno  0x00002830        0xc c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-errno.o)
+                0x00002830                __errno
  .text.__libc_init_array
-                0x000027dc       0x4c c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-init.o)
-                0x000027dc                __libc_init_array
- .text.memcpy   0x00002828       0x16 c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-memcpy-stub.o)
-                0x00002828                memcpy
- .text.memset   0x0000283e       0x10 c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-memset.o)
-                0x0000283e                memset
- *fill*         0x0000284e        0x2 
- .text.sprintf  0x00002850       0x48 c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-sprintf.o)
-                0x00002850                siprintf
-                0x00002850                sprintf
+                0x0000283c       0x4c c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-init.o)
+                0x0000283c                __libc_init_array
+ .text.memcpy   0x00002888       0x16 c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-memcpy-stub.o)
+                0x00002888                memcpy
+ .text.memset   0x0000289e       0x10 c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-memset.o)
+                0x0000289e                memset
+ *fill*         0x000028ae        0x2 
+ .text.sprintf  0x000028b0       0x48 c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-sprintf.o)
+                0x000028b0                siprintf
+                0x000028b0                sprintf
  .text.__ssputs_r
-                0x00002898       0xb2 c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-nano-svfprintf.o)
-                0x00002898                __ssputs_r
- *fill*         0x0000294a        0x2 
+                0x000028f8       0xb2 c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-nano-svfprintf.o)
+                0x000028f8                __ssputs_r
+ *fill*         0x000029aa        0x2 
  .text._svfprintf_r
-                0x0000294c      0x1e8 c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-nano-svfprintf.o)
-                0x0000294c                _svfiprintf_r
-                0x0000294c                _svfprintf_r
+                0x000029ac      0x1e8 c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-nano-svfprintf.o)
+                0x000029ac                _svfiprintf_r
+                0x000029ac                _svfprintf_r
  .text._printf_common
-                0x00002b34       0xec c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-nano-vfprintf_i.o)
-                0x00002b34                _printf_common
+                0x00002b94       0xec c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-nano-vfprintf_i.o)
+                0x00002b94                _printf_common
  .text._printf_i
-                0x00002c20      0x24c c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-nano-vfprintf_i.o)
-                0x00002c20                _printf_i
- .text.memchr   0x00002e6c       0x1c c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-memchr-stub.o)
-                0x00002e6c                memchr
- .text.memmove  0x00002e88       0x36 c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-memmove.o)
-                0x00002e88                memmove
- *fill*         0x00002ebe        0x2 
- .text._free_r  0x00002ec0       0x98 c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-nano-freer.o)
-                0x00002ec0                _free_r
+                0x00002c80      0x24c c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-nano-vfprintf_i.o)
+                0x00002c80                _printf_i
+ .text.memchr   0x00002ecc       0x1c c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-memchr-stub.o)
+                0x00002ecc                memchr
+ .text.memmove  0x00002ee8       0x36 c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-memmove.o)
+                0x00002ee8                memmove
+ *fill*         0x00002f1e        0x2 
+ .text._free_r  0x00002f20       0x98 c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-nano-freer.o)
+                0x00002f20                _free_r
  .text._malloc_r
-                0x00002f58       0xbc c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-nano-mallocr.o)
-                0x00002f58                _malloc_r
+                0x00002fb8       0xbc c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-nano-mallocr.o)
+                0x00002fb8                _malloc_r
  .text._realloc_r
-                0x00003014       0x4c c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-nano-reallocr.o)
-                0x00003014                _realloc_r
- .text._sbrk_r  0x00003060       0x20 c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-sbrkr.o)
-                0x00003060                _sbrk_r
+                0x00003074       0x4c c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-nano-reallocr.o)
+                0x00003074                _realloc_r
+ .text._sbrk_r  0x000030c0       0x20 c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-sbrkr.o)
+                0x000030c0                _sbrk_r
  .text.__malloc_lock
-                0x00003080        0x2 c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-mlock.o)
-                0x00003080                __malloc_lock
+                0x000030e0        0x2 c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-mlock.o)
+                0x000030e0                __malloc_lock
  .text.__malloc_unlock
-                0x00003082        0x2 c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-mlock.o)
-                0x00003082                __malloc_unlock
+                0x000030e2        0x2 c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-mlock.o)
+                0x000030e2                __malloc_unlock
  .text._malloc_usable_size_r
-                0x00003084       0x14 c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-nano-msizer.o)
-                0x00003084                _malloc_usable_size_r
+                0x000030e4       0x14 c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-nano-msizer.o)
+                0x000030e4                _malloc_usable_size_r
  *(.plt)
  *(.gnu.warning)
  *(.glue_7t)
- .glue_7t       0x00003098        0x0 linker stubs
+ .glue_7t       0x000030f8        0x0 linker stubs
  *(.glue_7)
- .glue_7        0x00003098        0x0 linker stubs
+ .glue_7        0x000030f8        0x0 linker stubs
  *(.vfp11_veneer)
- .vfp11_veneer  0x00003098        0x0 linker stubs
+ .vfp11_veneer  0x000030f8        0x0 linker stubs
  *(.bootloader)
  *(.ARM.extab* .gnu.linkonce.armextab.*)
  *(.gcc_except_table)
 
-.v4_bx          0x00003098        0x0
- .v4_bx         0x00003098        0x0 linker stubs
+.v4_bx          0x000030f8        0x0
+ .v4_bx         0x000030f8        0x0 linker stubs
 
-.iplt           0x00003098        0x0
- .iplt          0x00003098        0x0 c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtbegin.o
+.iplt           0x000030f8        0x0
+ .iplt          0x000030f8        0x0 c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtbegin.o
 
 .eh_frame_hdr
  *(.eh_frame_hdr)
 
-.eh_frame       0x00003098        0x4
+.eh_frame       0x000030f8        0x4
  *(.eh_frame)
- .eh_frame      0x00003098        0x0 c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtbegin.o
- .eh_frame      0x00003098        0x4 c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtend.o
+ .eh_frame      0x000030f8        0x0 c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtbegin.o
+ .eh_frame      0x000030f8        0x4 c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtend.o
                 [!provide]                PROVIDE (__exidx_start, .)
 
 .ARM.exidx
  *(.ARM.exidx* .gnu.linkonce.armexidx.*)
-                0x0000309c                __exidx_end = .
+                0x000030fc                __exidx_end = .
 
-.rodata         0x0000309c      0x394
+.rodata         0x000030fc      0x3bc
  *(.rodata .rodata.* .gnu.linkonce.r.*)
- .rodata        0x0000309c        0x6 .\CortexM3\ARM_GCC_541\Debug\main.o
- *fill*         0x000030a2        0x2 
+ .rodata        0x000030fc        0x6 .\CortexM3\ARM_GCC_541\Debug\main.o
+ *fill*         0x00003102        0x2 
  .rodata.str1.4
-                0x000030a4      0x2dc .\CortexM3\ARM_GCC_541\Debug\main.o
-                                0x2da (size before relaxing)
- .rodata        0x00003380       0x46 .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
-                0x00003380                ADC_DelSig_AMux__addrTable
-                0x00003388                ADC_DelSig_AMux__maskTable
+                0x00003104      0x300 .\CortexM3\ARM_GCC_541\Debug\main.o
+                                0x2ff (size before relaxing)
+ .rodata        0x00003404       0x46 .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
+                0x00003404                ADC_DelSig_AMux__addrTable
+                0x0000340c                ADC_DelSig_AMux__maskTable
  .rodata.str1.1
-                0x000033c6        0x2 c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-impure.o)
+                0x0000344a        0x2 c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-impure.o)
  .rodata.str1.1
-                0x000033c8       0x11 c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-nano-svfprintf.o)
+                0x0000344c       0x11 c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-nano-svfprintf.o)
  .rodata.str1.1
-                0x000033d9       0x22 c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-nano-vfprintf_i.o)
-                0x000033fc                . = ALIGN (0x4)
- *fill*         0x000033fb        0x1 
+                0x0000345d       0x22 c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-nano-vfprintf_i.o)
+                0x00003480                . = ALIGN (0x4)
+ *fill*         0x0000347f        0x1 
  *(.init)
- .init          0x000033fc        0x4 c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crti.o
-                0x000033fc                _init
- .init          0x00003400        0x8 c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtn.o
-                0x00003408                . = ALIGN (0x4)
-                0x00003408                __preinit_array_start = .
+ .init          0x00003480        0x4 c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crti.o
+                0x00003480                _init
+ .init          0x00003484        0x8 c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtn.o
+                0x0000348c                . = ALIGN (0x4)
+                0x0000348c                __preinit_array_start = .
  *(.preinit_array)
-                0x00003408                __preinit_array_end = .
-                0x00003408                . = ALIGN (0x4)
-                0x00003408                __init_array_start = .
+                0x0000348c                __preinit_array_end = .
+                0x0000348c                . = ALIGN (0x4)
+                0x0000348c                __init_array_start = .
  *(SORT(.init_array.*))
  *(.init_array)
- .init_array    0x00003408        0x4 c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtbegin.o
- .init_array    0x0000340c        0x4 .\CortexM3\ARM_GCC_541\Debug\Cm3Start.o
-                0x00003410                __init_array_end = .
-                0x00003410                . = ALIGN (0x4)
+ .init_array    0x0000348c        0x4 c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtbegin.o
+ .init_array    0x00003490        0x4 .\CortexM3\ARM_GCC_541\Debug\Cm3Start.o
+                0x00003494                __init_array_end = .
+                0x00003494                . = ALIGN (0x4)
  *(.fini)
- .fini          0x00003410        0x4 c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crti.o
-                0x00003410                _fini
- .fini          0x00003414        0x8 c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtn.o
-                0x0000341c                . = ALIGN (0x4)
-                0x0000341c                __fini_array_start = .
+ .fini          0x00003494        0x4 c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crti.o
+                0x00003494                _fini
+ .fini          0x00003498        0x8 c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtn.o
+                0x000034a0                . = ALIGN (0x4)
+                0x000034a0                __fini_array_start = .
  *(.fini_array)
- .fini_array    0x0000341c        0x4 c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtbegin.o
+ .fini_array    0x000034a0        0x4 c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtbegin.o
  *(SORT(.fini_array.*))
-                0x00003420                __fini_array_end = .
-                0x00003420                . = ALIGN (0x4)
+                0x000034a4                __fini_array_end = .
+                0x000034a4                . = ALIGN (0x4)
  *crtbegin.o(.ctors)
  *(EXCLUDE_FILE(*crtend.o) .ctors)
  *(SORT(.ctors.*))
  *crtend.o(.ctors)
-                0x00003420                . = ALIGN (0x4)
+                0x000034a4                . = ALIGN (0x4)
  *crtbegin.o(.dtors)
  *(EXCLUDE_FILE(*crtend.o) .dtors)
  *(SORT(.dtors.*))
  *crtend.o(.dtors)
-                0x00003420                . = ALIGN (0x4)
-                0x00003420                __cy_regions = .
-                0x00003420        0x4 LONG 0x3430 __cy_region_init_ram
-                0x00003424        0x4 LONG 0x1fff80c8 __cy_region_start_data
-                0x00003428        0x4 LONG 0x80 __cy_region_init_size_ram
-                0x0000342c        0x4 LONG 0xf0 __cy_region_zero_size_ram
-                0x00003430                __cy_regions_end = .
-                0x00003430                . = ALIGN (0x8)
-                0x00003430                _etext = .
+                0x000034a4                . = ALIGN (0x4)
+                0x000034a4                __cy_regions = .
+                0x000034a4        0x4 LONG 0x34b8 __cy_region_init_ram
+                0x000034a8        0x4 LONG 0x1fff80c8 __cy_region_start_data
+                0x000034ac        0x4 LONG 0x80 __cy_region_init_size_ram
+                0x000034b0        0x4 LONG 0xf0 __cy_region_zero_size_ram
+                0x000034b4                __cy_regions_end = .
+                0x000034b8                . = ALIGN (0x8)
+ *fill*         0x000034b4        0x4 
+                0x000034b8                _etext = .
 
 .cy_checksum_exclude
-                0x00003430        0x0
+                0x000034b8        0x0
  *(.cy_checksum_exclude)
 
 .ramvectors     0x1fff8000       0xc0
@@ -1817,7 +1819,7 @@ END GROUP
  .noinit        0x1fff80c0        0x1 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(CyLib.o)
                 0x1fff80c0                CyResetStatus
 
-.data           0x1fff80c8       0x80 load address 0x00003430
+.data           0x1fff80c8       0x80 load address 0x000034b8
                 0x1fff80c8                __cy_region_start_data = .
  *(.jcr)
  .jcr           0x1fff80c8        0x0 c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtbegin.o
@@ -1845,10 +1847,10 @@ END GROUP
  *(.ram)
                 0x1fff8148                _edata = .
 
-.igot.plt       0x1fff8148        0x0 load address 0x000034b0
+.igot.plt       0x1fff8148        0x0 load address 0x00003538
  .igot.plt      0x1fff8148        0x0 c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtbegin.o
 
-.bss            0x1fff8148       0xf0 load address 0x000034b0
+.bss            0x1fff8148       0xf0 load address 0x00003538
                 0x1fff8148                PROVIDE (__bss_start__, .)
  *(.shbss)
  *(.bss .bss.* .gnu.linkonce.b.*)
@@ -1929,11 +1931,11 @@ END GROUP
                 0x1fff8238                __end = .
                 0x1fff8238                PROVIDE (end, .)
                 0x1fff8238                PROVIDE (__bss_end__, .)
-                0x00003430                __cy_region_init_ram = LOADADDR (.data)
+                0x000034b8                __cy_region_init_ram = LOADADDR (.data)
                 0x00000080                __cy_region_init_size_ram = (_edata - ADDR (.data))
                 0x000000f0                __cy_region_zero_size_ram = (_end - _edata)
 
-.heap           0x1fff8238       0x80 load address 0x000034b0
+.heap           0x1fff8238       0x80 load address 0x00003538
                 0x1fff8238                . = _end
                 0x1fff82b8                . = (. + 0x80)
  *fill*         0x1fff8238       0x80 
@@ -1984,8 +1986,8 @@ END GROUP
  .cymeta        0x90500000        0xc .\CortexM3\ARM_GCC_541\Debug\cymetadata.o
                 0x90500000                cy_metadata
 
-.rel.dyn        0x000034b0        0x0 load address 0x9050000c
- .rel.iplt      0x000034b0        0x0 c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtbegin.o
+.rel.dyn        0x00003538        0x0 load address 0x9050000c
+ .rel.iplt      0x00003538        0x0 c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtbegin.o
 
 .stab
  *(.stab)
@@ -2099,52 +2101,52 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0xaa7d
+.debug_info     0x00000000     0xac31
  *(.debug_info .gnu.linkonce.wi.*)
- .debug_info    0x00000000      0xa8e .\CortexM3\ARM_GCC_541\Debug\main.o
- .debug_info    0x00000a8e      0x3d4 .\CortexM3\ARM_GCC_541\Debug\SPI_Interface.o
- .debug_info    0x00000e62      0x2f5 .\CortexM3\ARM_GCC_541\Debug\LIS3DH_SPI.o
- .debug_info    0x00001157      0x4f7 .\CortexM3\ARM_GCC_541\Debug\InterruptRoutines.o
- .debug_info    0x0000164e      0x263 .\CortexM3\ARM_GCC_541\Debug\RGBLedDriver.o
- .debug_info    0x000018b1      0x3b4 .\CortexM3\ARM_GCC_541\Debug\25LC256.o
- .debug_info    0x00001c65      0x3d4 .\CortexM3\ARM_GCC_541\Debug\SPI_Interface_EEPROM.o
- .debug_info    0x00002039      0x6b4 .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
- .debug_info    0x000026ed      0x139 .\CortexM3\ARM_GCC_541\Debug\cymetadata.o
- .debug_info    0x00002826      0x3bb .\CortexM3\ARM_GCC_541\Debug\Cm3Start.o
- .debug_info    0x00002be1      0x709 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_1.o)
- .debug_info    0x000032ea      0x18d .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_1_INT.o)
- .debug_info    0x00003477      0x11f .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(CS_1.o)
- .debug_info    0x00003596      0x174 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(Pin_ISR.o)
- .debug_info    0x0000370a      0x2d2 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_ACC.o)
- .debug_info    0x000039dc      0x283 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_1_IntClock.o)
- .debug_info    0x00003c5f     0x1374 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(CyLib.o)
- .debug_info    0x00004fd3      0xa2a .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(cyPm.o)
- .debug_info    0x000059fd      0x60c .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(UART_1.o)
- .debug_info    0x00006009      0x283 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(UART_1_IntClock.o)
- .debug_info    0x0000628c      0x381 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(PWM_RG.o)
- .debug_info    0x0000660d      0x333 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(PWM_B.o)
- .debug_info    0x00006940      0x11f .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(CS_2.o)
- .debug_info    0x00006a5f      0x709 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_2.o)
- .debug_info    0x00007168      0x18d .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_2_INT.o)
- .debug_info    0x000072f5      0x283 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_2_IntClock.o)
- .debug_info    0x00007578      0x2d2 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_DEBOUNCER.o)
- .debug_info    0x0000784a      0x11f .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(Pin_Led_Blue.o)
- .debug_info    0x00007969      0x293 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(TIMER_button.o)
- .debug_info    0x00007bfc      0x2d2 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_TIMER.o)
- .debug_info    0x00007ece      0x293 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(Timer_Blinking.o)
- .debug_info    0x00008161      0x2d2 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_BLINKING.o)
- .debug_info    0x00008433      0x2d2 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_positive.o)
- .debug_info    0x00008705      0xa19 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig.o)
- .debug_info    0x0000911e       0xd3 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig_INT.o)
- .debug_info    0x000091f1      0x165 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig_AMux.o)
- .debug_info    0x00009356      0x283 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig_Ext_CP_Clk.o)
- .debug_info    0x000095d9      0x2c4 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig_theACLK.o)
- .debug_info    0x0000989d      0x11f .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(Pin_RED_UARTVerboseFlag.o)
- .debug_info    0x000099bc      0x174 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(Pin_EnableDisable.o)
- .debug_info    0x00009b30      0x2d2 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_EnableDisable.o)
- .debug_info    0x00009e02       0xde .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(CyBootAsmGnu.o)
- .debug_info    0x00009ee0      0x64d .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(CyFlash.o)
- .debug_info    0x0000a52d      0x550 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(CySpc.o)
+ .debug_info    0x00000000      0xc53 .\CortexM3\ARM_GCC_541\Debug\main.o
+ .debug_info    0x00000c53      0x3d4 .\CortexM3\ARM_GCC_541\Debug\SPI_Interface.o
+ .debug_info    0x00001027      0x2f5 .\CortexM3\ARM_GCC_541\Debug\LIS3DH_SPI.o
+ .debug_info    0x0000131c      0x51c .\CortexM3\ARM_GCC_541\Debug\InterruptRoutines.o
+ .debug_info    0x00001838      0x263 .\CortexM3\ARM_GCC_541\Debug\RGBLedDriver.o
+ .debug_info    0x00001a9b      0x3b4 .\CortexM3\ARM_GCC_541\Debug\25LC256.o
+ .debug_info    0x00001e4f      0x3d4 .\CortexM3\ARM_GCC_541\Debug\SPI_Interface_EEPROM.o
+ .debug_info    0x00002223      0x6b4 .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
+ .debug_info    0x000028d7      0x139 .\CortexM3\ARM_GCC_541\Debug\cymetadata.o
+ .debug_info    0x00002a10      0x3bb .\CortexM3\ARM_GCC_541\Debug\Cm3Start.o
+ .debug_info    0x00002dcb      0x709 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_1.o)
+ .debug_info    0x000034d4      0x18d .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_1_INT.o)
+ .debug_info    0x00003661      0x11f .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(CS_1.o)
+ .debug_info    0x00003780      0x174 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(Pin_ISR.o)
+ .debug_info    0x000038f4      0x2d2 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_ACC.o)
+ .debug_info    0x00003bc6      0x283 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_1_IntClock.o)
+ .debug_info    0x00003e49     0x1374 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(CyLib.o)
+ .debug_info    0x000051bd      0xa2a .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(cyPm.o)
+ .debug_info    0x00005be7      0x60c .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(UART_1.o)
+ .debug_info    0x000061f3      0x283 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(UART_1_IntClock.o)
+ .debug_info    0x00006476      0x381 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(PWM_RG.o)
+ .debug_info    0x000067f7      0x333 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(PWM_B.o)
+ .debug_info    0x00006b2a      0x11f .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(CS_2.o)
+ .debug_info    0x00006c49      0x709 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_2.o)
+ .debug_info    0x00007352      0x18d .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_2_INT.o)
+ .debug_info    0x000074df      0x283 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_2_IntClock.o)
+ .debug_info    0x00007762      0x2d2 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_DEBOUNCER.o)
+ .debug_info    0x00007a34      0x11f .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(Pin_Led_Blue.o)
+ .debug_info    0x00007b53      0x293 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(TIMER_button.o)
+ .debug_info    0x00007de6      0x2d2 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_TIMER.o)
+ .debug_info    0x000080b8      0x293 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(Timer_Blinking.o)
+ .debug_info    0x0000834b      0x2d2 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_BLINKING.o)
+ .debug_info    0x0000861d      0x2d2 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_positive.o)
+ .debug_info    0x000088ef      0xa19 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig.o)
+ .debug_info    0x00009308       0xd3 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig_INT.o)
+ .debug_info    0x000093db      0x165 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig_AMux.o)
+ .debug_info    0x00009540      0x283 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig_Ext_CP_Clk.o)
+ .debug_info    0x000097c3      0x2c4 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig_theACLK.o)
+ .debug_info    0x00009a87      0x11f .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(Pin_RED_UARTVerboseFlag.o)
+ .debug_info    0x00009ba6      0x174 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(Pin_EnableDisable.o)
+ .debug_info    0x00009d1a      0x2d2 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_EnableDisable.o)
+ .debug_info    0x00009fec       0xa8 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(CyBootAsmGnu.o)
+ .debug_info    0x0000a094      0x64d .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(CyFlash.o)
+ .debug_info    0x0000a6e1      0x550 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(CySpc.o)
 
 .debug_abbrev   0x00000000     0x323b
  *(.debug_abbrev)
@@ -2193,52 +2195,52 @@ END GROUP
  .debug_abbrev  0x00002f00      0x1a7 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(CyFlash.o)
  .debug_abbrev  0x000030a7      0x194 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(CySpc.o)
 
-.debug_line     0x00000000     0x4c7c
+.debug_line     0x00000000     0x4c85
  *(.debug_line)
- .debug_line    0x00000000      0x378 .\CortexM3\ARM_GCC_541\Debug\main.o
- .debug_line    0x00000378      0x1f4 .\CortexM3\ARM_GCC_541\Debug\SPI_Interface.o
- .debug_line    0x0000056c      0x1ae .\CortexM3\ARM_GCC_541\Debug\LIS3DH_SPI.o
- .debug_line    0x0000071a      0x2fc .\CortexM3\ARM_GCC_541\Debug\InterruptRoutines.o
- .debug_line    0x00000a16      0x1cc .\CortexM3\ARM_GCC_541\Debug\RGBLedDriver.o
- .debug_line    0x00000be2      0x1ed .\CortexM3\ARM_GCC_541\Debug\25LC256.o
- .debug_line    0x00000dcf      0x1fb .\CortexM3\ARM_GCC_541\Debug\SPI_Interface_EEPROM.o
- .debug_line    0x00000fca      0x22f .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
- .debug_line    0x000011f9      0x141 .\CortexM3\ARM_GCC_541\Debug\cymetadata.o
- .debug_line    0x0000133a      0x234 .\CortexM3\ARM_GCC_541\Debug\Cm3Start.o
- .debug_line    0x0000156e      0x29e .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_1.o)
- .debug_line    0x0000180c       0xaa .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_1_INT.o)
- .debug_line    0x000018b6       0x91 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(CS_1.o)
- .debug_line    0x00001947       0xb8 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(Pin_ISR.o)
- .debug_line    0x000019ff      0x134 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_ACC.o)
- .debug_line    0x00001b33      0x17e .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_1_IntClock.o)
- .debug_line    0x00001cb1      0x816 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(CyLib.o)
- .debug_line    0x000024c7      0x367 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(cyPm.o)
- .debug_line    0x0000282e      0x2c0 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(UART_1.o)
- .debug_line    0x00002aee      0x17e .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(UART_1_IntClock.o)
- .debug_line    0x00002c6c      0x1aa .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(PWM_RG.o)
- .debug_line    0x00002e16      0x185 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(PWM_B.o)
- .debug_line    0x00002f9b       0x91 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(CS_2.o)
- .debug_line    0x0000302c      0x29e .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_2.o)
- .debug_line    0x000032ca       0xaa .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_2_INT.o)
- .debug_line    0x00003374      0x17e .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_2_IntClock.o)
- .debug_line    0x000034f2      0x13a .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_DEBOUNCER.o)
- .debug_line    0x0000362c       0x99 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(Pin_Led_Blue.o)
- .debug_line    0x000036c5      0x15a .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(TIMER_button.o)
- .debug_line    0x0000381f      0x136 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_TIMER.o)
- .debug_line    0x00003955      0x15c .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(Timer_Blinking.o)
- .debug_line    0x00003ab1      0x139 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_BLINKING.o)
- .debug_line    0x00003bea      0x139 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_positive.o)
- .debug_line    0x00003d23      0x373 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig.o)
- .debug_line    0x00004096       0x87 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig_INT.o)
- .debug_line    0x0000411d       0xb3 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig_AMux.o)
- .debug_line    0x000041d0      0x184 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig_Ext_CP_Clk.o)
- .debug_line    0x00004354      0x1a4 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig_theACLK.o)
- .debug_line    0x000044f8       0xa4 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(Pin_RED_UARTVerboseFlag.o)
- .debug_line    0x0000459c       0xc2 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(Pin_EnableDisable.o)
- .debug_line    0x0000465e      0x13e .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_EnableDisable.o)
- .debug_line    0x0000479c       0x66 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(CyBootAsmGnu.o)
- .debug_line    0x00004802      0x21a .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(CyFlash.o)
- .debug_line    0x00004a1c      0x260 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(CySpc.o)
+ .debug_line    0x00000000      0x37e .\CortexM3\ARM_GCC_541\Debug\main.o
+ .debug_line    0x0000037e      0x1f4 .\CortexM3\ARM_GCC_541\Debug\SPI_Interface.o
+ .debug_line    0x00000572      0x1ae .\CortexM3\ARM_GCC_541\Debug\LIS3DH_SPI.o
+ .debug_line    0x00000720      0x2ff .\CortexM3\ARM_GCC_541\Debug\InterruptRoutines.o
+ .debug_line    0x00000a1f      0x1cc .\CortexM3\ARM_GCC_541\Debug\RGBLedDriver.o
+ .debug_line    0x00000beb      0x1ed .\CortexM3\ARM_GCC_541\Debug\25LC256.o
+ .debug_line    0x00000dd8      0x1fb .\CortexM3\ARM_GCC_541\Debug\SPI_Interface_EEPROM.o
+ .debug_line    0x00000fd3      0x22f .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
+ .debug_line    0x00001202      0x141 .\CortexM3\ARM_GCC_541\Debug\cymetadata.o
+ .debug_line    0x00001343      0x234 .\CortexM3\ARM_GCC_541\Debug\Cm3Start.o
+ .debug_line    0x00001577      0x29e .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_1.o)
+ .debug_line    0x00001815       0xaa .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_1_INT.o)
+ .debug_line    0x000018bf       0x91 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(CS_1.o)
+ .debug_line    0x00001950       0xb8 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(Pin_ISR.o)
+ .debug_line    0x00001a08      0x134 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_ACC.o)
+ .debug_line    0x00001b3c      0x17e .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_1_IntClock.o)
+ .debug_line    0x00001cba      0x816 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(CyLib.o)
+ .debug_line    0x000024d0      0x367 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(cyPm.o)
+ .debug_line    0x00002837      0x2c0 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(UART_1.o)
+ .debug_line    0x00002af7      0x17e .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(UART_1_IntClock.o)
+ .debug_line    0x00002c75      0x1aa .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(PWM_RG.o)
+ .debug_line    0x00002e1f      0x185 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(PWM_B.o)
+ .debug_line    0x00002fa4       0x91 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(CS_2.o)
+ .debug_line    0x00003035      0x29e .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_2.o)
+ .debug_line    0x000032d3       0xaa .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_2_INT.o)
+ .debug_line    0x0000337d      0x17e .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_2_IntClock.o)
+ .debug_line    0x000034fb      0x13a .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_DEBOUNCER.o)
+ .debug_line    0x00003635       0x99 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(Pin_Led_Blue.o)
+ .debug_line    0x000036ce      0x15a .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(TIMER_button.o)
+ .debug_line    0x00003828      0x136 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_TIMER.o)
+ .debug_line    0x0000395e      0x15c .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(Timer_Blinking.o)
+ .debug_line    0x00003aba      0x139 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_BLINKING.o)
+ .debug_line    0x00003bf3      0x139 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_positive.o)
+ .debug_line    0x00003d2c      0x373 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig.o)
+ .debug_line    0x0000409f       0x87 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig_INT.o)
+ .debug_line    0x00004126       0xb3 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig_AMux.o)
+ .debug_line    0x000041d9      0x184 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig_Ext_CP_Clk.o)
+ .debug_line    0x0000435d      0x1a4 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig_theACLK.o)
+ .debug_line    0x00004501       0xa4 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(Pin_RED_UARTVerboseFlag.o)
+ .debug_line    0x000045a5       0xc2 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(Pin_EnableDisable.o)
+ .debug_line    0x00004667      0x13e .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_EnableDisable.o)
+ .debug_line    0x000047a5       0x66 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(CyBootAsmGnu.o)
+ .debug_line    0x0000480b      0x21a .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(CyFlash.o)
+ .debug_line    0x00004a25      0x260 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(CySpc.o)
 
 .debug_frame    0x00000000     0x3234
  *(.debug_frame)
@@ -2302,135 +2304,135 @@ END GROUP
  .debug_frame   0x000031b8       0x20 c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-nano-msizer.o)
  .debug_frame   0x000031d8       0x5c c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-reent.o)
 
-.debug_str      0x00000000     0x3fb3
+.debug_str      0x00000000     0x3f7d
  *(.debug_str)
- .debug_str     0x00000000      0x453 .\CortexM3\ARM_GCC_541\Debug\main.o
-                                0x4b6 (size before relaxing)
- .debug_str     0x00000453      0x154 .\CortexM3\ARM_GCC_541\Debug\SPI_Interface.o
-                                0x341 (size before relaxing)
- .debug_str     0x000005a7       0x3d .\CortexM3\ARM_GCC_541\Debug\LIS3DH_SPI.o
-                                0x286 (size before relaxing)
- .debug_str     0x000005e4      0x204 .\CortexM3\ARM_GCC_541\Debug\InterruptRoutines.o
-                                0x4d6 (size before relaxing)
- .debug_str     0x000007e8       0xc5 .\CortexM3\ARM_GCC_541\Debug\RGBLedDriver.o
-                                0x2de (size before relaxing)
- .debug_str     0x000008ad       0xb3 .\CortexM3\ARM_GCC_541\Debug\25LC256.o
-                                0x323 (size before relaxing)
- .debug_str     0x00000960       0xc7 .\CortexM3\ARM_GCC_541\Debug\SPI_Interface_EEPROM.o
-                                0x364 (size before relaxing)
- .debug_str     0x00000a27      0x211 .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
-                                0x3fa (size before relaxing)
- .debug_str     0x00000c38       0x75 .\CortexM3\ARM_GCC_541\Debug\cymetadata.o
-                                0x232 (size before relaxing)
- .debug_str     0x00000cad      0x144 .\CortexM3\ARM_GCC_541\Debug\Cm3Start.o
-                                0x358 (size before relaxing)
- .debug_str     0x00000df1      0x2f5 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_1.o)
-                                0x578 (size before relaxing)
- .debug_str     0x000010e6       0x40 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_1_INT.o)
-                                0x2e3 (size before relaxing)
- .debug_str     0x00001126       0x5b .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(CS_1.o)
-                                0x22b (size before relaxing)
- .debug_str     0x00001181       0x87 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(Pin_ISR.o)
-                                0x27a (size before relaxing)
- .debug_str     0x00001208      0x10a .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_ACC.o)
-                                0x310 (size before relaxing)
- .debug_str     0x00001312      0x19d .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_1_IntClock.o)
-                                0x39c (size before relaxing)
- .debug_str     0x000014af      0x7b9 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(CyLib.o)
-                                0xa95 (size before relaxing)
- .debug_str     0x00001c68      0x365 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(cyPm.o)
-                                0x781 (size before relaxing)
- .debug_str     0x00001fcd      0x279 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(UART_1.o)
-                                0x501 (size before relaxing)
- .debug_str     0x00002246      0x14c .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(UART_1_IntClock.o)
-                                0x39c (size before relaxing)
- .debug_str     0x00002392      0x191 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(PWM_RG.o)
-                                0x3dd (size before relaxing)
- .debug_str     0x00002523      0x13b .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(PWM_B.o)
-                                0x39f (size before relaxing)
- .debug_str     0x0000265e       0x4b .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(CS_2.o)
-                                0x22b (size before relaxing)
- .debug_str     0x000026a9      0x24f .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_2.o)
-                                0x578 (size before relaxing)
- .debug_str     0x000028f8       0x40 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_2_INT.o)
-                                0x2e3 (size before relaxing)
- .debug_str     0x00002938      0x14c .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_2_IntClock.o)
-                                0x39c (size before relaxing)
- .debug_str     0x00002a84      0x140 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_DEBOUNCER.o)
-                                0x364 (size before relaxing)
- .debug_str     0x00002bc4       0x59 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(Pin_Led_Blue.o)
-                                0x253 (size before relaxing)
- .debug_str     0x00002c1d      0x168 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(TIMER_button.o)
-                                0x3b3 (size before relaxing)
- .debug_str     0x00002d85      0x10c .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_TIMER.o)
-                                0x32c (size before relaxing)
- .debug_str     0x00002e91      0x176 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(Timer_Blinking.o)
-                                0x3d3 (size before relaxing)
- .debug_str     0x00003007      0x133 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_BLINKING.o)
-                                0x356 (size before relaxing)
- .debug_str     0x0000313a      0x133 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_positive.o)
-                                0x356 (size before relaxing)
- .debug_str     0x0000326d      0x442 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig.o)
-                                0x736 (size before relaxing)
- .debug_str     0x000036af       0x68 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig_INT.o)
-                                0x231 (size before relaxing)
- .debug_str     0x00003717       0x7b .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig_AMux.o)
-                                0x27e (size before relaxing)
- .debug_str     0x00003792      0x170 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig_Ext_CP_Clk.o)
-                                0x3e4 (size before relaxing)
- .debug_str     0x00003902      0x1a3 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig_theACLK.o)
-                                0x411 (size before relaxing)
- .debug_str     0x00003aa5       0x97 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(Pin_RED_UARTVerboseFlag.o)
+ .debug_str     0x00000000      0x43e .\CortexM3\ARM_GCC_541\Debug\main.o
+                                0x4a1 (size before relaxing)
+ .debug_str     0x0000043e      0x154 .\CortexM3\ARM_GCC_541\Debug\SPI_Interface.o
+                                0x30b (size before relaxing)
+ .debug_str     0x00000592       0x3d .\CortexM3\ARM_GCC_541\Debug\LIS3DH_SPI.o
+                                0x250 (size before relaxing)
+ .debug_str     0x000005cf      0x1f3 .\CortexM3\ARM_GCC_541\Debug\InterruptRoutines.o
+                                0x4a0 (size before relaxing)
+ .debug_str     0x000007c2       0xc5 .\CortexM3\ARM_GCC_541\Debug\RGBLedDriver.o
+                                0x2a8 (size before relaxing)
+ .debug_str     0x00000887       0xa3 .\CortexM3\ARM_GCC_541\Debug\25LC256.o
+                                0x2ed (size before relaxing)
+ .debug_str     0x0000092a       0xc7 .\CortexM3\ARM_GCC_541\Debug\SPI_Interface_EEPROM.o
+                                0x32e (size before relaxing)
+ .debug_str     0x000009f1      0x211 .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
+                                0x3c4 (size before relaxing)
+ .debug_str     0x00000c02       0x75 .\CortexM3\ARM_GCC_541\Debug\cymetadata.o
+                                0x1fc (size before relaxing)
+ .debug_str     0x00000c77      0x144 .\CortexM3\ARM_GCC_541\Debug\Cm3Start.o
+                                0x322 (size before relaxing)
+ .debug_str     0x00000dbb      0x2f5 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_1.o)
+                                0x542 (size before relaxing)
+ .debug_str     0x000010b0       0x40 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_1_INT.o)
+                                0x2ad (size before relaxing)
+ .debug_str     0x000010f0       0x5b .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(CS_1.o)
+                                0x1f5 (size before relaxing)
+ .debug_str     0x0000114b       0x87 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(Pin_ISR.o)
+                                0x244 (size before relaxing)
+ .debug_str     0x000011d2      0x10a .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_ACC.o)
+                                0x2da (size before relaxing)
+ .debug_str     0x000012dc      0x19d .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_1_IntClock.o)
+                                0x366 (size before relaxing)
+ .debug_str     0x00001479      0x7b9 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(CyLib.o)
+                                0xa5f (size before relaxing)
+ .debug_str     0x00001c32      0x365 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(cyPm.o)
+                                0x74b (size before relaxing)
+ .debug_str     0x00001f97      0x279 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(UART_1.o)
+                                0x4cb (size before relaxing)
+ .debug_str     0x00002210      0x14c .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(UART_1_IntClock.o)
+                                0x366 (size before relaxing)
+ .debug_str     0x0000235c      0x191 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(PWM_RG.o)
+                                0x3a7 (size before relaxing)
+ .debug_str     0x000024ed      0x13b .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(PWM_B.o)
+                                0x369 (size before relaxing)
+ .debug_str     0x00002628       0x4b .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(CS_2.o)
+                                0x1f5 (size before relaxing)
+ .debug_str     0x00002673      0x24f .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_2.o)
+                                0x542 (size before relaxing)
+ .debug_str     0x000028c2       0x40 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_2_INT.o)
+                                0x2ad (size before relaxing)
+ .debug_str     0x00002902      0x14c .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_2_IntClock.o)
+                                0x366 (size before relaxing)
+ .debug_str     0x00002a4e      0x140 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_DEBOUNCER.o)
+                                0x32e (size before relaxing)
+ .debug_str     0x00002b8e       0x59 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(Pin_Led_Blue.o)
+                                0x21d (size before relaxing)
+ .debug_str     0x00002be7      0x168 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(TIMER_button.o)
+                                0x37d (size before relaxing)
+ .debug_str     0x00002d4f      0x10c .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_TIMER.o)
+                                0x2f6 (size before relaxing)
+ .debug_str     0x00002e5b      0x176 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(Timer_Blinking.o)
+                                0x39d (size before relaxing)
+ .debug_str     0x00002fd1      0x133 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_BLINKING.o)
+                                0x320 (size before relaxing)
+ .debug_str     0x00003104      0x133 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_positive.o)
+                                0x320 (size before relaxing)
+ .debug_str     0x00003237      0x442 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig.o)
+                                0x700 (size before relaxing)
+ .debug_str     0x00003679       0x68 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig_INT.o)
+                                0x1fb (size before relaxing)
+ .debug_str     0x000036e1       0x7b .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig_AMux.o)
+                                0x248 (size before relaxing)
+ .debug_str     0x0000375c      0x170 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig_Ext_CP_Clk.o)
+                                0x3ae (size before relaxing)
+ .debug_str     0x000038cc      0x1a3 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig_theACLK.o)
+                                0x3db (size before relaxing)
+ .debug_str     0x00003a6f       0x97 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(Pin_RED_UARTVerboseFlag.o)
+                                0x254 (size before relaxing)
+ .debug_str     0x00003b06       0xa3 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(Pin_EnableDisable.o)
                                 0x28a (size before relaxing)
- .debug_str     0x00003b3c       0xa3 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(Pin_EnableDisable.o)
-                                0x2c0 (size before relaxing)
- .debug_str     0x00003bdf      0x174 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_EnableDisable.o)
-                                0x39c (size before relaxing)
- .debug_str     0x00003d53      0x1b4 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(CyFlash.o)
-                                0x40e (size before relaxing)
- .debug_str     0x00003f07       0xac .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(CySpc.o)
-                                0x386 (size before relaxing)
+ .debug_str     0x00003ba9      0x174 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_EnableDisable.o)
+                                0x366 (size before relaxing)
+ .debug_str     0x00003d1d      0x1b4 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(CyFlash.o)
+                                0x3d8 (size before relaxing)
+ .debug_str     0x00003ed1       0xac .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(CySpc.o)
+                                0x350 (size before relaxing)
 
-.debug_loc      0x00000000     0x3b63
+.debug_loc      0x00000000     0x3d0e
  *(.debug_loc)
- .debug_loc     0x00000000      0x1d6 .\CortexM3\ARM_GCC_541\Debug\main.o
- .debug_loc     0x000001d6      0x16c .\CortexM3\ARM_GCC_541\Debug\SPI_Interface.o
- .debug_loc     0x00000342      0x166 .\CortexM3\ARM_GCC_541\Debug\LIS3DH_SPI.o
- .debug_loc     0x000004a8       0xc6 .\CortexM3\ARM_GCC_541\Debug\RGBLedDriver.o
- .debug_loc     0x0000056e      0x15a .\CortexM3\ARM_GCC_541\Debug\25LC256.o
- .debug_loc     0x000006c8      0x16c .\CortexM3\ARM_GCC_541\Debug\SPI_Interface_EEPROM.o
- .debug_loc     0x00000834      0x29c .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
- .debug_loc     0x00000ad0      0x144 .\CortexM3\ARM_GCC_541\Debug\Cm3Start.o
- .debug_loc     0x00000c14      0x20d .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_1.o)
- .debug_loc     0x00000e21       0x74 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_1_INT.o)
- .debug_loc     0x00000e95       0x42 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(CS_1.o)
- .debug_loc     0x00000ed7       0x84 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(Pin_ISR.o)
- .debug_loc     0x00000f5b       0x56 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_ACC.o)
- .debug_loc     0x00000fb1      0x128 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_1_IntClock.o)
- .debug_loc     0x000010d9      0xa11 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(CyLib.o)
- .debug_loc     0x00001aea      0x1e4 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(cyPm.o)
- .debug_loc     0x00001cce      0x258 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(UART_1.o)
- .debug_loc     0x00001f26      0x128 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(UART_1_IntClock.o)
- .debug_loc     0x0000204e       0x26 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(PWM_RG.o)
- .debug_loc     0x00002074       0x26 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(PWM_B.o)
- .debug_loc     0x0000209a       0x42 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(CS_2.o)
- .debug_loc     0x000020dc      0x20d .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_2.o)
- .debug_loc     0x000022e9       0x74 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_2_INT.o)
- .debug_loc     0x0000235d      0x128 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_2_IntClock.o)
- .debug_loc     0x00002485       0x56 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_DEBOUNCER.o)
- .debug_loc     0x000024db       0x42 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(Pin_Led_Blue.o)
- .debug_loc     0x0000251d       0x56 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_TIMER.o)
- .debug_loc     0x00002573       0x56 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_BLINKING.o)
- .debug_loc     0x000025c9       0x56 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_positive.o)
- .debug_loc     0x0000261f      0x68c .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig.o)
- .debug_loc     0x00002cab       0x6c .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig_AMux.o)
- .debug_loc     0x00002d17      0x12c .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig_Ext_CP_Clk.o)
- .debug_loc     0x00002e43      0x14d .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig_theACLK.o)
- .debug_loc     0x00002f90       0x42 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(Pin_RED_UARTVerboseFlag.o)
- .debug_loc     0x00002fd2       0x84 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(Pin_EnableDisable.o)
- .debug_loc     0x00003056       0x56 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_EnableDisable.o)
- .debug_loc     0x000030ac      0x3b2 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(CyFlash.o)
- .debug_loc     0x0000345e      0x705 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(CySpc.o)
+ .debug_loc     0x00000000      0x381 .\CortexM3\ARM_GCC_541\Debug\main.o
+ .debug_loc     0x00000381      0x16c .\CortexM3\ARM_GCC_541\Debug\SPI_Interface.o
+ .debug_loc     0x000004ed      0x166 .\CortexM3\ARM_GCC_541\Debug\LIS3DH_SPI.o
+ .debug_loc     0x00000653       0xc6 .\CortexM3\ARM_GCC_541\Debug\RGBLedDriver.o
+ .debug_loc     0x00000719      0x15a .\CortexM3\ARM_GCC_541\Debug\25LC256.o
+ .debug_loc     0x00000873      0x16c .\CortexM3\ARM_GCC_541\Debug\SPI_Interface_EEPROM.o
+ .debug_loc     0x000009df      0x29c .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
+ .debug_loc     0x00000c7b      0x144 .\CortexM3\ARM_GCC_541\Debug\Cm3Start.o
+ .debug_loc     0x00000dbf      0x20d .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_1.o)
+ .debug_loc     0x00000fcc       0x74 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_1_INT.o)
+ .debug_loc     0x00001040       0x42 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(CS_1.o)
+ .debug_loc     0x00001082       0x84 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(Pin_ISR.o)
+ .debug_loc     0x00001106       0x56 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_ACC.o)
+ .debug_loc     0x0000115c      0x128 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_1_IntClock.o)
+ .debug_loc     0x00001284      0xa11 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(CyLib.o)
+ .debug_loc     0x00001c95      0x1e4 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(cyPm.o)
+ .debug_loc     0x00001e79      0x258 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(UART_1.o)
+ .debug_loc     0x000020d1      0x128 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(UART_1_IntClock.o)
+ .debug_loc     0x000021f9       0x26 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(PWM_RG.o)
+ .debug_loc     0x0000221f       0x26 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(PWM_B.o)
+ .debug_loc     0x00002245       0x42 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(CS_2.o)
+ .debug_loc     0x00002287      0x20d .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_2.o)
+ .debug_loc     0x00002494       0x74 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_2_INT.o)
+ .debug_loc     0x00002508      0x128 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(SPIM_2_IntClock.o)
+ .debug_loc     0x00002630       0x56 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_DEBOUNCER.o)
+ .debug_loc     0x00002686       0x42 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(Pin_Led_Blue.o)
+ .debug_loc     0x000026c8       0x56 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_TIMER.o)
+ .debug_loc     0x0000271e       0x56 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_BLINKING.o)
+ .debug_loc     0x00002774       0x56 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_positive.o)
+ .debug_loc     0x000027ca      0x68c .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig.o)
+ .debug_loc     0x00002e56       0x6c .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig_AMux.o)
+ .debug_loc     0x00002ec2      0x12c .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig_Ext_CP_Clk.o)
+ .debug_loc     0x00002fee      0x14d .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(ADC_DelSig_theACLK.o)
+ .debug_loc     0x0000313b       0x42 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(Pin_RED_UARTVerboseFlag.o)
+ .debug_loc     0x0000317d       0x84 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(Pin_EnableDisable.o)
+ .debug_loc     0x00003201       0x56 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(isr_EnableDisable.o)
+ .debug_loc     0x00003257      0x3b2 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(CyFlash.o)
+ .debug_loc     0x00003609      0x705 .\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.a(CySpc.o)
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -2691,4 +2693,4 @@ END GROUP
 
 /DISCARD/
  *(.note.GNU-stack)
-OUTPUT(C:\Users\noemi\Desktop\university\university\poli\lab sensors\final assignment\Final-Assignment-PSoC\Final_Assignment\Final_assignment_01.cydsn\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.elf elf32-littlearm)
+OUTPUT(C:\Users\Lorenzo\Desktop\Final-Assignment-PSoC\Final_Assignment\Final_assignment_01.cydsn\CortexM3\ARM_GCC_541\Debug\Final_assignment_01.elf elf32-littlearm)

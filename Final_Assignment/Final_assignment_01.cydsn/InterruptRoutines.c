@@ -134,6 +134,7 @@ CY_ISR(Custom_Pin_Button_Positive){
             */
             data_register = (system_status<<7) | (UARTVerboseFlag);
             EEPROM_writeByte(0x0000, data_register);
+            EEPROM_waitForWriteComplete();
             if (system_status==OFF){
                 Pin_Led_Blue_Write(OFF);
             }
@@ -276,7 +277,9 @@ CY_ISR(Custom_LED_Blinking){
                 UARTVerboseFlag = ON;
                 Pin_RED_UARTVerboseFlag_Write(ON);
             }
+            
         }
+        
     }    
     
 }
@@ -285,4 +288,8 @@ CY_ISR(Custom_Pin_EnableDisable){
     Pin_EnableDisable_ClearInterrupt();
     
     FlagEnableDisable=Pin_EnableDisable_Read();
+    
+    EEPROM_writeByte(0x0001, FlagEnableDisable);
+    EEPROM_waitForWriteComplete();
+
 }

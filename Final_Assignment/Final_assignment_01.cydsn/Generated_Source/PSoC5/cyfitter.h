@@ -1252,11 +1252,11 @@
 #define Clock_debouncer__PM_STBY_MSK 0x80u
 
 /* Pin_EnableDisable */
-#define Pin_EnableDisable__0__INTTYPE CYREG_PICU3_INTTYPE2
-#define Pin_EnableDisable__0__MASK 0x04u
-#define Pin_EnableDisable__0__PC CYREG_PRT3_PC2
+#define Pin_EnableDisable__0__INTTYPE CYREG_PICU3_INTTYPE1
+#define Pin_EnableDisable__0__MASK 0x02u
+#define Pin_EnableDisable__0__PC CYREG_PRT3_PC1
 #define Pin_EnableDisable__0__PORT 3u
-#define Pin_EnableDisable__0__SHIFT 2u
+#define Pin_EnableDisable__0__SHIFT 1u
 #define Pin_EnableDisable__AG CYREG_PRT3_AG
 #define Pin_EnableDisable__AMUX CYREG_PRT3_AMUX
 #define Pin_EnableDisable__BIE CYREG_PRT3_BIE
@@ -1272,7 +1272,7 @@
 #define Pin_EnableDisable__INTTYPE_BASE CYDEV_PICU_INTTYPE_PICU3_BASE
 #define Pin_EnableDisable__LCD_COM_SEG CYREG_PRT3_LCD_COM_SEG
 #define Pin_EnableDisable__LCD_EN CYREG_PRT3_LCD_EN
-#define Pin_EnableDisable__MASK 0x04u
+#define Pin_EnableDisable__MASK 0x02u
 #define Pin_EnableDisable__PORT 3u
 #define Pin_EnableDisable__PRT CYREG_PRT3_PRT
 #define Pin_EnableDisable__PRTDSI__CAPS_SEL CYREG_PRT3_CAPS_SEL
@@ -1283,7 +1283,7 @@
 #define Pin_EnableDisable__PRTDSI__OUT_SEL1 CYREG_PRT3_OUT_SEL1
 #define Pin_EnableDisable__PRTDSI__SYNC_OUT CYREG_PRT3_SYNC_OUT
 #define Pin_EnableDisable__PS CYREG_PRT3_PS
-#define Pin_EnableDisable__SHIFT 2u
+#define Pin_EnableDisable__SHIFT 1u
 #define Pin_EnableDisable__SLW CYREG_PRT3_SLW
 #define Pin_EnableDisable__SNAP CYREG_PICU3_SNAP
 
