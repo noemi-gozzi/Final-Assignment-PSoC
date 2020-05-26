@@ -23,6 +23,7 @@
     
     volatile uint8 PacketReadyFlag; //Flag to communicate when new data are available and read, to be sent then with UART
     uint8 UARTVerboseFlag;
+    //UARTVerboseFlag = 0;
     uint8 data_water;
     
     

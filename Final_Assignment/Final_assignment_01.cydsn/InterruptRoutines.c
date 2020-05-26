@@ -26,13 +26,17 @@ char bufferUART[100];
 #define FULL_SCALE_RANGE_LOW 0
 #define FULL_SCALE_RANGE_HIGH 65535
 #define FULL_SCALE_RANGE_HALF 32767 
+#define DATA_REGISTER_ADDRESS 0x0000
 
 uint8_t system_status=OFF;
 uint8_t configuration_status=OFF;
 uint8 TimerFlag=0; 
 int32 value_POT;
+uint8 data_register;
 
 uint8_t i=0;
+
+uint8 UARTVerboseFlag = 0;
 
 CY_ISR(Custom_Pin_ISR){
     
@@ -113,7 +117,7 @@ CY_ISR(Custom_Pin_Button_Positive){
             
             RGBLed_WriteColor(OFF, OFF, OFF);
             SPIM_1_Stop();
-            SPIM_2_Stop();
+            //SPIM_2_Stop();
             UART_1_Stop();
             Timer_Blinking_Start();
             
@@ -128,7 +132,8 @@ CY_ISR(Custom_Pin_Button_Positive){
             i.e. I can enter configuration mode both from system ON and system OFF. then, when i decide to 
             close CONFIGURATION mode the system is going back to ON or OFF. 
             */
-            
+            data_register = (system_status<<7) | (UARTVerboseFlag);
+            EEPROM_writeByte(0x0000, data_register);
             if (system_status==OFF){
                 Pin_Led_Blue_Write(OFF);
             }
@@ -137,7 +142,7 @@ CY_ISR(Custom_Pin_Button_Positive){
                 
                 UART_1_Start();
                 SPIM_1_Start();
-                SPIM_2_Start();
+                //SPIM_2_Start();
                 RGBLed_Start();
                 Timer_Blinking_Stop();
                 
@@ -185,19 +190,29 @@ CY_ISR(Custom_Pin_Button_Positive){
                  
                 UART_1_Start();
                 SPIM_1_Start();
-                SPIM_2_Start();
+                //SPIM_2_Start();
                 RGBLed_Start();
                 Timer_Blinking_Stop();
-                EEPROM_writeByte(0x0000, system_status);
+
+                /* DATA REGISTER (0x0000 EEPROM): system_status - - - - - - UARTVerboseFlag
+                i.e. if the system is ON (acquisition) and the flag is high 
+                (transmission via UART to the Bridge Control Panel) data 
+                register is: 10000001 (0x81)*/
+                data_register = (system_status<<7) | (UARTVerboseFlag);
+                EEPROM_writeByte(0x0000, data_register);
+                EEPROM_waitForWriteComplete();
+
             }
             else if (system_status==ON){
                 /******************* SYSTEM STOP ACQUISITION ******************/
                 system_status=OFF;
                 Pin_Led_Blue_Write(OFF);
-                EEPROM_writeByte(0x0000, system_status);
+                data_register = (system_status<<7) | (UARTVerboseFlag);
+                EEPROM_writeByte(DATA_REGISTER_ADDRESS, data_register);
+                EEPROM_waitForWriteComplete();
                 RGBLed_WriteColor(OFF, OFF, OFF);
                 SPIM_1_Stop();
-                SPIM_2_Stop();
+                //SPIM_2_Stop();
                 UART_1_Stop();
                 //RGBLed_Stop();
             }
