@@ -2,7 +2,7 @@
 --	Conversion of Final_assignment_01.v to vh2:
 --
 --	Cypress Semiconductor - WARP Version 6.3 IR 41
---	Tue May 26 10:41:44 2020
+--	Tue May 26 15:29:10 2020
 --
 
 USE cypress.cypress.all;
@@ -1459,6 +1459,11 @@ SIGNAL tmpFB_0__Pin_RED_UARTVerboseFlag_net_0 : bit;
 SIGNAL tmpIO_0__Pin_RED_UARTVerboseFlag_net_0 : bit;
 TERMINAL tmpSIOVREF__Pin_RED_UARTVerboseFlag_net_0 : bit;
 SIGNAL tmpINTERRUPT_0__Pin_RED_UARTVerboseFlag_net_0 : bit;
+SIGNAL tmpOE__Pin_EnableDisable_net_0 : bit;
+SIGNAL tmpFB_0__Pin_EnableDisable_net_0 : bit;
+SIGNAL tmpIO_0__Pin_EnableDisable_net_0 : bit;
+TERMINAL tmpSIOVREF__Pin_EnableDisable_net_0 : bit;
+SIGNAL Net_2711 : bit;
 SIGNAL Net_2523D : bit;
 SIGNAL \SPIM_1:BSPIM:so_send_reg\\D\ : bit;
 SIGNAL \SPIM_1:BSPIM:mosi_reg\\D\ : bit;
@@ -4113,6 +4118,80 @@ Pin_RED_UARTVerboseFlag:cy_psoc3_pins_v1_10
 		out_clock_en=>tmpOE__MISO_1_net_0,
 		out_reset=>zero,
 		interrupt=>tmpINTERRUPT_0__Pin_RED_UARTVerboseFlag_net_0);
+Pin_EnableDisable:cy_psoc3_pins_v1_10
+	GENERIC MAP(id=>"9af7fcf2-989b-495d-ac99-2ba422b1dcef",
+		drive_mode=>"110",
+		ibuf_enabled=>"1",
+		init_dr_st=>"0",
+		input_sync=>"0",
+		input_clk_en=>'0',
+		input_sync_mode=>"0",
+		intr_mode=>"11",
+		invert_in_clock=>'0',
+		invert_in_clock_en=>'0',
+		invert_in_reset=>'0',
+		invert_out_clock=>'0',
+		invert_out_clock_en=>'0',
+		invert_out_reset=>'0',
+		io_voltage=>"",
+		layout_mode=>"CONTIGUOUS",
+		output_conn=>"0",
+		output_sync=>"0",
+		output_clk_en=>'0',
+		output_mode=>"0",
+		output_reset=>'0',
+		output_clock_mode=>"0",
+		oe_sync=>"0",
+		oe_conn=>"0",
+		oe_reset=>'0',
+		pin_aliases=>"",
+		pin_mode=>"I",
+		por_state=>4,
+		sio_group_cnt=>0,
+		sio_hifreq=>"00000000",
+		sio_hyst=>"1",
+		sio_ibuf=>"00000000",
+		sio_info=>"00",
+		sio_obuf=>"00000000",
+		sio_refsel=>"00000000",
+		sio_vtrip=>"00000000",
+		sio_vohsel=>"00000000",
+		slew_rate=>"0",
+		spanning=>'0',
+		sw_only=>'0',
+		vtrip=>"00",
+		width=>1,
+		port_alias_required=>'0',
+		port_alias_group=>"",
+		use_annotation=>"0",
+		pa_in_clock=>-1,
+		pa_in_clock_en=>-1,
+		pa_in_reset=>-1,
+		pa_out_clock=>-1,
+		pa_out_clock_en=>-1,
+		pa_out_reset=>-1,
+		ovt_needed=>"0",
+		ovt_slew_control=>"00",
+		ovt_hyst_trim=>"0",
+		input_buffer_sel=>"00")
+	PORT MAP(oe=>(tmpOE__MISO_1_net_0),
+		y=>(zero),
+		fb=>(tmpFB_0__Pin_EnableDisable_net_0),
+		analog=>(open),
+		io=>(tmpIO_0__Pin_EnableDisable_net_0),
+		siovref=>(tmpSIOVREF__Pin_EnableDisable_net_0),
+		annotation=>(open),
+		in_clock=>zero,
+		in_clock_en=>tmpOE__MISO_1_net_0,
+		in_reset=>zero,
+		out_clock=>zero,
+		out_clock_en=>tmpOE__MISO_1_net_0,
+		out_reset=>zero,
+		interrupt=>Net_2711);
+isr_EnableDisable:cy_isr_v1_0
+	GENERIC MAP(int_type=>"01",
+		is_nmi=>'0')
+	PORT MAP(int_signal=>Net_2711);
 Net_2523:cy_dff
 	PORT MAP(d=>Net_2523D,
 		clk=>\SPIM_1:BSPIM:clk_fin\,

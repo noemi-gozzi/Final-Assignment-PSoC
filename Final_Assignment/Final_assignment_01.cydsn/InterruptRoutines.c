@@ -267,14 +267,21 @@ CY_ISR(Custom_LED_Blinking){
         if (value_POT < FULL_SCALE_RANGE_LOW) value_POT = FULL_SCALE_RANGE_LOW;
         if (value_POT > FULL_SCALE_RANGE_HIGH) value_POT = FULL_SCALE_RANGE_HIGH;
         
-        if (value_POT < FULL_SCALE_RANGE_HALF){
-            UARTVerboseFlag = OFF;
-            Pin_RED_UARTVerboseFlag_Write(OFF);
-        }
-        else{
-            UARTVerboseFlag = ON;
-            Pin_RED_UARTVerboseFlag_Write(ON);
+        if(FlagEnableDisable){
+            if (value_POT < FULL_SCALE_RANGE_HALF){
+                UARTVerboseFlag = OFF;
+                Pin_RED_UARTVerboseFlag_Write(OFF);
+            }
+            else{
+                UARTVerboseFlag = ON;
+                Pin_RED_UARTVerboseFlag_Write(ON);
+            }
         }
     }    
     
+}
+CY_ISR(Custom_Pin_EnableDisable){
+    Pin_EnableDisable_ClearInterrupt();
+    
+    FlagEnableDisable=Pin_EnableDisable_Read();
 }

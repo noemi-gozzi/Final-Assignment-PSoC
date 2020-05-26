@@ -25,13 +25,14 @@
     uint8 UARTVerboseFlag;
     //UARTVerboseFlag = 0;
     uint8 data_water;
-    
+    volatile uint8 FlagEnableDisable;
     
     CY_ISR_PROTO(Custom_Pin_ISR); 
     CY_ISR_PROTO(Custom_Pin_Button);
     CY_ISR_PROTO(Custom_Timer_Button);
     CY_ISR_PROTO(Custom_LED_Blinking);
     CY_ISR_PROTO(Custom_Pin_Button_Positive);
+    CY_ISR_PROTO(Custom_Pin_EnableDisable);
     
 #endif
 /* [] END OF FILE */
