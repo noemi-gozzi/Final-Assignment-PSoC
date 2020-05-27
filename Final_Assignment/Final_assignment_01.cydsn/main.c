@@ -158,7 +158,7 @@ int main(void)
     UART_1_PutString("LA MEMI E' LA MIGLIORE CHE CI SIA");
     CyDelay(10);
     
-    
+  
 
     //Variables declaration
     uint8_t AccData[DATA_BYTES];
@@ -188,7 +188,8 @@ int main(void)
     isr_EnableDisable_StartEx(Custom_Pin_EnableDisable);
     
     FlagEnableDisable=Pin_EnableDisable_Read();
-    if (FlagEnableDisable==0) UARTVerboseFlag=0;
+
+    if (FlagEnableDisable==0) UARTVerboseFlag=0; 
     
     ADC_DelSig_StartConvert();
     
