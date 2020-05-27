@@ -105,8 +105,8 @@ CY_ISR(Custom_Pin_Button_Positive){
             else if (system_status==ON){
                 Pin_Led_Blue_Write(ON);
                 
-                UART_1_Start();
-                SPIM_1_Start();
+                UART_1_Enable();
+                SPIM_1_Enable();
                 //SPIM_2_Start();
                 RGBLed_Start();
                 Timer_Blinking_Stop();
@@ -156,8 +156,8 @@ CY_ISR(Custom_Pin_Button_Positive){
                 system_status=ON;
                 Pin_Led_Blue_Write(ON);
                  
-                UART_1_Start();
-                SPIM_1_Start();
+                UART_1_Enable();
+                SPIM_1_Enable();
                 //SPIM_2_Start();
                 RGBLed_Start();
                 Timer_Blinking_Stop();
