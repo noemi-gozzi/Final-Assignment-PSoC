@@ -253,4 +253,6 @@ CY_ISR(Custom_Pin_EnableDisable){
     Pin_EnableDisable_ClearInterrupt();
     
     FlagEnableDisable=Pin_EnableDisable_Read();
+    
+    new_EnableDisable=1;
 }

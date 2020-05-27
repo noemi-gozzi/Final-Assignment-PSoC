@@ -27,6 +27,7 @@
     uint8 data_water;
     volatile uint8 FlagEnableDisable;
     volatile uint8 new_EEPROM;
+    volatile uint8 new_EnableDisable;
     uint8 data_register;
     
     CY_ISR_PROTO(Custom_Pin_ISR); 

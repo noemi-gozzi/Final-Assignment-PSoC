@@ -160,10 +160,19 @@ int main(void)
     data_read = LIS3DH_readByte(LIS3DH_INT1_DURATION);
     sprintf(bufferUART, " --> LIS3DH DURATION REGISTER= 0x%02X\r\n", data_read);
     UART_1_PutBuffer;
+    /*******************FlagEnableDisable Reading ****************/    
+    
+    FlagEnableDisable=Pin_EnableDisable_Read();
+    EEPROM_writeByte(0x0001, FlagEnableDisable);
+    EEPROM_waitForWriteComplete();
+    
+    data_read = EEPROM_readByte(0x0001);
+    sprintf(bufferUART, " --> FlagEnableDisable= %d\r\n", data_read);
+    UART_1_PutBuffer;
+    
     UART_1_PutString("READY \r\n\r\n");
     CyDelay(10);
-
-
+    
     //Variables declaration
     uint8_t AccData[DATA_BYTES];
     uint8_t AccData_Threshold [DATA_BYTES];
@@ -185,6 +194,7 @@ int main(void)
     UARTVerboseFlag=0;
     PacketReadyFlag = 0;
     new_EEPROM=0;
+    new_EnableDisable=0;
     
     isr_ACC_StartEx(Custom_Pin_ISR);
     
@@ -193,8 +203,6 @@ int main(void)
     isr_BLINKING_StartEx(Custom_LED_Blinking);
     isr_positive_StartEx(Custom_Pin_Button_Positive);
     isr_EnableDisable_StartEx(Custom_Pin_EnableDisable);
-    
-    FlagEnableDisable=Pin_EnableDisable_Read();
         
     ADC_DelSig_StartConvert();
     
@@ -228,6 +236,11 @@ int main(void)
             EEPROM_writeByte(DATA_REGISTER_ADDRESS, data_register);
             EEPROM_waitForWriteComplete();
             new_EEPROM=0;
+        }
+        if(new_EnableDisable){
+            EEPROM_writeByte(0x0001, FlagEnableDisable);
+            EEPROM_waitForWriteComplete();
+            new_EnableDisable=0;
         }
 
         if (PacketReadyFlag==1){
