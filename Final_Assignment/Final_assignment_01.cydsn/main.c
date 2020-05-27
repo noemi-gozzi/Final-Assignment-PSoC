@@ -193,7 +193,7 @@ int main(void)
     ADC_DelSig_StartConvert();
     
     SPIM_1_Stop();
-    //SPIM_2_Stop();
+    SPIM_2_Stop();
     UART_1_Stop();
 
 //    uint8_t reading_eeprom;

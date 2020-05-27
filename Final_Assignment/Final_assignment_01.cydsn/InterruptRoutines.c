@@ -84,7 +84,7 @@ CY_ISR(Custom_Pin_Button_Positive){
             
             RGBLed_WriteColor(OFF, OFF, OFF);
             SPIM_1_Stop();
-            //SPIM_2_Stop();
+            SPIM_2_Stop();
             UART_1_Stop();
             Timer_Blinking_Start();
             
@@ -109,7 +109,7 @@ CY_ISR(Custom_Pin_Button_Positive){
                 
                 UART_1_Start();
                 SPIM_1_Start();
-                //SPIM_2_Start();
+                SPIM_2_Start();
                 RGBLed_Start();
                 Timer_Blinking_Stop();
                 
@@ -157,7 +157,7 @@ CY_ISR(Custom_Pin_Button_Positive){
                  
                 UART_1_Start();
                 SPIM_1_Start();
-                //SPIM_2_Start();
+                SPIM_2_Start();
                 RGBLed_Start();
                 Timer_Blinking_Stop();
 
@@ -179,7 +179,7 @@ CY_ISR(Custom_Pin_Button_Positive){
                 EEPROM_waitForWriteComplete();
                 RGBLed_WriteColor(OFF, OFF, OFF);
                 SPIM_1_Stop();
-                //SPIM_2_Stop();
+                SPIM_2_Stop();
                 UART_1_Stop();
                 //RGBLed_Stop();
             }
