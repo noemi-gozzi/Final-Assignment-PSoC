@@ -190,6 +190,13 @@ int main(void)
     FlagEnableDisable=Pin_EnableDisable_Read();
 
     if (FlagEnableDisable==0) UARTVerboseFlag=0; 
+    EEPROM_writeByte(0x0001, FlagEnableDisable);
+    
+    EEPROM_waitForWriteComplete();
+    CyDelay(100);
+    data_read = EEPROM_readByte(0x0001);
+    sprintf(bufferUART, " --> FlagEnable: %d\r\n", data_read);
+    UART_1_PutBuffer;   
     
     ADC_DelSig_StartConvert();
     

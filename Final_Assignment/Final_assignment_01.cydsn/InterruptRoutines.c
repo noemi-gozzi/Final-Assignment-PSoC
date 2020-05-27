@@ -252,4 +252,9 @@ CY_ISR(Custom_Pin_EnableDisable){
     Pin_EnableDisable_ClearInterrupt();
     
     FlagEnableDisable=Pin_EnableDisable_Read();
+        
+    EEPROM_writeByte(0x0001, FlagEnableDisable);
+    
+    EEPROM_waitForWriteComplete();
+ 
 }
