@@ -26,6 +26,8 @@
     //UARTVerboseFlag = 0;
     uint8 data_water;
     volatile uint8 FlagEnableDisable;
+    volatile uint8 new_EEPROM;
+    uint8 data_register;
     
     CY_ISR_PROTO(Custom_Pin_ISR); 
     CY_ISR_PROTO(Custom_Pin_Button);

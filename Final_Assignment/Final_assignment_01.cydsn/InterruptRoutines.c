@@ -32,11 +32,7 @@ uint8_t system_status=OFF;
 uint8_t configuration_status=OFF;
 uint8 TimerFlag=0; 
 int32 value_POT;
-uint8 data_register;
-
-uint8_t i=0;
-
-
+int i=0;
 
 CY_ISR(Custom_Pin_ISR){
 
@@ -82,9 +78,12 @@ CY_ISR(Custom_Pin_Button_Positive){
             
             configuration_status=ON;
             
+            data_register = (0<<7) | (UARTVerboseFlag);
+            new_EEPROM=1;
+            
             RGBLed_WriteColor(OFF, OFF, OFF);
             SPIM_1_Stop();
-            SPIM_2_Stop();
+            //SPIM_2_Stop();
             UART_1_Stop();
             Timer_Blinking_Start();
             
@@ -99,8 +98,7 @@ CY_ISR(Custom_Pin_Button_Positive){
             i.e. I can enter configuration mode both from system ON and system OFF. then, when i decide to 
             close CONFIGURATION mode the system is going back to ON or OFF. 
             */
-            data_register = (system_status<<7) | (UARTVerboseFlag);
-            EEPROM_writeByte(0x0000, data_register);
+
             if (system_status==OFF){
                 Pin_Led_Blue_Write(OFF);
             }
@@ -109,12 +107,15 @@ CY_ISR(Custom_Pin_Button_Positive){
                 
                 UART_1_Start();
                 SPIM_1_Start();
-                SPIM_2_Start();
+                //SPIM_2_Start();
                 RGBLed_Start();
                 Timer_Blinking_Stop();
                 
             }
+            data_register = (system_status<<7) | (UARTVerboseFlag);
+            new_EEPROM=1;
         }
+        
         /*flag for switch case for double click detection. if i'm in long pressure,
         initialize to 0, to be sure that long pressure is not detected as normal click*/
         TimerFlag=0;
@@ -157,7 +158,7 @@ CY_ISR(Custom_Pin_Button_Positive){
                  
                 UART_1_Start();
                 SPIM_1_Start();
-                SPIM_2_Start();
+                //SPIM_2_Start();
                 RGBLed_Start();
                 Timer_Blinking_Stop();
 
@@ -166,8 +167,8 @@ CY_ISR(Custom_Pin_Button_Positive){
                 (transmission via UART to the Bridge Control Panel) data 
                 register is: 10000001 (0x81)*/
                 data_register = (system_status<<7) | (UARTVerboseFlag);
-                EEPROM_writeByte(0x0000, data_register);
-                EEPROM_waitForWriteComplete();
+                new_EEPROM=1;
+
 
             }
             else if (system_status==ON){
@@ -175,11 +176,11 @@ CY_ISR(Custom_Pin_Button_Positive){
                 system_status=OFF;
                 Pin_Led_Blue_Write(OFF);
                 data_register = (system_status<<7) | (UARTVerboseFlag);
-                EEPROM_writeByte(DATA_REGISTER_ADDRESS, data_register);
-                EEPROM_waitForWriteComplete();
+                new_EEPROM=1;
+
                 RGBLed_WriteColor(OFF, OFF, OFF);
                 SPIM_1_Stop();
-                SPIM_2_Stop();
+                //SPIM_2_Stop();
                 UART_1_Stop();
                 //RGBLed_Stop();
             }

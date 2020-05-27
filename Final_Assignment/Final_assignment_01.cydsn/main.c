@@ -17,17 +17,20 @@ Gozzi Noemi
 #include "RGBLedDriver.h"
 #include "25LC256.h"
 #include "SPI_Interface_EEPROM.h"
-
 #define UART_1_PutBuffer UART_1_PutString(bufferUART)
 #define DATA_BYTES 6
 #define CONVERSION_FACTOR_DIGIT_MG 4
 #define TRANSMIT_BUFFER_SIZE 8
 #define CONVERSION_MG_RGB 255/2000
+#define DATA_REGISTER_ADDRESS 0x0000
 
 char bufferUART[100];
 
+
+
 int main(void)
 {
+    
     CyGlobalIntEnable; /* Enable global interrupts. */
     
     /*          INITIALIZATION          */
@@ -36,8 +39,10 @@ int main(void)
     SPIM_2_Start();
     RGBLed_Start();
     ADC_DelSig_Start();
+    
     CyDelay(10);
     
+
     sprintf(bufferUART, "^^^^^^^^ Final Project: Noemi Gozzi, Lorenzo Francioli ^^^^^^^^\r\n\n");
     UART_1_PutBuffer;
     
@@ -155,10 +160,9 @@ int main(void)
     data_read = LIS3DH_readByte(LIS3DH_INT1_DURATION);
     sprintf(bufferUART, " --> LIS3DH DURATION REGISTER= 0x%02X\r\n", data_read);
     UART_1_PutBuffer;
-    UART_1_PutString("LA MEMI E' LA MIGLIORE CHE CI SIA");
+    UART_1_PutString("READY \r\n\r\n");
     CyDelay(10);
-    
-    
+
 
     //Variables declaration
     uint8_t AccData[DATA_BYTES];
@@ -178,7 +182,10 @@ int main(void)
     int16_t Acc_y;
     int16_t Acc_z;
     
+    UARTVerboseFlag=0;
     PacketReadyFlag = 0;
+    new_EEPROM=0;
+    
     isr_ACC_StartEx(Custom_Pin_ISR);
     
     isr_DEBOUNCER_StartEx(Custom_Pin_Button);
@@ -188,12 +195,11 @@ int main(void)
     isr_EnableDisable_StartEx(Custom_Pin_EnableDisable);
     
     FlagEnableDisable=Pin_EnableDisable_Read();
-    if (FlagEnableDisable==0) UARTVerboseFlag=0;
-    
+        
     ADC_DelSig_StartConvert();
     
     SPIM_1_Stop();
-    SPIM_2_Stop();
+    //SPIM_2_Stop();
     UART_1_Stop();
 
 //    uint8_t reading_eeprom;
@@ -217,6 +223,12 @@ int main(void)
         Acc_x = 0;
         Acc_y = 0;
         Acc_z = 0;
+        
+        if(new_EEPROM){
+            EEPROM_writeByte(DATA_REGISTER_ADDRESS, data_register);
+            EEPROM_waitForWriteComplete();
+            new_EEPROM=0;
+        }
 
         if (PacketReadyFlag==1){
             uint8_t data = LIS3DH_readByte(LIS3DH_INT1_SRC);
@@ -232,12 +244,13 @@ int main(void)
 //                Acc_z =((int16)((AccData[4]) | ((AccData[5])<<8))>>6);
 //                sprintf(bufferUART, " --> EEPROM Test Read = %d %d %d \r\n\n", Acc_x* CONVERSION_FACTOR_DIGIT_MG, Acc_y* CONVERSION_FACTOR_DIGIT_MG, Acc_z* CONVERSION_FACTOR_DIGIT_MG);
 //                UART_1_PutBuffer;
+                
                 LIS3DH_writeByte(LIS3DH_FIFO_CTRL_REG,0x00);
                 LIS3DH_writeByte(LIS3DH_FIFO_CTRL_REG,0x47);
                 
             }
             else{
-                
+
                 for (int i=0; i<7; i++){
                     LIS3DH_readPage(LIS3DH_OUT_X_L, (uint8_t*) AccData, DATA_BYTES);
                     Acc_x = Acc_x + ((int16)((AccData[0]) | ((AccData[1])<<8))>>6);

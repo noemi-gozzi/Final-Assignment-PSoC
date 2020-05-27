@@ -232,9 +232,11 @@ static void cfg_write_bytes32(const uint32 addr_table[], const cy_cfg_addrvalue_
 static void ClockSetup(void);
 static void ClockSetup(void)
 {
+	uint8 x32TrHold;
 	uint32 timeout;
 	uint8 pllLock;
 
+	x32TrHold = CY_GET_XTND_REG8((void CYFAR *)CYREG_X32_TR);
 
 	/* Configure Digital Clocks based on settings from Clock DWR */
 	CY_SET_XTND_REG16((void CYFAR *)(CYREG_CLKDIST_DCFG0_CFG0), 0x0000u);
@@ -260,6 +262,19 @@ static void ClockSetup(void)
 	/* Configure ILO based on settings from Clock DWR */
 	CY_SET_XTND_REG8((void CYFAR *)(CYREG_SLOWCLK_ILO_CR0), 0x02u);
 	CY_SET_XTND_REG8((void CYFAR *)(CYREG_CLKDIST_CR), 0x08u);
+
+	/* Configure XTAL 32kHz based on settings from Clock DWR */
+	CY_SET_XTND_REG8((void CYFAR *)(CYREG_SLOWCLK_X32_TST), 0xF3u);
+	CY_SET_XTND_REG8((void CYFAR *)(CYREG_X32_TR), 0x03u);
+	CY_SET_XTND_REG8((void CYFAR *)(CYREG_SLOWCLK_X32_CFG), 0x84u);
+	CY_SET_XTND_REG8((void CYFAR *)(CYREG_SLOWCLK_X32_CR), 0x05u);
+	/* Wait up to 1000000us for the XTAL 32kHz to lock */
+	for (timeout = 1000000u / 10u; (timeout > 0u) && ((CY_GET_XTND_REG8((void CYFAR *)CYREG_SLOWCLK_X32_CR) & 0x20u) == 0u); timeout--)
+	{ 
+		
+		CyDelayCycles(10u * 48u); /* Delay 10us based on 48MHz clock */
+	}
+	CY_SET_XTND_REG8((void CYFAR *)(CYREG_X32_TR), (x32TrHold));
 
 	/* Configure IMO based on settings from Clock DWR */
 	CY_SET_XTND_REG8((void CYFAR *)(CYREG_FASTCLK_IMO_CR), 0x03u);
