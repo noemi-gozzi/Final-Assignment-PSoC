@@ -78,7 +78,7 @@ int main(void)
     /*          CTRL4[0]=0 SPI with 4 wires (not 3)           */
     /*          CTRL4[4:5]= FULL SCALE RANGE. e.g. 00 +-2g    */
     /*          CTRL4[3]=RESOLUTION. normal 0                 */
-    /*                                                        */
+    
     LIS3DH_writeByte(LIS3DH_CTRL_REG4, LIS3DH_CTRL_REG4_2G_NORMAL);
     data_read = LIS3DH_readByte(LIS3DH_CTRL_REG4);
     sprintf(bufferUART, " --> LIS3DH CTRL REGISTER 4= 0x%02X\r\n", data_read);
@@ -97,7 +97,8 @@ int main(void)
     /*********************FIFO_CTRL_REG************************/
     /*          settings:  0x00                               */
     /*          0b00000000                                    */
-    /*          FIFOCTRL[6:7]=00 BYPASS mode                   */
+    /*          FIFOCTRL[6:7]=00 BYPASS mode                  */
+    
     LIS3DH_writeByte(LIS3DH_FIFO_CTRL_REG,0x00);
     data_read = LIS3DH_readByte(LIS3DH_FIFO_CTRL_REG);
     sprintf(bufferUART, " --> LIS3DH FIFO CTRL REGISTER (BYPASS mode) = 0x%02X\r\n", data_read);
@@ -108,6 +109,7 @@ int main(void)
     /*          FIFOCTRL[6:7]=01 FIFO mode                    */
     /*          FIFOCTRL[5]=0 allows triggering signal on INT1*/
     /*          FIFOCTRL[0:4]=00111 watermark: 7 sample       */
+    
     LIS3DH_writeByte(LIS3DH_FIFO_CTRL_REG, LIS3DH_FIFO_CTRL_REG_FIFO_MODE_WTM_7);
     data_read = LIS3DH_readByte(LIS3DH_FIFO_CTRL_REG);
     sprintf(bufferUART, " --> LIS3DH FIFO CTRL REGISTER (FIFO mode) = 0x%02X\r\n", data_read);
@@ -162,8 +164,9 @@ int main(void)
 
 //    CyDelay(20);
     EEPROM_writeByte(0x0001, FlagEnableDisable);
+    
+    EEPROM_waitForWriteComplete();
     CyDelay(100);
-//    EEPROM_waitForWriteComplete();
     data_read = EEPROM_readByte(0x0001);
     sprintf(bufferUART, " --> FlagEnable: %d\r\n", data_read);
     UART_1_PutBuffer;   

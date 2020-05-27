@@ -1252,11 +1252,11 @@
 .set Clock_debouncer__PM_STBY_MSK, 0x80
 
 /* Pin_EnableDisable */
-.set Pin_EnableDisable__0__INTTYPE, CYREG_PICU3_INTTYPE1
-.set Pin_EnableDisable__0__MASK, 0x02
-.set Pin_EnableDisable__0__PC, CYREG_PRT3_PC1
+.set Pin_EnableDisable__0__INTTYPE, CYREG_PICU3_INTTYPE2
+.set Pin_EnableDisable__0__MASK, 0x04
+.set Pin_EnableDisable__0__PC, CYREG_PRT3_PC2
 .set Pin_EnableDisable__0__PORT, 3
-.set Pin_EnableDisable__0__SHIFT, 1
+.set Pin_EnableDisable__0__SHIFT, 2
 .set Pin_EnableDisable__AG, CYREG_PRT3_AG
 .set Pin_EnableDisable__AMUX, CYREG_PRT3_AMUX
 .set Pin_EnableDisable__BIE, CYREG_PRT3_BIE
@@ -1272,7 +1272,7 @@
 .set Pin_EnableDisable__INTTYPE_BASE, CYDEV_PICU_INTTYPE_PICU3_BASE
 .set Pin_EnableDisable__LCD_COM_SEG, CYREG_PRT3_LCD_COM_SEG
 .set Pin_EnableDisable__LCD_EN, CYREG_PRT3_LCD_EN
-.set Pin_EnableDisable__MASK, 0x02
+.set Pin_EnableDisable__MASK, 0x04
 .set Pin_EnableDisable__PORT, 3
 .set Pin_EnableDisable__PRT, CYREG_PRT3_PRT
 .set Pin_EnableDisable__PRTDSI__CAPS_SEL, CYREG_PRT3_CAPS_SEL
@@ -1283,7 +1283,7 @@
 .set Pin_EnableDisable__PRTDSI__OUT_SEL1, CYREG_PRT3_OUT_SEL1
 .set Pin_EnableDisable__PRTDSI__SYNC_OUT, CYREG_PRT3_SYNC_OUT
 .set Pin_EnableDisable__PS, CYREG_PRT3_PS
-.set Pin_EnableDisable__SHIFT, 1
+.set Pin_EnableDisable__SHIFT, 2
 .set Pin_EnableDisable__SLW, CYREG_PRT3_SLW
 .set Pin_EnableDisable__SNAP, CYREG_PICU3_SNAP
 
