@@ -2,7 +2,7 @@
 --	Conversion of Final_assignment_01.v to vh2:
 --
 --	Cypress Semiconductor - WARP Version 6.3 IR 41
---	Wed May 27 18:03:33 2020
+--	Thu May 28 10:00:14 2020
 --
 
 USE cypress.cypress.all;
@@ -179,9 +179,9 @@ SIGNAL \UART_1:BUART:reset_sr\ : bit;
 SIGNAL \UART_1:BUART:HalfDuplexSend_last\ : bit;
 SIGNAL Net_78 : bit;
 SIGNAL \UART_1:BUART:txn\ : bit;
-SIGNAL Net_2398 : bit;
+SIGNAL Net_2775 : bit;
 SIGNAL \UART_1:BUART:tx_interrupt_out\ : bit;
-SIGNAL Net_2399 : bit;
+SIGNAL Net_2776 : bit;
 SIGNAL \UART_1:BUART:rx_interrupt_out\ : bit;
 SIGNAL \UART_1:BUART:tx_state_1\ : bit;
 SIGNAL \UART_1:BUART:tx_state_0\ : bit;
@@ -267,7 +267,7 @@ SIGNAL \UART_1:BUART:tx_status_0\ : bit;
 SIGNAL \UART_1:BUART:tx_status_1\ : bit;
 SIGNAL \UART_1:BUART:tx_status_2\ : bit;
 SIGNAL \UART_1:BUART:tx_status_3\ : bit;
-SIGNAL Net_2395 : bit;
+SIGNAL Net_2772 : bit;
 SIGNAL \UART_1:BUART:tx_bitclk\ : bit;
 SIGNAL \UART_1:BUART:tx_ctrl_mark_last\ : bit;
 SIGNAL \UART_1:BUART:tx_mark\ : bit;
@@ -411,7 +411,7 @@ SIGNAL \UART_1:BUART:rx_status_4\ : bit;
 SIGNAL \UART_1:BUART:rx_status_5\ : bit;
 SIGNAL \UART_1:BUART:rx_status_6\ : bit;
 SIGNAL \UART_1:BUART:rx_addr_match_status\ : bit;
-SIGNAL Net_2394 : bit;
+SIGNAL Net_2771 : bit;
 SIGNAL \UART_1:BUART:rx_markspace_pre\ : bit;
 SIGNAL \UART_1:BUART:rx_parity_error_pre\ : bit;
 SIGNAL \UART_1:BUART:rx_break_status\ : bit;
@@ -1391,17 +1391,17 @@ SIGNAL tmpFB_0__Pin_Led_Blue_net_0 : bit;
 SIGNAL tmpIO_0__Pin_Led_Blue_net_0 : bit;
 TERMINAL tmpSIOVREF__Pin_Led_Blue_net_0 : bit;
 SIGNAL tmpINTERRUPT_0__Pin_Led_Blue_net_0 : bit;
-SIGNAL Net_10 : bit;
+SIGNAL Net_2813 : bit;
 SIGNAL Net_12 : bit;
+SIGNAL Net_2830 : bit;
 SIGNAL \TIMER_button:Net_260\ : bit;
 SIGNAL \TIMER_button:Net_266\ : bit;
 SIGNAL \TIMER_button:Net_51\ : bit;
 SIGNAL \TIMER_button:Net_261\ : bit;
 SIGNAL \TIMER_button:Net_57\ : bit;
 SIGNAL Net_2680 : bit;
-SIGNAL Net_2615 : bit;
+SIGNAL Net_2829 : bit;
 SIGNAL \TIMER_button:Net_102\ : bit;
-SIGNAL Net_2688 : bit;
 SIGNAL Net_2690 : bit;
 SIGNAL \Timer_Blinking:Net_260\ : bit;
 SIGNAL \Timer_Blinking:Net_266\ : bit;
@@ -1464,6 +1464,17 @@ SIGNAL tmpFB_0__Pin_EnableDisable_net_0 : bit;
 SIGNAL tmpIO_0__Pin_EnableDisable_net_0 : bit;
 TERMINAL tmpSIOVREF__Pin_EnableDisable_net_0 : bit;
 SIGNAL Net_2711 : bit;
+SIGNAL Net_2845 : bit;
+SIGNAL Net_2853 : bit;
+SIGNAL \Counter_TimeStamp:Net_82\ : bit;
+SIGNAL \Counter_TimeStamp:Net_91\ : bit;
+SIGNAL \Counter_TimeStamp:Net_48\ : bit;
+SIGNAL \Counter_TimeStamp:Net_47\ : bit;
+SIGNAL \Counter_TimeStamp:Net_42\ : bit;
+SIGNAL Net_2843 : bit;
+SIGNAL \Counter_TimeStamp:Net_89\ : bit;
+SIGNAL \Counter_TimeStamp:Net_95\ : bit;
+SIGNAL \Counter_TimeStamp:Net_102\ : bit;
 SIGNAL Net_2523D : bit;
 SIGNAL \SPIM_1:BSPIM:so_send_reg\\D\ : bit;
 SIGNAL \SPIM_1:BSPIM:mosi_reg\\D\ : bit;
@@ -1482,7 +1493,7 @@ SIGNAL \UART_1:BUART:txn\\D\ : bit;
 SIGNAL \UART_1:BUART:tx_state_1\\D\ : bit;
 SIGNAL \UART_1:BUART:tx_state_0\\D\ : bit;
 SIGNAL \UART_1:BUART:tx_state_2\\D\ : bit;
-SIGNAL Net_2395D : bit;
+SIGNAL Net_2772D : bit;
 SIGNAL \UART_1:BUART:tx_bitclk\\D\ : bit;
 SIGNAL \UART_1:BUART:tx_ctrl_mark_last\\D\ : bit;
 SIGNAL \UART_1:BUART:tx_mark\\D\ : bit;
@@ -1581,10 +1592,10 @@ tmpOE__MISO_1_net_0 <=  ('1') ;
 \SPIM_1:BSPIM:state_2\\D\ <= ((not \SPIM_1:BSPIM:state_2\ and not \SPIM_1:BSPIM:state_0\ and not \SPIM_1:BSPIM:count_4\ and not \SPIM_1:BSPIM:count_3\ and not \SPIM_1:BSPIM:count_2\ and not \SPIM_1:BSPIM:count_0\ and not \SPIM_1:BSPIM:tx_status_1\ and \SPIM_1:BSPIM:state_1\ and \SPIM_1:BSPIM:count_1\)
 	OR (not \SPIM_1:BSPIM:state_2\ and not \SPIM_1:BSPIM:count_4\ and not \SPIM_1:BSPIM:count_3\ and not \SPIM_1:BSPIM:count_2\ and not \SPIM_1:BSPIM:count_1\ and \SPIM_1:BSPIM:state_1\ and \SPIM_1:BSPIM:state_0\ and \SPIM_1:BSPIM:count_0\));
 
-\SPIM_1:BSPIM:state_1\\D\ <= ((not \SPIM_1:BSPIM:state_2\ and not \SPIM_1:BSPIM:count_0\ and \SPIM_1:BSPIM:state_1\ and \SPIM_1:BSPIM:tx_status_1\)
-	OR (not \SPIM_1:BSPIM:state_2\ and not \SPIM_1:BSPIM:count_1\ and not \SPIM_1:BSPIM:count_0\ and \SPIM_1:BSPIM:state_1\)
+\SPIM_1:BSPIM:state_1\\D\ <= ((not \SPIM_1:BSPIM:state_2\ and not \SPIM_1:BSPIM:count_1\ and not \SPIM_1:BSPIM:count_0\ and \SPIM_1:BSPIM:state_1\)
 	OR (not \SPIM_1:BSPIM:state_2\ and not \SPIM_1:BSPIM:state_0\ and \SPIM_1:BSPIM:state_1\ and \SPIM_1:BSPIM:count_0\)
 	OR (not \SPIM_1:BSPIM:state_2\ and \SPIM_1:BSPIM:state_0\ and \SPIM_1:BSPIM:count_1\)
+	OR (not \SPIM_1:BSPIM:state_2\ and not \SPIM_1:BSPIM:count_0\ and \SPIM_1:BSPIM:state_1\ and \SPIM_1:BSPIM:tx_status_1\)
 	OR (not \SPIM_1:BSPIM:state_1\ and not \SPIM_1:BSPIM:state_0\ and \SPIM_1:BSPIM:state_2\)
 	OR (not \SPIM_1:BSPIM:state_2\ and not \SPIM_1:BSPIM:state_1\ and \SPIM_1:BSPIM:state_0\)
 	OR (not \SPIM_1:BSPIM:state_2\ and \SPIM_1:BSPIM:state_1\ and \SPIM_1:BSPIM:count_2\)
@@ -1632,7 +1643,7 @@ Net_78 <= (not \UART_1:BUART:txn\);
 
 \UART_1:BUART:tx_status_2\ <= (not \UART_1:BUART:tx_fifo_notfull\);
 
-Net_2395D <= ((not \UART_1:BUART:reset_reg\ and \UART_1:BUART:tx_state_2\)
+Net_2772D <= ((not \UART_1:BUART:reset_reg\ and \UART_1:BUART:tx_state_2\)
 	OR (not \UART_1:BUART:reset_reg\ and \UART_1:BUART:tx_state_0\)
 	OR (not \UART_1:BUART:reset_reg\ and \UART_1:BUART:tx_state_1\));
 
@@ -3821,19 +3832,9 @@ isr_DEBOUNCER:cy_isr_v1_0
 	GENERIC MAP(int_type=>"00",
 		is_nmi=>'0')
 	PORT MAP(int_signal=>Net_316);
-timer_clock:cy_clock_v1_0
-	GENERIC MAP(cy_registers=>"",
-		id=>"c0fb34bd-1044-4931-9788-16b01ce89812",
-		source_clock_id=>"",
-		divisor=>0,
-		period=>"5000000000000",
-		is_direct=>'0',
-		is_digital=>'1')
-	PORT MAP(clock_out=>Net_10,
-		dig_domain_out=>open);
 \TIMER_button:TimerHW\:cy_psoc3_timer_v1_0
 	GENERIC MAP(cy_registers=>"")
-	PORT MAP(clock=>Net_10,
+	PORT MAP(clock=>Net_2830,
 		kill=>zero,
 		enable=>tmpOE__MISO_1_net_0,
 		capture=>zero,
@@ -3853,11 +3854,11 @@ timer_clock_2:cy_clock_v1_0
 		period=>"5000000000000",
 		is_direct=>'0',
 		is_digital=>'1')
-	PORT MAP(clock_out=>Net_2688,
+	PORT MAP(clock_out=>Net_2830,
 		dig_domain_out=>open);
 \Timer_Blinking:TimerHW\:cy_psoc3_timer_v1_0
 	GENERIC MAP(cy_registers=>"")
-	PORT MAP(clock=>Net_2688,
+	PORT MAP(clock=>Net_2830,
 		kill=>zero,
 		enable=>tmpOE__MISO_1_net_0,
 		capture=>zero,
@@ -4192,6 +4193,30 @@ isr_EnableDisable:cy_isr_v1_0
 	GENERIC MAP(int_type=>"01",
 		is_nmi=>'0')
 	PORT MAP(int_signal=>Net_2711);
+isr_TimeStamp:cy_isr_v1_0
+	GENERIC MAP(int_type=>"01",
+		is_nmi=>'0')
+	PORT MAP(int_signal=>Net_2845);
+\Counter_TimeStamp:CounterHW\:cy_psoc3_timer_v1_0
+	GENERIC MAP(cy_registers=>"")
+	PORT MAP(clock=>Net_2853,
+		kill=>zero,
+		enable=>zero,
+		capture=>zero,
+		timer_reset=>zero,
+		tc=>\Counter_TimeStamp:Net_48\,
+		compare=>\Counter_TimeStamp:Net_47\,
+		interrupt=>Net_2845);
+Clock_TS:cy_clock_v1_0
+	GENERIC MAP(cy_registers=>"",
+		id=>"31e9b8e1-3f74-475e-a01a-2d24bf5b7a7a",
+		source_clock_id=>"",
+		divisor=>0,
+		period=>"20000000000000",
+		is_direct=>'0',
+		is_digital=>'1')
+	PORT MAP(clock_out=>Net_2853,
+		dig_domain_out=>open);
 Net_2523:cy_dff
 	PORT MAP(d=>Net_2523D,
 		clk=>\SPIM_1:BSPIM:clk_fin\,
@@ -4264,10 +4289,10 @@ Net_2525:cy_dff
 	PORT MAP(d=>\UART_1:BUART:tx_state_2\\D\,
 		clk=>\UART_1:BUART:clock_op\,
 		q=>\UART_1:BUART:tx_state_2\);
-Net_2395:cy_dff
-	PORT MAP(d=>Net_2395D,
+Net_2772:cy_dff
+	PORT MAP(d=>Net_2772D,
 		clk=>\UART_1:BUART:clock_op\,
-		q=>Net_2395);
+		q=>Net_2772);
 \UART_1:BUART:tx_bitclk\:cy_dff
 	PORT MAP(d=>\UART_1:BUART:tx_bitclk\\D\,
 		clk=>\UART_1:BUART:clock_op\,

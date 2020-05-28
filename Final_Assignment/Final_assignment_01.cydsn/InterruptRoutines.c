@@ -34,6 +34,7 @@ uint8 TimerFlag=0;
 int32 value_POT;
 int i=0;
 
+
 CY_ISR(Custom_Pin_ISR){
 
     PacketReadyFlag=1;
@@ -255,4 +256,9 @@ CY_ISR(Custom_Pin_EnableDisable){
     FlagEnableDisable=Pin_EnableDisable_Read();
     
     new_EnableDisable=1;
+}
+
+CY_ISR(Custom_TimeStamp){
+    Counter_TimeStamp_ReadStatusRegister();
+    Counter_overflow=Counter_overflow+1;
 }

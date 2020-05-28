@@ -29,6 +29,7 @@
     volatile uint8 new_EEPROM;
     volatile uint8 new_EnableDisable;
     uint8 data_register;
+    volatile uint8_t Counter_overflow;
     
     CY_ISR_PROTO(Custom_Pin_ISR); 
     CY_ISR_PROTO(Custom_Pin_Button);
@@ -36,6 +37,7 @@
     CY_ISR_PROTO(Custom_LED_Blinking);
     CY_ISR_PROTO(Custom_Pin_Button_Positive);
     CY_ISR_PROTO(Custom_Pin_EnableDisable);
+    CY_ISR_PROTO(Custom_TimeStamp);
     
 #endif
 /* [] END OF FILE */

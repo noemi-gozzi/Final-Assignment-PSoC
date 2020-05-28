@@ -22,7 +22,14 @@ Gozzi Noemi
 #define CONVERSION_FACTOR_DIGIT_MG 4
 #define TRANSMIT_BUFFER_SIZE 8
 #define CONVERSION_MG_RGB 255/2000
-#define DATA_REGISTER_ADDRESS 0x0000
+#define CONVERSION_COUNTER_TIMESTAMP_SEC 0.02 //each clock 0.02 sec
+#define CONVERSION_COUNTER_ISR 1200 //clock overflow 60000*0.02=1200 sec. when an ISR occured 1200 sec have passed
+#define FSR_COUNTER 60000
+
+#define EEPROM_ADDRESS_TIMESTAMP 0x0002
+#define EEPROM_ADDRESS_ENABLEDISABLE 0x0001
+#define EEPROM_ADDRESS_STATUS_VERBOSE_FLAG 0x0000
+#define EEPROM_ADDRESS_ACC_DATA_OVER_THRESHOLD 0x0080
 
 char bufferUART[100];
 
@@ -39,6 +46,8 @@ int main(void)
     SPIM_2_Start();
     RGBLed_Start();
     ADC_DelSig_Start();
+    Counter_TimeStamp_Start();
+
     
     CyDelay(10);
     
@@ -163,10 +172,10 @@ int main(void)
     /*******************FlagEnableDisable Reading ****************/    
     
     FlagEnableDisable=Pin_EnableDisable_Read();
-    EEPROM_writeByte(0x0001, FlagEnableDisable);
+    EEPROM_writeByte(EEPROM_ADDRESS_ENABLEDISABLE, FlagEnableDisable);
     EEPROM_waitForWriteComplete();
     
-    data_read = EEPROM_readByte(0x0001);
+    data_read = EEPROM_readByte(EEPROM_ADDRESS_ENABLEDISABLE);
     sprintf(bufferUART, " --> FlagEnableDisable= %d\r\n", data_read);
     UART_1_PutBuffer;
     
@@ -195,6 +204,7 @@ int main(void)
     PacketReadyFlag = 0;
     new_EEPROM=0;
     new_EnableDisable=0;
+    Counter_overflow=0;
     
     isr_ACC_StartEx(Custom_Pin_ISR);
     
@@ -203,6 +213,7 @@ int main(void)
     isr_BLINKING_StartEx(Custom_LED_Blinking);
     isr_positive_StartEx(Custom_Pin_Button_Positive);
     isr_EnableDisable_StartEx(Custom_Pin_EnableDisable);
+    isr_TimeStamp_StartEx(Custom_TimeStamp);
         
     ADC_DelSig_StartConvert();
     
@@ -211,6 +222,7 @@ int main(void)
     UART_1_Stop();
 
 //    uint8_t reading_eeprom;
+    uint32 timestamp;
     
     for(;;)
     {
@@ -226,19 +238,19 @@ int main(void)
         reading_eeprom = EEPROM_readByte(0x0000);
         sprintf(bufferUART, "** DATA REGISTER= 0x%02X\r\n", reading_eeprom);
         UART_1_PutBuffer;
-*/
+*/     
 
         Acc_x = 0;
         Acc_y = 0;
         Acc_z = 0;
         
         if(new_EEPROM){
-            EEPROM_writeByte(DATA_REGISTER_ADDRESS, data_register);
+            EEPROM_writeByte(EEPROM_ADDRESS_STATUS_VERBOSE_FLAG, data_register);
             EEPROM_waitForWriteComplete();
             new_EEPROM=0;
         }
         if(new_EnableDisable){
-            EEPROM_writeByte(0x0001, FlagEnableDisable);
+            EEPROM_writeByte(EEPROM_ADDRESS_ENABLEDISABLE, FlagEnableDisable);
             EEPROM_waitForWriteComplete();
             new_EnableDisable=0;
         }
@@ -249,7 +261,7 @@ int main(void)
                 sprintf(bufferUART, "THRESH 0x%02X\r\n", data);
                 UART_1_PutBuffer;
                 LIS3DH_readPage(LIS3DH_OUT_X_L, (uint8_t*) AccData_Threshold, DATA_BYTES);
-                EEPROM_writePage(0x0080,(uint8_t*) AccData, DATA_BYTES);
+                EEPROM_writePage(EEPROM_ADDRESS_ACC_DATA_OVER_THRESHOLD,(uint8_t*) AccData, DATA_BYTES);
                 EEPROM_waitForWriteComplete();
 //                EEPROM_readPage(0x0080, (uint8_t*) data_EEPROM, DATA_BYTES);
 //                Acc_x = ((int16)((AccData[0]) | ((AccData[1])<<8))>>6);
@@ -257,10 +269,23 @@ int main(void)
 //                Acc_z =((int16)((AccData[4]) | ((AccData[5])<<8))>>6);
 //                sprintf(bufferUART, " --> EEPROM Test Read = %d %d %d \r\n\n", Acc_x* CONVERSION_FACTOR_DIGIT_MG, Acc_y* CONVERSION_FACTOR_DIGIT_MG, Acc_z* CONVERSION_FACTOR_DIGIT_MG);
 //                UART_1_PutBuffer;
+
                 
                 LIS3DH_writeByte(LIS3DH_FIFO_CTRL_REG,0x00);
                 LIS3DH_writeByte(LIS3DH_FIFO_CTRL_REG,0x47);
                 
+                timestamp=(FSR_COUNTER-Counter_TimeStamp_ReadCounter())*CONVERSION_COUNTER_TIMESTAMP_SEC;
+                timestamp=timestamp+Counter_overflow*CONVERSION_COUNTER_ISR;
+                
+                uint8 timestamp_array[4];
+                timestamp_array[0]=(timestamp>>24)&0xFF; //MSB
+                timestamp_array[1]=(timestamp>>16)&0xFF;
+                timestamp_array[2]=(timestamp>>8)&0xFF;
+                timestamp_array[3]=(timestamp)&0xFF; //LSB
+                
+                EEPROM_writePage(EEPROM_ADDRESS_TIMESTAMP,(uint8_t*)timestamp_array, 4);
+                EEPROM_waitForWriteComplete();
+                             
             }
             else{
 

@@ -1,6 +1,6 @@
 // ======================================================================
 // Final_assignment_01.v generated from TopDesign.cysch
-// 05/27/2020 at 18:03
+// 05/28/2020 at 10:00
 // This file is auto generated. ANY EDITS YOU MAKE MAY BE LOST WHEN THIS FILE IS REGENERATED!!!
 // ======================================================================
 
@@ -1096,9 +1096,104 @@ module ADC_DelSig_v3_30_7 (
 
 endmodule
 
+// Counter_v3_0(CaptureMode=0, CaptureModeSoftware=0, ClockMode=3, CompareMode=0, CompareModeSoftware=0, CompareStatusEdgeSense=true, CompareValue=1, CONTROL3=1, ControlRegRemoved=0, CyGetRegReplacementString=CY_GET_REG16, CySetRegReplacementString=CY_SET_REG16, EnableMode=0, FF16=true, FF8=false, FixedFunction=true, FixedFunctionUsed=1, InitCounterValue=60000, InterruptOnCapture=false, InterruptOnCompare=false, InterruptOnOverUnderFlow=false, InterruptOnTC=true, Period=60000, RegDefReplacementString=reg16, RegSizeReplacementString=uint16, ReloadOnCapture=false, ReloadOnCompare=false, ReloadOnOverUnder=true, ReloadOnReset=true, Resolution=16, RunMode=0, UDB16=false, UDB24=false, UDB32=false, UDB8=false, UDBControlReg=false, UseInterrupt=true, VerilogSectionReplacementString=sC16, CY_API_CALLBACK_HEADER_INCLUDE=#include "cyapicallbacks.h", CY_COMMENT=, CY_COMPONENT_NAME=Counter_v3_0, CY_CONFIG_TITLE=Counter_TimeStamp, CY_CONST_CONFIG=true, CY_CONTROL_FILE=<:default:>, CY_DATASHEET_FILE=<:default:>, CY_FITTER_NAME=Counter_TimeStamp, CY_INSTANCE_SHORT_NAME=Counter_TimeStamp, CY_MAJOR_VERSION=3, CY_MINOR_VERSION=0, CY_PDL_DRIVER_NAME=, CY_PDL_DRIVER_REQ_VERSION=, CY_PDL_DRIVER_SUBGROUP=, CY_PDL_DRIVER_VARIANT=, CY_REMOVE=false, CY_SUPPRESS_API_GEN=false, CY_VERSION=PSoC Creator  4.3, INSTANCE_NAME=Counter_TimeStamp, )
+module Counter_v3_0_8 (
+    reset,
+    tc,
+    comp,
+    clock,
+    interrupt,
+    enable,
+    capture,
+    upCnt,
+    downCnt,
+    up_ndown,
+    count);
+    input       reset;
+    output      tc;
+    output      comp;
+    input       clock;
+    output      interrupt;
+    input       enable;
+    input       capture;
+    input       upCnt;
+    input       downCnt;
+    input       up_ndown;
+    input       count;
+
+    parameter CaptureMode = 0;
+    parameter ClockMode = 3;
+    parameter CompareMode = 0;
+    parameter CompareStatusEdgeSense = 1;
+    parameter EnableMode = 0;
+    parameter ReloadOnCapture = 0;
+    parameter ReloadOnCompare = 0;
+    parameter ReloadOnOverUnder = 1;
+    parameter ReloadOnReset = 1;
+    parameter Resolution = 16;
+    parameter RunMode = 0;
+    parameter UseInterrupt = 1;
+
+          wire  Net_47;
+          wire  Net_102;
+          wire  Net_95;
+          wire  Net_82;
+          wire  Net_91;
+          wire  Net_89;
+          wire  Net_49;
+          wire  Net_48;
+          wire  Net_42;
+          wire  Net_43;
+
+    cy_psoc3_timer_v1_0 CounterHW (
+        .timer_reset(reset),
+        .capture(capture),
+        .enable(Net_91),
+        .kill(Net_82),
+        .clock(clock),
+        .tc(Net_48),
+        .compare(Net_47),
+        .interrupt(Net_42));
+
+	// int_vm (cy_virtualmux_v1_0)
+	assign interrupt = Net_42;
+
+	// TC_vm (cy_virtualmux_v1_0)
+	assign tc = Net_48;
+
+    ZeroTerminal ZeroTerminal_1 (
+        .z(Net_82));
+
+	// VirtualMux_1 (cy_virtualmux_v1_0)
+	assign Net_89 = Net_95;
+
+    ZeroTerminal ZeroTerminal_2 (
+        .z(Net_95));
+
+	// vmEnableMode (cy_virtualmux_v1_0)
+	assign Net_91 = enable;
+
+    OneTerminal OneTerminal_1 (
+        .o(Net_102));
+
+
+
+endmodule
+
 // top
 module top ;
 
+          wire  Net_2862;
+          wire  Net_2856;
+          wire  Net_2850;
+          wire  Net_2849;
+          wire  Net_2848;
+          wire  Net_2847;
+          wire  Net_2846;
+          wire  Net_2853;
+          wire  Net_2844;
+          wire  Net_2843;
+          wire  Net_2845;
           wire  Net_2707;
     electrical  Net_2706;
           wire  Net_2705;
@@ -1113,13 +1208,12 @@ module top ;
           wire  Net_2692;
           wire  Net_2691;
           wire  Net_2698;
-          wire  Net_2615;
-          wire  Net_2684;
-          wire  Net_2683;
-          wire  Net_2682;
-          wire  Net_2681;
+          wire  Net_2829;
+          wire  Net_2828;
+          wire  Net_2827;
+          wire  Net_2826;
+          wire  Net_2825;
           wire  Net_2680;
-          wire  Net_2617;
           wire  Net_2606;
           wire  Net_2601;
           wire  Net_2600;
@@ -1155,28 +1249,30 @@ module top ;
           wire  Net_2045;
           wire  Net_2067;
           wire  Net_2277;
-          wire  Net_2403;
-          wire  Net_2402;
-          wire  Net_2401;
-          wire  Net_2400;
-          wire  Net_2399;
-          wire  Net_2398;
-          wire  Net_2397;
-          wire  Net_2396;
-          wire  Net_2395;
-          wire  Net_2394;
-          wire  Net_2393;
+          wire  Net_2780;
+          wire  Net_2779;
+          wire  Net_2778;
+          wire  Net_2777;
+          wire  Net_2776;
+          wire  Net_2775;
+          wire  Net_2774;
+          wire  Net_2773;
+          wire  Net_2772;
+          wire  Net_2771;
+          wire  Net_2770;
           wire  Net_2530;
           wire  Net_2529;
           wire  Net_2528;
           wire  Net_2527;
           wire  Net_2526;
           wire  Net_2525;
-          wire  Net_2711;
+          wire  Net_2813;
+          wire  Net_78;
+          wire  Net_83;
+          wire  Net_2830;
           wire  Net_2690;
-          wire  Net_2688;
+          wire  Net_2711;
           wire  Net_12;
-          wire  Net_10;
           wire  Net_214;
           wire  Net_316;
           wire  Net_136;
@@ -1186,8 +1282,6 @@ module top ;
           wire  Net_2532;
           wire  Net_23;
           wire  Net_149;
-          wire  Net_78;
-          wire  Net_83;
           wire  Net_1357;
           wire  Net_692;
           wire  Net_384;
@@ -1591,17 +1685,17 @@ module top ;
     UART_v2_50_1 UART_1 (
         .cts_n(1'b0),
         .tx(Net_78),
-        .rts_n(Net_2394),
-        .tx_en(Net_2395),
+        .rts_n(Net_2771),
+        .tx_en(Net_2772),
         .clock(1'b0),
         .reset(1'b0),
         .rx(Net_83),
-        .tx_interrupt(Net_2398),
-        .rx_interrupt(Net_2399),
-        .tx_data(Net_2400),
-        .tx_clk(Net_2401),
-        .rx_data(Net_2402),
-        .rx_clk(Net_2403));
+        .tx_interrupt(Net_2775),
+        .rx_interrupt(Net_2776),
+        .tx_data(Net_2777),
+        .tx_clk(Net_2778),
+        .rx_data(Net_2779),
+        .rx_clk(Net_2780));
     defparam UART_1.Address1 = 0;
     defparam UART_1.Address2 = 0;
     defparam UART_1.EnIntRXInterrupt = 0;
@@ -2533,17 +2627,8 @@ module top ;
 		 (.int_signal(Net_316));
 
 
-
-	cy_clock_v1_0
-		#(.id("c0fb34bd-1044-4931-9788-16b01ce89812"),
-		  .source_clock_id(""),
-		  .divisor(0),
-		  .period("5000000000000"),
-		  .is_direct(0),
-		  .is_digital(1))
-		timer_clock
-		 (.clock_out(Net_10));
-
+    ZeroTerminal ZeroTerminal_2 (
+        .z(Net_2813));
 
     ZeroTerminal ZeroTerminal_1 (
         .z(Net_12));
@@ -2554,9 +2639,9 @@ module top ;
         .enable(1'b1),
         .trigger(1'b1),
         .capture(1'b0),
-        .capture_out(Net_2684),
-        .tc(Net_2615),
-        .clock(Net_10));
+        .capture_out(Net_2828),
+        .tc(Net_2829),
+        .clock(Net_2830));
     defparam TIMER_button.CaptureCount = 2;
     defparam TIMER_button.CaptureCounterEnabled = 0;
     defparam TIMER_button.DeviceFamily = "PSoC5";
@@ -2581,7 +2666,7 @@ module top ;
 		  .is_direct(0),
 		  .is_digital(1))
 		timer_clock_2
-		 (.clock_out(Net_2688));
+		 (.clock_out(Net_2830));
 
 
     ZeroTerminal ZeroTerminal_3 (
@@ -2595,7 +2680,7 @@ module top ;
         .capture(1'b0),
         .capture_out(Net_2695),
         .tc(Net_2696),
-        .clock(Net_2688));
+        .clock(Net_2830));
     defparam Timer_Blinking.CaptureCount = 2;
     defparam Timer_Blinking.CaptureCounterEnabled = 0;
     defparam Timer_Blinking.DeviceFamily = "PSoC5";
@@ -2857,6 +2942,50 @@ module top ;
 		#(.int_type(2'b01))
 		isr_EnableDisable
 		 (.int_signal(Net_2711));
+
+
+
+	cy_isr_v1_0
+		#(.int_type(2'b01))
+		isr_TimeStamp
+		 (.int_signal(Net_2845));
+
+
+    Counter_v3_0_8 Counter_TimeStamp (
+        .reset(Net_2813),
+        .tc(Net_2843),
+        .comp(Net_2844),
+        .clock(Net_2853),
+        .interrupt(Net_2845),
+        .enable(1'b0),
+        .capture(1'b0),
+        .upCnt(1'b0),
+        .downCnt(1'b0),
+        .up_ndown(1'b1),
+        .count(1'b0));
+    defparam Counter_TimeStamp.CaptureMode = 0;
+    defparam Counter_TimeStamp.ClockMode = 3;
+    defparam Counter_TimeStamp.CompareMode = 0;
+    defparam Counter_TimeStamp.CompareStatusEdgeSense = 1;
+    defparam Counter_TimeStamp.EnableMode = 0;
+    defparam Counter_TimeStamp.ReloadOnCapture = 0;
+    defparam Counter_TimeStamp.ReloadOnCompare = 0;
+    defparam Counter_TimeStamp.ReloadOnOverUnder = 1;
+    defparam Counter_TimeStamp.ReloadOnReset = 1;
+    defparam Counter_TimeStamp.Resolution = 16;
+    defparam Counter_TimeStamp.RunMode = 0;
+    defparam Counter_TimeStamp.UseInterrupt = 1;
+
+
+	cy_clock_v1_0
+		#(.id("31e9b8e1-3f74-475e-a01a-2d24bf5b7a7a"),
+		  .source_clock_id(""),
+		  .divisor(0),
+		  .period("20000000000000"),
+		  .is_direct(0),
+		  .is_digital(1))
+		Clock_TS
+		 (.clock_out(Net_2853));
 
 
 
