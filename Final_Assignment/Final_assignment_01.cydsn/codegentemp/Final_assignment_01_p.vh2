@@ -1,5 +1,5 @@
 -- Project:   Final_assignment_01
--- Generated: 05/28/2020 10:51:01
+-- Generated: 05/28/2020 15:38:20
 -- PSoC Creator  4.3
 
 ENTITY Final_assignment_01 IS
@@ -59,9 +59,7 @@ ARCHITECTURE __DEFAULT__ OF Final_assignment_01 IS
     ATTRIBUTE global_signal OF Net_136 : SIGNAL IS true;
     SIGNAL Net_136_local : bit;
     SIGNAL Net_149 : bit;
-    SIGNAL Net_19 : bit;
     SIGNAL Net_2045 : bit;
-    SIGNAL Net_2067 : bit;
     SIGNAL Net_214 : bit;
     SIGNAL Net_23 : bit;
     SIGNAL Net_2508 : bit;
@@ -70,11 +68,7 @@ ARCHITECTURE __DEFAULT__ OF Final_assignment_01 IS
     SIGNAL Net_2528 : bit;
     SIGNAL Net_2530 : bit;
     SIGNAL Net_2532 : bit;
-    SIGNAL Net_2533 : bit;
-    SIGNAL Net_2536 : bit;
-    SIGNAL Net_2538 : bit;
     SIGNAL Net_2601 : bit;
-    SIGNAL Net_2680 : bit;
     SIGNAL Net_2691 : bit;
     SIGNAL Net_2704 : bit;
     SIGNAL Net_2711 : bit;
@@ -85,7 +79,13 @@ ARCHITECTURE __DEFAULT__ OF Final_assignment_01 IS
     SIGNAL Net_2853 : bit;
     ATTRIBUTE global_signal OF Net_2853 : SIGNAL IS true;
     SIGNAL Net_2853_local : bit;
+    SIGNAL Net_2874 : bit;
+    SIGNAL Net_3080 : bit;
     SIGNAL Net_316 : bit;
+    SIGNAL Net_3245 : bit;
+    SIGNAL Net_3271 : bit;
+    SIGNAL Net_3274 : bit;
+    SIGNAL Net_3276 : bit;
     SIGNAL Net_384 : bit;
     ATTRIBUTE udbclken_assigned OF Net_384 : SIGNAL IS "True";
     ATTRIBUTE global_signal OF Net_384 : SIGNAL IS true;
@@ -381,7 +381,7 @@ ARCHITECTURE __DEFAULT__ OF Final_assignment_01 IS
     ATTRIBUTE lib_model OF \PWM_RG:PWMUDB:prevCompare2\ : LABEL IS "macrocell47";
     ATTRIBUTE lib_model OF \PWM_RG:PWMUDB:status_0\ : LABEL IS "macrocell48";
     ATTRIBUTE lib_model OF \PWM_RG:PWMUDB:status_1\ : LABEL IS "macrocell49";
-    ATTRIBUTE lib_model OF Net_2067 : LABEL IS "macrocell50";
+    ATTRIBUTE lib_model OF Net_2874 : LABEL IS "macrocell50";
     ATTRIBUTE lib_model OF Net_2045 : LABEL IS "macrocell51";
     ATTRIBUTE lib_model OF \PWM_B:PWMUDB:runmode_enable\ : LABEL IS "macrocell52";
     ATTRIBUTE lib_model OF \PWM_B:PWMUDB:prevCompare1\ : LABEL IS "macrocell53";
@@ -392,7 +392,7 @@ ARCHITECTURE __DEFAULT__ OF Final_assignment_01 IS
     ATTRIBUTE lib_model OF \SPIM_2:BSPIM:state_2\ : LABEL IS "macrocell58";
     ATTRIBUTE lib_model OF \SPIM_2:BSPIM:state_1\ : LABEL IS "macrocell59";
     ATTRIBUTE lib_model OF \SPIM_2:BSPIM:state_0\ : LABEL IS "macrocell60";
-    ATTRIBUTE lib_model OF Net_2533 : LABEL IS "macrocell61";
+    ATTRIBUTE lib_model OF Net_3271 : LABEL IS "macrocell61";
     ATTRIBUTE lib_model OF \SPIM_2:BSPIM:load_cond\ : LABEL IS "macrocell62";
     ATTRIBUTE lib_model OF \SPIM_2:BSPIM:ld_ident\ : LABEL IS "macrocell63";
     ATTRIBUTE lib_model OF \SPIM_2:BSPIM:cnt_enable\ : LABEL IS "macrocell64";
@@ -1531,7 +1531,7 @@ BEGIN
         PORT MAP(
             pa_out => RED(0)__PA,
             oe => open,
-            pin_input => Net_2067,
+            pin_input => Net_2874,
             pad_out => RED(0)_PAD,
             pad_in => RED(0)_PAD,
             in_clock => open,
@@ -2081,7 +2081,7 @@ BEGIN
         PORT MAP(
             pa_out => MISO_2(0)__PA,
             oe => open,
-            fb => Net_19,
+            fb => Net_3245,
             pad_in => MISO_2(0)_PAD,
             in_clock => open,
             in_clock_en => '1',
@@ -3212,7 +3212,7 @@ BEGIN
             int_type => "10",
             is_nmi => 0)
         PORT MAP(
-            interrupt => Net_2536,
+            interrupt => Net_3274,
             clock => ClockBlock_BUS_CLK);
 
     \SPIM_2:BSPIM:BitCounter\:count7cell
@@ -3253,7 +3253,7 @@ BEGIN
             status_2 => \SPIM_2:BSPIM:tx_status_2\,
             status_1 => \SPIM_2:BSPIM:tx_status_1\,
             status_0 => \SPIM_2:BSPIM:tx_status_0\,
-            interrupt => Net_2538);
+            interrupt => Net_3276);
 
     \SPIM_2:BSPIM:RxStsReg\:statusicell
         GENERIC MAP(
@@ -3271,7 +3271,7 @@ BEGIN
             status_2 => open,
             status_1 => open,
             status_0 => open,
-            interrupt => Net_2536);
+            interrupt => Net_3274);
 
     \SPIM_2:BSPIM:sR8:Dp:u0\:datapathcell
         GENERIC MAP(
@@ -3305,7 +3305,7 @@ BEGIN
             cs_addr_2 => \SPIM_2:BSPIM:state_2\,
             cs_addr_1 => \SPIM_2:BSPIM:state_1\,
             cs_addr_0 => \SPIM_2:BSPIM:state_0\,
-            route_si => Net_19,
+            route_si => Net_3245,
             f1_load => \SPIM_2:BSPIM:load_rx_data\,
             so_comb => \SPIM_2:BSPIM:mosi_from_dp\,
             f0_bus_stat_comb => \SPIM_2:BSPIM:tx_status_2\,
@@ -3319,7 +3319,7 @@ BEGIN
             int_type => "10",
             is_nmi => 0)
         PORT MAP(
-            interrupt => Net_2538,
+            interrupt => Net_3276,
             clock => ClockBlock_BUS_CLK);
 
     isr_DEBOUNCER:interrupt
@@ -3341,14 +3341,14 @@ BEGIN
             timer_reset => open,
             tc => \TIMER_button:Net_51\,
             cmp => \TIMER_button:Net_261\,
-            irq => Net_2680);
+            irq => Net_3080);
 
     isr_TIMER:interrupt
         GENERIC MAP(
             int_type => "01",
             is_nmi => 0)
         PORT MAP(
-            interrupt => Net_2680,
+            interrupt => Net_3080,
             clock => ClockBlock_BUS_CLK);
 
     \Timer_Blinking:TimerHW\:timercell
@@ -3903,14 +3903,14 @@ BEGIN
             main_1 => \PWM_RG:PWMUDB:cmp2_eq\,
             main_2 => \PWM_RG:PWMUDB:cmp2_less\);
 
-    Net_2067:macrocell
+    Net_2874:macrocell
         GENERIC MAP(
             eqn_main => "(main_0 * !main_1 * !main_2)",
             regmode => 1,
             clk_inv => '0',
             clken_mode => 1)
         PORT MAP(
-            q => Net_2067,
+            q => Net_2874,
             clock_0 => Net_384,
             main_0 => \PWM_RG:PWMUDB:runmode_enable\,
             main_1 => \PWM_RG:PWMUDB:cmp1_eq\,
@@ -4067,19 +4067,19 @@ BEGIN
             main_2 => \SPIM_2:BSPIM:state_0\,
             main_3 => \SPIM_2:BSPIM:tx_status_1\);
 
-    Net_2533:macrocell
+    Net_3271:macrocell
         GENERIC MAP(
             eqn_main => "(!main_0 * !main_1 * main_2) + (!main_0 * main_1 * !main_3) + (main_0 * !main_1 * !main_2 * !main_3) + (main_1 * main_2 * !main_3)",
             regmode => 1,
             clk_inv => '0',
             clken_mode => 1)
         PORT MAP(
-            q => Net_2533,
+            q => Net_3271,
             clock_0 => \SPIM_2:Net_276\,
             main_0 => \SPIM_2:BSPIM:state_2\,
             main_1 => \SPIM_2:BSPIM:state_1\,
             main_2 => \SPIM_2:BSPIM:state_0\,
-            main_3 => Net_2533);
+            main_3 => Net_3271);
 
     \SPIM_2:BSPIM:load_cond\:macrocell
         GENERIC MAP(

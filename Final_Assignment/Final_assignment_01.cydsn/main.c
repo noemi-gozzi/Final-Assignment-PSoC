@@ -174,12 +174,21 @@ int main(void)
     FlagEnableDisable=Pin_EnableDisable_Read();
     EEPROM_writeByte(EEPROM_ADDRESS_ENABLEDISABLE, FlagEnableDisable);
     EEPROM_waitForWriteComplete();
-    
+    //potremmo togliere questa read all'indirizzo eeprom e lasciare solo il print modality + verbose
     data_read = EEPROM_readByte(EEPROM_ADDRESS_ENABLEDISABLE);
     sprintf(bufferUART, " --> FlagEnableDisable= %d\r\n", data_read);
     UART_1_PutBuffer;
     
-    UART_1_PutString("READY \r\n\r\n");
+    if (FlagEnableDisable){
+        sprintf(bufferUART, "\r\nREAD/WRITE CONFIGURATION MODALITY. configuration mode: %d\r\nUART VERBOSE FLAG: %d\r\n", FlagEnableDisable, UARTVerboseFlag);
+        UART_1_PutBuffer;
+    }
+    else {
+        sprintf(bufferUART, "\r\nATTENTION! READ ONLY MODALITY. configuration mode: %d\r\nUART VERBOSE FLAG: %d\r\n", FlagEnableDisable, UARTVerboseFlag);
+        UART_1_PutBuffer;
+    }  
+    
+    UART_1_PutString("\r\nREADY \r\n\r\n");
     CyDelay(10);
     
     //Variables declaration
@@ -261,17 +270,17 @@ int main(void)
             new_EnableDisable=0;
 
             if (FlagEnableDisable){
-                sprintf(bufferUART, "READ/WRITE CONFIGURATION MODALITY. configuration mode: %d\r\n", FlagEnableDisable);
+                sprintf(bufferUART, "READ/WRITE CONFIGURATION MODALITY. configuration mode: %d\r\nUART VERBOSE FLAG: %d\r\n", FlagEnableDisable, UARTVerboseFlag);
                 UART_1_PutBuffer;
             }
             else {
-                sprintf(bufferUART, "ATTENTION! READ ONLY MODALITY. configuration mode: %d\r\n", FlagEnableDisable);
+                sprintf(bufferUART, "ATTENTION! READ ONLY MODALITY. configuration mode: %d\r\nUART VERBOSE FLAG: %d\r\n", FlagEnableDisable, UARTVerboseFlag);
                 UART_1_PutBuffer;
             }    
         }
         
        if (configuration_status && FlagChangeParameters){
-                sprintf(bufferUART, "NEW UART VERBOSE FLAG%d\r\n", UARTVerboseFlag);
+                sprintf(bufferUART, "NEW UART VERBOSE FLAG: %d\r\n", UARTVerboseFlag);
                 UART_1_PutBuffer;
                 FlagChangeParameters=0;
         

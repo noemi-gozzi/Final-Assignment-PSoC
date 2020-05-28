@@ -1,6 +1,6 @@
 // ======================================================================
 // Final_assignment_01.v generated from TopDesign.cysch
-// 05/28/2020 at 10:50
+// 05/28/2020 at 15:38
 // This file is auto generated. ANY EDITS YOU MAKE MAY BE LOST WHEN THIS FILE IS REGENERATED!!!
 // ======================================================================
 
@@ -1201,33 +1201,34 @@ module top ;
           wire  Net_2703;
     electrical  Net_2702;
     electrical  Net_2701;
-          wire  Net_2696;
-          wire  Net_2695;
-          wire  Net_2694;
-          wire  Net_2693;
-          wire  Net_2692;
-          wire  Net_2691;
-          wire  Net_2698;
-          wire  Net_2829;
-          wire  Net_2828;
-          wire  Net_2827;
-          wire  Net_2826;
-          wire  Net_2825;
-          wire  Net_2680;
+          wire  Net_3079;
+          wire  Net_3078;
+          wire  Net_3077;
+          wire  Net_3076;
+          wire  Net_3075;
+          wire  Net_4127;
+          wire  Net_3085;
+          wire  Net_3084;
+          wire  Net_3083;
+          wire  Net_3082;
+          wire  Net_3081;
+          wire  Net_3080;
           wire  Net_2606;
           wire  Net_2601;
           wire  Net_2600;
+          wire  Net_316;
           wire  Net_2599;
-          wire  Net_2538;
-          wire  Net_2537;
-          wire  Net_2536;
-          wire  Net_2535;
-          wire  Net_2534;
-          wire  Net_2533;
-          wire  Net_19;
+          wire  Net_3276;
+          wire  Net_3275;
+          wire  Net_3274;
+          wire  Net_3273;
+          wire  Net_3272;
+          wire  Net_3271;
+          wire  Net_3245;
           wire  Net_259;
           wire  Net_2297;
           wire  Net_2296;
+          wire  Net_1356;
           wire  Net_2295;
           wire  Net_2294;
           wire  Net_2293;
@@ -1237,55 +1238,54 @@ module top ;
           wire  Net_2289;
           wire  Net_2288;
           wire  Net_2287;
-          wire  Net_2286;
-          wire  Net_2285;
-          wire  Net_2284;
-          wire  Net_2283;
-          wire  Net_2282;
-          wire  Net_2281;
-          wire  Net_2280;
-          wire  Net_2279;
-          wire  Net_2278;
+          wire  Net_4699;
+          wire  Net_4698;
+          wire  Net_4697;
+          wire  Net_4696;
+          wire  Net_4695;
+          wire  Net_4694;
+          wire  Net_4693;
+          wire  Net_4692;
+          wire  Net_4691;
           wire  Net_2045;
-          wire  Net_2067;
-          wire  Net_2277;
-          wire  Net_2780;
-          wire  Net_2779;
-          wire  Net_2778;
-          wire  Net_2777;
-          wire  Net_2776;
-          wire  Net_2775;
-          wire  Net_2774;
-          wire  Net_2773;
-          wire  Net_2772;
-          wire  Net_2771;
-          wire  Net_2770;
+          wire  Net_2874;
+          wire  Net_4690;
+          wire  Net_692;
+          wire  Net_2873;
+          wire  Net_2872;
+          wire  Net_2871;
+          wire  Net_2870;
+          wire  Net_2869;
+          wire  Net_2868;
+          wire  Net_83;
+          wire  Net_2867;
+          wire  Net_2866;
+          wire  Net_2865;
+          wire  Net_2864;
+          wire  Net_78;
+          wire  Net_2863;
           wire  Net_2530;
           wire  Net_2529;
           wire  Net_2528;
           wire  Net_2527;
           wire  Net_2526;
           wire  Net_2525;
-          wire  Net_2813;
-          wire  Net_78;
-          wire  Net_83;
-          wire  Net_2830;
-          wire  Net_2690;
-          wire  Net_2711;
-          wire  Net_12;
-          wire  Net_214;
-          wire  Net_316;
-          wire  Net_136;
-          wire  Net_60;
-          wire  Net_2508;
           wire  Net_2523;
-          wire  Net_2532;
-          wire  Net_23;
+          wire  Net_60;
+          wire  Net_2711;
           wire  Net_149;
-          wire  Net_1357;
-          wire  Net_692;
+          wire  Net_2830;
+          wire  Net_12;
+          wire  Net_2691;
+          wire  Net_214;
+          wire  Net_23;
+          wire  Net_2532;
+          wire  Net_2690;
           wire  Net_384;
-          wire  Net_1356;
+          wire  Net_136;
+          wire  Net_2813;
+          wire  Net_2508;
+          wire  Net_1357;
 
 	wire [0:0] tmpOE__MISO_1_net;
 	wire [0:0] tmpIO_0__MISO_1_net;
@@ -1685,17 +1685,17 @@ module top ;
     UART_v2_50_1 UART_1 (
         .cts_n(1'b0),
         .tx(Net_78),
-        .rts_n(Net_2771),
-        .tx_en(Net_2772),
+        .rts_n(Net_2864),
+        .tx_en(Net_2865),
         .clock(1'b0),
         .reset(1'b0),
         .rx(Net_83),
-        .tx_interrupt(Net_2775),
-        .rx_interrupt(Net_2776),
-        .tx_data(Net_2777),
-        .tx_clk(Net_2778),
-        .rx_data(Net_2779),
-        .rx_clk(Net_2780));
+        .tx_interrupt(Net_2868),
+        .rx_interrupt(Net_2869),
+        .tx_data(Net_2870),
+        .tx_clk(Net_2871),
+        .rx_data(Net_2872),
+        .rx_clk(Net_2873));
     defparam UART_1.Address1 = 0;
     defparam UART_1.Address2 = 0;
     defparam UART_1.EnIntRXInterrupt = 0;
@@ -1861,18 +1861,18 @@ module top ;
     PWM_v3_30_2 PWM_RG (
         .reset(Net_692),
         .clock(Net_384),
-        .tc(Net_2277),
-        .pwm1(Net_2067),
+        .tc(Net_4690),
+        .pwm1(Net_2874),
         .pwm2(Net_2045),
-        .interrupt(Net_2278),
+        .interrupt(Net_4691),
         .capture(1'b0),
         .kill(1'b1),
         .enable(1'b1),
         .trigger(1'b0),
         .cmp_sel(1'b0),
-        .pwm(Net_2284),
-        .ph1(Net_2285),
-        .ph2(Net_2286));
+        .pwm(Net_4697),
+        .ph1(Net_4698),
+        .ph2(Net_4699));
     defparam PWM_RG.Resolution = 8;
 
     PWM_v3_30_3 PWM_B (
@@ -1969,7 +1969,7 @@ module top ;
 		  .input_buffer_sel(2'b00))
 		RED
 		 (.oe(tmpOE__RED_net),
-		  .y({Net_2067}),
+		  .y({Net_2874}),
 		  .fb({tmpFB_0__RED_net[0:0]}),
 		  .io({tmpIO_0__RED_net[0:0]}),
 		  .siovref(tmpSIOVREF__RED_net),
@@ -2419,7 +2419,7 @@ module top ;
 		MISO_2
 		 (.oe(tmpOE__MISO_2_net),
 		  .y({1'b0}),
-		  .fb({Net_19}),
+		  .fb({Net_3245}),
 		  .io({tmpIO_0__MISO_2_net[0:0]}),
 		  .siovref(tmpSIOVREF__MISO_2_net),
 		  .interrupt({tmpINTERRUPT_0__MISO_2_net[0:0]}),
@@ -2435,13 +2435,13 @@ module top ;
     SPI_Master_v2_50_4 SPIM_2 (
         .mosi(Net_23),
         .sclk(Net_2532),
-        .ss(Net_2533),
-        .miso(Net_19),
+        .ss(Net_3271),
+        .miso(Net_3245),
         .clock(1'b0),
         .reset(1'b0),
-        .rx_interrupt(Net_2536),
-        .sdat(Net_2537),
-        .tx_interrupt(Net_2538));
+        .rx_interrupt(Net_3274),
+        .sdat(Net_3275),
+        .tx_interrupt(Net_3276));
     defparam SPIM_2.BidirectMode = 0;
     defparam SPIM_2.HighSpeedMode = 0;
     defparam SPIM_2.NumberOfDataBits = 8;
@@ -2635,12 +2635,12 @@ module top ;
 
     Timer_v2_80_5 TIMER_button (
         .reset(Net_12),
-        .interrupt(Net_2680),
+        .interrupt(Net_3080),
         .enable(1'b1),
         .trigger(1'b1),
         .capture(1'b0),
-        .capture_out(Net_2828),
-        .tc(Net_2829),
+        .capture_out(Net_3084),
+        .tc(Net_3085),
         .clock(Net_2830));
     defparam TIMER_button.CaptureCount = 2;
     defparam TIMER_button.CaptureCounterEnabled = 0;
@@ -2654,7 +2654,7 @@ module top ;
 	cy_isr_v1_0
 		#(.int_type(2'b01))
 		isr_TIMER
-		 (.int_signal(Net_2680));
+		 (.int_signal(Net_3080));
 
 
 
@@ -2665,7 +2665,7 @@ module top ;
 		  .period("5000000000000"),
 		  .is_direct(0),
 		  .is_digital(1))
-		timer_clock_2
+		timer_clock
 		 (.clock_out(Net_2830));
 
 
@@ -2678,8 +2678,8 @@ module top ;
         .enable(1'b1),
         .trigger(1'b1),
         .capture(1'b0),
-        .capture_out(Net_2695),
-        .tc(Net_2696),
+        .capture_out(Net_3078),
+        .tc(Net_3079),
         .clock(Net_2830));
     defparam Timer_Blinking.CaptureCount = 2;
     defparam Timer_Blinking.CaptureCounterEnabled = 0;

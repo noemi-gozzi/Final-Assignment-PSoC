@@ -60,7 +60,7 @@
 #include "isr_DEBOUNCER.h"
 #include "TIMER_button.h"
 #include "isr_TIMER.h"
-#include "timer_clock_2.h"
+#include "timer_clock.h"
 #include "Timer_Blinking.h"
 #include "isr_BLINKING.h"
 #include "isr_positive.h"

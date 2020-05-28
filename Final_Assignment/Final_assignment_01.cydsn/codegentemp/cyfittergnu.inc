@@ -1129,6 +1129,17 @@
 .set ADC_DelSig_theACLK__PM_STBY_CFG, CYREG_PM_STBY_CFG1
 .set ADC_DelSig_theACLK__PM_STBY_MSK, 0x01
 
+/* timer_clock */
+.set timer_clock__CFG0, CYREG_CLKDIST_DCFG5_CFG0
+.set timer_clock__CFG1, CYREG_CLKDIST_DCFG5_CFG1
+.set timer_clock__CFG2, CYREG_CLKDIST_DCFG5_CFG2
+.set timer_clock__CFG2_SRC_SEL_MASK, 0x07
+.set timer_clock__INDEX, 0x05
+.set timer_clock__PM_ACT_CFG, CYREG_PM_ACT_CFG2
+.set timer_clock__PM_ACT_MSK, 0x20
+.set timer_clock__PM_STBY_CFG, CYREG_PM_STBY_CFG2
+.set timer_clock__PM_STBY_MSK, 0x20
+
 /* Pin_Led_Blue */
 .set Pin_Led_Blue__0__INTTYPE, CYREG_PICU2_INTTYPE1
 .set Pin_Led_Blue__0__MASK, 0x02
@@ -1220,17 +1231,6 @@
 .set isr_TimeStamp__INTC_PRIOR_REG, CYREG_NVIC_PRI_17
 .set isr_TimeStamp__INTC_SET_EN_REG, CYREG_NVIC_SETENA0
 .set isr_TimeStamp__INTC_SET_PD_REG, CYREG_NVIC_SETPEND0
-
-/* timer_clock_2 */
-.set timer_clock_2__CFG0, CYREG_CLKDIST_DCFG5_CFG0
-.set timer_clock_2__CFG1, CYREG_CLKDIST_DCFG5_CFG1
-.set timer_clock_2__CFG2, CYREG_CLKDIST_DCFG5_CFG2
-.set timer_clock_2__CFG2_SRC_SEL_MASK, 0x07
-.set timer_clock_2__INDEX, 0x05
-.set timer_clock_2__PM_ACT_CFG, CYREG_PM_ACT_CFG2
-.set timer_clock_2__PM_ACT_MSK, 0x20
-.set timer_clock_2__PM_STBY_CFG, CYREG_PM_STBY_CFG2
-.set timer_clock_2__PM_STBY_MSK, 0x20
 
 /* Timer_Blinking */
 .set Timer_Blinking_TimerHW__CAP0, CYREG_TMR2_CAP0
