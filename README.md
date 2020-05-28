@@ -39,11 +39,25 @@ The main objectives of this system are:
  • provide the end user with a hardware menu to configure some settings related to the program 
 
 ## CONFIGURATION COMMANDS
+
 ***double click*** (interval time interclicks<500ms): START/STOP conditions
 
 ***long pressure click*** (duration time single click>1500ms) : CONFIGURATION mode. If the system is in configuration it is necessary to exit this modality before starting/stopping the device again. Another long pressure click will exit configuration mode, and the system will go back to the previous state (START or STOP)
 
-In Configuration mode, the value of the potentiometer is used to set a verbose flag to send raw sensors data via UART to the Bridge Control Panel (default to 0, set to 1 for verbose data logging). If the value is higher than FSR/2, the verbose flag is set to 1, otherwise is set to 0.
+In Configuration mode, the value of the ***potentiometer*** is used to set a ***UARTVerboseFlag*** to send raw sensors data via UART to the Bridge Control Panel (default to 0, set to 1 for verbose data logging). If the value is higher than FSR/2, the verbose flag is set to 1, otherwise is set to 0. The value of the Potentiometer affects UARTVerboseFlag only when configuration is in ***ReadWrite*** mode (PIN 3.2 set to 1).
+
+Changes in Pin 3.2 values (and so Read Only or ReadWrite modality) are promptly communicated through an ISR on PIN. 
+
+### *BUTTON CONTROLLED INTERRUPTS:* [InterruptRoutines.c](https://github.com/noemi-gozzi/Final-Assignment-PSoC/blob/master/Final_Assignment/Final_assignment_01.cydsn/InterruptRoutines.c) 
+> CY_ISR(Custom_Pin_Button)
+
+> CY_ISR(Custom_Pin_Button_Positive)
+
+ ![alt text](https://github.com/noemi-gozzi/Final-Assignment-PSoC/blob/master/Images/Button.PNG)
+ 
+ ### *CONFIGURATION OPTIONS*
+ ![alt text](https://github.com/noemi-gozzi/Final-Assignment-PSoC/blob/master/Images/Configuration.PNG) 
+
 
 
 
