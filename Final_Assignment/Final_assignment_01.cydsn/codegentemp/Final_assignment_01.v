@@ -1,6 +1,6 @@
 // ======================================================================
 // Final_assignment_01.v generated from TopDesign.cysch
-// 05/28/2020 at 10:00
+// 05/28/2020 at 10:38
 // This file is auto generated. ANY EDITS YOU MAKE MAY BE LOST WHEN THIS FILE IS REGENERATED!!!
 // ======================================================================
 
@@ -2870,7 +2870,7 @@ module top ;
 
 	cy_psoc3_pins_v1_10
 		#(.id("9af7fcf2-989b-495d-ac99-2ba422b1dcef"),
-		  .drive_mode(3'b110),
+		  .drive_mode(3'b001),
 		  .ibuf_enabled(1'b1),
 		  .init_dr_st(1'b0),
 		  .input_clk_en(0),
