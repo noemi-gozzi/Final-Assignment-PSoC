@@ -13,14 +13,13 @@
  *       you need to define SLAVE_CS_Write  		   *
  *       with the name of the Chip Select    		   * 
  *       pin (as defined in the Top Design)  		   *
- * E.g.: #define SLAVE_CS_Write CS_1_Write (default)   *
 */
 
 #pragma once
 
 #include <cytypes.h>
-#include "CS_1.h"
 
+#include "CS_1.h"
 #include "SPIM_1.h"
 
 #define SPI_DUMMY_BYTE  0x00

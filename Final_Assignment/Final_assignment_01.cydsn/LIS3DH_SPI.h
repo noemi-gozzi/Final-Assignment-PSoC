@@ -1,33 +1,26 @@
-/* ========================================
+/**
+ * @file LIS3DH_SPI.h
+ * @brief Functions required to interface with the Accelerometer LIS3DH SPI.
+ * 
+ * This header file contains macros and function prototypes to interface
+ * with the Accelerometer LIS3DH.
  *
- * Copyright YOUR COMPANY, THE YEAR
- * All Rights Reserved
- * UNPUBLISHED, LICENSED SOFTWARE.
- *
- * CONFIDENTIAL AND PROPRIETARY INFORMATION
- * WHICH IS THE PROPERTY OF your company.
- *
- * ========================================
 */
 
 #pragma once
 
 #include "SPI_Interface.h"
 
-
-
  /*** ========= MACROS ========= ***/   
 
 /** Instruction Set **/
-//#define READ_BIT 1
-//#define WRITE_BIT 0
-#define SPI_LIS3DH_READ 0b10000000
-#define SPI_LIS3DH_WRITE  0b00000000
+#define SPI_LIS3DH_READ 0b10000000 //MSB = 1 means READ
+#define SPI_LIS3DH_WRITE  0b00000000 //MSB = 0 means WRITE
 
-#define address_mask6 0b00111111
+#define address_mask6 0b00111111 //The adress taken by the SPI is a 6-bit address
 
 #define SPI_LIS3DH_MS 0b01000000 //if 1 autoincrement 
-#define CS_LIS3DH 1
+
 uint8_t LIS3DH_readByte(uint8_t addr);
 
 /*

@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 1
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccyNhQHX.s 			page 1
 
 
    1              		.syntax unified
@@ -29,7 +29,7 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 1
   26              	.LFB0:
   27              		.file 1 "SPI_Interface_EEPROM.c"
    1:SPI_Interface_EEPROM.c **** /**
-   2:SPI_Interface_EEPROM.c ****  * @file SPI_Interface.c
+   2:SPI_Interface_EEPROM.c ****  * @file SPI_Interface_EEPROM.c
    3:SPI_Interface_EEPROM.c ****  * @brief Functions required to interface with the SPI MASTER (SPIM).
    4:SPI_Interface_EEPROM.c ****  * 
    5:SPI_Interface_EEPROM.c ****  * This source code file contains macros and functions to interface
@@ -37,90 +37,75 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 1
    7:SPI_Interface_EEPROM.c **** 
    8:SPI_Interface_EEPROM.c **** */
    9:SPI_Interface_EEPROM.c **** 
-  10:SPI_Interface_EEPROM.c **** /*											 
-  11:SPI_Interface_EEPROM.c ****  * NOTE: in the .h Lib of the SPI Slave     		   *
-  12:SPI_Interface_EEPROM.c ****  *       you need to define SLAVE_CS_Write  		   *
-  13:SPI_Interface_EEPROM.c ****  *       with the name of the Chip Select    		   * 
-  14:SPI_Interface_EEPROM.c ****  *       pin (as defined in the Top Design)  		   *
-  15:SPI_Interface_EEPROM.c ****  * E.g.: #define SLAVE_CS_Write CS_1_Write (default)   *
-  16:SPI_Interface_EEPROM.c **** */
-  17:SPI_Interface_EEPROM.c **** 
-  18:SPI_Interface_EEPROM.c **** #include "SPI_Interface_EEPROM.h"
-  19:SPI_Interface_EEPROM.c **** 
-  20:SPI_Interface_EEPROM.c **** 
-  21:SPI_Interface_EEPROM.c **** /*
-  22:SPI_Interface_EEPROM.c **** * @brief Full-Duplex, Single-Operation 1-Byte Trade
-  23:SPI_Interface_EEPROM.c **** */
-  24:SPI_Interface_EEPROM.c **** uint8_t SPI_Interface_EEPROM_tradeByte(uint8_t byte) {
-  28              		.loc 1 24 0
+  10:SPI_Interface_EEPROM.c **** #include "SPI_Interface_EEPROM.h"
+  11:SPI_Interface_EEPROM.c **** 
+  12:SPI_Interface_EEPROM.c **** /*
+  13:SPI_Interface_EEPROM.c **** * @brief Full-Duplex, Single-Operation 1-Byte Trade
+  14:SPI_Interface_EEPROM.c **** */
+  15:SPI_Interface_EEPROM.c **** uint8_t SPI_Interface_EEPROM_tradeByte(uint8_t byte) {
+  28              		.loc 1 15 0
   29              		.cfi_startproc
   30              		@ args = 0, pretend = 0, frame = 0
   31              		@ frame_needed = 0, uses_anonymous_args = 0
   32              	.LVL0:
   33 0000 10B5     		push	{r4, lr}
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 2
-
-
   34              		.cfi_def_cfa_offset 8
   35              		.cfi_offset 4, -8
   36              		.cfi_offset 14, -4
   37 0002 0446     		mov	r4, r0
-  25:SPI_Interface_EEPROM.c **** 	
-  26:SPI_Interface_EEPROM.c **** 	
-  27:SPI_Interface_EEPROM.c ****     
-  28:SPI_Interface_EEPROM.c ****     CS_2_Write(0);
-  38              		.loc 1 28 0
+  16:SPI_Interface_EEPROM.c **** 	
+  17:SPI_Interface_EEPROM.c ****     /* Enable the Slave */
+  18:SPI_Interface_EEPROM.c ****     CS_2_Write(0);
+  38              		.loc 1 18 0
   39 0004 0020     		movs	r0, #0
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccyNhQHX.s 			page 2
+
+
   40              	.LVL1:
   41 0006 FFF7FEFF 		bl	CS_2_Write
   42              	.LVL2:
-  29:SPI_Interface_EEPROM.c **** 
-  30:SPI_Interface_EEPROM.c **** 	
-  31:SPI_Interface_EEPROM.c **** 	/* Load the TX Buffer */
-  32:SPI_Interface_EEPROM.c **** 	SPIM_2_WriteTxData(byte);
-  43              		.loc 1 32 0
+  19:SPI_Interface_EEPROM.c **** 
+  20:SPI_Interface_EEPROM.c **** 	/* Load the TX Buffer */
+  21:SPI_Interface_EEPROM.c **** 	SPIM_2_WriteTxData(byte);
+  43              		.loc 1 21 0
   44 000a 2046     		mov	r0, r4
   45 000c FFF7FEFF 		bl	SPIM_2_WriteTxData
   46              	.LVL3:
   47              	.L2:
-  33:SPI_Interface_EEPROM.c **** 	
-  34:SPI_Interface_EEPROM.c **** 	/* Wait for TX */
-  35:SPI_Interface_EEPROM.c ****     while( !(SPIM_2_ReadTxStatus() & SPIM_2_STS_BYTE_COMPLETE) );
-  48              		.loc 1 35 0 discriminator 1
+  22:SPI_Interface_EEPROM.c **** 	
+  23:SPI_Interface_EEPROM.c **** 	/* Wait for TX */
+  24:SPI_Interface_EEPROM.c ****     while( !(SPIM_2_ReadTxStatus() & SPIM_2_STS_BYTE_COMPLETE) );
+  48              		.loc 1 24 0 discriminator 1
   49 0010 FFF7FEFF 		bl	SPIM_2_ReadTxStatus
   50              	.LVL4:
   51 0014 10F0080F 		tst	r0, #8
   52 0018 FAD0     		beq	.L2
-  36:SPI_Interface_EEPROM.c **** 	
-  37:SPI_Interface_EEPROM.c **** 	/* Read the RX Buffer */
-  38:SPI_Interface_EEPROM.c **** 	uint8_t data = SPIM_2_ReadRxData();
-  53              		.loc 1 38 0
+  25:SPI_Interface_EEPROM.c **** 	
+  26:SPI_Interface_EEPROM.c **** 	/* Read the RX Buffer */
+  27:SPI_Interface_EEPROM.c **** 	uint8_t data = SPIM_2_ReadRxData();
+  53              		.loc 1 27 0
   54 001a FFF7FEFF 		bl	SPIM_2_ReadRxData
   55              	.LVL5:
   56 001e 0446     		mov	r4, r0
   57              	.LVL6:
-  39:SPI_Interface_EEPROM.c **** 	
-  40:SPI_Interface_EEPROM.c **** 	/* Disable the Slave */
-  41:SPI_Interface_EEPROM.c **** 
-  42:SPI_Interface_EEPROM.c ****     CS_2_Write(1);
-  58              		.loc 1 42 0
+  28:SPI_Interface_EEPROM.c **** 	
+  29:SPI_Interface_EEPROM.c **** 	/* Disable the Slave */
+  30:SPI_Interface_EEPROM.c ****     CS_2_Write(1);
+  58              		.loc 1 30 0
   59 0020 0120     		movs	r0, #1
   60 0022 FFF7FEFF 		bl	CS_2_Write
   61              	.LVL7:
-  43:SPI_Interface_EEPROM.c **** 
-  44:SPI_Interface_EEPROM.c **** 	return data;
-  45:SPI_Interface_EEPROM.c ****     
-  46:SPI_Interface_EEPROM.c **** }
-  62              		.loc 1 46 0
+  31:SPI_Interface_EEPROM.c **** 
+  32:SPI_Interface_EEPROM.c **** 	return data;
+  33:SPI_Interface_EEPROM.c ****     
+  34:SPI_Interface_EEPROM.c **** }
+  62              		.loc 1 34 0
   63 0026 2046     		mov	r0, r4
   64 0028 10BD     		pop	{r4, pc}
   65              		.cfi_endproc
   66              	.LFE0:
   67              		.size	SPI_Interface_EEPROM_tradeByte, .-SPI_Interface_EEPROM_tradeByte
   68              		.section	.text.SPI_Interface_EEPROM_ReadByte,"ax",%progbits
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 3
-
-
   69              		.align	2
   70              		.global	SPI_Interface_EEPROM_ReadByte
   71              		.thumb
@@ -128,13 +113,16 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 1
   73              		.type	SPI_Interface_EEPROM_ReadByte, %function
   74              	SPI_Interface_EEPROM_ReadByte:
   75              	.LFB1:
-  47:SPI_Interface_EEPROM.c **** 
-  48:SPI_Interface_EEPROM.c **** 
-  49:SPI_Interface_EEPROM.c **** /*
-  50:SPI_Interface_EEPROM.c **** * @brief RX-only, Dual-Operation 1-Byte READ
-  51:SPI_Interface_EEPROM.c **** */
-  52:SPI_Interface_EEPROM.c **** uint8_t SPI_Interface_EEPROM_ReadByte(uint8_t byteTX) {
-  76              		.loc 1 52 0
+  35:SPI_Interface_EEPROM.c **** 
+  36:SPI_Interface_EEPROM.c **** 
+  37:SPI_Interface_EEPROM.c **** /*
+  38:SPI_Interface_EEPROM.c **** * @brief RX-only, Dual-Operation 1-Byte READ
+  39:SPI_Interface_EEPROM.c **** */
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccyNhQHX.s 			page 3
+
+
+  40:SPI_Interface_EEPROM.c **** uint8_t SPI_Interface_EEPROM_ReadByte(uint8_t byteTX) {
+  76              		.loc 1 40 0
   77              		.cfi_startproc
   78              		@ args = 0, pretend = 0, frame = 0
   79              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -144,65 +132,64 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 1
   83              		.cfi_offset 4, -8
   84              		.cfi_offset 14, -4
   85 0002 0446     		mov	r4, r0
-  53:SPI_Interface_EEPROM.c **** 	
-  54:SPI_Interface_EEPROM.c **** 	/* Enable the Slave */
-  55:SPI_Interface_EEPROM.c **** 
-  56:SPI_Interface_EEPROM.c ****     CS_2_Write(0);
-  86              		.loc 1 56 0
+  41:SPI_Interface_EEPROM.c **** 	
+  42:SPI_Interface_EEPROM.c **** 	/* Enable the Slave */
+  43:SPI_Interface_EEPROM.c ****     CS_2_Write(0);
+  86              		.loc 1 43 0
   87 0004 0020     		movs	r0, #0
   88              	.LVL9:
   89 0006 FFF7FEFF 		bl	CS_2_Write
   90              	.LVL10:
-  57:SPI_Interface_EEPROM.c **** 
-  58:SPI_Interface_EEPROM.c ****     
-  59:SPI_Interface_EEPROM.c ****     SPIM_2_WriteTxData(byteTX);
-  91              		.loc 1 59 0
+  44:SPI_Interface_EEPROM.c **** 
+  45:SPI_Interface_EEPROM.c ****     /* Load the TX Buffer */
+  46:SPI_Interface_EEPROM.c ****     SPIM_2_WriteTxData(byteTX);
+  91              		.loc 1 46 0
   92 000a 2046     		mov	r0, r4
   93 000c FFF7FEFF 		bl	SPIM_2_WriteTxData
   94              	.LVL11:
-  60:SPI_Interface_EEPROM.c ****     
-  61:SPI_Interface_EEPROM.c ****     SPIM_2_WriteTxData(SPI_DUMMY_BYTE);
-  95              		.loc 1 61 0
+  47:SPI_Interface_EEPROM.c ****     
+  48:SPI_Interface_EEPROM.c ****     /* SPI Dummy Byte */
+  49:SPI_Interface_EEPROM.c ****     SPIM_2_WriteTxData(SPI_DUMMY_BYTE);
+  95              		.loc 1 49 0
   96 0010 0020     		movs	r0, #0
   97 0012 FFF7FEFF 		bl	SPIM_2_WriteTxData
   98              	.LVL12:
   99              	.L5:
-  62:SPI_Interface_EEPROM.c ****     while( !(SPIM_2_ReadTxStatus() & SPIM_2_STS_SPI_DONE) ) ;
- 100              		.loc 1 62 0 discriminator 1
+  50:SPI_Interface_EEPROM.c ****     
+  51:SPI_Interface_EEPROM.c ****     /* Wait for TX/RX */
+  52:SPI_Interface_EEPROM.c ****     while( !(SPIM_2_ReadTxStatus() & SPIM_2_STS_SPI_DONE) ) ;
+ 100              		.loc 1 52 0 discriminator 1
  101 0016 FFF7FEFF 		bl	SPIM_2_ReadTxStatus
  102              	.LVL13:
  103 001a 10F0010F 		tst	r0, #1
  104 001e FAD0     		beq	.L5
-  63:SPI_Interface_EEPROM.c ****     //first read it has no sense
-  64:SPI_Interface_EEPROM.c ****     SPIM_2_ReadRxData();
- 105              		.loc 1 64 0
+  53:SPI_Interface_EEPROM.c ****     
+  54:SPI_Interface_EEPROM.c ****     /* Read the RX Buffer */
+  55:SPI_Interface_EEPROM.c ****     SPIM_2_ReadRxData();
+ 105              		.loc 1 55 0
  106 0020 FFF7FEFF 		bl	SPIM_2_ReadRxData
  107              	.LVL14:
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 4
-
-
-  65:SPI_Interface_EEPROM.c ****     uint8_t byteRX = SPIM_2_ReadRxData();
- 108              		.loc 1 65 0
+  56:SPI_Interface_EEPROM.c ****     uint8_t byteRX = SPIM_2_ReadRxData();
+ 108              		.loc 1 56 0
  109 0024 FFF7FEFF 		bl	SPIM_2_ReadRxData
  110              	.LVL15:
  111 0028 0446     		mov	r4, r0
  112              	.LVL16:
-  66:SPI_Interface_EEPROM.c ****         
-  67:SPI_Interface_EEPROM.c ****     
-  68:SPI_Interface_EEPROM.c ****     
-  69:SPI_Interface_EEPROM.c ****     CS_2_Write(1);
- 113              		.loc 1 69 0
+  57:SPI_Interface_EEPROM.c ****         
+  58:SPI_Interface_EEPROM.c ****     /* Disable the Slave */
+  59:SPI_Interface_EEPROM.c ****     CS_2_Write(1);
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccyNhQHX.s 			page 4
+
+
+ 113              		.loc 1 59 0
  114 002a 0120     		movs	r0, #1
  115 002c FFF7FEFF 		bl	CS_2_Write
  116              	.LVL17:
-  70:SPI_Interface_EEPROM.c ****     
-  71:SPI_Interface_EEPROM.c **** 
-  72:SPI_Interface_EEPROM.c ****     return byteRX;
-  73:SPI_Interface_EEPROM.c ****     
-  74:SPI_Interface_EEPROM.c **** 	
-  75:SPI_Interface_EEPROM.c **** 	
-  76:SPI_Interface_EEPROM.c **** }
- 117              		.loc 1 76 0
+  60:SPI_Interface_EEPROM.c ****     
+  61:SPI_Interface_EEPROM.c ****     return byteRX;	
+  62:SPI_Interface_EEPROM.c ****     
+  63:SPI_Interface_EEPROM.c **** }
+ 117              		.loc 1 63 0
  118 0030 2046     		mov	r0, r4
  119 0032 10BD     		pop	{r4, pc}
  120              		.cfi_endproc
@@ -216,13 +203,13 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 1
  128              		.type	SPI_Interface_EEPROM_Multi_Trade, %function
  129              	SPI_Interface_EEPROM_Multi_Trade:
  130              	.LFB2:
-  77:SPI_Interface_EEPROM.c **** 
-  78:SPI_Interface_EEPROM.c **** 
-  79:SPI_Interface_EEPROM.c **** /*
-  80:SPI_Interface_EEPROM.c **** * @brief Full-Duplex, Multi-Byte Trade (RX/TX)
-  81:SPI_Interface_EEPROM.c **** */
-  82:SPI_Interface_EEPROM.c **** void SPI_Interface_EEPROM_Multi_Trade(uint8_t* dataTX, uint8_t* dataRX, uint8_t nBytes) {
- 131              		.loc 1 82 0
+  64:SPI_Interface_EEPROM.c **** 
+  65:SPI_Interface_EEPROM.c **** 
+  66:SPI_Interface_EEPROM.c **** /*
+  67:SPI_Interface_EEPROM.c **** * @brief Full-Duplex, Multi-Byte Trade (RX/TX)
+  68:SPI_Interface_EEPROM.c **** */
+  69:SPI_Interface_EEPROM.c **** void SPI_Interface_EEPROM_Multi_Trade(uint8_t* dataTX, uint8_t* dataRX, uint8_t nBytes) {
+ 131              		.loc 1 69 0
  132              		.cfi_startproc
  133              		@ args = 0, pretend = 0, frame = 0
  134              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -238,26 +225,26 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 1
  144              		.thumb
  145              		.thumb_func
  146              		.type	SPI_Interface_EEPROM_Multi_RW, %function
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 5
-
-
  147              	SPI_Interface_EEPROM_Multi_RW:
  148              	.LFB3:
-  83:SPI_Interface_EEPROM.c **** 	
-  84:SPI_Interface_EEPROM.c ****     
-  85:SPI_Interface_EEPROM.c **** 	
-  86:SPI_Interface_EEPROM.c **** }
-  87:SPI_Interface_EEPROM.c **** 
-  88:SPI_Interface_EEPROM.c **** /*
-  89:SPI_Interface_EEPROM.c **** * @brief RX-only, Dual-Operation Multi-Byte READ/WRITE
-  90:SPI_Interface_EEPROM.c **** */
-  91:SPI_Interface_EEPROM.c **** void SPI_Interface_EEPROM_Multi_RW(uint8_t* dataTX, uint8_t bytesTX, uint8_t* dataRX, uint8_t bytes
- 149              		.loc 1 91 0
+  70:SPI_Interface_EEPROM.c **** 	
+  71:SPI_Interface_EEPROM.c ****     
+  72:SPI_Interface_EEPROM.c **** 	
+  73:SPI_Interface_EEPROM.c **** }
+  74:SPI_Interface_EEPROM.c **** 
+  75:SPI_Interface_EEPROM.c **** /*
+  76:SPI_Interface_EEPROM.c **** * @brief RX-only, Dual-Operation Multi-Byte READ/WRITE
+  77:SPI_Interface_EEPROM.c **** */
+  78:SPI_Interface_EEPROM.c **** void SPI_Interface_EEPROM_Multi_RW(uint8_t* dataTX, uint8_t bytesTX, uint8_t* dataRX, uint8_t bytes
+ 149              		.loc 1 78 0
  150              		.cfi_startproc
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccyNhQHX.s 			page 5
+
+
  151              		@ args = 0, pretend = 0, frame = 8
  152              		@ frame_needed = 0, uses_anonymous_args = 0
  153              	.LVL19:
- 154              		.loc 1 91 0
+ 154              		.loc 1 78 0
  155 0000 2DE9F043 		push	{r4, r5, r6, r7, r8, r9, lr}
  156              		.cfi_def_cfa_offset 28
  157              		.cfi_offset 4, -28
@@ -273,37 +260,31 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 1
  167 0008 0C46     		mov	r4, r1
  168 000a 1746     		mov	r7, r2
  169 000c 9846     		mov	r8, r3
-  92:SPI_Interface_EEPROM.c **** 	
-  93:SPI_Interface_EEPROM.c **** 
-  94:SPI_Interface_EEPROM.c ****     CS_2_Write(0);
- 170              		.loc 1 94 0
+  79:SPI_Interface_EEPROM.c **** 
+  80:SPI_Interface_EEPROM.c ****     /* Enable the Slave */
+  81:SPI_Interface_EEPROM.c ****     CS_2_Write(0);
+ 170              		.loc 1 81 0
  171 000e 0020     		movs	r0, #0
  172              	.LVL20:
  173 0010 FFF7FEFF 		bl	CS_2_Write
  174              	.LVL21:
-  95:SPI_Interface_EEPROM.c **** 
-  96:SPI_Interface_EEPROM.c **** //	        /* Enable the Slave */
-  97:SPI_Interface_EEPROM.c **** 
-  98:SPI_Interface_EEPROM.c ****             
-  99:SPI_Interface_EEPROM.c ****         int8_t count = bytesTX, index = 0;
- 175              		.loc 1 99 0
+  82:SPI_Interface_EEPROM.c ****         
+  83:SPI_Interface_EEPROM.c ****     int8_t count = bytesTX, index = 0;
+ 175              		.loc 1 83 0
  176 0014 64B2     		sxtb	r4, r4
  177              	.LVL22:
  178 0016 0025     		movs	r5, #0
- 100:SPI_Interface_EEPROM.c ****         	
- 101:SPI_Interface_EEPROM.c ****         /* Transmit Data */
- 102:SPI_Interface_EEPROM.c ****         while ( count > 0 ) {
- 179              		.loc 1 102 0
+  84:SPI_Interface_EEPROM.c ****     	
+  85:SPI_Interface_EEPROM.c ****     /* Transmit Data */
+  86:SPI_Interface_EEPROM.c ****     while ( count > 0 ) {
+ 179              		.loc 1 86 0
  180 0018 11E0     		b	.L9
  181              	.LVL23:
  182              	.L11:
- 103:SPI_Interface_EEPROM.c ****                 
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 6
-
-
- 104:SPI_Interface_EEPROM.c ****         	/* Load the TX buffer with Data*/
- 105:SPI_Interface_EEPROM.c ****                 SPIM_2_PutArray(&dataTX[index*SPI_TxBufferSize], (count > SPI_TxBufferSize ? SPI_Tx
- 183              		.loc 1 105 0
+  87:SPI_Interface_EEPROM.c ****             
+  88:SPI_Interface_EEPROM.c ****     	/* Load the TX buffer with Data*/
+  89:SPI_Interface_EEPROM.c ****         SPIM_2_PutArray(&dataTX[index*SPI_TxBufferSize], (count > SPI_TxBufferSize ? SPI_TxBufferSi
+ 183              		.loc 1 89 0
  184 001a 2146     		mov	r1, r4
  185 001c 082C     		cmp	r4, #8
  186 001e A8BF     		it	ge
@@ -313,74 +294,77 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 1
  190 0028 FFF7FEFF 		bl	SPIM_2_PutArray
  191              	.LVL24:
  192              	.L10:
- 106:SPI_Interface_EEPROM.c ****                 /* Wait for TX */
- 107:SPI_Interface_EEPROM.c ****                 while( !(SPIM_2_ReadTxStatus() & SPIM_2_STS_SPI_DONE) );
- 193              		.loc 1 107 0 discriminator 1
+  90:SPI_Interface_EEPROM.c ****         /* Wait for TX */
+  91:SPI_Interface_EEPROM.c ****         while( !(SPIM_2_ReadTxStatus() & SPIM_2_STS_SPI_DONE) );
+ 193              		.loc 1 91 0 discriminator 1
  194 002c FFF7FEFF 		bl	SPIM_2_ReadTxStatus
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccyNhQHX.s 			page 6
+
+
  195              	.LVL25:
  196 0030 10F0010F 		tst	r0, #1
  197 0034 FAD0     		beq	.L10
- 108:SPI_Interface_EEPROM.c ****                 
- 109:SPI_Interface_EEPROM.c ****                 /* Update count */
- 110:SPI_Interface_EEPROM.c ****                 count -= SPI_TxBufferSize;
- 198              		.loc 1 110 0
+  92:SPI_Interface_EEPROM.c ****         
+  93:SPI_Interface_EEPROM.c ****         /* Update count */
+  94:SPI_Interface_EEPROM.c ****         count -= SPI_TxBufferSize;
+ 198              		.loc 1 94 0
  199 0036 083C     		subs	r4, r4, #8
  200              	.LVL26:
  201 0038 64B2     		sxtb	r4, r4
  202              	.LVL27:
- 111:SPI_Interface_EEPROM.c ****                 index++;
- 203              		.loc 1 111 0
+  95:SPI_Interface_EEPROM.c ****         index++;
+ 203              		.loc 1 95 0
  204 003a 0135     		adds	r5, r5, #1
  205              	.LVL28:
  206 003c 6DB2     		sxtb	r5, r5
  207              	.LVL29:
  208              	.L9:
- 102:SPI_Interface_EEPROM.c ****                 
- 209              		.loc 1 102 0
+  86:SPI_Interface_EEPROM.c ****             
+ 209              		.loc 1 86 0
  210 003e 002C     		cmp	r4, #0
  211 0040 EBDC     		bgt	.L11
- 112:SPI_Interface_EEPROM.c ****                
- 113:SPI_Interface_EEPROM.c ****         }
- 114:SPI_Interface_EEPROM.c ****             
- 115:SPI_Interface_EEPROM.c ****         /* Clear the RX Buffer */
- 116:SPI_Interface_EEPROM.c ****         SPIM_2_ClearFIFO();
- 212              		.loc 1 116 0
+  96:SPI_Interface_EEPROM.c ****            
+  97:SPI_Interface_EEPROM.c ****     }
+  98:SPI_Interface_EEPROM.c ****         
+  99:SPI_Interface_EEPROM.c ****     /* Clear the RX Buffer */
+ 100:SPI_Interface_EEPROM.c ****     SPIM_2_ClearFIFO();
+ 212              		.loc 1 100 0
  213 0042 FFF7FEFF 		bl	SPIM_2_ClearFIFO
  214              	.LVL30:
- 117:SPI_Interface_EEPROM.c ****         SPIM_2_ClearRxBuffer();
- 215              		.loc 1 117 0
+ 101:SPI_Interface_EEPROM.c ****     SPIM_2_ClearRxBuffer();
+ 215              		.loc 1 101 0
  216 0046 FFF7FEFF 		bl	SPIM_2_ClearRxBuffer
  217              	.LVL31:
- 118:SPI_Interface_EEPROM.c ****             
- 119:SPI_Interface_EEPROM.c ****         /* Init the Dummy TX Buffer */
- 120:SPI_Interface_EEPROM.c ****         uint8_t dummyTX[SPI_RxBufferSize];
- 121:SPI_Interface_EEPROM.c ****         memset(dummyTX, SPI_DUMMY_BYTE, SPI_RxBufferSize);
- 218              		.loc 1 121 0
+ 102:SPI_Interface_EEPROM.c ****         
+ 103:SPI_Interface_EEPROM.c ****     /* Init the Dummy TX Buffer */
+ 104:SPI_Interface_EEPROM.c ****     uint8_t dummyTX[SPI_RxBufferSize];
+ 105:SPI_Interface_EEPROM.c ****     memset(dummyTX, SPI_DUMMY_BYTE, SPI_RxBufferSize);
+ 218              		.loc 1 105 0
  219 004a 0026     		movs	r6, #0
  220              	.LVL32:
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 7
-
-
  221 004c 0096     		str	r6, [sp]
  222 004e 0196     		str	r6, [sp, #4]
- 122:SPI_Interface_EEPROM.c ****             
- 123:SPI_Interface_EEPROM.c ****         /* Update count for RX */
- 124:SPI_Interface_EEPROM.c ****         count = bytesRX;
- 223              		.loc 1 124 0
+ 106:SPI_Interface_EEPROM.c ****         
+ 107:SPI_Interface_EEPROM.c ****     /* Update count for RX */
+ 108:SPI_Interface_EEPROM.c ****     count = bytesRX;
+ 223              		.loc 1 108 0
  224 0050 4FFA88F8 		sxtb	r8, r8
  225              	.LVL33:
- 125:SPI_Interface_EEPROM.c ****         index = 0;
- 126:SPI_Interface_EEPROM.c ****             
- 127:SPI_Interface_EEPROM.c ****         /* Get the RX Data */
- 128:SPI_Interface_EEPROM.c ****         while ( count > 0 ) {
- 226              		.loc 1 128 0
+ 109:SPI_Interface_EEPROM.c ****     index = 0;
+ 110:SPI_Interface_EEPROM.c ****         
+ 111:SPI_Interface_EEPROM.c ****     /* Get the RX Data */
+ 112:SPI_Interface_EEPROM.c ****     while ( count > 0 ) {
+ 226              		.loc 1 112 0
  227 0054 20E0     		b	.L12
  228              	.LVL34:
  229              	.L16:
- 129:SPI_Interface_EEPROM.c ****              
- 130:SPI_Interface_EEPROM.c ****                 /* Load the TX buffer with Dummy Bytes*/
- 131:SPI_Interface_EEPROM.c ****                 SPIM_2_PutArray(dummyTX, (count > SPI_TxBufferSize ? SPI_TxBufferSize : count));
- 230              		.loc 1 131 0
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccyNhQHX.s 			page 7
+
+
+ 113:SPI_Interface_EEPROM.c ****          
+ 114:SPI_Interface_EEPROM.c ****         /* Load the TX buffer with Dummy Bytes*/
+ 115:SPI_Interface_EEPROM.c ****         SPIM_2_PutArray(dummyTX, (count > SPI_TxBufferSize ? SPI_TxBufferSize : count));
+ 230              		.loc 1 115 0
  231 0056 C146     		mov	r9, r8
  232 0058 B8F1080F 		cmp	r8, #8
  233 005c A8BF     		it	ge
@@ -390,9 +374,9 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 1
  237 0068 FFF7FEFF 		bl	SPIM_2_PutArray
  238              	.LVL35:
  239              	.L13:
- 132:SPI_Interface_EEPROM.c ****                 /* Wait for TX */
- 133:SPI_Interface_EEPROM.c ****                 while( !(SPIM_2_ReadTxStatus() & SPIM_2_STS_SPI_DONE) );
- 240              		.loc 1 133 0 discriminator 1
+ 116:SPI_Interface_EEPROM.c ****         /* Wait for TX */
+ 117:SPI_Interface_EEPROM.c ****         while( !(SPIM_2_ReadTxStatus() & SPIM_2_STS_SPI_DONE) );
+ 240              		.loc 1 117 0 discriminator 1
  241 006c FFF7FEFF 		bl	SPIM_2_ReadTxStatus
  242              	.LVL36:
  243 0070 10F0010F 		tst	r0, #1
@@ -402,75 +386,74 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 1
  247              	.LVL37:
  248              	.L15:
  249              	.LBB2:
- 134:SPI_Interface_EEPROM.c ****                 /* Read the RX Buffer */
- 135:SPI_Interface_EEPROM.c ****                 for( uint8_t j = 0; j < (count > SPI_TxBufferSize ? SPI_TxBufferSize : count); j++ 
- 136:SPI_Interface_EEPROM.c ****                     dataRX[j + index*SPI_RxBufferSize] = SPIM_2_ReadRxData();   
- 250              		.loc 1 136 0 discriminator 3
+ 118:SPI_Interface_EEPROM.c ****         /* Read the RX Buffer */
+ 119:SPI_Interface_EEPROM.c ****         for( uint8_t j = 0; j < (count > SPI_TxBufferSize ? SPI_TxBufferSize : count); j++ ) {
+ 120:SPI_Interface_EEPROM.c ****             dataRX[j + index*SPI_RxBufferSize] = SPIM_2_ReadRxData();   
+ 250              		.loc 1 120 0 discriminator 3
  251 007a 04EBC605 		add	r5, r4, r6, lsl #3
  252 007e FFF7FEFF 		bl	SPIM_2_ReadRxData
  253              	.LVL38:
  254 0082 7855     		strb	r0, [r7, r5]
- 135:SPI_Interface_EEPROM.c ****                     dataRX[j + index*SPI_RxBufferSize] = SPIM_2_ReadRxData();   
- 255              		.loc 1 135 0 discriminator 3
+ 119:SPI_Interface_EEPROM.c ****             dataRX[j + index*SPI_RxBufferSize] = SPIM_2_ReadRxData();   
+ 255              		.loc 1 119 0 discriminator 3
  256 0084 0134     		adds	r4, r4, #1
  257              	.LVL39:
  258 0086 E4B2     		uxtb	r4, r4
  259              	.LVL40:
  260              	.L14:
- 135:SPI_Interface_EEPROM.c ****                     dataRX[j + index*SPI_RxBufferSize] = SPIM_2_ReadRxData();   
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 8
-
-
- 261              		.loc 1 135 0 is_stmt 0 discriminator 1
+ 119:SPI_Interface_EEPROM.c ****             dataRX[j + index*SPI_RxBufferSize] = SPIM_2_ReadRxData();   
+ 261              		.loc 1 119 0 is_stmt 0 discriminator 1
  262 0088 4C45     		cmp	r4, r9
  263 008a F6DB     		blt	.L15
  264              	.LBE2:
- 137:SPI_Interface_EEPROM.c ****                 }
- 138:SPI_Interface_EEPROM.c ****                 
- 139:SPI_Interface_EEPROM.c ****                 count -= SPI_RxBufferSize;
- 265              		.loc 1 139 0 is_stmt 1
+ 121:SPI_Interface_EEPROM.c ****         }
+ 122:SPI_Interface_EEPROM.c ****         
+ 123:SPI_Interface_EEPROM.c ****         count -= SPI_RxBufferSize;
+ 265              		.loc 1 123 0 is_stmt 1
  266 008c A8F10808 		sub	r8, r8, #8
  267              	.LVL41:
  268 0090 4FFA88F8 		sxtb	r8, r8
  269              	.LVL42:
- 140:SPI_Interface_EEPROM.c ****                 index++;
- 270              		.loc 1 140 0
+ 124:SPI_Interface_EEPROM.c ****         index++;
+ 270              		.loc 1 124 0
  271 0094 0136     		adds	r6, r6, #1
  272              	.LVL43:
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccyNhQHX.s 			page 8
+
+
  273 0096 76B2     		sxtb	r6, r6
  274              	.LVL44:
  275              	.L12:
- 128:SPI_Interface_EEPROM.c ****              
- 276              		.loc 1 128 0
+ 112:SPI_Interface_EEPROM.c ****          
+ 276              		.loc 1 112 0
  277 0098 B8F1000F 		cmp	r8, #0
  278 009c DBDC     		bgt	.L16
- 141:SPI_Interface_EEPROM.c ****                 
- 142:SPI_Interface_EEPROM.c ****         }
- 143:SPI_Interface_EEPROM.c ****             
- 144:SPI_Interface_EEPROM.c ****         /* Disable the Slave */
- 145:SPI_Interface_EEPROM.c **** 
- 146:SPI_Interface_EEPROM.c ****         CS_2_Write(1);
- 279              		.loc 1 146 0
+ 125:SPI_Interface_EEPROM.c ****             
+ 126:SPI_Interface_EEPROM.c ****     }
+ 127:SPI_Interface_EEPROM.c ****         
+ 128:SPI_Interface_EEPROM.c ****     /* Disable the Slave */
+ 129:SPI_Interface_EEPROM.c ****     CS_2_Write(1);
+ 279              		.loc 1 129 0
  280 009e 0120     		movs	r0, #1
  281 00a0 FFF7FEFF 		bl	CS_2_Write
  282              	.LVL45:
- 147:SPI_Interface_EEPROM.c **** 
- 148:SPI_Interface_EEPROM.c **** 
- 149:SPI_Interface_EEPROM.c ****         /* Clear */
- 150:SPI_Interface_EEPROM.c ****         SPIM_2_ClearFIFO();
- 283              		.loc 1 150 0
+ 130:SPI_Interface_EEPROM.c **** 
+ 131:SPI_Interface_EEPROM.c ****     /* Clear */
+ 132:SPI_Interface_EEPROM.c ****     SPIM_2_ClearFIFO();
+ 283              		.loc 1 132 0
  284 00a4 FFF7FEFF 		bl	SPIM_2_ClearFIFO
  285              	.LVL46:
- 151:SPI_Interface_EEPROM.c ****         SPIM_2_ClearRxBuffer();
- 286              		.loc 1 151 0
+ 133:SPI_Interface_EEPROM.c ****     SPIM_2_ClearRxBuffer();
+ 286              		.loc 1 133 0
  287 00a8 FFF7FEFF 		bl	SPIM_2_ClearRxBuffer
  288              	.LVL47:
- 152:SPI_Interface_EEPROM.c ****         SPIM_2_ClearTxBuffer();
- 289              		.loc 1 152 0
+ 134:SPI_Interface_EEPROM.c ****     SPIM_2_ClearTxBuffer();
+ 289              		.loc 1 134 0
  290 00ac FFF7FEFF 		bl	SPIM_2_ClearTxBuffer
  291              	.LVL48:
- 153:SPI_Interface_EEPROM.c **** }
- 292              		.loc 1 153 0
+ 135:SPI_Interface_EEPROM.c ****     
+ 136:SPI_Interface_EEPROM.c **** }
+ 292              		.loc 1 136 0
  293 00b0 03B0     		add	sp, sp, #12
  294              		.cfi_def_cfa_offset 28
  295              		@ sp needed
@@ -478,9 +461,6 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 1
  297              		.cfi_endproc
  298              	.LFE3:
  299              		.size	SPI_Interface_EEPROM_Multi_RW, .-SPI_Interface_EEPROM_Multi_RW
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 9
-
-
  300 00b6 00BF     		.text
  301              	.Letext0:
  302              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.3\\psoc creator\\import\\gnu\\arm\\5.4.
@@ -498,6 +478,9 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 1
  314 000c BF000000 		.4byte	.LASF43
  315 0010 0C       		.byte	0xc
  316 0011 D4020000 		.4byte	.LASF44
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccyNhQHX.s 			page 9
+
+
  317 0015 BC010000 		.4byte	.LASF45
  318 0019 00000000 		.4byte	.Ldebug_ranges0+0
  319 001d 00000000 		.4byte	0
@@ -538,9 +521,6 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 1
  354 0061 4D010000 		.4byte	.LASF7
  355 0065 03       		.uleb128 0x3
  356 0066 08       		.byte	0x8
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 10
-
-
  357 0067 05       		.byte	0x5
  358 0068 A6020000 		.4byte	.LASF8
  359 006c 03       		.uleb128 0x3
@@ -558,6 +538,9 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 1
  371 0081 02       		.uleb128 0x2
  372 0082 98000000 		.4byte	.LASF11
  373 0086 03       		.byte	0x3
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccyNhQHX.s 			page 10
+
+
  374 0087 14       		.byte	0x14
  375 0088 25000000 		.4byte	0x25
  376 008c 02       		.uleb128 0x2
@@ -593,31 +576,31 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 1
  406 00c6 06       		.uleb128 0x6
  407 00c7 00000000 		.4byte	.LASF19
  408 00cb 01       		.byte	0x1
- 409 00cc 18       		.byte	0x18
+ 409 00cc 0F       		.byte	0xf
  410 00cd 8C000000 		.4byte	0x8c
  411 00d1 00000000 		.4byte	.LFB0
  412 00d5 2A000000 		.4byte	.LFE0-.LFB0
  413 00d9 01       		.uleb128 0x1
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 11
-
-
  414 00da 9C       		.byte	0x9c
  415 00db 44010000 		.4byte	0x144
  416 00df 07       		.uleb128 0x7
  417 00e0 70000000 		.4byte	.LASF21
  418 00e4 01       		.byte	0x1
- 419 00e5 18       		.byte	0x18
+ 419 00e5 0F       		.byte	0xf
  420 00e6 8C000000 		.4byte	0x8c
  421 00ea 00000000 		.4byte	.LLST0
  422 00ee 08       		.uleb128 0x8
  423 00ef AC000000 		.4byte	.LASF23
  424 00f3 01       		.byte	0x1
- 425 00f4 26       		.byte	0x26
+ 425 00f4 1B       		.byte	0x1b
  426 00f5 8C000000 		.4byte	0x8c
  427 00f9 01       		.uleb128 0x1
  428 00fa 54       		.byte	0x54
  429 00fb 09       		.uleb128 0x9
  430 00fc 0A000000 		.4byte	.LVL2
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccyNhQHX.s 			page 11
+
+
  431 0100 7B030000 		.4byte	0x37b
  432 0104 0E010000 		.4byte	0x10e
  433 0108 0A       		.uleb128 0xa
@@ -656,11 +639,8 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 1
  466 0144 06       		.uleb128 0x6
  467 0145 29020000 		.4byte	.LASF20
  468 0149 01       		.byte	0x1
- 469 014a 34       		.byte	0x34
+ 469 014a 28       		.byte	0x28
  470 014b 8C000000 		.4byte	0x8c
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 12
-
-
  471 014f 00000000 		.4byte	.LFB1
  472 0153 34000000 		.4byte	.LFE1-.LFB1
  473 0157 01       		.uleb128 0x1
@@ -669,15 +649,18 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 1
  476 015d 07       		.uleb128 0x7
  477 015e 9F000000 		.4byte	.LASF22
  478 0162 01       		.byte	0x1
- 479 0163 34       		.byte	0x34
+ 479 0163 28       		.byte	0x28
  480 0164 8C000000 		.4byte	0x8c
  481 0168 21000000 		.4byte	.LLST1
  482 016c 08       		.uleb128 0x8
  483 016d CD020000 		.4byte	.LASF24
  484 0171 01       		.byte	0x1
- 485 0172 41       		.byte	0x41
+ 485 0172 38       		.byte	0x38
  486 0173 8C000000 		.4byte	0x8c
  487 0177 01       		.uleb128 0x1
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccyNhQHX.s 			page 12
+
+
  488 0178 54       		.byte	0x54
  489 0179 09       		.uleb128 0x9
  490 017a 0A000000 		.4byte	.LVL10
@@ -718,9 +701,6 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 1
  525 01c1 9C030000 		.4byte	0x39c
  526 01c5 0B       		.uleb128 0xb
  527 01c6 28000000 		.4byte	.LVL15
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 13
-
-
  528 01ca 9C030000 		.4byte	0x39c
  529 01ce 0C       		.uleb128 0xc
  530 01cf 30000000 		.4byte	.LVL17
@@ -735,30 +715,33 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 1
  539 01de 0D       		.uleb128 0xd
  540 01df 8A010000 		.4byte	.LASF28
  541 01e3 01       		.byte	0x1
- 542 01e4 52       		.byte	0x52
+ 542 01e4 45       		.byte	0x45
  543 01e5 00000000 		.4byte	.LFB2
  544 01e9 02000000 		.4byte	.LFE2-.LFB2
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccyNhQHX.s 			page 13
+
+
  545 01ed 01       		.uleb128 0x1
  546 01ee 9C       		.byte	0x9c
  547 01ef 1B020000 		.4byte	0x21b
  548 01f3 0E       		.uleb128 0xe
  549 01f4 27030000 		.4byte	.LASF25
  550 01f8 01       		.byte	0x1
- 551 01f9 52       		.byte	0x52
+ 551 01f9 45       		.byte	0x45
  552 01fa 1B020000 		.4byte	0x21b
  553 01fe 01       		.uleb128 0x1
  554 01ff 50       		.byte	0x50
  555 0200 0E       		.uleb128 0xe
  556 0201 83020000 		.4byte	.LASF26
  557 0205 01       		.byte	0x1
- 558 0206 52       		.byte	0x52
+ 558 0206 45       		.byte	0x45
  559 0207 1B020000 		.4byte	0x21b
  560 020b 01       		.uleb128 0x1
  561 020c 51       		.byte	0x51
  562 020d 0E       		.uleb128 0xe
  563 020e 56000000 		.4byte	.LASF27
  564 0212 01       		.byte	0x1
- 565 0213 52       		.byte	0x52
+ 565 0213 45       		.byte	0x45
  566 0214 8C000000 		.4byte	0x8c
  567 0218 01       		.uleb128 0x1
  568 0219 52       		.byte	0x52
@@ -769,7 +752,7 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 1
  573 0221 0D       		.uleb128 0xd
  574 0222 38000000 		.4byte	.LASF29
  575 0226 01       		.byte	0x1
- 576 0227 5B       		.byte	0x5b
+ 576 0227 4E       		.byte	0x4e
  577 0228 00000000 		.4byte	.LFB3
  578 022c B6000000 		.4byte	.LFE3-.LFB3
  579 0230 01       		.uleb128 0x1
@@ -778,46 +761,46 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 1
  582 0236 07       		.uleb128 0x7
  583 0237 27030000 		.4byte	.LASF25
  584 023b 01       		.byte	0x1
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 14
-
-
- 585 023c 5B       		.byte	0x5b
+ 585 023c 4E       		.byte	0x4e
  586 023d 1B020000 		.4byte	0x21b
  587 0241 42000000 		.4byte	.LLST2
  588 0245 07       		.uleb128 0x7
  589 0246 8A020000 		.4byte	.LASF30
  590 024a 01       		.byte	0x1
- 591 024b 5B       		.byte	0x5b
+ 591 024b 4E       		.byte	0x4e
  592 024c 8C000000 		.4byte	0x8c
  593 0250 6E000000 		.4byte	.LLST3
  594 0254 07       		.uleb128 0x7
  595 0255 83020000 		.4byte	.LASF26
  596 0259 01       		.byte	0x1
- 597 025a 5B       		.byte	0x5b
+ 597 025a 4E       		.byte	0x4e
  598 025b 1B020000 		.4byte	0x21b
  599 025f 8F000000 		.4byte	.LLST4
  600 0263 07       		.uleb128 0x7
  601 0264 73020000 		.4byte	.LASF31
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccyNhQHX.s 			page 14
+
+
  602 0268 01       		.byte	0x1
- 603 0269 5B       		.byte	0x5b
+ 603 0269 4E       		.byte	0x4e
  604 026a 8C000000 		.4byte	0x8c
  605 026e AD000000 		.4byte	.LLST5
  606 0272 10       		.uleb128 0x10
  607 0273 32000000 		.4byte	.LASF32
  608 0277 01       		.byte	0x1
- 609 0278 63       		.byte	0x63
+ 609 0278 53       		.byte	0x53
  610 0279 81000000 		.4byte	0x81
  611 027d CE000000 		.4byte	.LLST6
  612 0281 10       		.uleb128 0x10
  613 0282 EB020000 		.4byte	.LASF33
  614 0286 01       		.byte	0x1
- 615 0287 63       		.byte	0x63
+ 615 0287 53       		.byte	0x53
  616 0288 81000000 		.4byte	0x81
  617 028c 02010000 		.4byte	.LLST7
  618 0290 08       		.uleb128 0x8
  619 0291 7B020000 		.4byte	.LASF34
  620 0295 01       		.byte	0x1
- 621 0296 78       		.byte	0x78
+ 621 0296 68       		.byte	0x68
  622 0297 6B030000 		.4byte	0x36b
  623 029b 02       		.uleb128 0x2
  624 029c 91       		.byte	0x91
@@ -829,7 +812,7 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 1
  630 02ab 12       		.uleb128 0x12
  631 02ac 6A00     		.ascii	"j\000"
  632 02ae 01       		.byte	0x1
- 633 02af 87       		.byte	0x87
+ 633 02af 77       		.byte	0x77
  634 02b0 8C000000 		.4byte	0x8c
  635 02b4 4E010000 		.4byte	.LLST8
  636 02b8 0B       		.uleb128 0xb
@@ -838,9 +821,6 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 1
  639 02c1 00       		.byte	0
  640 02c2 09       		.uleb128 0x9
  641 02c3 14000000 		.4byte	.LVL21
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 15
-
-
  642 02c7 7B030000 		.4byte	0x37b
  643 02cb D5020000 		.4byte	0x2d5
  644 02cf 0A       		.uleb128 0xa
@@ -858,6 +838,9 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 1
  656 02e4 50       		.byte	0x50
  657 02e5 07       		.uleb128 0x7
  658 02e6 75       		.byte	0x75
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccyNhQHX.s 			page 15
+
+
  659 02e7 00       		.sleb128 0
  660 02e8 33       		.byte	0x33
  661 02e9 24       		.byte	0x24
@@ -898,9 +881,6 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 1
  696 0328 50       		.byte	0x50
  697 0329 02       		.uleb128 0x2
  698 032a 7D       		.byte	0x7d
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 16
-
-
  699 032b 00       		.sleb128 0
  700 032c 0A       		.uleb128 0xa
  701 032d 01       		.uleb128 0x1
@@ -918,6 +898,9 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 1
  713 0345 4F030000 		.4byte	0x34f
  714 0349 0A       		.uleb128 0xa
  715 034a 01       		.uleb128 0x1
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccyNhQHX.s 			page 16
+
+
  716 034b 50       		.byte	0x50
  717 034c 01       		.uleb128 0x1
  718 034d 31       		.byte	0x31
@@ -958,9 +941,6 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 1
  753 039d 75000000 		.4byte	.LASF38
  754 03a1 75000000 		.4byte	.LASF38
  755 03a5 06       		.byte	0x6
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 17
-
-
  756 03a6 60       		.byte	0x60
  757 03a7 15       		.uleb128 0x15
  758 03a8 7A010000 		.4byte	.LASF39
@@ -978,6 +958,9 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 1
  770 03c6 06       		.byte	0x6
  771 03c7 64       		.byte	0x64
  772 03c8 15       		.uleb128 0x15
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccyNhQHX.s 			page 17
+
+
  773 03c9 65010000 		.4byte	.LASF42
  774 03cd 65010000 		.4byte	.LASF42
  775 03d1 06       		.byte	0x6
@@ -1018,9 +1001,6 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 1
  810 001e 00       		.byte	0
  811 001f 00       		.byte	0
  812 0020 03       		.uleb128 0x3
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 18
-
-
  813 0021 24       		.uleb128 0x24
  814 0022 00       		.byte	0
  815 0023 0B       		.uleb128 0xb
@@ -1038,6 +1018,9 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 1
  827 002f 0B       		.uleb128 0xb
  828 0030 3E       		.uleb128 0x3e
  829 0031 0B       		.uleb128 0xb
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccyNhQHX.s 			page 18
+
+
  830 0032 03       		.uleb128 0x3
  831 0033 08       		.uleb128 0x8
  832 0034 00       		.byte	0
@@ -1078,9 +1061,6 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 1
  867 0057 18       		.uleb128 0x18
  868 0058 9742     		.uleb128 0x2117
  869 005a 19       		.uleb128 0x19
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 19
-
-
  870 005b 01       		.uleb128 0x1
  871 005c 13       		.uleb128 0x13
  872 005d 00       		.byte	0
@@ -1098,6 +1078,9 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 1
  884 0069 13       		.uleb128 0x13
  885 006a 02       		.uleb128 0x2
  886 006b 17       		.uleb128 0x17
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccyNhQHX.s 			page 19
+
+
  887 006c 00       		.byte	0
  888 006d 00       		.byte	0
  889 006e 08       		.uleb128 0x8
@@ -1138,9 +1121,6 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 1
  924 0096 0B       		.uleb128 0xb
  925 0097 898201   		.uleb128 0x4109
  926 009a 00       		.byte	0
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 20
-
-
  927 009b 11       		.uleb128 0x11
  928 009c 01       		.uleb128 0x1
  929 009d 31       		.uleb128 0x31
@@ -1158,6 +1138,9 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 1
  941 00ab 00       		.byte	0
  942 00ac 0D       		.uleb128 0xd
  943 00ad 2E       		.uleb128 0x2e
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccyNhQHX.s 			page 20
+
+
  944 00ae 01       		.byte	0x1
  945 00af 3F       		.uleb128 0x3f
  946 00b0 19       		.uleb128 0x19
@@ -1198,9 +1181,6 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 1
  981 00d4 00       		.byte	0
  982 00d5 0F       		.uleb128 0xf
  983 00d6 0F       		.uleb128 0xf
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 21
-
-
  984 00d7 00       		.byte	0
  985 00d8 0B       		.uleb128 0xb
  986 00d9 0B       		.uleb128 0xb
@@ -1218,6 +1198,9 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 1
  998 00e5 3B       		.uleb128 0x3b
  999 00e6 0B       		.uleb128 0xb
  1000 00e7 49       		.uleb128 0x49
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccyNhQHX.s 			page 21
+
+
  1001 00e8 13       		.uleb128 0x13
  1002 00e9 02       		.uleb128 0x2
  1003 00ea 17       		.uleb128 0x17
@@ -1258,9 +1241,6 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 1
  1038 010d 13       		.uleb128 0x13
  1039 010e 00       		.byte	0
  1040 010f 00       		.byte	0
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 22
-
-
  1041 0110 14       		.uleb128 0x14
  1042 0111 21       		.uleb128 0x21
  1043 0112 00       		.byte	0
@@ -1278,6 +1258,9 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 1
  1055 011e 3C       		.uleb128 0x3c
  1056 011f 19       		.uleb128 0x19
  1057 0120 6E       		.uleb128 0x6e
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccyNhQHX.s 			page 22
+
+
  1058 0121 0E       		.uleb128 0xe
  1059 0122 03       		.uleb128 0x3
  1060 0123 0E       		.uleb128 0xe
@@ -1318,9 +1301,6 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 1
  1095 0039 9F       		.byte	0x9f
  1096 003a 00000000 		.4byte	0
  1097 003e 00000000 		.4byte	0
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 23
-
-
  1098              	.LLST2:
  1099 0042 00000000 		.4byte	.LVL19
  1100 0046 10000000 		.4byte	.LVL20
@@ -1338,6 +1318,9 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 1
  1112 0064 50       		.byte	0x50
  1113 0065 9F       		.byte	0x9f
  1114 0066 00000000 		.4byte	0
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccyNhQHX.s 			page 23
+
+
  1115 006a 00000000 		.4byte	0
  1116              	.LLST3:
  1117 006e 00000000 		.4byte	.LVL19
@@ -1378,9 +1361,6 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 1
  1152 00c5 9F       		.byte	0x9f
  1153 00c6 00000000 		.4byte	0
  1154 00ca 00000000 		.4byte	0
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 24
-
-
  1155              	.LLST6:
  1156 00ce 16000000 		.4byte	.LVL22
  1157 00d2 38000000 		.4byte	.LVL26
@@ -1398,6 +1378,9 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 1
  1169 00f3 B6000000 		.4byte	.LFE3
  1170 00f7 0100     		.2byte	0x1
  1171 00f9 58       		.byte	0x58
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccyNhQHX.s 			page 24
+
+
  1172 00fa 00000000 		.4byte	0
  1173 00fe 00000000 		.4byte	0
  1174              	.LLST7:
@@ -1438,9 +1421,6 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 1
  1209 015d 98000000 		.4byte	.LVL44
  1210 0161 0100     		.2byte	0x1
  1211 0163 54       		.byte	0x54
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 25
-
-
  1212 0164 00000000 		.4byte	0
  1213 0168 00000000 		.4byte	0
  1214              		.section	.debug_aranges,"",%progbits
@@ -1458,6 +1438,9 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 1
  1226 0020 00000000 		.4byte	.LFB2
  1227 0024 02000000 		.4byte	.LFE2-.LFB2
  1228 0028 00000000 		.4byte	.LFB3
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccyNhQHX.s 			page 25
+
+
  1229 002c B6000000 		.4byte	.LFE3-.LFB3
  1230 0030 00000000 		.4byte	0
  1231 0034 00000000 		.4byte	0
@@ -1498,9 +1481,6 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 1
  1254 0032 636F756E 		.ascii	"count\000"
  1254      7400
  1255              	.LASF29:
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 26
-
-
  1256 0038 5350495F 		.ascii	"SPI_Interface_EEPROM_Multi_RW\000"
  1256      496E7465 
  1256      72666163 
@@ -1518,6 +1498,9 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 1
  1261              	.LASF21:
  1262 0070 62797465 		.ascii	"byte\000"
  1262      00
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccyNhQHX.s 			page 26
+
+
  1263              	.LASF38:
  1264 0075 5350494D 		.ascii	"SPIM_2_ReadRxData\000"
  1264      5F325F52 
@@ -1558,9 +1541,6 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 1
  1279      6973696F 
  1279      6E203233 
  1279      37373135 
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 27
-
-
  1280 0125 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
  1280      66756E63 
  1280      74696F6E 
@@ -1578,6 +1558,9 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 1
  1285              	.LASF42:
  1286 0165 5350494D 		.ascii	"SPIM_2_ClearTxBuffer\000"
  1286      5F325F43 
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccyNhQHX.s 			page 27
+
+
  1286      6C656172 
  1286      54784275 
  1286      66666572 
@@ -1618,9 +1601,6 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 1
  1299      746100
  1300              	.LASF20:
  1301 0229 5350495F 		.ascii	"SPI_Interface_EEPROM_ReadByte\000"
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 28
-
-
  1301      496E7465 
  1301      72666163 
  1301      655F4545 
@@ -1638,6 +1618,9 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 1
  1305      65642069 
  1306              	.LASF12:
  1307 026b 75696E74 		.ascii	"uint8_t\000"
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccyNhQHX.s 			page 28
+
+
  1307      385F7400 
  1308              	.LASF31:
  1309 0273 62797465 		.ascii	"bytesRX\000"
@@ -1678,9 +1661,6 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 1
  1327      525800
  1328              	.LASF44:
  1329 02d4 5350495F 		.ascii	"SPI_Interface_EEPROM.c\000"
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 29
-
-
  1329      496E7465 
  1329      72666163 
  1329      655F4545 
@@ -1698,6 +1678,9 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccbamn8W.s 			page 1
  1335 0306 6C6F6E67 		.ascii	"long int\000"
  1335      20696E74 
  1335      00
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccyNhQHX.s 			page 29
+
+
  1336              	.LASF17:
  1337 030f 6C6F6E67 		.ascii	"long double\000"
  1337      20646F75 

@@ -5,15 +5,11 @@
  * This header file contains macros and function prototypes to interface
  * with the EEPROM 25LC256.
  *
- * @author Mattia Pesenti
- * @date 9 April, 2020
 */
 
 #pragma once
 
 #include "SPI_Interface_EEPROM.h"
-
-
 
 extern uint8_t eeprom_Status;
 

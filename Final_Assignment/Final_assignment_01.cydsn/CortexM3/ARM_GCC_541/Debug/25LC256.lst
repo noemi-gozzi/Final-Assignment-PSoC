@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc1qXrnN.s 			page 1
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccsuLVMu.s 			page 1
 
 
    1              		.syntax unified
@@ -35,17 +35,15 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc1qXrnN.s 			page 1
    5:25LC256.c     ****  * This c file contains the API functions to interface
    6:25LC256.c     ****  * with the SPI EEPROM 25LC256.
    7:25LC256.c     ****  *
-   8:25LC256.c     ****  * @author Mattia Pesenti
-   9:25LC256.c     ****  * @date 24 March, 2020
-  10:25LC256.c     **** */
-  11:25LC256.c     **** 
-  12:25LC256.c     **** #include "25LC256.h"
-  13:25LC256.c     **** uint8_t eeprom_Status;
+   8:25LC256.c     **** */
+   9:25LC256.c     **** 
+  10:25LC256.c     **** #include "25LC256.h"
+  11:25LC256.c     **** uint8_t eeprom_Status;
+  12:25LC256.c     **** 
+  13:25LC256.c     **** /** ====== Helper Functions ====== **/
   14:25LC256.c     **** 
-  15:25LC256.c     **** /** ====== Helper Functions ====== **/
-  16:25LC256.c     **** 
-  17:25LC256.c     **** uint8_t EEPROM_readStatus() {
-  28              		.loc 1 17 0
+  15:25LC256.c     **** uint8_t EEPROM_readStatus() {
+  28              		.loc 1 15 0
   29              		.cfi_startproc
   30              		@ args = 0, pretend = 0, frame = 0
   31              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -53,18 +51,18 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc1qXrnN.s 			page 1
   33              		.cfi_def_cfa_offset 8
   34              		.cfi_offset 3, -8
   35              		.cfi_offset 14, -4
-  18:25LC256.c     ****     
-  19:25LC256.c     **** 	return SPI_Interface_EEPROM_ReadByte(SPI_EEPROM_RDSR);
-  36              		.loc 1 19 0
+  16:25LC256.c     ****     
+  17:25LC256.c     **** 	return SPI_Interface_EEPROM_ReadByte(SPI_EEPROM_RDSR);
+  36              		.loc 1 17 0
   37 0002 0520     		movs	r0, #5
   38 0004 FFF7FEFF 		bl	SPI_Interface_EEPROM_ReadByte
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc1qXrnN.s 			page 2
-
-
   39              	.LVL0:
-  20:25LC256.c     ****     
-  21:25LC256.c     **** }
-  40              		.loc 1 21 0
+  18:25LC256.c     ****     
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccsuLVMu.s 			page 2
+
+
+  19:25LC256.c     **** }
+  40              		.loc 1 19 0
   41 0008 08BD     		pop	{r3, pc}
   42              		.cfi_endproc
   43              	.LFE0:
@@ -77,9 +75,9 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc1qXrnN.s 			page 1
   50              		.type	EEPROM_writeEnable, %function
   51              	EEPROM_writeEnable:
   52              	.LFB1:
-  22:25LC256.c     **** 
-  23:25LC256.c     **** void EEPROM_writeEnable() {
-  53              		.loc 1 23 0
+  20:25LC256.c     **** 
+  21:25LC256.c     **** void EEPROM_writeEnable() {
+  53              		.loc 1 21 0
   54              		.cfi_startproc
   55              		@ args = 0, pretend = 0, frame = 0
   56              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -87,10 +85,10 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc1qXrnN.s 			page 1
   58              		.cfi_def_cfa_offset 8
   59              		.cfi_offset 3, -8
   60              		.cfi_offset 14, -4
-  24:25LC256.c     ****     
-  25:25LC256.c     **** 	/* Send 1-byte Instruction */
-  26:25LC256.c     **** 	SPI_Interface_EEPROM_tradeByte(SPI_EEPROM_WREN);
-  61              		.loc 1 26 0
+  22:25LC256.c     ****     
+  23:25LC256.c     **** 	/* Send 1-byte Instruction */
+  24:25LC256.c     **** 	SPI_Interface_EEPROM_tradeByte(SPI_EEPROM_WREN);
+  61              		.loc 1 24 0
   62 0002 0620     		movs	r0, #6
   63 0004 FFF7FEFF 		bl	SPI_Interface_EEPROM_tradeByte
   64              	.LVL1:
@@ -106,55 +104,55 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc1qXrnN.s 			page 1
   74              		.type	EEPROM_readByte, %function
   75              	EEPROM_readByte:
   76              	.LFB2:
-  27:25LC256.c     ****     
-  28:25LC256.c     **** }
+  25:25LC256.c     ****     
+  26:25LC256.c     **** }
+  27:25LC256.c     **** 
+  28:25LC256.c     **** /** ====== User-level Functions ====== **/
   29:25LC256.c     **** 
-  30:25LC256.c     **** /** ====== User-level Functions ====== **/
-  31:25LC256.c     **** 
-  32:25LC256.c     **** uint8_t EEPROM_readByte(uint16_t addr) {
-  77              		.loc 1 32 0
+  30:25LC256.c     **** uint8_t EEPROM_readByte(uint16_t addr) {
+  77              		.loc 1 30 0
   78              		.cfi_startproc
   79              		@ args = 0, pretend = 0, frame = 8
   80              		@ frame_needed = 0, uses_anonymous_args = 0
   81              	.LVL2:
   82 0000 00B5     		push	{lr}
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc1qXrnN.s 			page 3
-
-
   83              		.cfi_def_cfa_offset 4
   84              		.cfi_offset 14, -4
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccsuLVMu.s 			page 3
+
+
   85 0002 83B0     		sub	sp, sp, #12
   86              		.cfi_def_cfa_offset 16
-  33:25LC256.c     **** 
-  34:25LC256.c     **** 	/* Prepare the TX data packet: instruction + address */
-  35:25LC256.c     **** 	uint8_t dataTX[3] = { SPI_EEPROM_READ, ((addr & 0xFF00) >> 8), (addr & 0x00FF) };
-  87              		.loc 1 35 0
+  31:25LC256.c     **** 
+  32:25LC256.c     **** 	/* Prepare the TX data packet: instruction + address */
+  33:25LC256.c     **** 	uint8_t dataTX[3] = { SPI_EEPROM_READ, ((addr & 0xFF00) >> 8), (addr & 0x00FF) };
+  87              		.loc 1 33 0
   88 0004 0321     		movs	r1, #3
   89 0006 8DF80410 		strb	r1, [sp, #4]
   90 000a 030A     		lsrs	r3, r0, #8
   91 000c 8DF80530 		strb	r3, [sp, #5]
   92 0010 8DF80600 		strb	r0, [sp, #6]
-  36:25LC256.c     **** 	
-  37:25LC256.c     **** 	/* Prepare the RX byte */
-  38:25LC256.c     **** 	uint8_t dataRX = 0;
-  93              		.loc 1 38 0
+  34:25LC256.c     **** 	
+  35:25LC256.c     **** 	/* Prepare the RX byte */
+  36:25LC256.c     **** 	uint8_t dataRX = 0;
+  93              		.loc 1 36 0
   94 0014 02AA     		add	r2, sp, #8
   95 0016 0023     		movs	r3, #0
   96 0018 02F8053D 		strb	r3, [r2, #-5]!
-  39:25LC256.c     **** 	
-  40:25LC256.c     **** 	/* Read 1 byte from addr */
-  41:25LC256.c     **** 	SPI_Interface_EEPROM_Multi_RW(dataTX, 3, &dataRX, 1);
-  97              		.loc 1 41 0
+  37:25LC256.c     **** 	
+  38:25LC256.c     **** 	/* Read 1 byte from addr */
+  39:25LC256.c     **** 	SPI_Interface_EEPROM_Multi_RW(dataTX, 3, &dataRX, 1);
+  97              		.loc 1 39 0
   98 001c 0123     		movs	r3, #1
   99 001e 01A8     		add	r0, sp, #4
  100              	.LVL3:
  101 0020 FFF7FEFF 		bl	SPI_Interface_EEPROM_Multi_RW
  102              	.LVL4:
-  42:25LC256.c     **** 	
-  43:25LC256.c     **** 	return dataRX;
-  44:25LC256.c     ****     
-  45:25LC256.c     **** }
- 103              		.loc 1 45 0
+  40:25LC256.c     **** 	
+  41:25LC256.c     **** 	return dataRX;
+  42:25LC256.c     ****     
+  43:25LC256.c     **** }
+ 103              		.loc 1 43 0
  104 0024 9DF80300 		ldrb	r0, [sp, #3]	@ zero_extendqisi2
  105 0028 03B0     		add	sp, sp, #12
  106              		.cfi_def_cfa_offset 4
@@ -171,18 +169,18 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc1qXrnN.s 			page 1
  117              		.type	EEPROM_writeByte, %function
  118              	EEPROM_writeByte:
  119              	.LFB3:
-  46:25LC256.c     **** 
-  47:25LC256.c     **** void EEPROM_writeByte(uint16_t addr, uint8_t dataByte) {
- 120              		.loc 1 47 0
+  44:25LC256.c     **** 
+  45:25LC256.c     **** void EEPROM_writeByte(uint16_t addr, uint8_t dataByte) {
+ 120              		.loc 1 45 0
  121              		.cfi_startproc
  122              		@ args = 0, pretend = 0, frame = 8
  123              		@ frame_needed = 0, uses_anonymous_args = 0
  124              	.LVL5:
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc1qXrnN.s 			page 4
-
-
  125 0000 30B5     		push	{r4, r5, lr}
  126              		.cfi_def_cfa_offset 12
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccsuLVMu.s 			page 4
+
+
  127              		.cfi_offset 4, -12
  128              		.cfi_offset 5, -8
  129              		.cfi_offset 14, -4
@@ -190,39 +188,39 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc1qXrnN.s 			page 1
  131              		.cfi_def_cfa_offset 24
  132 0004 0446     		mov	r4, r0
  133 0006 0D46     		mov	r5, r1
-  48:25LC256.c     ****     
-  49:25LC256.c     ****     /* Enable WRITE operations */
-  50:25LC256.c     ****     EEPROM_writeEnable();
- 134              		.loc 1 50 0
+  46:25LC256.c     ****     
+  47:25LC256.c     ****     /* Enable WRITE operations */
+  48:25LC256.c     ****     EEPROM_writeEnable();
+ 134              		.loc 1 48 0
  135 0008 FFF7FEFF 		bl	EEPROM_writeEnable
  136              	.LVL6:
-  51:25LC256.c     **** 	
-  52:25LC256.c     **** 	/* Prepare the TX packet */
-  53:25LC256.c     ****     uint8_t dataTX[4] = {SPI_EEPROM_WRITE, ((addr & 0xFF00) >> 8), (addr & 0x00FF), dataByte};
- 137              		.loc 1 53 0
+  49:25LC256.c     **** 	
+  50:25LC256.c     **** 	/* Prepare the TX packet */
+  51:25LC256.c     ****     uint8_t dataTX[4] = {SPI_EEPROM_WRITE, ((addr & 0xFF00) >> 8), (addr & 0x00FF), dataByte};
+ 137              		.loc 1 51 0
  138 000c 0223     		movs	r3, #2
  139 000e 8DF80430 		strb	r3, [sp, #4]
  140 0012 230A     		lsrs	r3, r4, #8
  141 0014 8DF80530 		strb	r3, [sp, #5]
  142 0018 8DF80640 		strb	r4, [sp, #6]
  143 001c 8DF80750 		strb	r5, [sp, #7]
-  54:25LC256.c     **** 	/* Nothing to RX... */
-  55:25LC256.c     **** 	uint8_t temp = 0;
- 144              		.loc 1 55 0
+  52:25LC256.c     **** 	/* Nothing to RX... */
+  53:25LC256.c     **** 	uint8_t temp = 0;
+ 144              		.loc 1 53 0
  145 0020 0023     		movs	r3, #0
  146 0022 02AA     		add	r2, sp, #8
  147 0024 02F8053D 		strb	r3, [r2, #-5]!
-  56:25LC256.c     **** 	
-  57:25LC256.c     **** 	/* Write 1 byte to addr */
-  58:25LC256.c     **** 	SPI_Interface_EEPROM_Multi_RW(dataTX, 4, &temp, 0);
- 148              		.loc 1 58 0
+  54:25LC256.c     **** 	
+  55:25LC256.c     **** 	/* Write 1 byte to addr */
+  56:25LC256.c     **** 	SPI_Interface_EEPROM_Multi_RW(dataTX, 4, &temp, 0);
+ 148              		.loc 1 56 0
  149 0028 0421     		movs	r1, #4
  150 002a 0DEB0100 		add	r0, sp, r1
  151 002e FFF7FEFF 		bl	SPI_Interface_EEPROM_Multi_RW
  152              	.LVL7:
-  59:25LC256.c     **** 	    
-  60:25LC256.c     **** }
- 153              		.loc 1 60 0
+  57:25LC256.c     **** 	    
+  58:25LC256.c     **** }
+ 153              		.loc 1 58 0
  154 0032 03B0     		add	sp, sp, #12
  155              		.cfi_def_cfa_offset 12
  156              		@ sp needed
@@ -238,12 +236,12 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc1qXrnN.s 			page 1
  166              		.type	EEPROM_readPage, %function
  167              	EEPROM_readPage:
  168              	.LFB4:
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc1qXrnN.s 			page 5
+  59:25LC256.c     **** 
+  60:25LC256.c     **** void EEPROM_readPage(uint16_t addr, uint8_t* dataRX, uint8_t nBytes) {
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccsuLVMu.s 			page 5
 
 
-  61:25LC256.c     **** 
-  62:25LC256.c     **** void EEPROM_readPage(uint16_t addr, uint8_t* dataRX, uint8_t nBytes) {
- 169              		.loc 1 62 0
+ 169              		.loc 1 60 0
  170              		.cfi_startproc
  171              		@ args = 0, pretend = 0, frame = 8
  172              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -254,19 +252,19 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc1qXrnN.s 			page 1
  177              		.cfi_offset 14, -4
  178 0002 82B0     		sub	sp, sp, #8
  179              		.cfi_def_cfa_offset 16
-  63:25LC256.c     ****     
-  64:25LC256.c     **** 	/* Prepare the TX data packet: instruction + address */
-  65:25LC256.c     **** 	uint8_t dataTX[3] = {SPI_EEPROM_READ, ((addr & 0xFF00) >> 8), (addr & 0x00FF)};
- 180              		.loc 1 65 0
+  61:25LC256.c     ****     
+  62:25LC256.c     **** 	/* Prepare the TX data packet: instruction + address */
+  63:25LC256.c     **** 	uint8_t dataTX[3] = {SPI_EEPROM_READ, ((addr & 0xFF00) >> 8), (addr & 0x00FF)};
+ 180              		.loc 1 63 0
  181 0004 0324     		movs	r4, #3
  182 0006 8DF80440 		strb	r4, [sp, #4]
  183 000a 030A     		lsrs	r3, r0, #8
  184 000c 8DF80530 		strb	r3, [sp, #5]
  185 0010 8DF80600 		strb	r0, [sp, #6]
-  66:25LC256.c     **** 	
-  67:25LC256.c     **** 	/* Read the nBytes */
-  68:25LC256.c     **** 	SPI_Interface_EEPROM_Multi_RW(dataTX, 3, dataRX, nBytes);
- 186              		.loc 1 68 0
+  64:25LC256.c     **** 	
+  65:25LC256.c     **** 	/* Read the nBytes */
+  66:25LC256.c     **** 	SPI_Interface_EEPROM_Multi_RW(dataTX, 3, dataRX, nBytes);
+ 186              		.loc 1 66 0
  187 0014 1346     		mov	r3, r2
  188 0016 0A46     		mov	r2, r1
  189              	.LVL9:
@@ -276,9 +274,9 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc1qXrnN.s 			page 1
  193              	.LVL11:
  194 001c FFF7FEFF 		bl	SPI_Interface_EEPROM_Multi_RW
  195              	.LVL12:
-  69:25LC256.c     **** 		
-  70:25LC256.c     **** }
- 196              		.loc 1 70 0
+  67:25LC256.c     **** 		
+  68:25LC256.c     **** }
+ 196              		.loc 1 68 0
  197 0020 02B0     		add	sp, sp, #8
  198              		.cfi_def_cfa_offset 8
  199              		@ sp needed
@@ -294,15 +292,15 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc1qXrnN.s 			page 1
  209              		.type	EEPROM_writePage, %function
  210              	EEPROM_writePage:
  211              	.LFB5:
-  71:25LC256.c     **** 
-  72:25LC256.c     **** void EEPROM_writePage(uint16_t addr, uint8_t* data, uint8_t nBytes) {
- 212              		.loc 1 72 0
+  69:25LC256.c     **** 
+  70:25LC256.c     **** void EEPROM_writePage(uint16_t addr, uint8_t* data, uint8_t nBytes) {
+ 212              		.loc 1 70 0
  213              		.cfi_startproc
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc1qXrnN.s 			page 6
-
-
  214              		@ args = 0, pretend = 0, frame = 8
  215              		@ frame_needed = 1, uses_anonymous_args = 0
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccsuLVMu.s 			page 6
+
+
  216              	.LVL13:
  217 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
  218              		.cfi_def_cfa_offset 24
@@ -319,69 +317,69 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc1qXrnN.s 			page 1
  229 0008 0546     		mov	r5, r0
  230 000a 8846     		mov	r8, r1
  231 000c 1446     		mov	r4, r2
-  73:25LC256.c     **** 	    
-  74:25LC256.c     ****     /* Enable WRITE operations */
-  75:25LC256.c     ****     EEPROM_writeEnable();
- 232              		.loc 1 75 0
+  71:25LC256.c     **** 	    
+  72:25LC256.c     ****     /* Enable WRITE operations */
+  73:25LC256.c     ****     EEPROM_writeEnable();
+ 232              		.loc 1 73 0
  233 000e FFF7FEFF 		bl	EEPROM_writeEnable
  234              	.LVL14:
-  76:25LC256.c     **** 	
-  77:25LC256.c     ****     CyDelayUs(1);
- 235              		.loc 1 77 0
+  74:25LC256.c     **** 	
+  75:25LC256.c     ****     CyDelayUs(1);
+ 235              		.loc 1 75 0
  236 0012 0120     		movs	r0, #1
  237 0014 FFF7FEFF 		bl	CyDelayUs
  238              	.LVL15:
-  78:25LC256.c     ****     
-  79:25LC256.c     **** 	/* Prepare the TX packet of size nBytes+3 
-  80:25LC256.c     ****        [ Write Instruction - Address MSB - Address LSB - +++data+++ ]
-  81:25LC256.c     ****     */
-  82:25LC256.c     **** 	uint8_t dataTX[3+nBytes];
- 239              		.loc 1 82 0
+  76:25LC256.c     ****     
+  77:25LC256.c     **** 	/* Prepare the TX packet of size nBytes+3 
+  78:25LC256.c     ****        [ Write Instruction - Address MSB - Address LSB - +++data+++ ]
+  79:25LC256.c     ****     */
+  80:25LC256.c     **** 	uint8_t dataTX[3+nBytes];
+ 239              		.loc 1 80 0
  240 0018 E61C     		adds	r6, r4, #3
  241              	.LVL16:
  242 001a 04F10A03 		add	r3, r4, #10
  243 001e 23F00703 		bic	r3, r3, #7
  244 0022 ADEB030D 		sub	sp, sp, r3
  245              	.LVL17:
-  83:25LC256.c     ****     dataTX[0] = SPI_EEPROM_WRITE;
- 246              		.loc 1 83 0
+  81:25LC256.c     ****     dataTX[0] = SPI_EEPROM_WRITE;
+ 246              		.loc 1 81 0
  247 0026 0223     		movs	r3, #2
  248 0028 8DF80030 		strb	r3, [sp]
-  84:25LC256.c     ****     dataTX[1] = (addr & 0xFF00) >> 8;
- 249              		.loc 1 84 0
+  82:25LC256.c     ****     dataTX[1] = (addr & 0xFF00) >> 8;
+ 249              		.loc 1 82 0
  250 002c 2B0A     		lsrs	r3, r5, #8
  251 002e 8DF80130 		strb	r3, [sp, #1]
-  85:25LC256.c     ****     dataTX[2] = addr & 0x00FF;
- 252              		.loc 1 85 0
+  83:25LC256.c     ****     dataTX[2] = addr & 0x00FF;
+ 252              		.loc 1 83 0
  253 0032 8DF80250 		strb	r5, [sp, #2]
-  86:25LC256.c     ****     /* Copy the input data in the memory */
-  87:25LC256.c     **** 	memcpy(&dataTX[3], data, nBytes);
- 254              		.loc 1 87 0
+  84:25LC256.c     ****     /* Copy the input data in the memory */
+  85:25LC256.c     **** 	memcpy(&dataTX[3], data, nBytes);
+ 254              		.loc 1 85 0
  255 0036 2246     		mov	r2, r4
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc1qXrnN.s 			page 7
-
-
  256 0038 4146     		mov	r1, r8
  257 003a 0DF10300 		add	r0, sp, #3
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccsuLVMu.s 			page 7
+
+
  258 003e FFF7FEFF 		bl	memcpy
  259              	.LVL18:
-  88:25LC256.c     **** 	
-  89:25LC256.c     **** 	/* Nothing to RX: point to a dummy variable */
-  90:25LC256.c     **** 	uint8_t temp = 0;
- 260              		.loc 1 90 0
+  86:25LC256.c     **** 	
+  87:25LC256.c     **** 	/* Nothing to RX: point to a dummy variable */
+  88:25LC256.c     **** 	uint8_t temp = 0;
+ 260              		.loc 1 88 0
  261 0042 0023     		movs	r3, #0
  262 0044 07F10802 		add	r2, r7, #8
  263 0048 02F8013D 		strb	r3, [r2, #-1]!
-  91:25LC256.c     **** 	
-  92:25LC256.c     **** 	SPI_Interface_EEPROM_Multi_RW(dataTX, 3+nBytes, &temp, 0);
- 264              		.loc 1 92 0
+  89:25LC256.c     **** 	
+  90:25LC256.c     **** 	SPI_Interface_EEPROM_Multi_RW(dataTX, 3+nBytes, &temp, 0);
+ 264              		.loc 1 90 0
  265 004c F1B2     		uxtb	r1, r6
  266 004e 6846     		mov	r0, sp
  267 0050 FFF7FEFF 		bl	SPI_Interface_EEPROM_Multi_RW
  268              	.LVL19:
-  93:25LC256.c     **** 	
-  94:25LC256.c     **** }
- 269              		.loc 1 94 0
+  91:25LC256.c     **** 	
+  92:25LC256.c     **** }
+ 269              		.loc 1 92 0
  270 0054 0837     		adds	r7, r7, #8
  271              		.cfi_def_cfa_offset 24
  272 0056 BD46     		mov	sp, r7
@@ -400,9 +398,9 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc1qXrnN.s 			page 1
  285              		.type	EEPROM_waitForWriteComplete, %function
  286              	EEPROM_waitForWriteComplete:
  287              	.LFB6:
-  95:25LC256.c     **** 
-  96:25LC256.c     **** void EEPROM_waitForWriteComplete() {
- 288              		.loc 1 96 0
+  93:25LC256.c     **** 
+  94:25LC256.c     **** void EEPROM_waitForWriteComplete() {
+ 288              		.loc 1 94 0
  289              		.cfi_startproc
  290              		@ args = 0, pretend = 0, frame = 0
  291              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -411,19 +409,19 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc1qXrnN.s 			page 1
  294              		.cfi_offset 3, -8
  295              		.cfi_offset 14, -4
  296              	.L14:
-  97:25LC256.c     ****     
-  98:25LC256.c     ****     while( EEPROM_readStatus() & SPI_EEPROM_WRITE_IN_PROGRESS );
- 297              		.loc 1 98 0 discriminator 1
+  95:25LC256.c     ****     
+  96:25LC256.c     ****     while( EEPROM_readStatus() & SPI_EEPROM_WRITE_IN_PROGRESS );
+ 297              		.loc 1 96 0 discriminator 1
  298 0002 FFF7FEFF 		bl	EEPROM_readStatus
  299              	.LVL21:
  300 0006 10F0010F 		tst	r0, #1
  301 000a FAD1     		bne	.L14
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc1qXrnN.s 			page 8
+  97:25LC256.c     ****     
+  98:25LC256.c     **** }
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccsuLVMu.s 			page 8
 
 
-  99:25LC256.c     ****     
- 100:25LC256.c     **** }
- 302              		.loc 1 100 0
+ 302              		.loc 1 98 0
  303 000c 08BD     		pop	{r3, pc}
  304              		.cfi_endproc
  305              	.LFE6:
@@ -478,11 +476,11 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc1qXrnN.s 			page 1
  354 0057 02       		.uleb128 0x2
  355 0058 04       		.byte	0x4
  356 0059 05       		.byte	0x5
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc1qXrnN.s 			page 9
-
-
  357 005a AD020000 		.4byte	.LASF6
  358 005e 02       		.uleb128 0x2
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccsuLVMu.s 			page 9
+
+
  359 005f 04       		.byte	0x4
  360 0060 07       		.byte	0x7
  361 0061 19010000 		.4byte	.LASF7
@@ -535,14 +533,14 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc1qXrnN.s 			page 1
  408 00ba 05       		.uleb128 0x5
  409 00bb EC010000 		.4byte	.LASF18
  410 00bf 01       		.byte	0x1
- 411 00c0 11       		.byte	0x11
+ 411 00c0 0F       		.byte	0xf
  412 00c1 81000000 		.4byte	0x81
  413 00c5 00000000 		.4byte	.LFB0
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc1qXrnN.s 			page 10
-
-
  414 00c9 0A000000 		.4byte	.LFE0-.LFB0
  415 00cd 01       		.uleb128 0x1
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccsuLVMu.s 			page 10
+
+
  416 00ce 9C       		.byte	0x9c
  417 00cf E3000000 		.4byte	0xe3
  418 00d3 06       		.uleb128 0x6
@@ -558,7 +556,7 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc1qXrnN.s 			page 1
  428 00e3 08       		.uleb128 0x8
  429 00e4 DA020000 		.4byte	.LASF22
  430 00e8 01       		.byte	0x1
- 431 00e9 17       		.byte	0x17
+ 431 00e9 15       		.byte	0x15
  432 00ea 00000000 		.4byte	.LFB1
  433 00ee 0A000000 		.4byte	.LFE1-.LFB1
  434 00f2 01       		.uleb128 0x1
@@ -577,7 +575,7 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc1qXrnN.s 			page 1
  447 0108 05       		.uleb128 0x5
  448 0109 35010000 		.4byte	.LASF19
  449 010d 01       		.byte	0x1
- 450 010e 20       		.byte	0x20
+ 450 010e 1E       		.byte	0x1e
  451 010f 81000000 		.4byte	0x81
  452 0113 00000000 		.4byte	.LFB2
  453 0117 2E000000 		.4byte	.LFE2-.LFB2
@@ -587,24 +585,24 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc1qXrnN.s 			page 1
  457 0121 09       		.uleb128 0x9
  458 0122 30010000 		.4byte	.LASF24
  459 0126 01       		.byte	0x1
- 460 0127 20       		.byte	0x20
+ 460 0127 1E       		.byte	0x1e
  461 0128 8C000000 		.4byte	0x8c
  462 012c 00000000 		.4byte	.LLST0
  463 0130 0A       		.uleb128 0xa
  464 0131 D3020000 		.4byte	.LASF20
  465 0135 01       		.byte	0x1
- 466 0136 23       		.byte	0x23
+ 466 0136 21       		.byte	0x21
  467 0137 6D010000 		.4byte	0x16d
  468 013b 02       		.uleb128 0x2
  469 013c 91       		.byte	0x91
  470 013d 74       		.sleb128 -12
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc1qXrnN.s 			page 11
-
-
  471 013e 0A       		.uleb128 0xa
  472 013f 2A020000 		.4byte	.LASF21
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccsuLVMu.s 			page 11
+
+
  473 0143 01       		.byte	0x1
- 474 0144 26       		.byte	0x26
+ 474 0144 24       		.byte	0x24
  475 0145 81000000 		.4byte	0x81
  476 0149 02       		.uleb128 0x2
  477 014a 91       		.byte	0x91
@@ -646,7 +644,7 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc1qXrnN.s 			page 1
  513 017d 08       		.uleb128 0x8
  514 017e 1F000000 		.4byte	.LASF23
  515 0182 01       		.byte	0x1
- 516 0183 2F       		.byte	0x2f
+ 516 0183 2D       		.byte	0x2d
  517 0184 00000000 		.4byte	.LFB3
  518 0188 36000000 		.4byte	.LFE3-.LFB3
  519 018c 01       		.uleb128 0x1
@@ -655,22 +653,22 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc1qXrnN.s 			page 1
  522 0192 09       		.uleb128 0x9
  523 0193 30010000 		.4byte	.LASF24
  524 0197 01       		.byte	0x1
- 525 0198 2F       		.byte	0x2f
+ 525 0198 2D       		.byte	0x2d
  526 0199 8C000000 		.4byte	0x8c
  527 019d 21000000 		.4byte	.LLST1
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc1qXrnN.s 			page 12
-
-
  528 01a1 09       		.uleb128 0x9
  529 01a2 4F010000 		.4byte	.LASF25
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccsuLVMu.s 			page 12
+
+
  530 01a6 01       		.byte	0x1
- 531 01a7 2F       		.byte	0x2f
+ 531 01a7 2D       		.byte	0x2d
  532 01a8 81000000 		.4byte	0x81
  533 01ac 42000000 		.4byte	.LLST2
  534 01b0 0A       		.uleb128 0xa
  535 01b1 D3020000 		.4byte	.LASF20
  536 01b5 01       		.byte	0x1
- 537 01b6 35       		.byte	0x35
+ 537 01b6 33       		.byte	0x33
  538 01b7 F6010000 		.4byte	0x1f6
  539 01bb 02       		.uleb128 0x2
  540 01bc 91       		.byte	0x91
@@ -678,7 +676,7 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc1qXrnN.s 			page 1
  542 01be 0A       		.uleb128 0xa
  543 01bf 2B010000 		.4byte	.LASF26
  544 01c3 01       		.byte	0x1
- 545 01c4 37       		.byte	0x37
+ 545 01c4 35       		.byte	0x35
  546 01c5 81000000 		.4byte	0x81
  547 01c9 02       		.uleb128 0x2
  548 01ca 91       		.byte	0x91
@@ -718,15 +716,15 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc1qXrnN.s 			page 1
  582 01fb 06020000 		.4byte	0x206
  583 01ff 0C       		.uleb128 0xc
  584 0200 B3000000 		.4byte	0xb3
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc1qXrnN.s 			page 13
-
-
  585 0204 03       		.byte	0x3
  586 0205 00       		.byte	0
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccsuLVMu.s 			page 13
+
+
  587 0206 08       		.uleb128 0x8
  588 0207 5A000000 		.4byte	.LASF27
  589 020b 01       		.byte	0x1
- 590 020c 3E       		.byte	0x3e
+ 590 020c 3C       		.byte	0x3c
  591 020d 00000000 		.4byte	.LFB4
  592 0211 24000000 		.4byte	.LFE4-.LFB4
  593 0215 01       		.uleb128 0x1
@@ -735,25 +733,25 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc1qXrnN.s 			page 1
  596 021b 09       		.uleb128 0x9
  597 021c 30010000 		.4byte	.LASF24
  598 0220 01       		.byte	0x1
- 599 0221 3E       		.byte	0x3e
+ 599 0221 3C       		.byte	0x3c
  600 0222 8C000000 		.4byte	0x8c
  601 0226 63000000 		.4byte	.LLST3
  602 022a 09       		.uleb128 0x9
  603 022b 2A020000 		.4byte	.LASF21
  604 022f 01       		.byte	0x1
- 605 0230 3E       		.byte	0x3e
+ 605 0230 3C       		.byte	0x3c
  606 0231 74020000 		.4byte	0x274
  607 0235 84000000 		.4byte	.LLST4
  608 0239 09       		.uleb128 0x9
  609 023a 40000000 		.4byte	.LASF28
  610 023e 01       		.byte	0x1
- 611 023f 3E       		.byte	0x3e
+ 611 023f 3C       		.byte	0x3c
  612 0240 81000000 		.4byte	0x81
  613 0244 B0000000 		.4byte	.LLST5
  614 0248 0A       		.uleb128 0xa
  615 0249 D3020000 		.4byte	.LASF20
  616 024d 01       		.byte	0x1
- 617 024e 41       		.byte	0x41
+ 617 024e 3F       		.byte	0x3f
  618 024f 6D010000 		.4byte	0x16d
  619 0253 02       		.uleb128 0x2
  620 0254 91       		.byte	0x91
@@ -778,11 +776,11 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc1qXrnN.s 			page 1
  639 026d 52       		.byte	0x52
  640 026e 03       		.uleb128 0x3
  641 026f F3       		.byte	0xf3
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc1qXrnN.s 			page 14
-
-
  642 0270 01       		.uleb128 0x1
  643 0271 51       		.byte	0x51
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccsuLVMu.s 			page 14
+
+
  644 0272 00       		.byte	0
  645 0273 00       		.byte	0
  646 0274 0E       		.uleb128 0xe
@@ -791,7 +789,7 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc1qXrnN.s 			page 1
  649 027a 08       		.uleb128 0x8
  650 027b 93020000 		.4byte	.LASF29
  651 027f 01       		.byte	0x1
- 652 0280 48       		.byte	0x48
+ 652 0280 46       		.byte	0x46
  653 0281 00000000 		.4byte	.LFB5
  654 0285 5C000000 		.4byte	.LFE5-.LFB5
  655 0289 01       		.uleb128 0x1
@@ -800,31 +798,31 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc1qXrnN.s 			page 1
  658 028f 09       		.uleb128 0x9
  659 0290 30010000 		.4byte	.LASF24
  660 0294 01       		.byte	0x1
- 661 0295 48       		.byte	0x48
+ 661 0295 46       		.byte	0x46
  662 0296 8C000000 		.4byte	0x8c
  663 029a D1000000 		.4byte	.LLST6
  664 029e 09       		.uleb128 0x9
  665 029f 78000000 		.4byte	.LASF30
  666 02a3 01       		.byte	0x1
- 667 02a4 48       		.byte	0x48
+ 667 02a4 46       		.byte	0x46
  668 02a5 74020000 		.4byte	0x274
  669 02a9 F2000000 		.4byte	.LLST7
  670 02ad 09       		.uleb128 0x9
  671 02ae 40000000 		.4byte	.LASF28
  672 02b2 01       		.byte	0x1
- 673 02b3 48       		.byte	0x48
+ 673 02b3 46       		.byte	0x46
  674 02b4 81000000 		.4byte	0x81
  675 02b8 10010000 		.4byte	.LLST8
  676 02bc 0F       		.uleb128 0xf
  677 02bd D3020000 		.4byte	.LASF20
  678 02c1 01       		.byte	0x1
- 679 02c2 52       		.byte	0x52
+ 679 02c2 50       		.byte	0x50
  680 02c3 37030000 		.4byte	0x337
  681 02c7 31010000 		.4byte	.LLST9
  682 02cb 0A       		.uleb128 0xa
  683 02cc 2B010000 		.4byte	.LASF26
  684 02d0 01       		.byte	0x1
- 685 02d1 5A       		.byte	0x5a
+ 685 02d1 58       		.byte	0x58
  686 02d2 81000000 		.4byte	0x81
  687 02d6 02       		.uleb128 0x2
  688 02d7 91       		.byte	0x91
@@ -838,11 +836,11 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc1qXrnN.s 			page 1
  696 02eb F5020000 		.4byte	0x2f5
  697 02ef 07       		.uleb128 0x7
  698 02f0 01       		.uleb128 0x1
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc1qXrnN.s 			page 15
-
-
  699 02f1 50       		.byte	0x50
  700 02f2 01       		.uleb128 0x1
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccsuLVMu.s 			page 15
+
+
  701 02f3 31       		.byte	0x31
  702 02f4 00       		.byte	0
  703 02f5 10       		.uleb128 0x10
@@ -898,11 +896,11 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc1qXrnN.s 			page 1
  753 0336 00       		.byte	0
  754 0337 0B       		.uleb128 0xb
  755 0338 81000000 		.4byte	0x81
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc1qXrnN.s 			page 16
-
-
  756 033c 4E030000 		.4byte	0x34e
  757 0340 11       		.uleb128 0x11
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccsuLVMu.s 			page 16
+
+
  758 0341 B3000000 		.4byte	0xb3
  759 0345 07       		.uleb128 0x7
  760 0346 74       		.byte	0x74
@@ -916,7 +914,7 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc1qXrnN.s 			page 1
  768 034e 08       		.uleb128 0x8
  769 034f 31020000 		.4byte	.LASF31
  770 0353 01       		.byte	0x1
- 771 0354 60       		.byte	0x60
+ 771 0354 5E       		.byte	0x5e
  772 0355 00000000 		.4byte	.LFB6
  773 0359 0E000000 		.4byte	.LFE6-.LFB6
  774 035d 01       		.uleb128 0x1
@@ -929,7 +927,7 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc1qXrnN.s 			page 1
  781 036d 12       		.uleb128 0x12
  782 036e 6A000000 		.4byte	.LASF39
  783 0372 01       		.byte	0x1
- 784 0373 0D       		.byte	0xd
+ 784 0373 0B       		.byte	0xb
  785 0374 81000000 		.4byte	0x81
  786 0378 05       		.uleb128 0x5
  787 0379 03       		.byte	0x3
@@ -938,17 +936,17 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc1qXrnN.s 			page 1
  790 037f CE010000 		.4byte	.LASF32
  791 0383 CE010000 		.4byte	.LASF32
  792 0387 04       		.byte	0x4
- 793 0388 3B       		.byte	0x3b
+ 793 0388 3A       		.byte	0x3a
  794 0389 13       		.uleb128 0x13
  795 038a 00000000 		.4byte	.LASF33
  796 038e 00000000 		.4byte	.LASF33
  797 0392 04       		.byte	0x4
- 798 0393 2B       		.byte	0x2b
+ 798 0393 2A       		.byte	0x2a
  799 0394 13       		.uleb128 0x13
  800 0395 6B020000 		.4byte	.LASF34
  801 0399 6B020000 		.4byte	.LASF34
  802 039d 04       		.byte	0x4
- 803 039e 57       		.byte	0x57
+ 803 039e 56       		.byte	0x56
  804 039f 13       		.uleb128 0x13
  805 03a0 C4010000 		.4byte	.LASF35
  806 03a4 C4010000 		.4byte	.LASF35
@@ -958,11 +956,11 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc1qXrnN.s 			page 1
  810 03ab 64020000 		.4byte	.LASF40
  811 03af 64020000 		.4byte	.LASF40
  812 03b3 00       		.byte	0
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc1qXrnN.s 			page 17
-
-
  813              		.section	.debug_abbrev,"",%progbits
  814              	.Ldebug_abbrev0:
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccsuLVMu.s 			page 17
+
+
  815 0000 01       		.uleb128 0x1
  816 0001 11       		.uleb128 0x11
  817 0002 01       		.byte	0x1
@@ -1018,11 +1016,11 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc1qXrnN.s 			page 1
  867 0034 00       		.byte	0
  868 0035 00       		.byte	0
  869 0036 05       		.uleb128 0x5
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc1qXrnN.s 			page 18
-
-
  870 0037 2E       		.uleb128 0x2e
  871 0038 01       		.byte	0x1
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccsuLVMu.s 			page 18
+
+
  872 0039 3F       		.uleb128 0x3f
  873 003a 19       		.uleb128 0x19
  874 003b 03       		.uleb128 0x3
@@ -1078,11 +1076,11 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc1qXrnN.s 			page 1
  924 0073 0B       		.uleb128 0xb
  925 0074 27       		.uleb128 0x27
  926 0075 19       		.uleb128 0x19
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc1qXrnN.s 			page 19
-
-
  927 0076 11       		.uleb128 0x11
  928 0077 01       		.uleb128 0x1
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccsuLVMu.s 			page 19
+
+
  929 0078 12       		.uleb128 0x12
  930 0079 06       		.uleb128 0x6
  931 007a 40       		.uleb128 0x40
@@ -1138,11 +1136,11 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc1qXrnN.s 			page 1
  981 00ad 49       		.uleb128 0x49
  982 00ae 13       		.uleb128 0x13
  983 00af 2F       		.uleb128 0x2f
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc1qXrnN.s 			page 20
-
-
  984 00b0 0B       		.uleb128 0xb
  985 00b1 00       		.byte	0
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccsuLVMu.s 			page 20
+
+
  986 00b2 00       		.byte	0
  987 00b3 0D       		.uleb128 0xd
  988 00b4 898201   		.uleb128 0x4109
@@ -1198,11 +1196,11 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc1qXrnN.s 			page 1
  1038 00ea 00       		.byte	0
  1039 00eb 00       		.byte	0
  1040 00ec 12       		.uleb128 0x12
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc1qXrnN.s 			page 21
-
-
  1041 00ed 34       		.uleb128 0x34
  1042 00ee 00       		.byte	0
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccsuLVMu.s 			page 21
+
+
  1043 00ef 03       		.uleb128 0x3
  1044 00f0 0E       		.uleb128 0xe
  1045 00f1 3A       		.uleb128 0x3a
@@ -1258,11 +1256,11 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc1qXrnN.s 			page 1
  1095 000b 20000000 		.4byte	.LVL3
  1096 000f 2E000000 		.4byte	.LFE2
  1097 0013 0400     		.2byte	0x4
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc1qXrnN.s 			page 22
-
-
  1098 0015 F3       		.byte	0xf3
  1099 0016 01       		.uleb128 0x1
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccsuLVMu.s 			page 22
+
+
  1100 0017 50       		.byte	0x50
  1101 0018 9F       		.byte	0x9f
  1102 0019 00000000 		.4byte	0
@@ -1318,11 +1316,11 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc1qXrnN.s 			page 1
  1152 0093 1F000000 		.4byte	.LVL12-1
  1153 0097 0100     		.2byte	0x1
  1154 0099 52       		.byte	0x52
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc1qXrnN.s 			page 23
-
-
  1155 009a 1F000000 		.4byte	.LVL12-1
  1156 009e 24000000 		.4byte	.LFE4
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccsuLVMu.s 			page 23
+
+
  1157 00a2 0400     		.2byte	0x4
  1158 00a4 F3       		.byte	0xf3
  1159 00a5 01       		.uleb128 0x1
@@ -1378,11 +1376,11 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc1qXrnN.s 			page 1
  1209 011f 5C000000 		.4byte	.LFE5
  1210 0123 0400     		.2byte	0x4
  1211 0125 F3       		.byte	0xf3
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc1qXrnN.s 			page 24
-
-
  1212 0126 01       		.uleb128 0x1
  1213 0127 52       		.byte	0x52
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccsuLVMu.s 			page 24
+
+
  1214 0128 9F       		.byte	0x9f
  1215 0129 00000000 		.4byte	0
  1216 012d 00000000 		.4byte	0
@@ -1438,11 +1436,11 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc1qXrnN.s 			page 1
  1266 0004 0A000000 		.4byte	.LFE0
  1267 0008 00000000 		.4byte	.LFB1
  1268 000c 0A000000 		.4byte	.LFE1
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc1qXrnN.s 			page 25
-
-
  1269 0010 00000000 		.4byte	.LFB2
  1270 0014 2E000000 		.4byte	.LFE2
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccsuLVMu.s 			page 25
+
+
  1271 0018 00000000 		.4byte	.LFB3
  1272 001c 36000000 		.4byte	.LFE3
  1273 0020 00000000 		.4byte	.LFB4
@@ -1498,11 +1496,11 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc1qXrnN.s 			page 1
  1299      6F6D5F53 
  1299      74617475 
  1299      7300
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc1qXrnN.s 			page 26
-
-
  1300              	.LASF30:
  1301 0078 64617461 		.ascii	"data\000"
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccsuLVMu.s 			page 26
+
+
  1301      00
  1302              	.LASF1:
  1303 007d 756E7369 		.ascii	"unsigned char\000"
@@ -1558,11 +1556,11 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc1qXrnN.s 			page 1
  1323 0163 646F7562 		.ascii	"double\000"
  1323      6C6500
  1324              	.LASF38:
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc1qXrnN.s 			page 27
-
-
  1325 016a 433A5C55 		.ascii	"C:\\Users\\Lorenzo\\Desktop\\Final-Assignment-PSoC\\"
  1325      73657273 
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccsuLVMu.s 			page 27
+
+
  1325      5C4C6F72 
  1325      656E7A6F 
  1325      5C446573 
@@ -1618,11 +1616,11 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc1qXrnN.s 			page 1
  1346 0256 6C6F6E67 		.ascii	"long long int\000"
  1346      206C6F6E 
  1346      6720696E 
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc1qXrnN.s 			page 28
-
-
  1346      7400
  1347              	.LASF40:
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccsuLVMu.s 			page 28
+
+
  1348 0264 6D656D63 		.ascii	"memcpy\000"
  1348      707900
  1349              	.LASF34:

@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccOimZwh.s 			page 1
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccFLQ5ng.s 			page 1
 
 
    1              		.syntax unified
@@ -28,25 +28,22 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccOimZwh.s 			page 1
   25              	LIS3DH_readByte:
   26              	.LFB0:
   27              		.file 1 "LIS3DH_SPI.c"
-   1:LIS3DH_SPI.c  **** /* ========================================
-   2:LIS3DH_SPI.c  ****  *
-   3:LIS3DH_SPI.c  ****  * Copyright YOUR COMPANY, THE YEAR
-   4:LIS3DH_SPI.c  ****  * All Rights Reserved
-   5:LIS3DH_SPI.c  ****  * UNPUBLISHED, LICENSED SOFTWARE.
-   6:LIS3DH_SPI.c  ****  *
-   7:LIS3DH_SPI.c  ****  * CONFIDENTIAL AND PROPRIETARY INFORMATION
-   8:LIS3DH_SPI.c  ****  * WHICH IS THE PROPERTY OF your company.
-   9:LIS3DH_SPI.c  ****  *
-  10:LIS3DH_SPI.c  ****  * ========================================
-  11:LIS3DH_SPI.c  **** */
-  12:LIS3DH_SPI.c  **** #include "LIS3DH_SPI.h"
-  13:LIS3DH_SPI.c  **** #include "LIS3DH.h"
+   1:LIS3DH_SPI.c  **** /**
+   2:LIS3DH_SPI.c  ****  * @file LIS3DH_SPI.c
+   3:LIS3DH_SPI.c  ****  * @brief Functions required to interface with the SPI EEPROM 25LC256.
+   4:LIS3DH_SPI.c  ****  * 
+   5:LIS3DH_SPI.c  ****  * This c file contains the API functions to interface
+   6:LIS3DH_SPI.c  ****  * with the Accelerometer LIS3DH SPI.
+   7:LIS3DH_SPI.c  ****  *
+   8:LIS3DH_SPI.c  **** */
+   9:LIS3DH_SPI.c  **** 
+  10:LIS3DH_SPI.c  **** #include "LIS3DH_SPI.h"
+  11:LIS3DH_SPI.c  **** #include "LIS3DH.h"
+  12:LIS3DH_SPI.c  **** 
+  13:LIS3DH_SPI.c  **** /** ====== User-level Functions ====== **/
   14:LIS3DH_SPI.c  **** 
-  15:LIS3DH_SPI.c  **** 
-  16:LIS3DH_SPI.c  **** /** ====== User-level Functions ====== **/
-  17:LIS3DH_SPI.c  **** 
-  18:LIS3DH_SPI.c  **** uint8_t LIS3DH_readByte(uint8_t addr) {
-  28              		.loc 1 18 0
+  15:LIS3DH_SPI.c  **** uint8_t LIS3DH_readByte(uint8_t addr) {
+  28              		.loc 1 15 0
   29              		.cfi_startproc
   30              		@ args = 0, pretend = 0, frame = 8
   31              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -56,43 +53,38 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccOimZwh.s 			page 1
   35              		.cfi_offset 14, -4
   36 0002 83B0     		sub	sp, sp, #12
   37              		.cfi_def_cfa_offset 16
-  19:LIS3DH_SPI.c  **** 
-  20:LIS3DH_SPI.c  **** 	/* Prepare the TX data packet: instruction + address */
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccOimZwh.s 			page 2
-
-
-  21:LIS3DH_SPI.c  **** 
-  22:LIS3DH_SPI.c  ****     uint8_t packet[1]={(SPI_LIS3DH_READ)|(addr & address_mask6)};
-  38              		.loc 1 22 0
+  16:LIS3DH_SPI.c  ****     
+  17:LIS3DH_SPI.c  **** 	/* Prepare the TX data packet: instruction + address */
+  18:LIS3DH_SPI.c  ****     uint8_t packet[1]={(SPI_LIS3DH_READ)|(addr & address_mask6)};
+  38              		.loc 1 18 0
   39 0004 00F03F00 		and	r0, r0, #63
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccFLQ5ng.s 			page 2
+
+
   40              	.LVL1:
   41 0008 60F07F00 		orn	r0, r0, #127
   42 000c 8DF80400 		strb	r0, [sp, #4]
-  23:LIS3DH_SPI.c  ****     
-  24:LIS3DH_SPI.c  **** 	
-  25:LIS3DH_SPI.c  **** 	
-  26:LIS3DH_SPI.c  **** 	/* Prepare the RX byte */
-  27:LIS3DH_SPI.c  **** 	uint8_t dataRX=0;
-  43              		.loc 1 27 0
+  19:LIS3DH_SPI.c  **** 	
+  20:LIS3DH_SPI.c  **** 	/* Prepare the RX byte */
+  21:LIS3DH_SPI.c  **** 	uint8_t dataRX=0;
+  43              		.loc 1 21 0
   44 0010 02AA     		add	r2, sp, #8
   45 0012 0023     		movs	r3, #0
   46 0014 02F8053D 		strb	r3, [r2, #-5]!
-  28:LIS3DH_SPI.c  ****    
-  29:LIS3DH_SPI.c  **** 	
-  30:LIS3DH_SPI.c  **** 	/* Read 1 byte from addr */
-  31:LIS3DH_SPI.c  ****     
-  32:LIS3DH_SPI.c  **** 	SPI_Interface_Multi_RW(packet, 1, &dataRX, 1);
-  47              		.loc 1 32 0
+  22:LIS3DH_SPI.c  ****    
+  23:LIS3DH_SPI.c  **** 	/* Read 1 byte from addr */
+  24:LIS3DH_SPI.c  **** 	SPI_Interface_Multi_RW(packet, 1, &dataRX, 1);
+  47              		.loc 1 24 0
   48 0018 0123     		movs	r3, #1
   49 001a 1946     		mov	r1, r3
   50 001c 01A8     		add	r0, sp, #4
   51 001e FFF7FEFF 		bl	SPI_Interface_Multi_RW
   52              	.LVL2:
-  33:LIS3DH_SPI.c  **** 	
-  34:LIS3DH_SPI.c  **** 	return dataRX;
-  35:LIS3DH_SPI.c  ****     
-  36:LIS3DH_SPI.c  **** }
-  53              		.loc 1 36 0
+  25:LIS3DH_SPI.c  **** 	
+  26:LIS3DH_SPI.c  **** 	return dataRX;
+  27:LIS3DH_SPI.c  ****     
+  28:LIS3DH_SPI.c  **** }
+  53              		.loc 1 28 0
   54 0022 9DF80300 		ldrb	r0, [sp, #3]	@ zero_extendqisi2
   55 0026 03B0     		add	sp, sp, #12
   56              		.cfi_def_cfa_offset 4
@@ -109,49 +101,48 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccOimZwh.s 			page 1
   67              		.type	LIS3DH_writeByte, %function
   68              	LIS3DH_writeByte:
   69              	.LFB1:
-  37:LIS3DH_SPI.c  **** 
-  38:LIS3DH_SPI.c  **** void LIS3DH_writeByte(uint8_t addr, uint8_t dataByte) {
-  70              		.loc 1 38 0
+  29:LIS3DH_SPI.c  **** 
+  30:LIS3DH_SPI.c  **** void LIS3DH_writeByte(uint8_t addr, uint8_t dataByte) {
+  70              		.loc 1 30 0
   71              		.cfi_startproc
   72              		@ args = 0, pretend = 0, frame = 8
   73              		@ frame_needed = 0, uses_anonymous_args = 0
   74              	.LVL3:
   75 0000 00B5     		push	{lr}
   76              		.cfi_def_cfa_offset 4
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccOimZwh.s 			page 3
-
-
   77              		.cfi_offset 14, -4
   78 0002 83B0     		sub	sp, sp, #12
   79              		.cfi_def_cfa_offset 16
-  39:LIS3DH_SPI.c  ****     
-  40:LIS3DH_SPI.c  ****     /* Enable WRITE operations */
-  41:LIS3DH_SPI.c  **** //    EEPROM_writeEnable();
-  42:LIS3DH_SPI.c  **** 
-  43:LIS3DH_SPI.c  **** 	/* Prepare the TX packet */
-  44:LIS3DH_SPI.c  ****     uint8_t dataTX[2] = {((SPI_LIS3DH_WRITE)|(addr & address_mask6)), dataByte};
-  80              		.loc 1 44 0
+  31:LIS3DH_SPI.c  **** 
+  32:LIS3DH_SPI.c  **** 	/* Prepare the TX packet */
+  33:LIS3DH_SPI.c  ****     uint8_t dataTX[2] = {((SPI_LIS3DH_WRITE)|(addr & address_mask6)), dataByte};
+  80              		.loc 1 33 0
   81 0004 00F03F00 		and	r0, r0, #63
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccFLQ5ng.s 			page 3
+
+
   82              	.LVL4:
   83 0008 8DF80400 		strb	r0, [sp, #4]
   84 000c 8DF80510 		strb	r1, [sp, #5]
-  45:LIS3DH_SPI.c  **** 	/* Nothing to RX... */
-  46:LIS3DH_SPI.c  **** 	uint8_t temp = 0;
-  85              		.loc 1 46 0
+  34:LIS3DH_SPI.c  ****     
+  35:LIS3DH_SPI.c  **** 	/* Nothing to RX... */
+  36:LIS3DH_SPI.c  **** 	uint8_t temp = 0;
+  85              		.loc 1 36 0
   86 0010 0023     		movs	r3, #0
   87 0012 02AA     		add	r2, sp, #8
   88 0014 02F8053D 		strb	r3, [r2, #-5]!
-  47:LIS3DH_SPI.c  **** 	/* Write 1 byte to addr */
-  48:LIS3DH_SPI.c  **** 	SPI_Interface_Multi_RW(dataTX, 2, &temp, 0);
-  89              		.loc 1 48 0
+  37:LIS3DH_SPI.c  ****     
+  38:LIS3DH_SPI.c  **** 	/* Write 1 byte to addr */
+  39:LIS3DH_SPI.c  **** 	SPI_Interface_Multi_RW(dataTX, 2, &temp, 0);  
+  89              		.loc 1 39 0
   90 0018 0221     		movs	r1, #2
   91              	.LVL5:
   92 001a 01A8     		add	r0, sp, #4
   93 001c FFF7FEFF 		bl	SPI_Interface_Multi_RW
   94              	.LVL6:
-  49:LIS3DH_SPI.c  **** 	    
-  50:LIS3DH_SPI.c  **** }
-  95              		.loc 1 50 0
+  40:LIS3DH_SPI.c  ****     
+  41:LIS3DH_SPI.c  **** }
+  95              		.loc 1 41 0
   96 0020 03B0     		add	sp, sp, #12
   97              		.cfi_def_cfa_offset 4
   98              		@ sp needed
@@ -167,10 +158,10 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccOimZwh.s 			page 1
  108              		.type	LIS3DH_readPage, %function
  109              	LIS3DH_readPage:
  110              	.LFB2:
-  51:LIS3DH_SPI.c  **** 
-  52:LIS3DH_SPI.c  **** 
-  53:LIS3DH_SPI.c  **** void LIS3DH_readPage(uint8_t addr, uint8_t* dataRX, uint8_t nBytes) {
- 111              		.loc 1 53 0
+  42:LIS3DH_SPI.c  **** 
+  43:LIS3DH_SPI.c  **** 
+  44:LIS3DH_SPI.c  **** void LIS3DH_readPage(uint8_t addr, uint8_t* dataRX, uint8_t nBytes) {
+ 111              		.loc 1 44 0
  112              		.cfi_startproc
  113              		@ args = 0, pretend = 0, frame = 8
  114              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -178,25 +169,23 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccOimZwh.s 			page 1
  116 0000 00B5     		push	{lr}
  117              		.cfi_def_cfa_offset 4
  118              		.cfi_offset 14, -4
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccOimZwh.s 			page 4
-
-
  119 0002 83B0     		sub	sp, sp, #12
  120              		.cfi_def_cfa_offset 16
-  54:LIS3DH_SPI.c  ****     
-  55:LIS3DH_SPI.c  **** 	/* Prepare the TX data packet: instruction + address */
-  56:LIS3DH_SPI.c  ****     uint8_t dataTX[1]={(SPI_LIS3DH_READ)|(SPI_LIS3DH_MS)|(addr & address_mask6)};
- 121              		.loc 1 56 0
+  45:LIS3DH_SPI.c  ****     
+  46:LIS3DH_SPI.c  **** 	/* Prepare the TX data packet: instruction + autoincrement + address */
+  47:LIS3DH_SPI.c  ****     uint8_t dataTX[1]={(SPI_LIS3DH_READ)|(SPI_LIS3DH_MS)|(addr & address_mask6)};
+ 121              		.loc 1 47 0
  122 0004 40F0C003 		orr	r3, r0, #192
  123 0008 02A8     		add	r0, sp, #8
  124              	.LVL8:
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccFLQ5ng.s 			page 4
+
+
  125 000a 00F8043D 		strb	r3, [r0, #-4]!
-  57:LIS3DH_SPI.c  ****     
-  58:LIS3DH_SPI.c  **** 	
-  59:LIS3DH_SPI.c  **** 	
-  60:LIS3DH_SPI.c  **** 	/* Read the nBytes */
-  61:LIS3DH_SPI.c  **** 	SPI_Interface_Multi_RW(dataTX, 1, dataRX, nBytes);
- 126              		.loc 1 61 0
+  48:LIS3DH_SPI.c  ****     
+  49:LIS3DH_SPI.c  **** 	/* Read the nBytes */
+  50:LIS3DH_SPI.c  **** 	SPI_Interface_Multi_RW(dataTX, 1, dataRX, nBytes);	
+ 126              		.loc 1 50 0
  127 000e 1346     		mov	r3, r2
  128 0010 0A46     		mov	r2, r1
  129              	.LVL9:
@@ -204,9 +193,9 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccOimZwh.s 			page 1
  131              	.LVL10:
  132 0014 FFF7FEFF 		bl	SPI_Interface_Multi_RW
  133              	.LVL11:
-  62:LIS3DH_SPI.c  **** 		
-  63:LIS3DH_SPI.c  **** }
- 134              		.loc 1 63 0
+  51:LIS3DH_SPI.c  ****     
+  52:LIS3DH_SPI.c  **** }
+ 134              		.loc 1 52 0
  135 0018 03B0     		add	sp, sp, #12
  136              		.cfi_def_cfa_offset 4
  137              		@ sp needed
@@ -222,9 +211,9 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccOimZwh.s 			page 1
  147              		.type	LIS3DH_writePage, %function
  148              	LIS3DH_writePage:
  149              	.LFB3:
-  64:LIS3DH_SPI.c  **** 
-  65:LIS3DH_SPI.c  **** void LIS3DH_writePage(uint8_t addr, uint8_t* data, uint8_t nBytes) {
- 150              		.loc 1 65 0
+  53:LIS3DH_SPI.c  **** 
+  54:LIS3DH_SPI.c  **** void LIS3DH_writePage(uint8_t addr, uint8_t* data, uint8_t nBytes) {
+ 150              		.loc 1 54 0
  151              		.cfi_startproc
  152              		@ args = 0, pretend = 0, frame = 8
  153              		@ frame_needed = 1, uses_anonymous_args = 0
@@ -238,69 +227,67 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccOimZwh.s 			page 1
  161              		.cfi_offset 8, -8
  162              		.cfi_offset 14, -4
  163 0004 82B0     		sub	sp, sp, #8
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccOimZwh.s 			page 5
-
-
  164              		.cfi_def_cfa_offset 32
  165 0006 00AF     		add	r7, sp, #0
  166              		.cfi_def_cfa_register 7
  167 0008 0446     		mov	r4, r0
  168 000a 8846     		mov	r8, r1
  169 000c 1546     		mov	r5, r2
-  66:LIS3DH_SPI.c  **** 	    
-  67:LIS3DH_SPI.c  ****     CyDelayUs(1);
- 170              		.loc 1 67 0
+  55:LIS3DH_SPI.c  **** 	    
+  56:LIS3DH_SPI.c  ****     CyDelayUs(1);
+ 170              		.loc 1 56 0
  171 000e 0120     		movs	r0, #1
  172              	.LVL13:
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccFLQ5ng.s 			page 5
+
+
  173 0010 FFF7FEFF 		bl	CyDelayUs
  174              	.LVL14:
-  68:LIS3DH_SPI.c  ****     
-  69:LIS3DH_SPI.c  **** 	/* Prepare the TX packet of size nBytes+3 
-  70:LIS3DH_SPI.c  ****        [ Write Instruction - Address MSB - Address LSB - +++data+++ ]
-  71:LIS3DH_SPI.c  ****     */
-  72:LIS3DH_SPI.c  **** 	uint8_t dataTX[1+nBytes];
- 175              		.loc 1 72 0
+  57:LIS3DH_SPI.c  ****     
+  58:LIS3DH_SPI.c  **** 	/* Prepare the TX packet of size nBytes+1 
+  59:LIS3DH_SPI.c  ****        [ Write Instruction - Autoincrement - Address + +++data+++ ]
+  60:LIS3DH_SPI.c  ****     */
+  61:LIS3DH_SPI.c  **** 	uint8_t dataTX[1+nBytes];
+ 175              		.loc 1 61 0
  176 0014 6E1C     		adds	r6, r5, #1
  177              	.LVL15:
  178 0016 05F10803 		add	r3, r5, #8
  179 001a 23F00703 		bic	r3, r3, #7
  180 001e ADEB030D 		sub	sp, sp, r3
  181              	.LVL16:
-  73:LIS3DH_SPI.c  ****     dataTX[0] = (SPI_LIS3DH_WRITE)|(SPI_LIS3DH_MS)|(addr & address_mask6);
- 182              		.loc 1 73 0
+  62:LIS3DH_SPI.c  ****     /* Write Instruction - Autoincrement - Address */
+  63:LIS3DH_SPI.c  ****     dataTX[0] = (SPI_LIS3DH_WRITE)|(SPI_LIS3DH_MS)|(addr & address_mask6);
+ 182              		.loc 1 63 0
  183 0022 04F03F04 		and	r4, r4, #63
  184 0026 44F04004 		orr	r4, r4, #64
  185 002a 6846     		mov	r0, sp
  186 002c 00F8014B 		strb	r4, [r0], #1
-  74:LIS3DH_SPI.c  **** 
-  75:LIS3DH_SPI.c  ****     /* Copy the input data in the memory */
-  76:LIS3DH_SPI.c  **** 	memcpy(&dataTX[1], data, nBytes);
- 187              		.loc 1 76 0
+  64:LIS3DH_SPI.c  **** 
+  65:LIS3DH_SPI.c  ****     /* Copy the input data in the memory */
+  66:LIS3DH_SPI.c  **** 	memcpy(&dataTX[1], data, nBytes);
+ 187              		.loc 1 66 0
  188 0030 2A46     		mov	r2, r5
  189 0032 4146     		mov	r1, r8
  190 0034 FFF7FEFF 		bl	memcpy
  191              	.LVL17:
-  77:LIS3DH_SPI.c  **** 	
-  78:LIS3DH_SPI.c  **** 	/* Nothing to RX: point to a dummy variable */
-  79:LIS3DH_SPI.c  **** 	uint8_t temp = 0;
- 192              		.loc 1 79 0
+  67:LIS3DH_SPI.c  **** 	
+  68:LIS3DH_SPI.c  **** 	/* Nothing to RX: point to a dummy variable */
+  69:LIS3DH_SPI.c  **** 	uint8_t temp = 0;
+ 192              		.loc 1 69 0
  193 0038 0023     		movs	r3, #0
  194 003a 07F10802 		add	r2, r7, #8
  195 003e 02F8013D 		strb	r3, [r2, #-1]!
-  80:LIS3DH_SPI.c  **** 	
-  81:LIS3DH_SPI.c  **** 	SPI_Interface_Multi_RW(dataTX, 1+nBytes, &temp, 0);
- 196              		.loc 1 81 0
+  70:LIS3DH_SPI.c  **** 	
+  71:LIS3DH_SPI.c  **** 	SPI_Interface_Multi_RW(dataTX, 1+nBytes, &temp, 0);
+ 196              		.loc 1 71 0
  197 0042 F1B2     		uxtb	r1, r6
  198 0044 6846     		mov	r0, sp
  199 0046 FFF7FEFF 		bl	SPI_Interface_Multi_RW
  200              	.LVL18:
-  82:LIS3DH_SPI.c  **** 	
-  83:LIS3DH_SPI.c  **** }
- 201              		.loc 1 83 0
+  72:LIS3DH_SPI.c  ****     
+  73:LIS3DH_SPI.c  **** }
+ 201              		.loc 1 73 0
  202 004a 0837     		adds	r7, r7, #8
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccOimZwh.s 			page 6
-
-
  203              		.cfi_def_cfa_offset 24
  204 004c BD46     		mov	sp, r7
  205              		.cfi_def_cfa_register 13
@@ -311,6 +298,9 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccOimZwh.s 			page 1
  210              	.LFE3:
  211              		.size	LIS3DH_writePage, .-LIS3DH_writePage
  212 0052 00BF     		.text
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccFLQ5ng.s 			page 6
+
+
  213              	.Letext0:
  214              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.3\\psoc creator\\import\\gnu\\arm\\5.4.
  215              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.3\\psoc creator\\import\\gnu\\arm\\5.4.
@@ -358,9 +348,6 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccOimZwh.s 			page 1
  257 0053 02       		.uleb128 0x2
  258 0054 04       		.byte	0x4
  259 0055 07       		.byte	0x7
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccOimZwh.s 			page 7
-
-
  260 0056 FF000000 		.4byte	.LASF5
  261 005a 02       		.uleb128 0x2
  262 005b 08       		.byte	0x8
@@ -371,6 +358,9 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccOimZwh.s 			page 1
  267 0063 07       		.byte	0x7
  268 0064 A3010000 		.4byte	.LASF7
  269 0068 04       		.uleb128 0x4
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccFLQ5ng.s 			page 7
+
+
  270 0069 04       		.byte	0x4
  271 006a 05       		.byte	0x5
  272 006b 696E7400 		.ascii	"int\000"
@@ -406,7 +396,7 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccOimZwh.s 			page 1
  302 00a4 05       		.uleb128 0x5
  303 00a5 00000000 		.4byte	.LASF32
  304 00a9 01       		.byte	0x1
- 305 00aa 12       		.byte	0x12
+ 305 00aa 0F       		.byte	0xf
  306 00ab 76000000 		.4byte	0x76
  307 00af 00000000 		.4byte	.LFB0
  308 00b3 2C000000 		.4byte	.LFE0-.LFB0
@@ -416,24 +406,24 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccOimZwh.s 			page 1
  312 00bd 06       		.uleb128 0x6
  313 00be 16010000 		.4byte	.LASF18
  314 00c2 01       		.byte	0x1
- 315 00c3 12       		.byte	0x12
+ 315 00c3 0F       		.byte	0xf
  316 00c4 76000000 		.4byte	0x76
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccOimZwh.s 			page 8
-
-
  317 00c8 00000000 		.4byte	.LLST0
  318 00cc 07       		.uleb128 0x7
  319 00cd 85010000 		.4byte	.LASF16
  320 00d1 01       		.byte	0x1
- 321 00d2 16       		.byte	0x16
+ 321 00d2 12       		.byte	0x12
  322 00d3 09010000 		.4byte	0x109
  323 00d7 02       		.uleb128 0x2
  324 00d8 91       		.byte	0x91
  325 00d9 74       		.sleb128 -12
  326 00da 07       		.uleb128 0x7
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccFLQ5ng.s 			page 8
+
+
  327 00db D3010000 		.4byte	.LASF17
  328 00df 01       		.byte	0x1
- 329 00e0 1B       		.byte	0x1b
+ 329 00e0 15       		.byte	0x15
  330 00e1 76000000 		.4byte	0x76
  331 00e5 02       		.uleb128 0x2
  332 00e6 91       		.byte	0x91
@@ -475,31 +465,31 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccOimZwh.s 			page 1
  368 0119 0C       		.uleb128 0xc
  369 011a 12020000 		.4byte	.LASF22
  370 011e 01       		.byte	0x1
- 371 011f 26       		.byte	0x26
+ 371 011f 1E       		.byte	0x1e
  372 0120 00000000 		.4byte	.LFB1
  373 0124 26000000 		.4byte	.LFE1-.LFB1
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccOimZwh.s 			page 9
-
-
  374 0128 01       		.uleb128 0x1
  375 0129 9C       		.byte	0x9c
  376 012a 89010000 		.4byte	0x189
  377 012e 06       		.uleb128 0x6
  378 012f 16010000 		.4byte	.LASF18
  379 0133 01       		.byte	0x1
- 380 0134 26       		.byte	0x26
+ 380 0134 1E       		.byte	0x1e
  381 0135 76000000 		.4byte	0x76
  382 0139 21000000 		.4byte	.LLST1
  383 013d 06       		.uleb128 0x6
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccFLQ5ng.s 			page 9
+
+
  384 013e 1B010000 		.4byte	.LASF19
  385 0142 01       		.byte	0x1
- 386 0143 26       		.byte	0x26
+ 386 0143 1E       		.byte	0x1e
  387 0144 76000000 		.4byte	0x76
  388 0148 42000000 		.4byte	.LLST2
  389 014c 07       		.uleb128 0x7
  390 014d 49020000 		.4byte	.LASF20
  391 0151 01       		.byte	0x1
- 392 0152 2C       		.byte	0x2c
+ 392 0152 21       		.byte	0x21
  393 0153 89010000 		.4byte	0x189
  394 0157 02       		.uleb128 0x2
  395 0158 91       		.byte	0x91
@@ -507,7 +497,7 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccOimZwh.s 			page 1
  397 015a 07       		.uleb128 0x7
  398 015b 11010000 		.4byte	.LASF21
  399 015f 01       		.byte	0x1
- 400 0160 2E       		.byte	0x2e
+ 400 0160 24       		.byte	0x24
  401 0161 76000000 		.4byte	0x76
  402 0165 02       		.uleb128 0x2
  403 0166 91       		.byte	0x91
@@ -538,9 +528,6 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccOimZwh.s 			page 1
  428 0185 01       		.uleb128 0x1
  429 0186 30       		.byte	0x30
  430 0187 00       		.byte	0
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccOimZwh.s 			page 10
-
-
  431 0188 00       		.byte	0
  432 0189 0A       		.uleb128 0xa
  433 018a 76000000 		.4byte	0x76
@@ -551,8 +538,11 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccOimZwh.s 			page 1
  438 0198 00       		.byte	0
  439 0199 0C       		.uleb128 0xc
  440 019a 02020000 		.4byte	.LASF23
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccFLQ5ng.s 			page 10
+
+
  441 019e 01       		.byte	0x1
- 442 019f 35       		.byte	0x35
+ 442 019f 2C       		.byte	0x2c
  443 01a0 00000000 		.4byte	.LFB2
  444 01a4 1E000000 		.4byte	.LFE2-.LFB2
  445 01a8 01       		.uleb128 0x1
@@ -561,25 +551,25 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccOimZwh.s 			page 1
  448 01ae 06       		.uleb128 0x6
  449 01af 16010000 		.4byte	.LASF18
  450 01b3 01       		.byte	0x1
- 451 01b4 35       		.byte	0x35
+ 451 01b4 2C       		.byte	0x2c
  452 01b5 76000000 		.4byte	0x76
  453 01b9 6F000000 		.4byte	.LLST3
  454 01bd 06       		.uleb128 0x6
  455 01be D3010000 		.4byte	.LASF17
  456 01c2 01       		.byte	0x1
- 457 01c3 35       		.byte	0x35
+ 457 01c3 2C       		.byte	0x2c
  458 01c4 06020000 		.4byte	0x206
  459 01c8 90000000 		.4byte	.LLST4
  460 01cc 06       		.uleb128 0x6
  461 01cd 1A000000 		.4byte	.LASF24
  462 01d1 01       		.byte	0x1
- 463 01d2 35       		.byte	0x35
+ 463 01d2 2C       		.byte	0x2c
  464 01d3 76000000 		.4byte	0x76
  465 01d7 BC000000 		.4byte	.LLST5
  466 01db 07       		.uleb128 0x7
  467 01dc 49020000 		.4byte	.LASF20
  468 01e0 01       		.byte	0x1
- 469 01e1 38       		.byte	0x38
+ 469 01e1 2F       		.byte	0x2f
  470 01e2 09010000 		.4byte	0x109
  471 01e6 02       		.uleb128 0x2
  472 01e7 91       		.byte	0x91
@@ -598,9 +588,6 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccOimZwh.s 			page 1
  485 01fa 51       		.byte	0x51
  486 01fb 01       		.uleb128 0x1
  487 01fc 31       		.byte	0x31
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccOimZwh.s 			page 11
-
-
  488 01fd 09       		.uleb128 0x9
  489 01fe 01       		.uleb128 0x1
  490 01ff 52       		.byte	0x52
@@ -611,12 +598,15 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccOimZwh.s 			page 1
  495 0204 00       		.byte	0
  496 0205 00       		.byte	0
  497 0206 0D       		.uleb128 0xd
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccFLQ5ng.s 			page 11
+
+
  498 0207 04       		.byte	0x4
  499 0208 76000000 		.4byte	0x76
  500 020c 0C       		.uleb128 0xc
  501 020d C2010000 		.4byte	.LASF25
  502 0211 01       		.byte	0x1
- 503 0212 41       		.byte	0x41
+ 503 0212 36       		.byte	0x36
  504 0213 00000000 		.4byte	.LFB3
  505 0217 52000000 		.4byte	.LFE3-.LFB3
  506 021b 01       		.uleb128 0x1
@@ -625,31 +615,31 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccOimZwh.s 			page 1
  509 0221 06       		.uleb128 0x6
  510 0222 16010000 		.4byte	.LASF18
  511 0226 01       		.byte	0x1
- 512 0227 41       		.byte	0x41
+ 512 0227 36       		.byte	0x36
  513 0228 76000000 		.4byte	0x76
  514 022c DD000000 		.4byte	.LLST6
  515 0230 06       		.uleb128 0x6
  516 0231 51000000 		.4byte	.LASF26
  517 0235 01       		.byte	0x1
- 518 0236 41       		.byte	0x41
+ 518 0236 36       		.byte	0x36
  519 0237 06020000 		.4byte	0x206
  520 023b FE000000 		.4byte	.LLST7
  521 023f 06       		.uleb128 0x6
  522 0240 1A000000 		.4byte	.LASF24
  523 0244 01       		.byte	0x1
- 524 0245 41       		.byte	0x41
+ 524 0245 36       		.byte	0x36
  525 0246 76000000 		.4byte	0x76
  526 024a 1C010000 		.4byte	.LLST8
  527 024e 0E       		.uleb128 0xe
  528 024f 49020000 		.4byte	.LASF20
  529 0253 01       		.byte	0x1
- 530 0254 48       		.byte	0x48
+ 530 0254 3D       		.byte	0x3d
  531 0255 C0020000 		.4byte	0x2c0
  532 0259 3D010000 		.4byte	.LLST9
  533 025d 07       		.uleb128 0x7
  534 025e 11010000 		.4byte	.LASF21
  535 0262 01       		.byte	0x1
- 536 0263 4F       		.byte	0x4f
+ 536 0263 45       		.byte	0x45
  537 0264 76000000 		.4byte	0x76
  538 0268 02       		.uleb128 0x2
  539 0269 91       		.byte	0x91
@@ -658,9 +648,6 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccOimZwh.s 			page 1
  542 026c 14000000 		.4byte	.LVL14
  543 0270 E0020000 		.4byte	0x2e0
  544 0274 7E020000 		.4byte	0x27e
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccOimZwh.s 			page 12
-
-
  545 0278 09       		.uleb128 0x9
  546 0279 01       		.uleb128 0x1
  547 027a 50       		.byte	0x50
@@ -671,6 +658,9 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccOimZwh.s 			page 1
  552 027f 38000000 		.4byte	.LVL17
  553 0283 EB020000 		.4byte	0x2eb
  554 0287 9E020000 		.4byte	0x29e
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccFLQ5ng.s 			page 12
+
+
  555 028b 09       		.uleb128 0x9
  556 028c 01       		.uleb128 0x1
  557 028d 50       		.byte	0x50
@@ -718,9 +708,6 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccOimZwh.s 			page 1
  599 02bd 30       		.byte	0x30
  600 02be 00       		.byte	0
  601 02bf 00       		.byte	0
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccOimZwh.s 			page 13
-
-
  602 02c0 0A       		.uleb128 0xa
  603 02c1 76000000 		.4byte	0x76
  604 02c5 D5020000 		.4byte	0x2d5
@@ -731,13 +718,16 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccOimZwh.s 			page 1
  609 02d0 00       		.sleb128 0
  610 02d1 08       		.byte	0x8
  611 02d2 FF       		.byte	0xff
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccFLQ5ng.s 			page 13
+
+
  612 02d3 1A       		.byte	0x1a
  613 02d4 00       		.byte	0
  614 02d5 11       		.uleb128 0x11
  615 02d6 34000000 		.4byte	.LASF27
  616 02da 34000000 		.4byte	.LASF27
  617 02de 04       		.byte	0x4
- 618 02df 57       		.byte	0x57
+ 618 02df 56       		.byte	0x56
  619 02e0 11       		.uleb128 0x11
  620 02e1 8C010000 		.4byte	.LASF28
  621 02e5 8C010000 		.4byte	.LASF28
@@ -778,9 +768,6 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccOimZwh.s 			page 1
  656 001a 03       		.uleb128 0x3
  657 001b 0E       		.uleb128 0xe
  658 001c 00       		.byte	0
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccOimZwh.s 			page 14
-
-
  659 001d 00       		.byte	0
  660 001e 03       		.uleb128 0x3
  661 001f 16       		.uleb128 0x16
@@ -791,6 +778,9 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccOimZwh.s 			page 1
  666 0024 0B       		.uleb128 0xb
  667 0025 3B       		.uleb128 0x3b
  668 0026 0B       		.uleb128 0xb
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccFLQ5ng.s 			page 14
+
+
  669 0027 49       		.uleb128 0x49
  670 0028 13       		.uleb128 0x13
  671 0029 00       		.byte	0
@@ -838,9 +828,6 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccOimZwh.s 			page 1
  713 0054 00       		.byte	0
  714 0055 03       		.uleb128 0x3
  715 0056 0E       		.uleb128 0xe
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccOimZwh.s 			page 15
-
-
  716 0057 3A       		.uleb128 0x3a
  717 0058 0B       		.uleb128 0xb
  718 0059 3B       		.uleb128 0x3b
@@ -851,6 +838,9 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccOimZwh.s 			page 1
  723 005e 17       		.uleb128 0x17
  724 005f 00       		.byte	0
  725 0060 00       		.byte	0
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccFLQ5ng.s 			page 15
+
+
  726 0061 07       		.uleb128 0x7
  727 0062 34       		.uleb128 0x34
  728 0063 00       		.byte	0
@@ -898,9 +888,6 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccOimZwh.s 			page 1
  770 0092 00       		.byte	0
  771 0093 49       		.uleb128 0x49
  772 0094 13       		.uleb128 0x13
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccOimZwh.s 			page 16
-
-
  773 0095 2F       		.uleb128 0x2f
  774 0096 0B       		.uleb128 0xb
  775 0097 00       		.byte	0
@@ -911,6 +898,9 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccOimZwh.s 			page 1
  780 009c 3F       		.uleb128 0x3f
  781 009d 19       		.uleb128 0x19
  782 009e 03       		.uleb128 0x3
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccFLQ5ng.s 			page 16
+
+
  783 009f 0E       		.uleb128 0xe
  784 00a0 3A       		.uleb128 0x3a
  785 00a1 0B       		.uleb128 0xb
@@ -958,9 +948,6 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccOimZwh.s 			page 1
  827 00cc 898201   		.uleb128 0x4109
  828 00cf 01       		.byte	0x1
  829 00d0 11       		.uleb128 0x11
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccOimZwh.s 			page 17
-
-
  830 00d1 01       		.uleb128 0x1
  831 00d2 31       		.uleb128 0x31
  832 00d3 13       		.uleb128 0x13
@@ -971,6 +958,9 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccOimZwh.s 			page 1
  837 00d8 10       		.uleb128 0x10
  838 00d9 21       		.uleb128 0x21
  839 00da 00       		.byte	0
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccFLQ5ng.s 			page 17
+
+
  840 00db 49       		.uleb128 0x49
  841 00dc 13       		.uleb128 0x13
  842 00dd 2F       		.uleb128 0x2f
@@ -1018,9 +1008,6 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccOimZwh.s 			page 1
  884 000b 08000000 		.4byte	.LVL1
  885 000f 2C000000 		.4byte	.LFE0
  886 0013 0400     		.2byte	0x4
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccOimZwh.s 			page 18
-
-
  887 0015 F3       		.byte	0xf3
  888 0016 01       		.uleb128 0x1
  889 0017 50       		.byte	0x50
@@ -1031,6 +1018,9 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccOimZwh.s 			page 1
  894 0021 00000000 		.4byte	.LVL3
  895 0025 08000000 		.4byte	.LVL4
  896 0029 0100     		.2byte	0x1
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccFLQ5ng.s 			page 18
+
+
  897 002b 50       		.byte	0x50
  898 002c 08000000 		.4byte	.LVL4
  899 0030 26000000 		.4byte	.LFE1
@@ -1078,9 +1068,6 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccOimZwh.s 			page 1
  941 0090 00000000 		.4byte	.LVL7
  942 0094 14000000 		.4byte	.LVL10
  943 0098 0100     		.2byte	0x1
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccOimZwh.s 			page 19
-
-
  944 009a 51       		.byte	0x51
  945 009b 14000000 		.4byte	.LVL10
  946 009f 17000000 		.4byte	.LVL11-1
@@ -1091,6 +1078,9 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccOimZwh.s 			page 1
  951 00ae 0400     		.2byte	0x4
  952 00b0 F3       		.byte	0xf3
  953 00b1 01       		.uleb128 0x1
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccFLQ5ng.s 			page 19
+
+
  954 00b2 51       		.byte	0x51
  955 00b3 9F       		.byte	0x9f
  956 00b4 00000000 		.4byte	0
@@ -1138,9 +1128,6 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccOimZwh.s 			page 1
  998 011c 00000000 		.4byte	.LVL12
  999 0120 13000000 		.4byte	.LVL14-1
  1000 0124 0100     		.2byte	0x1
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccOimZwh.s 			page 20
-
-
  1001 0126 52       		.byte	0x52
  1002 0127 13000000 		.4byte	.LVL14-1
  1003 012b 52000000 		.4byte	.LFE3
@@ -1151,6 +1138,9 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccOimZwh.s 			page 1
  1008 0134 9F       		.byte	0x9f
  1009 0135 00000000 		.4byte	0
  1010 0139 00000000 		.4byte	0
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccFLQ5ng.s 			page 20
+
+
  1011              	.LLST9:
  1012 013d 22000000 		.4byte	.LVL16
  1013 0141 4E000000 		.4byte	.LVL19
@@ -1198,9 +1188,6 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccOimZwh.s 			page 1
  1055 0008 00000000 		.4byte	.LFB1
  1056 000c 26000000 		.4byte	.LFE1
  1057 0010 00000000 		.4byte	.LFB2
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccOimZwh.s 			page 21
-
-
  1058 0014 1E000000 		.4byte	.LFE2
  1059 0018 00000000 		.4byte	.LFB3
  1060 001c 52000000 		.4byte	.LFE3
@@ -1208,9 +1195,12 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccOimZwh.s 			page 1
  1062 0024 00000000 		.4byte	0
  1063              		.section	.debug_line,"",%progbits
  1064              	.Ldebug_line0:
- 1065 0000 AA010000 		.section	.debug_str,"MS",%progbits,1
+ 1065 0000 A9010000 		.section	.debug_str,"MS",%progbits,1
  1065      02005501 
  1065      00000201 
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccFLQ5ng.s 			page 21
+
+
  1065      FB0E0D00 
  1065      01010101 
  1066              	.LASF32:
@@ -1258,9 +1248,6 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccOimZwh.s 			page 1
  1084      20726576 
  1084      6973696F 
  1084      6E203233 
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccOimZwh.s 			page 22
-
-
  1084      37373135 
  1085 00ca 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
  1085      66756E63 
@@ -1271,6 +1258,9 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccOimZwh.s 			page 1
  1087 00f2 4C495333 		.ascii	"LIS3DH_SPI.c\000"
  1087      44485F53 
  1087      50492E63 
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccFLQ5ng.s 			page 22
+
+
  1087      00
  1088              	.LASF5:
  1089 00ff 6C6F6E67 		.ascii	"long unsigned int\000"
@@ -1318,9 +1308,6 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccOimZwh.s 			page 1
  1108 01a3 6C6F6E67 		.ascii	"long long unsigned int\000"
  1108      206C6F6E 
  1108      6720756E 
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccOimZwh.s 			page 23
-
-
  1108      7369676E 
  1108      65642069 
  1109              	.LASF10:
@@ -1331,6 +1318,9 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccOimZwh.s 			page 1
  1112      44485F77 
  1112      72697465 
  1112      50616765 
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccFLQ5ng.s 			page 23
+
+
  1112      00
  1113              	.LASF17:
  1114 01d3 64617461 		.ascii	"dataRX\000"
@@ -1378,9 +1368,6 @@ ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccOimZwh.s 			page 1
  1134      65642063 
  1134      68617200 
  1135              	.LASF20:
-ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccOimZwh.s 			page 24
-
-
  1136 0249 64617461 		.ascii	"dataTX\000"
  1136      545800
  1137              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

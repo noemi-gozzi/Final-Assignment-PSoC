@@ -1,5 +1,5 @@
 /**
- * @file SPI_Interface.h
+ * @file SPI_Interface_EEPROM.h
  * @brief Functions required to interface with the SPI MASTER (SPIM).
  * 
  * This header file contains macros and function prototypes to interface
@@ -13,7 +13,6 @@
  *       you need to define SLAVE_CS_Write  		   *
  *       with the name of the Chip Select    		   * 
  *       pin (as defined in the Top Design)  		   *
- * E.g.: #define SLAVE_CS_Write CS_1_Write (default)   *
 */
 
 #pragma once

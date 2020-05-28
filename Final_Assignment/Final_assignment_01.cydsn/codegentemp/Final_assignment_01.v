@@ -1,6 +1,6 @@
 // ======================================================================
 // Final_assignment_01.v generated from TopDesign.cysch
-// 05/28/2020 at 15:38
+// 05/28/2020 at 16:01
 // This file is auto generated. ANY EDITS YOU MAKE MAY BE LOST WHEN THIS FILE IS REGENERATED!!!
 // ======================================================================
 
@@ -1183,7 +1183,7 @@ endmodule
 // top
 module top ;
 
-          wire  Net_2862;
+          wire  Net_6110;
           wire  Net_2856;
           wire  Net_2850;
           wire  Net_2849;
@@ -1238,18 +1238,18 @@ module top ;
           wire  Net_2289;
           wire  Net_2288;
           wire  Net_2287;
-          wire  Net_4699;
-          wire  Net_4698;
-          wire  Net_4697;
-          wire  Net_4696;
-          wire  Net_4695;
-          wire  Net_4694;
-          wire  Net_4693;
-          wire  Net_4692;
-          wire  Net_4691;
+          wire  Net_6130;
+          wire  Net_6129;
+          wire  Net_6128;
+          wire  Net_6127;
+          wire  Net_6126;
+          wire  Net_6125;
+          wire  Net_6124;
+          wire  Net_6123;
+          wire  Net_6122;
           wire  Net_2045;
           wire  Net_2874;
-          wire  Net_4690;
+          wire  Net_6121;
           wire  Net_692;
           wire  Net_2873;
           wire  Net_2872;
@@ -1272,6 +1272,7 @@ module top ;
           wire  Net_2525;
           wire  Net_2523;
           wire  Net_60;
+          wire  Net_2813;
           wire  Net_2711;
           wire  Net_149;
           wire  Net_2830;
@@ -1283,7 +1284,6 @@ module top ;
           wire  Net_2690;
           wire  Net_384;
           wire  Net_136;
-          wire  Net_2813;
           wire  Net_2508;
           wire  Net_1357;
 
@@ -1861,18 +1861,18 @@ module top ;
     PWM_v3_30_2 PWM_RG (
         .reset(Net_692),
         .clock(Net_384),
-        .tc(Net_4690),
+        .tc(Net_6121),
         .pwm1(Net_2874),
         .pwm2(Net_2045),
-        .interrupt(Net_4691),
+        .interrupt(Net_6122),
         .capture(1'b0),
         .kill(1'b1),
         .enable(1'b1),
         .trigger(1'b0),
         .cmp_sel(1'b0),
-        .pwm(Net_4697),
-        .ph1(Net_4698),
-        .ph2(Net_4699));
+        .pwm(Net_6128),
+        .ph1(Net_6129),
+        .ph2(Net_6130));
     defparam PWM_RG.Resolution = 8;
 
     PWM_v3_30_3 PWM_B (

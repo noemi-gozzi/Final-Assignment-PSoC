@@ -17,6 +17,7 @@ Gozzi Noemi
 #include "RGBLedDriver.h"
 #include "25LC256.h"
 #include "SPI_Interface_EEPROM.h"
+
 #define UART_1_PutBuffer UART_1_PutString(bufferUART)
 #define DATA_BYTES 6
 #define CONVERSION_FACTOR_DIGIT_MG 4
@@ -25,14 +26,12 @@ Gozzi Noemi
 #define CONVERSION_COUNTER_TIMESTAMP_SEC 0.02 //each clock 0.02 sec
 #define CONVERSION_COUNTER_ISR 1200 //clock overflow 60000*0.02=1200 sec. when an ISR occured 1200 sec have passed
 #define FSR_COUNTER 60000
-
 #define EEPROM_ADDRESS_TIMESTAMP 0x0002
 #define EEPROM_ADDRESS_ENABLEDISABLE 0x0001
 #define EEPROM_ADDRESS_STATUS_VERBOSE_FLAG 0x0000
 #define EEPROM_ADDRESS_ACC_DATA_OVER_THRESHOLD 0x0080
 
 char bufferUART[100];
-
 
 
 int main(void)
@@ -48,10 +47,8 @@ int main(void)
     ADC_DelSig_Start();
     Counter_TimeStamp_Start();
 
-    
     CyDelay(10);
     
-
     sprintf(bufferUART, "^^^^^^^^ Final Project: Noemi Gozzi, Lorenzo Francioli ^^^^^^^^\r\n\n");
     UART_1_PutBuffer;
     
@@ -169,15 +166,16 @@ int main(void)
     data_read = LIS3DH_readByte(LIS3DH_INT1_DURATION);
     sprintf(bufferUART, " --> LIS3DH DURATION REGISTER= 0x%02X\r\n", data_read);
     UART_1_PutBuffer;
-    /*******************FlagEnableDisable Reading ****************/    
+    
+    /*******************CONFIGURATION MODE ****************/    
     
     FlagEnableDisable=Pin_EnableDisable_Read();
     EEPROM_writeByte(EEPROM_ADDRESS_ENABLEDISABLE, FlagEnableDisable);
     EEPROM_waitForWriteComplete();
     //potremmo togliere questa read all'indirizzo eeprom e lasciare solo il print modality + verbose
-    data_read = EEPROM_readByte(EEPROM_ADDRESS_ENABLEDISABLE);
-    sprintf(bufferUART, " --> FlagEnableDisable= %d\r\n", data_read);
-    UART_1_PutBuffer;
+//    data_read = EEPROM_readByte(EEPROM_ADDRESS_ENABLEDISABLE);
+//    sprintf(bufferUART, " --> FlagEnableDisable= %d\r\n", data_read);
+//    UART_1_PutBuffer;
     
     if (FlagEnableDisable){
         sprintf(bufferUART, "\r\nREAD/WRITE CONFIGURATION MODALITY. configuration mode: %d\r\nUART VERBOSE FLAG: %d\r\n", FlagEnableDisable, UARTVerboseFlag);
@@ -191,28 +189,28 @@ int main(void)
     UART_1_PutString("\r\nREADY \r\n\r\n");
     CyDelay(10);
     
-    //Variables declaration
+    /* Variables declaration */
     uint8_t AccData[DATA_BYTES];
     uint8_t AccData_Threshold [DATA_BYTES];
+    uint32 timestamp;
+    int16_t Acc_x;
+    int16_t Acc_y;
+    int16_t Acc_z;
     int16 OutAccX;
     int16 OutAccY;
     int16 OutAccZ;
     uint8_t header = 0xA0;
     uint8_t footer = 0xC0;
     uint8_t OutArray[TRANSMIT_BUFFER_SIZE];
-   
-    //Header and footer set up
+    uint8_t red_x, green_y, blue_z;
+    //    uint8_t reading_eeprom;
+    
+    /* Header and footer set up */
     OutArray[0] = header;
     OutArray[TRANSMIT_BUFFER_SIZE - 1] = footer;
-    uint8_t red_x, green_y, blue_z;
-    int16_t Acc_x;
-    int16_t Acc_y;
-    int16_t Acc_z;
-    
 
-//    
+     /* ISRs StartEx */   
     isr_ACC_StartEx(Custom_Pin_ISR);
-//    
     isr_DEBOUNCER_StartEx(Custom_Pin_Button);
     isr_TIMER_StartEx(Custom_Timer_Button);
     isr_BLINKING_StartEx(Custom_LED_Blinking);
@@ -221,9 +219,11 @@ int main(void)
     isr_TimeStamp_StartEx(Custom_TimeStamp);
         
     ADC_DelSig_StartConvert();
+    
     CyDelay(10);
+    
+    /* Variables initialization */
     UARTVerboseFlag=0;
-
     new_EEPROM=0;
     new_EnableDisable=0;
     Counter_overflow=0;
@@ -232,38 +232,35 @@ int main(void)
     configuration_status=0;
     FlagChangeParameters=0;
 
-    //SPIM_2_Stop();
-   // UART_1_Stop();
+    /* The Accelerometer SPI must be ON only in acquisition mode*/
     SPIM_1_Stop();
-    UART_1_Start();
-//    uint8_t reading_eeprom;
-    uint32 timestamp;
-    
+
     for(;;)
     {
-   
-//        data_read = LIS3DH_readByte(LIS3DH_FIFO_SRC_REG);
-//        sprintf(bufferUART, "** LIS3DH FIFO SRC REG= 0x%02X\r\n", data_water);
-//        UART_1_PutBuffer;
-//        data_read = LIS3DH_readByte(LIS3DH_INT1_SRC);
-//        sprintf(bufferUART, "** LIS3DH_INT1_SRC= 0x%02X\r\n", data_read);
-//        UART_1_PutBuffer;
-        
-/*      TESTING FOR eeprom 0x0000 --> data register system_status - - - - - - verboseFlag      
+        /*
+      TESTING FOR eeprom 0x0000 --> data register system_status - - - - - - verboseFlag      
         reading_eeprom = EEPROM_readByte(0x0000);
         sprintf(bufferUART, "** DATA REGISTER= 0x%02X\r\n", reading_eeprom);
         UART_1_PutBuffer;
-*/     
-
+        */
+        
+        /* Variables initialization */
         Acc_x = 0;
         Acc_y = 0;
         Acc_z = 0;
         
+        /*
+        If the system enters in a new state (from acquisition ON to OFF or viceversa, 
+        from acquisition ON to CONFIGURATION MODE), the system state is stored at the 
+        EEPROM address 0x0000, together with the value of the verbose flag, indicating 
+        the enabled or disabled communication via Bridge Control Panel
+        */
         if(new_EEPROM){
             EEPROM_writeByte(EEPROM_ADDRESS_STATUS_VERBOSE_FLAG, data_register);
             EEPROM_waitForWriteComplete();
             new_EEPROM=0;
         }
+        
         if(new_EnableDisable){
             EEPROM_writeByte(EEPROM_ADDRESS_ENABLEDISABLE, FlagEnableDisable);
             EEPROM_waitForWriteComplete();
