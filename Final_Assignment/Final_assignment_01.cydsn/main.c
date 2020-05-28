@@ -200,14 +200,10 @@ int main(void)
     int16_t Acc_y;
     int16_t Acc_z;
     
-    UARTVerboseFlag=0;
-    PacketReadyFlag = 0;
-    new_EEPROM=0;
-    new_EnableDisable=0;
-    Counter_overflow=0;
-    
+
+//    
     isr_ACC_StartEx(Custom_Pin_ISR);
-    
+//    
     isr_DEBOUNCER_StartEx(Custom_Pin_Button);
     isr_TIMER_StartEx(Custom_Timer_Button);
     isr_BLINKING_StartEx(Custom_LED_Blinking);
@@ -216,11 +212,21 @@ int main(void)
     isr_TimeStamp_StartEx(Custom_TimeStamp);
         
     ADC_DelSig_StartConvert();
-    
-    SPIM_1_Stop();
-    //SPIM_2_Stop();
-    UART_1_Stop();
+    CyDelay(10);
+    UARTVerboseFlag=0;
 
+    new_EEPROM=0;
+    new_EnableDisable=0;
+    Counter_overflow=0;
+    PacketReadyFlag = 0;
+    system_status=0;
+    configuration_status=0;
+    FlagChangeParameters=0;
+
+    //SPIM_2_Stop();
+   // UART_1_Stop();
+    SPIM_1_Stop();
+    UART_1_Start();
 //    uint8_t reading_eeprom;
     uint32 timestamp;
     
@@ -253,9 +259,25 @@ int main(void)
             EEPROM_writeByte(EEPROM_ADDRESS_ENABLEDISABLE, FlagEnableDisable);
             EEPROM_waitForWriteComplete();
             new_EnableDisable=0;
-        }
 
-        if (PacketReadyFlag==1){
+            if (FlagEnableDisable){
+                sprintf(bufferUART, "READ/WRITE CONFIGURATION MODALITY. configuration mode: %d\r\n", FlagEnableDisable);
+                UART_1_PutBuffer;
+            }
+            else {
+                sprintf(bufferUART, "ATTENTION! READ ONLY MODALITY. configuration mode: %d\r\n", FlagEnableDisable);
+                UART_1_PutBuffer;
+            }    
+        }
+        
+       if (configuration_status && FlagChangeParameters){
+                sprintf(bufferUART, "NEW UART VERBOSE FLAG%d\r\n", UARTVerboseFlag);
+                UART_1_PutBuffer;
+                FlagChangeParameters=0;
+        
+       }
+
+        if (PacketReadyFlag==1 && system_status==1 && configuration_status==0){
             uint8_t data = LIS3DH_readByte(LIS3DH_INT1_SRC);
             if(data&0x40){
                 sprintf(bufferUART, "THRESH 0x%02X\r\n", data);
@@ -332,7 +354,7 @@ int main(void)
         PacketReadyFlag=0;
         
         }
-    
+//    
 
 
     }

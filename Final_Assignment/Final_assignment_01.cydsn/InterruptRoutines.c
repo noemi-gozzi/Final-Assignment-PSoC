@@ -15,24 +15,20 @@
 
 #define empty_bit 0x20
 
-char bufferUART[100];
-#define UART_1_PutBuffer UART_1_PutString(bufferUART)
 #include <stdio.h>
 #include <string.h>
 
-#define OFF 0
-#define ON 1
+
 #define TIME_FACTOR 6
-#define FULL_SCALE_RANGE_LOW 0
-#define FULL_SCALE_RANGE_HIGH 65535
-#define FULL_SCALE_RANGE_HALF 32767 
 #define DATA_REGISTER_ADDRESS 0x0000
 
-uint8_t system_status=OFF;
-uint8_t configuration_status=OFF;
+
+
 uint8 TimerFlag=0; 
 int32 value_POT;
 int i=0;
+uint8_t UARTVerboseFlagOLD=OFF;
+
 
 
 CY_ISR(Custom_Pin_ISR){
@@ -85,7 +81,7 @@ CY_ISR(Custom_Pin_Button_Positive){
             RGBLed_WriteColor(OFF, OFF, OFF);
             SPIM_1_Stop();
             //SPIM_2_Stop();
-            UART_1_Stop();
+           // UART_1_Stop();
             Timer_Blinking_Start();
             
         }
@@ -106,7 +102,7 @@ CY_ISR(Custom_Pin_Button_Positive){
             else if (system_status==ON){
                 Pin_Led_Blue_Write(ON);
                 
-                UART_1_Enable();
+                //UART_1_Enable();
                 SPIM_1_Enable();
                 //SPIM_2_Start();
                 RGBLed_Start();
@@ -157,7 +153,7 @@ CY_ISR(Custom_Pin_Button_Positive){
                 system_status=ON;
                 Pin_Led_Blue_Write(ON);
                  
-                UART_1_Enable();
+                //UART_1_Enable();
                 SPIM_1_Enable();
                 //SPIM_2_Start();
                 RGBLed_Start();
@@ -182,7 +178,7 @@ CY_ISR(Custom_Pin_Button_Positive){
                 RGBLed_WriteColor(OFF, OFF, OFF);
                 SPIM_1_Stop();
                 //SPIM_2_Stop();
-                UART_1_Stop();
+                //UART_1_Stop();
                 //RGBLed_Stop();
             }
             //flag cleared
@@ -229,12 +225,14 @@ CY_ISR(Custom_LED_Blinking){
     Timer_Blinking_ReadStatusRegister();
     i=i+1;
     if (configuration_status==1){
+        
         Pin_Led_Blue_Write(!Pin_Led_Blue_Read());
         value_POT = ADC_DelSig_Read32();
         
         
         if (value_POT < FULL_SCALE_RANGE_LOW) value_POT = FULL_SCALE_RANGE_LOW;
         if (value_POT > FULL_SCALE_RANGE_HIGH) value_POT = FULL_SCALE_RANGE_HIGH;
+        
         
         if(FlagEnableDisable){
             if (value_POT < FULL_SCALE_RANGE_HALF){
@@ -245,6 +243,10 @@ CY_ISR(Custom_LED_Blinking){
                 UARTVerboseFlag = ON;
                 Pin_RED_UARTVerboseFlag_Write(ON);
             }
+        if (UARTVerboseFlagOLD!=UARTVerboseFlag){
+            FlagChangeParameters=1;
+        }
+        UARTVerboseFlagOLD=UARTVerboseFlag;
         }
 
     }    

@@ -13,6 +13,12 @@
     
     #define _INTERRUPT_ROUTINES_H 
     
+    #define FULL_SCALE_RANGE_LOW 0
+    #define FULL_SCALE_RANGE_HIGH 65535
+    #define FULL_SCALE_RANGE_HALF 32767 
+    #define OFF 0
+    #define ON 1
+    
     #include "SPI_Interface.h"
     #include "project.h"
     #include "LIS3DH.h"
@@ -30,6 +36,9 @@
     volatile uint8 new_EnableDisable;
     uint8 data_register;
     volatile uint8_t Counter_overflow;
+    volatile uint8_t system_status;
+    volatile uint8_t configuration_status;
+    volatile uint8_t FlagChangeParameters;
     
     CY_ISR_PROTO(Custom_Pin_ISR); 
     CY_ISR_PROTO(Custom_Pin_Button);

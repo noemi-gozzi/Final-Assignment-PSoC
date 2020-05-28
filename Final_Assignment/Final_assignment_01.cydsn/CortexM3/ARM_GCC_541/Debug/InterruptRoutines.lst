@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccJjDDw8.s 			page 1
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccbaDK1q.s 			page 1
 
 
    1              		.syntax unified
@@ -45,31 +45,27 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccJjDDw8.s 			page 1
   15:InterruptRoutines.c **** 
   16:InterruptRoutines.c **** #define empty_bit 0x20
   17:InterruptRoutines.c **** 
-  18:InterruptRoutines.c **** char bufferUART[100];
-  19:InterruptRoutines.c **** #define UART_1_PutBuffer UART_1_PutString(bufferUART)
-  20:InterruptRoutines.c **** #include <stdio.h>
-  21:InterruptRoutines.c **** #include <string.h>
-  22:InterruptRoutines.c **** 
-  23:InterruptRoutines.c **** #define OFF 0
-  24:InterruptRoutines.c **** #define ON 1
-  25:InterruptRoutines.c **** #define TIME_FACTOR 6
-  26:InterruptRoutines.c **** #define FULL_SCALE_RANGE_LOW 0
-  27:InterruptRoutines.c **** #define FULL_SCALE_RANGE_HIGH 65535
-  28:InterruptRoutines.c **** #define FULL_SCALE_RANGE_HALF 32767 
-  29:InterruptRoutines.c **** #define DATA_REGISTER_ADDRESS 0x0000
-  30:InterruptRoutines.c **** 
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccJjDDw8.s 			page 2
+  18:InterruptRoutines.c **** #include <stdio.h>
+  19:InterruptRoutines.c **** #include <string.h>
+  20:InterruptRoutines.c **** 
+  21:InterruptRoutines.c **** 
+  22:InterruptRoutines.c **** #define TIME_FACTOR 6
+  23:InterruptRoutines.c **** #define DATA_REGISTER_ADDRESS 0x0000
+  24:InterruptRoutines.c **** 
+  25:InterruptRoutines.c **** 
+  26:InterruptRoutines.c **** 
+  27:InterruptRoutines.c **** uint8 TimerFlag=0; 
+  28:InterruptRoutines.c **** int32 value_POT;
+  29:InterruptRoutines.c **** int i=0;
+  30:InterruptRoutines.c **** uint8_t UARTVerboseFlagOLD=OFF;
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccbaDK1q.s 			page 2
 
 
-  31:InterruptRoutines.c **** uint8_t system_status=OFF;
-  32:InterruptRoutines.c **** uint8_t configuration_status=OFF;
-  33:InterruptRoutines.c **** uint8 TimerFlag=0; 
-  34:InterruptRoutines.c **** int32 value_POT;
-  35:InterruptRoutines.c **** int i=0;
-  36:InterruptRoutines.c **** 
-  37:InterruptRoutines.c **** 
-  38:InterruptRoutines.c **** CY_ISR(Custom_Pin_ISR){
-  28              		.loc 1 38 0
+  31:InterruptRoutines.c **** 
+  32:InterruptRoutines.c **** 
+  33:InterruptRoutines.c **** 
+  34:InterruptRoutines.c **** CY_ISR(Custom_Pin_ISR){
+  28              		.loc 1 34 0
   29              		.cfi_startproc
   30              		@ args = 0, pretend = 0, frame = 0
   31              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -77,15 +73,15 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccJjDDw8.s 			page 1
   33              		.cfi_def_cfa_offset 8
   34              		.cfi_offset 3, -8
   35              		.cfi_offset 14, -4
-  39:InterruptRoutines.c **** 
-  40:InterruptRoutines.c ****     PacketReadyFlag=1;
-  36              		.loc 1 40 0
+  35:InterruptRoutines.c **** 
+  36:InterruptRoutines.c ****     PacketReadyFlag=1;
+  36              		.loc 1 36 0
   37 0002 0122     		movs	r2, #1
   38 0004 024B     		ldr	r3, .L3
   39 0006 1A70     		strb	r2, [r3]
-  41:InterruptRoutines.c **** 
-  42:InterruptRoutines.c ****     Pin_ISR_ClearInterrupt();
-  40              		.loc 1 42 0
+  37:InterruptRoutines.c **** 
+  38:InterruptRoutines.c ****     Pin_ISR_ClearInterrupt();
+  40              		.loc 1 38 0
   41 0008 FFF7FEFF 		bl	Pin_ISR_ClearInterrupt
   42              	.LVL0:
   43 000c 08BD     		pop	{r3, pc}
@@ -104,11 +100,11 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccJjDDw8.s 			page 1
   56              		.type	Custom_Pin_Button, %function
   57              	Custom_Pin_Button:
   58              	.LFB65:
-  43:InterruptRoutines.c **** 
-  44:InterruptRoutines.c **** }
-  45:InterruptRoutines.c **** 
-  46:InterruptRoutines.c **** CY_ISR(Custom_Pin_Button){
-  59              		.loc 1 46 0
+  39:InterruptRoutines.c **** 
+  40:InterruptRoutines.c **** }
+  41:InterruptRoutines.c **** 
+  42:InterruptRoutines.c **** CY_ISR(Custom_Pin_Button){
+  59              		.loc 1 42 0
   60              		.cfi_startproc
   61              		@ args = 0, pretend = 0, frame = 0
   62              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -116,29 +112,29 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccJjDDw8.s 			page 1
   64              		.cfi_def_cfa_offset 8
   65              		.cfi_offset 3, -8
   66              		.cfi_offset 14, -4
-  47:InterruptRoutines.c ****     
-  48:InterruptRoutines.c ****     /*      NEGATIVE EDGE OF THE DEBOUNCED BUTTON -->CLICKED
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccJjDDw8.s 			page 3
+  43:InterruptRoutines.c ****     
+  44:InterruptRoutines.c ****     /*      NEGATIVE EDGE OF THE DEBOUNCED BUTTON -->CLICKED
+  45:InterruptRoutines.c ****     STOP timer button. this timer is responsible of counting the time difference between two differ
+  46:InterruptRoutines.c ****     I don't want that timer keeps counting if i'm pressing (i don't consided that as time INTER cli
+  47:InterruptRoutines.c ****     */
+  48:InterruptRoutines.c ****     
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccbaDK1q.s 			page 3
 
 
-  49:InterruptRoutines.c ****     STOP timer button. this timer is responsible of counting the time difference between two differ
-  50:InterruptRoutines.c ****     I don't want that timer keeps counting if i'm pressing (i don't consided that as time INTER cli
-  51:InterruptRoutines.c ****     */
-  52:InterruptRoutines.c ****     
-  53:InterruptRoutines.c ****     TIMER_button_Stop();
-  67              		.loc 1 53 0
+  49:InterruptRoutines.c ****     TIMER_button_Stop();
+  67              		.loc 1 49 0
   68 0002 FFF7FEFF 		bl	TIMER_button_Stop
   69              	.LVL1:
-  54:InterruptRoutines.c ****     Timer_Blinking_Start();
-  70              		.loc 1 54 0
+  50:InterruptRoutines.c ****     Timer_Blinking_Start();
+  70              		.loc 1 50 0
   71 0006 FFF7FEFF 		bl	Timer_Blinking_Start
   72              	.LVL2:
-  55:InterruptRoutines.c ****     /*
-  56:InterruptRoutines.c ****     index i is increased with a timer (overflow 250 ms) that is used for counting the time between
-  57:InterruptRoutines.c ****     negative edge and positive edge --> duration of pressing. everytime a negative edge is detected
-  58:InterruptRoutines.c ****     */
-  59:InterruptRoutines.c ****     i=0;
-  73              		.loc 1 59 0
+  51:InterruptRoutines.c ****     /*
+  52:InterruptRoutines.c ****     index i is increased with a timer (overflow 250 ms) that is used for counting the time between
+  53:InterruptRoutines.c ****     negative edge and positive edge --> duration of pressing. everytime a negative edge is detected
+  54:InterruptRoutines.c ****     */
+  55:InterruptRoutines.c ****     i=0;
+  73              		.loc 1 55 0
   74 000a 0022     		movs	r2, #0
   75 000c 014B     		ldr	r3, .L7
   76 000e 1A60     		str	r2, [r3]
@@ -158,11 +154,11 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccJjDDw8.s 			page 1
   90              		.type	Custom_Pin_Button_Positive, %function
   91              	Custom_Pin_Button_Positive:
   92              	.LFB66:
-  60:InterruptRoutines.c ****  
-  61:InterruptRoutines.c **** }
-  62:InterruptRoutines.c **** 
-  63:InterruptRoutines.c **** CY_ISR(Custom_Pin_Button_Positive){
-  93              		.loc 1 63 0
+  56:InterruptRoutines.c ****  
+  57:InterruptRoutines.c **** }
+  58:InterruptRoutines.c **** 
+  59:InterruptRoutines.c **** CY_ISR(Custom_Pin_Button_Positive){
+  93              		.loc 1 59 0
   94              		.cfi_startproc
   95              		@ args = 0, pretend = 0, frame = 0
   96              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -172,2003 +168,1988 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccJjDDw8.s 			page 1
  100              		.cfi_offset 4, -12
  101              		.cfi_offset 5, -8
  102              		.cfi_offset 14, -4
-  64:InterruptRoutines.c ****     
-  65:InterruptRoutines.c ****     /*      POSITIVE EDGE OF THE DEBOUNCED BUTTON --> BUTTON RELEASED
-  66:InterruptRoutines.c ****     when the button is released the first thing to be checked is the time intercurred 
-  67:InterruptRoutines.c ****     between button pressed and button released.
-  68:InterruptRoutines.c ****     since overflow is 250 ms, index=TIME FACTOR=6 means 1500 ms
-  69:InterruptRoutines.c ****     if the time was higher than time factor : CONFIGURATION MODE
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccJjDDw8.s 			page 4
+  60:InterruptRoutines.c ****     
+  61:InterruptRoutines.c ****     /*      POSITIVE EDGE OF THE DEBOUNCED BUTTON --> BUTTON RELEASED
+  62:InterruptRoutines.c ****     when the button is released the first thing to be checked is the time intercurred 
+  63:InterruptRoutines.c ****     between button pressed and button released.
+  64:InterruptRoutines.c ****     since overflow is 250 ms, index=TIME FACTOR=6 means 1500 ms
+  65:InterruptRoutines.c ****     if the time was higher than time factor : CONFIGURATION MODE
+  66:InterruptRoutines.c ****     if the time was lower that time factor: check for double click options (START/STOP ACQUISITION)
+  67:InterruptRoutines.c ****     */
+  68:InterruptRoutines.c ****     
+  69:InterruptRoutines.c ****     if (i>=TIME_FACTOR){
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccbaDK1q.s 			page 4
 
 
-  70:InterruptRoutines.c ****     if the time was lower that time factor: check for double click options (START/STOP ACQUISITION)
-  71:InterruptRoutines.c ****     */
-  72:InterruptRoutines.c ****     
-  73:InterruptRoutines.c ****     if (i>=TIME_FACTOR){
- 103              		.loc 1 73 0
- 104 0002 4B4B     		ldr	r3, .L22
+ 103              		.loc 1 69 0
+ 104 0002 504B     		ldr	r3, .L22
  105 0004 1B68     		ldr	r3, [r3]
  106 0006 052B     		cmp	r3, #5
- 107 0008 3EDD     		ble	.L10
-  74:InterruptRoutines.c ****         
-  75:InterruptRoutines.c ****         /*LONG PRESSURE: configuration mode. depending on the current configuration state
-  76:InterruptRoutines.c ****         enter or exit configuration mode
-  77:InterruptRoutines.c ****         */
-  78:InterruptRoutines.c ****         if (configuration_status==OFF){
- 108              		.loc 1 78 0
- 109 000a 494B     		ldr	r3, .L22
- 110 000c 1B79     		ldrb	r3, [r3, #4]	@ zero_extendqisi2
- 111 000e A3B9     		cbnz	r3, .L11
-  79:InterruptRoutines.c ****             
-  80:InterruptRoutines.c ****             configuration_status=ON;
- 112              		.loc 1 80 0
- 113 0010 0123     		movs	r3, #1
- 114 0012 474A     		ldr	r2, .L22
- 115 0014 1371     		strb	r3, [r2, #4]
-  81:InterruptRoutines.c ****             
-  82:InterruptRoutines.c ****             data_register = (0<<7) | (UARTVerboseFlag);
- 116              		.loc 1 82 0
- 117 0016 474A     		ldr	r2, .L22+4
- 118 0018 1178     		ldrb	r1, [r2]	@ zero_extendqisi2
- 119 001a 474A     		ldr	r2, .L22+8
- 120 001c 1170     		strb	r1, [r2]
-  83:InterruptRoutines.c ****             new_EEPROM=1;
- 121              		.loc 1 83 0
- 122 001e 474A     		ldr	r2, .L22+12
- 123 0020 1370     		strb	r3, [r2]
-  84:InterruptRoutines.c ****             
-  85:InterruptRoutines.c ****             RGBLed_WriteColor(OFF, OFF, OFF);
- 124              		.loc 1 85 0
- 125 0022 0022     		movs	r2, #0
- 126 0024 1146     		mov	r1, r2
- 127 0026 1046     		mov	r0, r2
- 128 0028 FFF7FEFF 		bl	RGBLed_WriteColor
- 129              	.LVL3:
-  86:InterruptRoutines.c ****             SPIM_1_Stop();
- 130              		.loc 1 86 0
- 131 002c FFF7FEFF 		bl	SPIM_1_Stop
- 132              	.LVL4:
-  87:InterruptRoutines.c ****             //SPIM_2_Stop();
-  88:InterruptRoutines.c ****             UART_1_Stop();
- 133              		.loc 1 88 0
- 134 0030 FFF7FEFF 		bl	UART_1_Stop
- 135              	.LVL5:
-  89:InterruptRoutines.c ****             Timer_Blinking_Start();
- 136              		.loc 1 89 0
- 137 0034 FFF7FEFF 		bl	Timer_Blinking_Start
- 138              	.LVL6:
- 139 0038 22E0     		b	.L12
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccJjDDw8.s 			page 5
+ 107 0008 45DD     		ble	.L10
+  70:InterruptRoutines.c ****         
+  71:InterruptRoutines.c ****         /*LONG PRESSURE: configuration mode. depending on the current configuration state
+  72:InterruptRoutines.c ****         enter or exit configuration mode
+  73:InterruptRoutines.c ****         */
+  74:InterruptRoutines.c ****         if (configuration_status==OFF){
+ 108              		.loc 1 74 0
+ 109 000a 4F4B     		ldr	r3, .L22+4
+ 110 000c 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 111 000e 13F0FF0F 		tst	r3, #255
+ 112 0012 12D1     		bne	.L11
+  75:InterruptRoutines.c ****             
+  76:InterruptRoutines.c ****             configuration_status=ON;
+ 113              		.loc 1 76 0
+ 114 0014 0123     		movs	r3, #1
+ 115 0016 4C4A     		ldr	r2, .L22+4
+ 116 0018 1370     		strb	r3, [r2]
+  77:InterruptRoutines.c ****             
+  78:InterruptRoutines.c ****             data_register = (0<<7) | (UARTVerboseFlag);
+ 117              		.loc 1 78 0
+ 118 001a 4C4A     		ldr	r2, .L22+8
+ 119 001c 1178     		ldrb	r1, [r2]	@ zero_extendqisi2
+ 120 001e 4C4A     		ldr	r2, .L22+12
+ 121 0020 1170     		strb	r1, [r2]
+  79:InterruptRoutines.c ****             new_EEPROM=1;
+ 122              		.loc 1 79 0
+ 123 0022 4C4A     		ldr	r2, .L22+16
+ 124 0024 1370     		strb	r3, [r2]
+  80:InterruptRoutines.c ****             
+  81:InterruptRoutines.c ****             RGBLed_WriteColor(OFF, OFF, OFF);
+ 125              		.loc 1 81 0
+ 126 0026 0022     		movs	r2, #0
+ 127 0028 1146     		mov	r1, r2
+ 128 002a 1046     		mov	r0, r2
+ 129 002c FFF7FEFF 		bl	RGBLed_WriteColor
+ 130              	.LVL3:
+  82:InterruptRoutines.c ****             SPIM_1_Stop();
+ 131              		.loc 1 82 0
+ 132 0030 FFF7FEFF 		bl	SPIM_1_Stop
+ 133              	.LVL4:
+  83:InterruptRoutines.c ****             //SPIM_2_Stop();
+  84:InterruptRoutines.c ****            // UART_1_Stop();
+  85:InterruptRoutines.c ****             Timer_Blinking_Start();
+ 134              		.loc 1 85 0
+ 135 0034 FFF7FEFF 		bl	Timer_Blinking_Start
+ 136              	.LVL5:
+ 137 0038 29E0     		b	.L12
+ 138              	.L11:
+  86:InterruptRoutines.c ****             
+  87:InterruptRoutines.c ****         }
+  88:InterruptRoutines.c ****         else if (configuration_status==ON){
+ 139              		.loc 1 88 0
+ 140 003a 434B     		ldr	r3, .L22+4
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccbaDK1q.s 			page 5
 
 
- 140              	.L11:
-  90:InterruptRoutines.c ****             
-  91:InterruptRoutines.c ****         }
-  92:InterruptRoutines.c ****         else if (configuration_status==ON){
- 141              		.loc 1 92 0
- 142 003a 012B     		cmp	r3, #1
- 143 003c 20D1     		bne	.L12
-  93:InterruptRoutines.c **** 
-  94:InterruptRoutines.c ****             configuration_status=OFF;
- 144              		.loc 1 94 0
- 145 003e 3C4B     		ldr	r3, .L22
- 146 0040 0022     		movs	r2, #0
- 147 0042 1A71     		strb	r2, [r3, #4]
-  95:InterruptRoutines.c ****             
-  96:InterruptRoutines.c ****             /*
-  97:InterruptRoutines.c ****             if the system is exiting the configuration mode, RETURN to the previous
-  98:InterruptRoutines.c ****             system status.
-  99:InterruptRoutines.c ****             i.e. I can enter configuration mode both from system ON and system OFF. then, when i de
- 100:InterruptRoutines.c ****             close CONFIGURATION mode the system is going back to ON or OFF. 
- 101:InterruptRoutines.c ****             */
- 102:InterruptRoutines.c **** 
- 103:InterruptRoutines.c ****             if (system_status==OFF){
- 148              		.loc 1 103 0
- 149 0044 5B79     		ldrb	r3, [r3, #5]	@ zero_extendqisi2
- 150 0046 1BB9     		cbnz	r3, .L13
- 104:InterruptRoutines.c ****                 Pin_Led_Blue_Write(OFF);
- 151              		.loc 1 104 0
- 152 0048 1046     		mov	r0, r2
- 153 004a FFF7FEFF 		bl	Pin_Led_Blue_Write
- 154              	.LVL7:
- 155 004e 0CE0     		b	.L14
- 156              	.L13:
- 105:InterruptRoutines.c ****             }
- 106:InterruptRoutines.c ****             else if (system_status==ON){
- 157              		.loc 1 106 0
- 158 0050 012B     		cmp	r3, #1
- 159 0052 0AD1     		bne	.L14
- 107:InterruptRoutines.c ****                 Pin_Led_Blue_Write(ON);
- 160              		.loc 1 107 0
- 161 0054 0120     		movs	r0, #1
- 162 0056 FFF7FEFF 		bl	Pin_Led_Blue_Write
- 163              	.LVL8:
- 108:InterruptRoutines.c ****                 
- 109:InterruptRoutines.c ****                 UART_1_Enable();
- 164              		.loc 1 109 0
- 165 005a FFF7FEFF 		bl	UART_1_Enable
- 166              	.LVL9:
- 110:InterruptRoutines.c ****                 SPIM_1_Enable();
- 167              		.loc 1 110 0
- 168 005e FFF7FEFF 		bl	SPIM_1_Enable
- 169              	.LVL10:
- 111:InterruptRoutines.c ****                 //SPIM_2_Start();
- 112:InterruptRoutines.c ****                 RGBLed_Start();
- 170              		.loc 1 112 0
- 171 0062 FFF7FEFF 		bl	RGBLed_Start
- 172              	.LVL11:
- 113:InterruptRoutines.c ****                 Timer_Blinking_Stop();
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccJjDDw8.s 			page 6
+ 141 003c 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 142 003e DBB2     		uxtb	r3, r3
+ 143 0040 012B     		cmp	r3, #1
+ 144 0042 24D1     		bne	.L12
+  89:InterruptRoutines.c **** 
+  90:InterruptRoutines.c ****             configuration_status=OFF;
+ 145              		.loc 1 90 0
+ 146 0044 0022     		movs	r2, #0
+ 147 0046 404B     		ldr	r3, .L22+4
+ 148 0048 1A70     		strb	r2, [r3]
+  91:InterruptRoutines.c ****             
+  92:InterruptRoutines.c ****             /*
+  93:InterruptRoutines.c ****             if the system is exiting the configuration mode, RETURN to the previous
+  94:InterruptRoutines.c ****             system status.
+  95:InterruptRoutines.c ****             i.e. I can enter configuration mode both from system ON and system OFF. then, when i de
+  96:InterruptRoutines.c ****             close CONFIGURATION mode the system is going back to ON or OFF. 
+  97:InterruptRoutines.c ****             */
+  98:InterruptRoutines.c **** 
+  99:InterruptRoutines.c ****             if (system_status==OFF){
+ 149              		.loc 1 99 0
+ 150 004a 434B     		ldr	r3, .L22+20
+ 151 004c 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 152 004e 13F0FF0F 		tst	r3, #255
+ 153 0052 03D1     		bne	.L13
+ 100:InterruptRoutines.c ****                 Pin_Led_Blue_Write(OFF);
+ 154              		.loc 1 100 0
+ 155 0054 1046     		mov	r0, r2
+ 156 0056 FFF7FEFF 		bl	Pin_Led_Blue_Write
+ 157              	.LVL6:
+ 158 005a 0DE0     		b	.L14
+ 159              	.L13:
+ 101:InterruptRoutines.c ****             }
+ 102:InterruptRoutines.c ****             else if (system_status==ON){
+ 160              		.loc 1 102 0
+ 161 005c 3E4B     		ldr	r3, .L22+20
+ 162 005e 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 163 0060 DBB2     		uxtb	r3, r3
+ 164 0062 012B     		cmp	r3, #1
+ 165 0064 08D1     		bne	.L14
+ 103:InterruptRoutines.c ****                 Pin_Led_Blue_Write(ON);
+ 166              		.loc 1 103 0
+ 167 0066 0120     		movs	r0, #1
+ 168 0068 FFF7FEFF 		bl	Pin_Led_Blue_Write
+ 169              	.LVL7:
+ 104:InterruptRoutines.c ****                 
+ 105:InterruptRoutines.c ****                 //UART_1_Enable();
+ 106:InterruptRoutines.c ****                 SPIM_1_Enable();
+ 170              		.loc 1 106 0
+ 171 006c FFF7FEFF 		bl	SPIM_1_Enable
+ 172              	.LVL8:
+ 107:InterruptRoutines.c ****                 //SPIM_2_Start();
+ 108:InterruptRoutines.c ****                 RGBLed_Start();
+ 173              		.loc 1 108 0
+ 174 0070 FFF7FEFF 		bl	RGBLed_Start
+ 175              	.LVL9:
+ 109:InterruptRoutines.c ****                 Timer_Blinking_Stop();
+ 176              		.loc 1 109 0
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccbaDK1q.s 			page 6
 
 
- 173              		.loc 1 113 0
- 174 0066 FFF7FEFF 		bl	Timer_Blinking_Stop
- 175              	.LVL12:
- 176              	.L14:
- 114:InterruptRoutines.c ****                 
- 115:InterruptRoutines.c ****             }
- 116:InterruptRoutines.c ****             data_register = (system_status<<7) | (UARTVerboseFlag);
- 177              		.loc 1 116 0
- 178 006a 314B     		ldr	r3, .L22
- 179 006c 5A79     		ldrb	r2, [r3, #5]	@ zero_extendqisi2
- 180 006e 314B     		ldr	r3, .L22+4
- 181 0070 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 182 0072 43EAC213 		orr	r3, r3, r2, lsl #7
- 183 0076 304A     		ldr	r2, .L22+8
- 184 0078 1370     		strb	r3, [r2]
- 117:InterruptRoutines.c ****             new_EEPROM=1;
- 185              		.loc 1 117 0
- 186 007a 0122     		movs	r2, #1
- 187 007c 2F4B     		ldr	r3, .L22+12
- 188 007e 1A70     		strb	r2, [r3]
- 189              	.L12:
- 118:InterruptRoutines.c ****         }
- 119:InterruptRoutines.c ****         
- 120:InterruptRoutines.c ****         /*flag for switch case for double click detection. if i'm in long pressure,
- 121:InterruptRoutines.c ****         initialize to 0, to be sure that long pressure is not detected as normal click*/
- 122:InterruptRoutines.c ****         TimerFlag=0;
- 190              		.loc 1 122 0
- 191 0080 0022     		movs	r2, #0
- 192 0082 2B4B     		ldr	r3, .L22
- 193 0084 9A71     		strb	r2, [r3, #6]
- 194 0086 38BD     		pop	{r3, r4, r5, pc}
- 195              	.L10:
- 123:InterruptRoutines.c ****     }
- 124:InterruptRoutines.c ****     
- 125:InterruptRoutines.c ****     /*
- 126:InterruptRoutines.c ****     the system CANNOT enter the start/stop CONDITIONS if it's in configuration mode.
- 127:InterruptRoutines.c ****     so it enters if:
- 128:InterruptRoutines.c ****     - time between push and release of the button is lower than time factor (not long pressure)
- 129:InterruptRoutines.c ****        --> CHECK INSIDE IF DOUBLE CLICK
- 130:InterruptRoutines.c ****     - the system is not in CONFIGURATION mode
- 131:InterruptRoutines.c ****     */
- 132:InterruptRoutines.c ****     
- 133:InterruptRoutines.c ****     else if (i<TIME_FACTOR && configuration_status==OFF) {
- 196              		.loc 1 133 0
- 197 0088 052B     		cmp	r3, #5
- 198 008a 50DC     		bgt	.L9
- 199              		.loc 1 133 0 is_stmt 0 discriminator 1
- 200 008c 284B     		ldr	r3, .L22
- 201 008e 1B79     		ldrb	r3, [r3, #4]	@ zero_extendqisi2
- 202 0090 002B     		cmp	r3, #0
- 203 0092 4CD1     		bne	.L9
- 134:InterruptRoutines.c ****         switch (TimerFlag)
- 204              		.loc 1 134 0 is_stmt 1
- 205 0094 264B     		ldr	r3, .L22
- 206 0096 9B79     		ldrb	r3, [r3, #6]	@ zero_extendqisi2
- 207 0098 012B     		cmp	r3, #1
- 208 009a 09D0     		beq	.L16
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccJjDDw8.s 			page 7
+ 177 0074 FFF7FEFF 		bl	Timer_Blinking_Stop
+ 178              	.LVL10:
+ 179              	.L14:
+ 110:InterruptRoutines.c ****                 
+ 111:InterruptRoutines.c ****             }
+ 112:InterruptRoutines.c ****             data_register = (system_status<<7) | (UARTVerboseFlag);
+ 180              		.loc 1 112 0
+ 181 0078 374B     		ldr	r3, .L22+20
+ 182 007a 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 183 007c 334B     		ldr	r3, .L22+8
+ 184 007e 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 185 0080 43EAC213 		orr	r3, r3, r2, lsl #7
+ 186 0084 324A     		ldr	r2, .L22+12
+ 187 0086 1370     		strb	r3, [r2]
+ 113:InterruptRoutines.c ****             new_EEPROM=1;
+ 188              		.loc 1 113 0
+ 189 0088 0122     		movs	r2, #1
+ 190 008a 324B     		ldr	r3, .L22+16
+ 191 008c 1A70     		strb	r2, [r3]
+ 192              	.L12:
+ 114:InterruptRoutines.c ****         }
+ 115:InterruptRoutines.c ****         
+ 116:InterruptRoutines.c ****         /*flag for switch case for double click detection. if i'm in long pressure,
+ 117:InterruptRoutines.c ****         initialize to 0, to be sure that long pressure is not detected as normal click*/
+ 118:InterruptRoutines.c ****         TimerFlag=0;
+ 193              		.loc 1 118 0
+ 194 008e 0022     		movs	r2, #0
+ 195 0090 2C4B     		ldr	r3, .L22
+ 196 0092 1A71     		strb	r2, [r3, #4]
+ 197 0094 38BD     		pop	{r3, r4, r5, pc}
+ 198              	.L10:
+ 119:InterruptRoutines.c ****     }
+ 120:InterruptRoutines.c ****     
+ 121:InterruptRoutines.c ****     /*
+ 122:InterruptRoutines.c ****     the system CANNOT enter the start/stop CONDITIONS if it's in configuration mode.
+ 123:InterruptRoutines.c ****     so it enters if:
+ 124:InterruptRoutines.c ****     - time between push and release of the button is lower than time factor (not long pressure)
+ 125:InterruptRoutines.c ****        --> CHECK INSIDE IF DOUBLE CLICK
+ 126:InterruptRoutines.c ****     - the system is not in CONFIGURATION mode
+ 127:InterruptRoutines.c ****     */
+ 128:InterruptRoutines.c ****     
+ 129:InterruptRoutines.c ****     else if (i<TIME_FACTOR && configuration_status==OFF) {
+ 199              		.loc 1 129 0
+ 200 0096 052B     		cmp	r3, #5
+ 201 0098 52DC     		bgt	.L9
+ 202              		.loc 1 129 0 is_stmt 0 discriminator 1
+ 203 009a 2B4B     		ldr	r3, .L22+4
+ 204 009c 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 205 009e 13F0FF0F 		tst	r3, #255
+ 206 00a2 4DD1     		bne	.L9
+ 130:InterruptRoutines.c ****         switch (TimerFlag)
+ 207              		.loc 1 130 0 is_stmt 1
+ 208 00a4 274B     		ldr	r3, .L22
+ 209 00a6 1B79     		ldrb	r3, [r3, #4]	@ zero_extendqisi2
+ 210 00a8 012B     		cmp	r3, #1
+ 211 00aa 09D0     		beq	.L16
+ 212 00ac 13B1     		cbz	r3, .L17
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccbaDK1q.s 			page 7
 
 
- 209 009c 13B1     		cbz	r3, .L17
- 210 009e 022B     		cmp	r3, #2
- 211 00a0 40D0     		beq	.L18
- 212 00a2 38BD     		pop	{r3, r4, r5, pc}
- 213              	.L17:
- 135:InterruptRoutines.c ****     	{
- 136:InterruptRoutines.c ****     		case 0: 
- 137:InterruptRoutines.c ****             //first time that the button has been pressed. normal pressure, SINGLE. Nothing to do.
- 138:InterruptRoutines.c ****             TimerFlag=1;
- 214              		.loc 1 138 0
- 215 00a4 0122     		movs	r2, #1
- 216 00a6 224B     		ldr	r3, .L22
- 217 00a8 9A71     		strb	r2, [r3, #6]
- 139:InterruptRoutines.c ****             /*
- 140:InterruptRoutines.c ****             if the button has been released, and it was not a long pressure, that is identified as 
- 141:InterruptRoutines.c ****             TIMER button start, that is the one used to measure the time intercurring between two c
- 142:InterruptRoutines.c ****             it will be stopped in the NEGATIVE isr of the next debounced pressure
- 143:InterruptRoutines.c ****             */
- 144:InterruptRoutines.c ****             TIMER_button_Start();
- 218              		.loc 1 144 0
- 219 00aa FFF7FEFF 		bl	TIMER_button_Start
- 220              	.LVL13:
- 145:InterruptRoutines.c ****     		break;
- 221              		.loc 1 145 0
- 222 00ae 38BD     		pop	{r3, r4, r5, pc}
- 223              	.L16:
- 146:InterruptRoutines.c ****     		case 1:
- 147:InterruptRoutines.c ****             /*button has been pressed for (at least) two times.
- 148:InterruptRoutines.c ****             the time between first and second pressure is less than timer overflow, since
- 149:InterruptRoutines.c ****             if it overflows (at least one time, that is 500 ms) the TimerFlag would be set as 2.
- 150:InterruptRoutines.c ****             */
- 151:InterruptRoutines.c ****             
- 152:InterruptRoutines.c ****             /* CHECK THE PREVIOUS SYSTEM STATUS */
- 153:InterruptRoutines.c ****             
- 154:InterruptRoutines.c ****             if (system_status==OFF){
- 224              		.loc 1 154 0
- 225 00b0 1F4B     		ldr	r3, .L22
- 226 00b2 5B79     		ldrb	r3, [r3, #5]	@ zero_extendqisi2
- 227 00b4 BBB9     		cbnz	r3, .L19
- 155:InterruptRoutines.c ****                 /******************* SYSTEM START ACQUISITION ******************/
- 156:InterruptRoutines.c ****                           
- 157:InterruptRoutines.c ****                 system_status=ON;
- 228              		.loc 1 157 0
- 229 00b6 1E4D     		ldr	r5, .L22
- 230 00b8 0124     		movs	r4, #1
- 231 00ba 6C71     		strb	r4, [r5, #5]
- 158:InterruptRoutines.c ****                 Pin_Led_Blue_Write(ON);
- 232              		.loc 1 158 0
- 233 00bc 2046     		mov	r0, r4
- 234 00be FFF7FEFF 		bl	Pin_Led_Blue_Write
- 235              	.LVL14:
- 159:InterruptRoutines.c ****                  
- 160:InterruptRoutines.c ****                 UART_1_Enable();
- 236              		.loc 1 160 0
- 237 00c2 FFF7FEFF 		bl	UART_1_Enable
- 238              	.LVL15:
- 161:InterruptRoutines.c ****                 SPIM_1_Enable();
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccJjDDw8.s 			page 8
+ 213 00ae 022B     		cmp	r3, #2
+ 214 00b0 41D0     		beq	.L18
+ 215 00b2 38BD     		pop	{r3, r4, r5, pc}
+ 216              	.L17:
+ 131:InterruptRoutines.c ****     	{
+ 132:InterruptRoutines.c ****     		case 0: 
+ 133:InterruptRoutines.c ****             //first time that the button has been pressed. normal pressure, SINGLE. Nothing to do.
+ 134:InterruptRoutines.c ****             TimerFlag=1;
+ 217              		.loc 1 134 0
+ 218 00b4 0122     		movs	r2, #1
+ 219 00b6 234B     		ldr	r3, .L22
+ 220 00b8 1A71     		strb	r2, [r3, #4]
+ 135:InterruptRoutines.c ****             /*
+ 136:InterruptRoutines.c ****             if the button has been released, and it was not a long pressure, that is identified as 
+ 137:InterruptRoutines.c ****             TIMER button start, that is the one used to measure the time intercurring between two c
+ 138:InterruptRoutines.c ****             it will be stopped in the NEGATIVE isr of the next debounced pressure
+ 139:InterruptRoutines.c ****             */
+ 140:InterruptRoutines.c ****             TIMER_button_Start();
+ 221              		.loc 1 140 0
+ 222 00ba FFF7FEFF 		bl	TIMER_button_Start
+ 223              	.LVL11:
+ 141:InterruptRoutines.c ****     		break;
+ 224              		.loc 1 141 0
+ 225 00be 38BD     		pop	{r3, r4, r5, pc}
+ 226              	.L16:
+ 142:InterruptRoutines.c ****     		case 1:
+ 143:InterruptRoutines.c ****             /*button has been pressed for (at least) two times.
+ 144:InterruptRoutines.c ****             the time between first and second pressure is less than timer overflow, since
+ 145:InterruptRoutines.c ****             if it overflows (at least one time, that is 500 ms) the TimerFlag would be set as 2.
+ 146:InterruptRoutines.c ****             */
+ 147:InterruptRoutines.c ****             
+ 148:InterruptRoutines.c ****             /* CHECK THE PREVIOUS SYSTEM STATUS */
+ 149:InterruptRoutines.c ****             
+ 150:InterruptRoutines.c ****             if (system_status==OFF){
+ 227              		.loc 1 150 0
+ 228 00c0 254B     		ldr	r3, .L22+20
+ 229 00c2 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 230 00c4 13F0FF0F 		tst	r3, #255
+ 231 00c8 15D1     		bne	.L19
+ 151:InterruptRoutines.c ****                 /******************* SYSTEM START ACQUISITION ******************/
+ 152:InterruptRoutines.c ****                           
+ 153:InterruptRoutines.c ****                 system_status=ON;
+ 232              		.loc 1 153 0
+ 233 00ca 234D     		ldr	r5, .L22+20
+ 234 00cc 0124     		movs	r4, #1
+ 235 00ce 2C70     		strb	r4, [r5]
+ 154:InterruptRoutines.c ****                 Pin_Led_Blue_Write(ON);
+ 236              		.loc 1 154 0
+ 237 00d0 2046     		mov	r0, r4
+ 238 00d2 FFF7FEFF 		bl	Pin_Led_Blue_Write
+ 239              	.LVL12:
+ 155:InterruptRoutines.c ****                  
+ 156:InterruptRoutines.c ****                 //UART_1_Enable();
+ 157:InterruptRoutines.c ****                 SPIM_1_Enable();
+ 240              		.loc 1 157 0
+ 241 00d6 FFF7FEFF 		bl	SPIM_1_Enable
+ 242              	.LVL13:
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccbaDK1q.s 			page 8
 
 
- 239              		.loc 1 161 0
- 240 00c6 FFF7FEFF 		bl	SPIM_1_Enable
- 241              	.LVL16:
- 162:InterruptRoutines.c ****                 //SPIM_2_Start();
- 163:InterruptRoutines.c ****                 RGBLed_Start();
- 242              		.loc 1 163 0
- 243 00ca FFF7FEFF 		bl	RGBLed_Start
- 244              	.LVL17:
- 164:InterruptRoutines.c ****                 Timer_Blinking_Stop();
- 245              		.loc 1 164 0
- 246 00ce FFF7FEFF 		bl	Timer_Blinking_Stop
- 247              	.LVL18:
- 165:InterruptRoutines.c **** 
- 166:InterruptRoutines.c ****                 /* DATA REGISTER (0x0000 EEPROM): system_status - - - - - - UARTVerboseFlag
- 167:InterruptRoutines.c ****                 i.e. if the system is ON (acquisition) and the flag is high 
- 168:InterruptRoutines.c ****                 (transmission via UART to the Bridge Control Panel) data 
- 169:InterruptRoutines.c ****                 register is: 10000001 (0x81)*/
- 170:InterruptRoutines.c ****                 data_register = (system_status<<7) | (UARTVerboseFlag);
- 248              		.loc 1 170 0
- 249 00d2 6A79     		ldrb	r2, [r5, #5]	@ zero_extendqisi2
- 250 00d4 174B     		ldr	r3, .L22+4
- 251 00d6 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 252 00d8 43EAC213 		orr	r3, r3, r2, lsl #7
- 253 00dc 164A     		ldr	r2, .L22+8
- 254 00de 1370     		strb	r3, [r2]
- 171:InterruptRoutines.c ****                 new_EEPROM=1;
- 255              		.loc 1 171 0
- 256 00e0 164B     		ldr	r3, .L22+12
- 257 00e2 1C70     		strb	r4, [r3]
- 258 00e4 1AE0     		b	.L20
- 259              	.L19:
- 172:InterruptRoutines.c **** 
- 173:InterruptRoutines.c **** 
- 174:InterruptRoutines.c ****             }
- 175:InterruptRoutines.c ****             else if (system_status==ON){
- 260              		.loc 1 175 0
- 261 00e6 012B     		cmp	r3, #1
- 262 00e8 18D1     		bne	.L20
- 176:InterruptRoutines.c ****                 /******************* SYSTEM STOP ACQUISITION ******************/
- 177:InterruptRoutines.c ****                 system_status=OFF;
- 263              		.loc 1 177 0
- 264 00ea 114D     		ldr	r5, .L22
- 265 00ec 0024     		movs	r4, #0
- 266 00ee 6C71     		strb	r4, [r5, #5]
- 178:InterruptRoutines.c ****                 Pin_Led_Blue_Write(OFF);
- 267              		.loc 1 178 0
- 268 00f0 2046     		mov	r0, r4
- 269 00f2 FFF7FEFF 		bl	Pin_Led_Blue_Write
- 270              	.LVL19:
- 179:InterruptRoutines.c ****                 data_register = (system_status<<7) | (UARTVerboseFlag);
- 271              		.loc 1 179 0
- 272 00f6 6A79     		ldrb	r2, [r5, #5]	@ zero_extendqisi2
- 273 00f8 0E4B     		ldr	r3, .L22+4
- 274 00fa 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 275 00fc 43EAC213 		orr	r3, r3, r2, lsl #7
- 276 0100 0D4A     		ldr	r2, .L22+8
- 277 0102 1370     		strb	r3, [r2]
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccJjDDw8.s 			page 9
+ 158:InterruptRoutines.c ****                 //SPIM_2_Start();
+ 159:InterruptRoutines.c ****                 RGBLed_Start();
+ 243              		.loc 1 159 0
+ 244 00da FFF7FEFF 		bl	RGBLed_Start
+ 245              	.LVL14:
+ 160:InterruptRoutines.c ****                 Timer_Blinking_Stop();
+ 246              		.loc 1 160 0
+ 247 00de FFF7FEFF 		bl	Timer_Blinking_Stop
+ 248              	.LVL15:
+ 161:InterruptRoutines.c **** 
+ 162:InterruptRoutines.c ****                 /* DATA REGISTER (0x0000 EEPROM): system_status - - - - - - UARTVerboseFlag
+ 163:InterruptRoutines.c ****                 i.e. if the system is ON (acquisition) and the flag is high 
+ 164:InterruptRoutines.c ****                 (transmission via UART to the Bridge Control Panel) data 
+ 165:InterruptRoutines.c ****                 register is: 10000001 (0x81)*/
+ 166:InterruptRoutines.c ****                 data_register = (system_status<<7) | (UARTVerboseFlag);
+ 249              		.loc 1 166 0
+ 250 00e2 2A78     		ldrb	r2, [r5]	@ zero_extendqisi2
+ 251 00e4 194B     		ldr	r3, .L22+8
+ 252 00e6 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 253 00e8 43EAC213 		orr	r3, r3, r2, lsl #7
+ 254 00ec 184A     		ldr	r2, .L22+12
+ 255 00ee 1370     		strb	r3, [r2]
+ 167:InterruptRoutines.c ****                 new_EEPROM=1;
+ 256              		.loc 1 167 0
+ 257 00f0 184B     		ldr	r3, .L22+16
+ 258 00f2 1C70     		strb	r4, [r3]
+ 259 00f4 1BE0     		b	.L20
+ 260              	.L19:
+ 168:InterruptRoutines.c **** 
+ 169:InterruptRoutines.c **** 
+ 170:InterruptRoutines.c ****             }
+ 171:InterruptRoutines.c ****             else if (system_status==ON){
+ 261              		.loc 1 171 0
+ 262 00f6 184B     		ldr	r3, .L22+20
+ 263 00f8 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 264 00fa DBB2     		uxtb	r3, r3
+ 265 00fc 012B     		cmp	r3, #1
+ 266 00fe 16D1     		bne	.L20
+ 172:InterruptRoutines.c ****                 /******************* SYSTEM STOP ACQUISITION ******************/
+ 173:InterruptRoutines.c ****                 system_status=OFF;
+ 267              		.loc 1 173 0
+ 268 0100 154D     		ldr	r5, .L22+20
+ 269 0102 0024     		movs	r4, #0
+ 270 0104 2C70     		strb	r4, [r5]
+ 174:InterruptRoutines.c ****                 Pin_Led_Blue_Write(OFF);
+ 271              		.loc 1 174 0
+ 272 0106 2046     		mov	r0, r4
+ 273 0108 FFF7FEFF 		bl	Pin_Led_Blue_Write
+ 274              	.LVL16:
+ 175:InterruptRoutines.c ****                 data_register = (system_status<<7) | (UARTVerboseFlag);
+ 275              		.loc 1 175 0
+ 276 010c 2A78     		ldrb	r2, [r5]	@ zero_extendqisi2
+ 277 010e 0F4B     		ldr	r3, .L22+8
+ 278 0110 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 279 0112 43EAC213 		orr	r3, r3, r2, lsl #7
+ 280 0116 0E4A     		ldr	r2, .L22+12
+ 281 0118 1370     		strb	r3, [r2]
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccbaDK1q.s 			page 9
 
 
- 180:InterruptRoutines.c ****                 new_EEPROM=1;
- 278              		.loc 1 180 0
- 279 0104 0122     		movs	r2, #1
- 280 0106 0D4B     		ldr	r3, .L22+12
- 281 0108 1A70     		strb	r2, [r3]
- 181:InterruptRoutines.c **** 
- 182:InterruptRoutines.c ****                 RGBLed_WriteColor(OFF, OFF, OFF);
- 282              		.loc 1 182 0
- 283 010a 2246     		mov	r2, r4
- 284 010c 2146     		mov	r1, r4
- 285 010e 2046     		mov	r0, r4
- 286 0110 FFF7FEFF 		bl	RGBLed_WriteColor
- 287              	.LVL20:
- 183:InterruptRoutines.c ****                 SPIM_1_Stop();
- 288              		.loc 1 183 0
- 289 0114 FFF7FEFF 		bl	SPIM_1_Stop
- 290              	.LVL21:
- 184:InterruptRoutines.c ****                 //SPIM_2_Stop();
- 185:InterruptRoutines.c ****                 UART_1_Stop();
- 291              		.loc 1 185 0
- 292 0118 FFF7FEFF 		bl	UART_1_Stop
- 293              	.LVL22:
- 294              	.L20:
- 186:InterruptRoutines.c ****                 //RGBLed_Stop();
- 187:InterruptRoutines.c ****             }
- 188:InterruptRoutines.c ****             //flag cleared
- 189:InterruptRoutines.c ****             TimerFlag=0;  
- 295              		.loc 1 189 0
- 296 011c 0022     		movs	r2, #0
- 297 011e 044B     		ldr	r3, .L22
- 298 0120 9A71     		strb	r2, [r3, #6]
- 190:InterruptRoutines.c ****     		break;
- 299              		.loc 1 190 0
- 300 0122 38BD     		pop	{r3, r4, r5, pc}
- 301              	.L18:
- 191:InterruptRoutines.c ****             
- 192:InterruptRoutines.c ****     		case 2: 
- 193:InterruptRoutines.c ****             /*
- 194:InterruptRoutines.c ****             time over 500ms--> TIME OVERFLOW OCCURED, FLAG=2, so it is not considered as a double c
- 195:InterruptRoutines.c ****             Anyway, it could be considered as the first click of a double click, 
- 196:InterruptRoutines.c ****             so the system will check the second pressing if it is before 500 ms.
- 197:InterruptRoutines.c ****             */
- 198:InterruptRoutines.c ****             TimerFlag=1;
- 302              		.loc 1 198 0
- 303 0124 0122     		movs	r2, #1
- 304 0126 024B     		ldr	r3, .L22
- 305 0128 9A71     		strb	r2, [r3, #6]
- 199:InterruptRoutines.c ****             /*
- 200:InterruptRoutines.c ****             if the button has been released, and it was not a long pressure, that is identified as 
- 201:InterruptRoutines.c ****             TIMER button start, that is the one used to measure the time intercurring between two c
- 202:InterruptRoutines.c ****             it will be stopped in the NEGATIVE isr of the next debounced pressure
- 203:InterruptRoutines.c ****             */
- 204:InterruptRoutines.c ****             TIMER_button_Start();
- 306              		.loc 1 204 0
- 307 012a FFF7FEFF 		bl	TIMER_button_Start
- 308              	.LVL23:
- 309              	.L9:
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccJjDDw8.s 			page 10
+ 176:InterruptRoutines.c ****                 new_EEPROM=1;
+ 282              		.loc 1 176 0
+ 283 011a 0122     		movs	r2, #1
+ 284 011c 0D4B     		ldr	r3, .L22+16
+ 285 011e 1A70     		strb	r2, [r3]
+ 177:InterruptRoutines.c **** 
+ 178:InterruptRoutines.c ****                 RGBLed_WriteColor(OFF, OFF, OFF);
+ 286              		.loc 1 178 0
+ 287 0120 2246     		mov	r2, r4
+ 288 0122 2146     		mov	r1, r4
+ 289 0124 2046     		mov	r0, r4
+ 290 0126 FFF7FEFF 		bl	RGBLed_WriteColor
+ 291              	.LVL17:
+ 179:InterruptRoutines.c ****                 SPIM_1_Stop();
+ 292              		.loc 1 179 0
+ 293 012a FFF7FEFF 		bl	SPIM_1_Stop
+ 294              	.LVL18:
+ 295              	.L20:
+ 180:InterruptRoutines.c ****                 //SPIM_2_Stop();
+ 181:InterruptRoutines.c ****                 //UART_1_Stop();
+ 182:InterruptRoutines.c ****                 //RGBLed_Stop();
+ 183:InterruptRoutines.c ****             }
+ 184:InterruptRoutines.c ****             //flag cleared
+ 185:InterruptRoutines.c ****             TimerFlag=0;  
+ 296              		.loc 1 185 0
+ 297 012e 0022     		movs	r2, #0
+ 298 0130 044B     		ldr	r3, .L22
+ 299 0132 1A71     		strb	r2, [r3, #4]
+ 186:InterruptRoutines.c ****     		break;
+ 300              		.loc 1 186 0
+ 301 0134 38BD     		pop	{r3, r4, r5, pc}
+ 302              	.L18:
+ 187:InterruptRoutines.c ****             
+ 188:InterruptRoutines.c ****     		case 2: 
+ 189:InterruptRoutines.c ****             /*
+ 190:InterruptRoutines.c ****             time over 500ms--> TIME OVERFLOW OCCURED, FLAG=2, so it is not considered as a double c
+ 191:InterruptRoutines.c ****             Anyway, it could be considered as the first click of a double click, 
+ 192:InterruptRoutines.c ****             so the system will check the second pressing if it is before 500 ms.
+ 193:InterruptRoutines.c ****             */
+ 194:InterruptRoutines.c ****             TimerFlag=1;
+ 303              		.loc 1 194 0
+ 304 0136 0122     		movs	r2, #1
+ 305 0138 024B     		ldr	r3, .L22
+ 306 013a 1A71     		strb	r2, [r3, #4]
+ 195:InterruptRoutines.c ****             /*
+ 196:InterruptRoutines.c ****             if the button has been released, and it was not a long pressure, that is identified as 
+ 197:InterruptRoutines.c ****             TIMER button start, that is the one used to measure the time intercurring between two c
+ 198:InterruptRoutines.c ****             it will be stopped in the NEGATIVE isr of the next debounced pressure
+ 199:InterruptRoutines.c ****             */
+ 200:InterruptRoutines.c ****             TIMER_button_Start();
+ 307              		.loc 1 200 0
+ 308 013c FFF7FEFF 		bl	TIMER_button_Start
+ 309              	.LVL19:
+ 310              	.L9:
+ 311 0140 38BD     		pop	{r3, r4, r5, pc}
+ 312              	.L23:
+ 313 0142 00BF     		.align	2
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccbaDK1q.s 			page 10
 
 
- 310 012e 38BD     		pop	{r3, r4, r5, pc}
- 311              	.L23:
- 312              		.align	2
- 313              	.L22:
- 314 0130 00000000 		.word	.LANCHOR0
- 315 0134 00000000 		.word	UARTVerboseFlag
- 316 0138 00000000 		.word	data_register
- 317 013c 00000000 		.word	new_EEPROM
- 318              		.cfi_endproc
- 319              	.LFE66:
- 320              		.size	Custom_Pin_Button_Positive, .-Custom_Pin_Button_Positive
- 321              		.section	.text.Custom_Timer_Button,"ax",%progbits
- 322              		.align	2
- 323              		.global	Custom_Timer_Button
- 324              		.thumb
- 325              		.thumb_func
- 326              		.type	Custom_Timer_Button, %function
- 327              	Custom_Timer_Button:
- 328              	.LFB67:
- 205:InterruptRoutines.c ****     		    
- 206:InterruptRoutines.c ****     		break;
- 207:InterruptRoutines.c ****             
- 208:InterruptRoutines.c ****         }
- 209:InterruptRoutines.c **** 
- 210:InterruptRoutines.c ****     }
- 211:InterruptRoutines.c **** }
- 212:InterruptRoutines.c **** 
- 213:InterruptRoutines.c **** CY_ISR(Custom_Timer_Button){
- 329              		.loc 1 213 0
- 330              		.cfi_startproc
- 331              		@ args = 0, pretend = 0, frame = 0
- 332              		@ frame_needed = 0, uses_anonymous_args = 0
- 333 0000 08B5     		push	{r3, lr}
- 334              		.cfi_def_cfa_offset 8
- 335              		.cfi_offset 3, -8
- 336              		.cfi_offset 14, -4
- 214:InterruptRoutines.c ****     /* TIMER for double click interval. this timer has been started from previous ISR only after po
- 215:InterruptRoutines.c ****     it it reaches overflow before next button negative edge, the flag is set to 2
- 216:InterruptRoutines.c ****     */
- 217:InterruptRoutines.c ****     TimerFlag=2;
- 337              		.loc 1 217 0
- 338 0002 0222     		movs	r2, #2
- 339 0004 024B     		ldr	r3, .L26
- 340 0006 9A71     		strb	r2, [r3, #6]
- 218:InterruptRoutines.c ****     TIMER_button_ReadStatusRegister();
- 341              		.loc 1 218 0
- 342 0008 FFF7FEFF 		bl	TIMER_button_ReadStatusRegister
- 343              	.LVL24:
- 344 000c 08BD     		pop	{r3, pc}
- 345              	.L27:
- 346 000e 00BF     		.align	2
- 347              	.L26:
- 348 0010 00000000 		.word	.LANCHOR0
- 349              		.cfi_endproc
- 350              	.LFE67:
- 351              		.size	Custom_Timer_Button, .-Custom_Timer_Button
- 352              		.section	.text.Custom_LED_Blinking,"ax",%progbits
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccJjDDw8.s 			page 11
+ 314              	.L22:
+ 315 0144 00000000 		.word	.LANCHOR0
+ 316 0148 00000000 		.word	configuration_status
+ 317 014c 00000000 		.word	UARTVerboseFlag
+ 318 0150 00000000 		.word	data_register
+ 319 0154 00000000 		.word	new_EEPROM
+ 320 0158 00000000 		.word	system_status
+ 321              		.cfi_endproc
+ 322              	.LFE66:
+ 323              		.size	Custom_Pin_Button_Positive, .-Custom_Pin_Button_Positive
+ 324              		.section	.text.Custom_Timer_Button,"ax",%progbits
+ 325              		.align	2
+ 326              		.global	Custom_Timer_Button
+ 327              		.thumb
+ 328              		.thumb_func
+ 329              		.type	Custom_Timer_Button, %function
+ 330              	Custom_Timer_Button:
+ 331              	.LFB67:
+ 201:InterruptRoutines.c ****     		    
+ 202:InterruptRoutines.c ****     		break;
+ 203:InterruptRoutines.c ****             
+ 204:InterruptRoutines.c ****         }
+ 205:InterruptRoutines.c **** 
+ 206:InterruptRoutines.c ****     }
+ 207:InterruptRoutines.c **** }
+ 208:InterruptRoutines.c **** 
+ 209:InterruptRoutines.c **** CY_ISR(Custom_Timer_Button){
+ 332              		.loc 1 209 0
+ 333              		.cfi_startproc
+ 334              		@ args = 0, pretend = 0, frame = 0
+ 335              		@ frame_needed = 0, uses_anonymous_args = 0
+ 336 0000 08B5     		push	{r3, lr}
+ 337              		.cfi_def_cfa_offset 8
+ 338              		.cfi_offset 3, -8
+ 339              		.cfi_offset 14, -4
+ 210:InterruptRoutines.c ****     /* TIMER for double click interval. this timer has been started from previous ISR only after po
+ 211:InterruptRoutines.c ****     it it reaches overflow before next button negative edge, the flag is set to 2
+ 212:InterruptRoutines.c ****     */
+ 213:InterruptRoutines.c ****     TimerFlag=2;
+ 340              		.loc 1 213 0
+ 341 0002 0222     		movs	r2, #2
+ 342 0004 024B     		ldr	r3, .L26
+ 343 0006 1A71     		strb	r2, [r3, #4]
+ 214:InterruptRoutines.c ****     TIMER_button_ReadStatusRegister();
+ 344              		.loc 1 214 0
+ 345 0008 FFF7FEFF 		bl	TIMER_button_ReadStatusRegister
+ 346              	.LVL20:
+ 347 000c 08BD     		pop	{r3, pc}
+ 348              	.L27:
+ 349 000e 00BF     		.align	2
+ 350              	.L26:
+ 351 0010 00000000 		.word	.LANCHOR0
+ 352              		.cfi_endproc
+ 353              	.LFE67:
+ 354              		.size	Custom_Timer_Button, .-Custom_Timer_Button
+ 355              		.section	.text.Custom_LED_Blinking,"ax",%progbits
+ 356              		.align	2
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccbaDK1q.s 			page 11
 
 
- 353              		.align	2
- 354              		.global	Custom_LED_Blinking
- 355              		.thumb
- 356              		.thumb_func
- 357              		.type	Custom_LED_Blinking, %function
- 358              	Custom_LED_Blinking:
- 359              	.LFB68:
- 219:InterruptRoutines.c **** 
- 220:InterruptRoutines.c **** }
- 221:InterruptRoutines.c **** 
- 222:InterruptRoutines.c **** CY_ISR(Custom_LED_Blinking){
- 360              		.loc 1 222 0
- 361              		.cfi_startproc
- 362              		@ args = 0, pretend = 0, frame = 0
- 363              		@ frame_needed = 0, uses_anonymous_args = 0
- 364 0000 08B5     		push	{r3, lr}
- 365              		.cfi_def_cfa_offset 8
- 366              		.cfi_offset 3, -8
- 367              		.cfi_offset 14, -4
- 223:InterruptRoutines.c ****     /* ISR on overflow 250 ms
- 224:InterruptRoutines.c ****     double function:
- 225:InterruptRoutines.c ****     1. toggle the led if configuration mode
- 226:InterruptRoutines.c ****     2. count the time between NEGATIVE (pressed) and POSITIVE (released)
- 227:InterruptRoutines.c ****     edge of the debouncer
- 228:InterruptRoutines.c ****     */
- 229:InterruptRoutines.c ****     Timer_Blinking_ReadStatusRegister();
- 368              		.loc 1 229 0
- 369 0002 FFF7FEFF 		bl	Timer_Blinking_ReadStatusRegister
- 370              	.LVL25:
- 230:InterruptRoutines.c ****     i=i+1;
- 371              		.loc 1 230 0
- 372 0006 1B4B     		ldr	r3, .L34
- 373 0008 1A68     		ldr	r2, [r3]
- 374 000a 0132     		adds	r2, r2, #1
- 375 000c 1A60     		str	r2, [r3]
- 231:InterruptRoutines.c ****     if (configuration_status==1){
- 376              		.loc 1 231 0
- 377 000e 1B79     		ldrb	r3, [r3, #4]	@ zero_extendqisi2
- 378 0010 012B     		cmp	r3, #1
- 379 0012 2DD1     		bne	.L28
- 232:InterruptRoutines.c ****         Pin_Led_Blue_Write(!Pin_Led_Blue_Read());
- 380              		.loc 1 232 0
- 381 0014 FFF7FEFF 		bl	Pin_Led_Blue_Read
- 382              	.LVL26:
- 383 0018 B0FA80F0 		clz	r0, r0
- 384 001c 4009     		lsrs	r0, r0, #5
- 385 001e FFF7FEFF 		bl	Pin_Led_Blue_Write
- 386              	.LVL27:
- 233:InterruptRoutines.c ****         value_POT = ADC_DelSig_Read32();
- 387              		.loc 1 233 0
- 388 0022 FFF7FEFF 		bl	ADC_DelSig_Read32
- 389              	.LVL28:
- 390 0026 144B     		ldr	r3, .L34+4
- 391 0028 1860     		str	r0, [r3]
- 234:InterruptRoutines.c ****         
+ 357              		.global	Custom_LED_Blinking
+ 358              		.thumb
+ 359              		.thumb_func
+ 360              		.type	Custom_LED_Blinking, %function
+ 361              	Custom_LED_Blinking:
+ 362              	.LFB68:
+ 215:InterruptRoutines.c **** 
+ 216:InterruptRoutines.c **** }
+ 217:InterruptRoutines.c **** 
+ 218:InterruptRoutines.c **** CY_ISR(Custom_LED_Blinking){
+ 363              		.loc 1 218 0
+ 364              		.cfi_startproc
+ 365              		@ args = 0, pretend = 0, frame = 0
+ 366              		@ frame_needed = 0, uses_anonymous_args = 0
+ 367 0000 08B5     		push	{r3, lr}
+ 368              		.cfi_def_cfa_offset 8
+ 369              		.cfi_offset 3, -8
+ 370              		.cfi_offset 14, -4
+ 219:InterruptRoutines.c ****     /* ISR on overflow 250 ms
+ 220:InterruptRoutines.c ****     double function:
+ 221:InterruptRoutines.c ****     1. toggle the led if configuration mode
+ 222:InterruptRoutines.c ****     2. count the time between NEGATIVE (pressed) and POSITIVE (released)
+ 223:InterruptRoutines.c ****     edge of the debouncer
+ 224:InterruptRoutines.c ****     */
+ 225:InterruptRoutines.c ****     Timer_Blinking_ReadStatusRegister();
+ 371              		.loc 1 225 0
+ 372 0002 FFF7FEFF 		bl	Timer_Blinking_ReadStatusRegister
+ 373              	.LVL21:
+ 226:InterruptRoutines.c ****     i=i+1;
+ 374              		.loc 1 226 0
+ 375 0006 234A     		ldr	r2, .L36
+ 376 0008 1368     		ldr	r3, [r2]
+ 377 000a 0133     		adds	r3, r3, #1
+ 378 000c 1360     		str	r3, [r2]
+ 227:InterruptRoutines.c ****     if (configuration_status==1){
+ 379              		.loc 1 227 0
+ 380 000e 224B     		ldr	r3, .L36+4
+ 381 0010 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 382 0012 DBB2     		uxtb	r3, r3
+ 383 0014 012B     		cmp	r3, #1
+ 384 0016 3BD1     		bne	.L28
+ 228:InterruptRoutines.c ****         
+ 229:InterruptRoutines.c ****         Pin_Led_Blue_Write(!Pin_Led_Blue_Read());
+ 385              		.loc 1 229 0
+ 386 0018 FFF7FEFF 		bl	Pin_Led_Blue_Read
+ 387              	.LVL22:
+ 388 001c B0FA80F0 		clz	r0, r0
+ 389 0020 4009     		lsrs	r0, r0, #5
+ 390 0022 FFF7FEFF 		bl	Pin_Led_Blue_Write
+ 391              	.LVL23:
+ 230:InterruptRoutines.c ****         value_POT = ADC_DelSig_Read32();
+ 392              		.loc 1 230 0
+ 393 0026 FFF7FEFF 		bl	ADC_DelSig_Read32
+ 394              	.LVL24:
+ 395 002a 1C4B     		ldr	r3, .L36+8
+ 396 002c 1860     		str	r0, [r3]
+ 231:InterruptRoutines.c ****         
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccbaDK1q.s 			page 12
+
+
+ 232:InterruptRoutines.c ****         
+ 233:InterruptRoutines.c ****         if (value_POT < FULL_SCALE_RANGE_LOW) value_POT = FULL_SCALE_RANGE_LOW;
+ 397              		.loc 1 233 0
+ 398 002e 0028     		cmp	r0, #0
+ 399 0030 01DA     		bge	.L30
+ 400              		.loc 1 233 0 is_stmt 0 discriminator 1
+ 401 0032 0022     		movs	r2, #0
+ 402 0034 1A60     		str	r2, [r3]
+ 403              	.L30:
+ 234:InterruptRoutines.c ****         if (value_POT > FULL_SCALE_RANGE_HIGH) value_POT = FULL_SCALE_RANGE_HIGH;
+ 404              		.loc 1 234 0 is_stmt 1
+ 405 0036 194B     		ldr	r3, .L36+8
+ 406 0038 1B68     		ldr	r3, [r3]
+ 407 003a B3F5803F 		cmp	r3, #65536
+ 408 003e 03DB     		blt	.L31
+ 409              		.loc 1 234 0 is_stmt 0 discriminator 1
+ 410 0040 4FF6FF72 		movw	r2, #65535
+ 411 0044 154B     		ldr	r3, .L36+8
+ 412 0046 1A60     		str	r2, [r3]
+ 413              	.L31:
  235:InterruptRoutines.c ****         
- 236:InterruptRoutines.c ****         if (value_POT < FULL_SCALE_RANGE_LOW) value_POT = FULL_SCALE_RANGE_LOW;
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccJjDDw8.s 			page 12
+ 236:InterruptRoutines.c ****         
+ 237:InterruptRoutines.c ****         if(FlagEnableDisable){
+ 414              		.loc 1 237 0 is_stmt 1
+ 415 0048 154B     		ldr	r3, .L36+12
+ 416 004a 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 417 004c 13F0FF0F 		tst	r3, #255
+ 418 0050 1ED0     		beq	.L28
+ 238:InterruptRoutines.c ****             if (value_POT < FULL_SCALE_RANGE_HALF){
+ 419              		.loc 1 238 0
+ 420 0052 124B     		ldr	r3, .L36+8
+ 421 0054 1A68     		ldr	r2, [r3]
+ 422 0056 47F6FE73 		movw	r3, #32766
+ 423 005a 9A42     		cmp	r2, r3
+ 424 005c 05DC     		bgt	.L32
+ 239:InterruptRoutines.c ****                 UARTVerboseFlag = OFF;
+ 425              		.loc 1 239 0
+ 426 005e 0020     		movs	r0, #0
+ 427 0060 104B     		ldr	r3, .L36+16
+ 428 0062 1870     		strb	r0, [r3]
+ 240:InterruptRoutines.c ****                 Pin_RED_UARTVerboseFlag_Write(OFF);
+ 429              		.loc 1 240 0
+ 430 0064 FFF7FEFF 		bl	Pin_RED_UARTVerboseFlag_Write
+ 431              	.LVL25:
+ 432 0068 04E0     		b	.L33
+ 433              	.L32:
+ 241:InterruptRoutines.c ****             }
+ 242:InterruptRoutines.c ****             else{
+ 243:InterruptRoutines.c ****                 UARTVerboseFlag = ON;
+ 434              		.loc 1 243 0
+ 435 006a 0120     		movs	r0, #1
+ 436 006c 0D4B     		ldr	r3, .L36+16
+ 437 006e 1870     		strb	r0, [r3]
+ 244:InterruptRoutines.c ****                 Pin_RED_UARTVerboseFlag_Write(ON);
+ 438              		.loc 1 244 0
+ 439 0070 FFF7FEFF 		bl	Pin_RED_UARTVerboseFlag_Write
+ 440              	.LVL26:
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccbaDK1q.s 			page 13
 
 
- 392              		.loc 1 236 0
- 393 002a 0028     		cmp	r0, #0
- 394 002c 01DA     		bge	.L30
- 395              		.loc 1 236 0 is_stmt 0 discriminator 1
- 396 002e 0022     		movs	r2, #0
- 397 0030 1A60     		str	r2, [r3]
- 398              	.L30:
- 237:InterruptRoutines.c ****         if (value_POT > FULL_SCALE_RANGE_HIGH) value_POT = FULL_SCALE_RANGE_HIGH;
- 399              		.loc 1 237 0 is_stmt 1
- 400 0032 114B     		ldr	r3, .L34+4
- 401 0034 1B68     		ldr	r3, [r3]
- 402 0036 B3F5803F 		cmp	r3, #65536
- 403 003a 03DB     		blt	.L31
- 404              		.loc 1 237 0 is_stmt 0 discriminator 1
- 405 003c 4FF6FF72 		movw	r2, #65535
- 406 0040 0D4B     		ldr	r3, .L34+4
- 407 0042 1A60     		str	r2, [r3]
- 408              	.L31:
- 238:InterruptRoutines.c ****         
- 239:InterruptRoutines.c ****         if(FlagEnableDisable){
- 409              		.loc 1 239 0 is_stmt 1
- 410 0044 0D4B     		ldr	r3, .L34+8
- 411 0046 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 412 0048 13F0FF0F 		tst	r3, #255
- 413 004c 10D0     		beq	.L28
- 240:InterruptRoutines.c ****             if (value_POT < FULL_SCALE_RANGE_HALF){
- 414              		.loc 1 240 0
- 415 004e 0A4B     		ldr	r3, .L34+4
- 416 0050 1A68     		ldr	r2, [r3]
- 417 0052 47F6FE73 		movw	r3, #32766
- 418 0056 9A42     		cmp	r2, r3
- 419 0058 05DC     		bgt	.L32
- 241:InterruptRoutines.c ****                 UARTVerboseFlag = OFF;
- 420              		.loc 1 241 0
- 421 005a 0020     		movs	r0, #0
- 422 005c 084B     		ldr	r3, .L34+12
- 423 005e 1870     		strb	r0, [r3]
- 242:InterruptRoutines.c ****                 Pin_RED_UARTVerboseFlag_Write(OFF);
- 424              		.loc 1 242 0
- 425 0060 FFF7FEFF 		bl	Pin_RED_UARTVerboseFlag_Write
- 426              	.LVL29:
- 427 0064 08BD     		pop	{r3, pc}
- 428              	.L32:
- 243:InterruptRoutines.c ****             }
- 244:InterruptRoutines.c ****             else{
- 245:InterruptRoutines.c ****                 UARTVerboseFlag = ON;
- 429              		.loc 1 245 0
- 430 0066 0120     		movs	r0, #1
- 431 0068 054B     		ldr	r3, .L34+12
- 432 006a 1870     		strb	r0, [r3]
- 246:InterruptRoutines.c ****                 Pin_RED_UARTVerboseFlag_Write(ON);
- 433              		.loc 1 246 0
- 434 006c FFF7FEFF 		bl	Pin_RED_UARTVerboseFlag_Write
- 435              	.LVL30:
- 436              	.L28:
- 437 0070 08BD     		pop	{r3, pc}
- 438              	.L35:
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccJjDDw8.s 			page 13
-
-
- 439 0072 00BF     		.align	2
- 440              	.L34:
- 441 0074 00000000 		.word	.LANCHOR0
- 442 0078 00000000 		.word	value_POT
- 443 007c 00000000 		.word	FlagEnableDisable
- 444 0080 00000000 		.word	UARTVerboseFlag
- 445              		.cfi_endproc
- 446              	.LFE68:
- 447              		.size	Custom_LED_Blinking, .-Custom_LED_Blinking
- 448              		.section	.text.Custom_Pin_EnableDisable,"ax",%progbits
- 449              		.align	2
- 450              		.global	Custom_Pin_EnableDisable
- 451              		.thumb
- 452              		.thumb_func
- 453              		.type	Custom_Pin_EnableDisable, %function
- 454              	Custom_Pin_EnableDisable:
- 455              	.LFB69:
- 247:InterruptRoutines.c ****             }
+ 441              	.L33:
+ 245:InterruptRoutines.c ****             }
+ 246:InterruptRoutines.c ****         if (UARTVerboseFlagOLD!=UARTVerboseFlag){
+ 442              		.loc 1 246 0
+ 443 0074 074B     		ldr	r3, .L36
+ 444 0076 5A79     		ldrb	r2, [r3, #5]	@ zero_extendqisi2
+ 445 0078 0A4B     		ldr	r3, .L36+16
+ 446 007a 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 447 007c DBB2     		uxtb	r3, r3
+ 448 007e 9A42     		cmp	r2, r3
+ 449 0080 02D0     		beq	.L34
+ 247:InterruptRoutines.c ****             FlagChangeParameters=1;
+ 450              		.loc 1 247 0
+ 451 0082 0122     		movs	r2, #1
+ 452 0084 084B     		ldr	r3, .L36+20
+ 453 0086 1A70     		strb	r2, [r3]
+ 454              	.L34:
  248:InterruptRoutines.c ****         }
- 249:InterruptRoutines.c **** 
- 250:InterruptRoutines.c ****     }    
- 251:InterruptRoutines.c ****     
- 252:InterruptRoutines.c **** }
- 253:InterruptRoutines.c **** CY_ISR(Custom_Pin_EnableDisable){
- 456              		.loc 1 253 0
- 457              		.cfi_startproc
- 458              		@ args = 0, pretend = 0, frame = 0
- 459              		@ frame_needed = 0, uses_anonymous_args = 0
- 460 0000 08B5     		push	{r3, lr}
- 461              		.cfi_def_cfa_offset 8
- 462              		.cfi_offset 3, -8
- 463              		.cfi_offset 14, -4
- 254:InterruptRoutines.c ****     Pin_EnableDisable_ClearInterrupt();
- 464              		.loc 1 254 0
- 465 0002 FFF7FEFF 		bl	Pin_EnableDisable_ClearInterrupt
- 466              	.LVL31:
- 255:InterruptRoutines.c ****     
- 256:InterruptRoutines.c ****     FlagEnableDisable=Pin_EnableDisable_Read();
- 467              		.loc 1 256 0
- 468 0006 FFF7FEFF 		bl	Pin_EnableDisable_Read
- 469              	.LVL32:
- 470 000a 034B     		ldr	r3, .L38
- 471 000c 1870     		strb	r0, [r3]
+ 249:InterruptRoutines.c ****         UARTVerboseFlagOLD=UARTVerboseFlag;
+ 455              		.loc 1 249 0
+ 456 0088 064B     		ldr	r3, .L36+16
+ 457 008a 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 458 008c 014B     		ldr	r3, .L36
+ 459 008e 5A71     		strb	r2, [r3, #5]
+ 460              	.L28:
+ 461 0090 08BD     		pop	{r3, pc}
+ 462              	.L37:
+ 463 0092 00BF     		.align	2
+ 464              	.L36:
+ 465 0094 00000000 		.word	.LANCHOR0
+ 466 0098 00000000 		.word	configuration_status
+ 467 009c 00000000 		.word	value_POT
+ 468 00a0 00000000 		.word	FlagEnableDisable
+ 469 00a4 00000000 		.word	UARTVerboseFlag
+ 470 00a8 00000000 		.word	FlagChangeParameters
+ 471              		.cfi_endproc
+ 472              	.LFE68:
+ 473              		.size	Custom_LED_Blinking, .-Custom_LED_Blinking
+ 474              		.section	.text.Custom_Pin_EnableDisable,"ax",%progbits
+ 475              		.align	2
+ 476              		.global	Custom_Pin_EnableDisable
+ 477              		.thumb
+ 478              		.thumb_func
+ 479              		.type	Custom_Pin_EnableDisable, %function
+ 480              	Custom_Pin_EnableDisable:
+ 481              	.LFB69:
+ 250:InterruptRoutines.c ****         }
+ 251:InterruptRoutines.c **** 
+ 252:InterruptRoutines.c ****     }    
+ 253:InterruptRoutines.c ****     
+ 254:InterruptRoutines.c **** }
+ 255:InterruptRoutines.c **** CY_ISR(Custom_Pin_EnableDisable){
+ 482              		.loc 1 255 0
+ 483              		.cfi_startproc
+ 484              		@ args = 0, pretend = 0, frame = 0
+ 485              		@ frame_needed = 0, uses_anonymous_args = 0
+ 486 0000 08B5     		push	{r3, lr}
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccbaDK1q.s 			page 14
+
+
+ 487              		.cfi_def_cfa_offset 8
+ 488              		.cfi_offset 3, -8
+ 489              		.cfi_offset 14, -4
+ 256:InterruptRoutines.c ****     Pin_EnableDisable_ClearInterrupt();
+ 490              		.loc 1 256 0
+ 491 0002 FFF7FEFF 		bl	Pin_EnableDisable_ClearInterrupt
+ 492              	.LVL27:
  257:InterruptRoutines.c ****     
- 258:InterruptRoutines.c ****     new_EnableDisable=1;
- 472              		.loc 1 258 0
- 473 000e 0122     		movs	r2, #1
- 474 0010 024B     		ldr	r3, .L38+4
- 475 0012 1A70     		strb	r2, [r3]
- 476 0014 08BD     		pop	{r3, pc}
- 477              	.L39:
- 478 0016 00BF     		.align	2
- 479              	.L38:
- 480 0018 00000000 		.word	FlagEnableDisable
- 481 001c 00000000 		.word	new_EnableDisable
- 482              		.cfi_endproc
- 483              	.LFE69:
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccJjDDw8.s 			page 14
+ 258:InterruptRoutines.c ****     FlagEnableDisable=Pin_EnableDisable_Read();
+ 493              		.loc 1 258 0
+ 494 0006 FFF7FEFF 		bl	Pin_EnableDisable_Read
+ 495              	.LVL28:
+ 496 000a 034B     		ldr	r3, .L40
+ 497 000c 1870     		strb	r0, [r3]
+ 259:InterruptRoutines.c ****     
+ 260:InterruptRoutines.c ****     new_EnableDisable=1;
+ 498              		.loc 1 260 0
+ 499 000e 0122     		movs	r2, #1
+ 500 0010 024B     		ldr	r3, .L40+4
+ 501 0012 1A70     		strb	r2, [r3]
+ 502 0014 08BD     		pop	{r3, pc}
+ 503              	.L41:
+ 504 0016 00BF     		.align	2
+ 505              	.L40:
+ 506 0018 00000000 		.word	FlagEnableDisable
+ 507 001c 00000000 		.word	new_EnableDisable
+ 508              		.cfi_endproc
+ 509              	.LFE69:
+ 510              		.size	Custom_Pin_EnableDisable, .-Custom_Pin_EnableDisable
+ 511              		.section	.text.Custom_TimeStamp,"ax",%progbits
+ 512              		.align	2
+ 513              		.global	Custom_TimeStamp
+ 514              		.thumb
+ 515              		.thumb_func
+ 516              		.type	Custom_TimeStamp, %function
+ 517              	Custom_TimeStamp:
+ 518              	.LFB70:
+ 261:InterruptRoutines.c **** }
+ 262:InterruptRoutines.c **** 
+ 263:InterruptRoutines.c **** CY_ISR(Custom_TimeStamp){
+ 519              		.loc 1 263 0
+ 520              		.cfi_startproc
+ 521              		@ args = 0, pretend = 0, frame = 0
+ 522              		@ frame_needed = 0, uses_anonymous_args = 0
+ 523 0000 08B5     		push	{r3, lr}
+ 524              		.cfi_def_cfa_offset 8
+ 525              		.cfi_offset 3, -8
+ 526              		.cfi_offset 14, -4
+ 264:InterruptRoutines.c ****     Counter_TimeStamp_ReadStatusRegister();
+ 527              		.loc 1 264 0
+ 528 0002 FFF7FEFF 		bl	Counter_TimeStamp_ReadStatusRegister
+ 529              	.LVL29:
+ 265:InterruptRoutines.c ****     Counter_overflow=Counter_overflow+1;
+ 530              		.loc 1 265 0
+ 531 0006 034A     		ldr	r2, .L44
+ 532 0008 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 533 000a 0133     		adds	r3, r3, #1
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccbaDK1q.s 			page 15
 
 
- 484              		.size	Custom_Pin_EnableDisable, .-Custom_Pin_EnableDisable
- 485              		.section	.text.Custom_TimeStamp,"ax",%progbits
- 486              		.align	2
- 487              		.global	Custom_TimeStamp
- 488              		.thumb
- 489              		.thumb_func
- 490              		.type	Custom_TimeStamp, %function
- 491              	Custom_TimeStamp:
- 492              	.LFB70:
- 259:InterruptRoutines.c **** }
- 260:InterruptRoutines.c **** 
- 261:InterruptRoutines.c **** CY_ISR(Custom_TimeStamp){
- 493              		.loc 1 261 0
- 494              		.cfi_startproc
- 495              		@ args = 0, pretend = 0, frame = 0
- 496              		@ frame_needed = 0, uses_anonymous_args = 0
- 497 0000 08B5     		push	{r3, lr}
- 498              		.cfi_def_cfa_offset 8
- 499              		.cfi_offset 3, -8
- 500              		.cfi_offset 14, -4
- 262:InterruptRoutines.c ****     Counter_TimeStamp_ReadStatusRegister();
- 501              		.loc 1 262 0
- 502 0002 FFF7FEFF 		bl	Counter_TimeStamp_ReadStatusRegister
- 503              	.LVL33:
- 263:InterruptRoutines.c ****     Counter_overflow=Counter_overflow+1;
- 504              		.loc 1 263 0
- 505 0006 034A     		ldr	r2, .L42
- 506 0008 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
- 507 000a 0133     		adds	r3, r3, #1
- 508 000c DBB2     		uxtb	r3, r3
- 509 000e 1370     		strb	r3, [r2]
- 510 0010 08BD     		pop	{r3, pc}
- 511              	.L43:
- 512 0012 00BF     		.align	2
- 513              	.L42:
- 514 0014 00000000 		.word	Counter_overflow
- 515              		.cfi_endproc
- 516              	.LFE70:
- 517              		.size	Custom_TimeStamp, .-Custom_TimeStamp
- 518              		.global	i
- 519              		.comm	value_POT,4,4
- 520              		.global	TimerFlag
- 521              		.global	configuration_status
- 522              		.global	system_status
- 523              		.comm	bufferUART,100,4
- 524              		.comm	Counter_overflow,1,1
- 525              		.comm	data_register,1,1
- 526              		.comm	new_EnableDisable,1,1
- 527              		.comm	new_EEPROM,1,1
- 528              		.comm	FlagEnableDisable,1,1
- 529              		.comm	data_water,1,1
- 530              		.comm	UARTVerboseFlag,1,1
- 531              		.comm	PacketReadyFlag,1,1
- 532              		.bss
- 533              		.align	2
- 534              		.set	.LANCHOR0,. + 0
- 535              		.type	i, %object
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccJjDDw8.s 			page 15
+ 534 000c DBB2     		uxtb	r3, r3
+ 535 000e 1370     		strb	r3, [r2]
+ 536 0010 08BD     		pop	{r3, pc}
+ 537              	.L45:
+ 538 0012 00BF     		.align	2
+ 539              	.L44:
+ 540 0014 00000000 		.word	Counter_overflow
+ 541              		.cfi_endproc
+ 542              	.LFE70:
+ 543              		.size	Custom_TimeStamp, .-Custom_TimeStamp
+ 544              		.global	UARTVerboseFlagOLD
+ 545              		.global	i
+ 546              		.comm	value_POT,4,4
+ 547              		.global	TimerFlag
+ 548              		.comm	FlagChangeParameters,1,1
+ 549              		.comm	configuration_status,1,1
+ 550              		.comm	system_status,1,1
+ 551              		.comm	Counter_overflow,1,1
+ 552              		.comm	data_register,1,1
+ 553              		.comm	new_EnableDisable,1,1
+ 554              		.comm	new_EEPROM,1,1
+ 555              		.comm	FlagEnableDisable,1,1
+ 556              		.comm	data_water,1,1
+ 557              		.comm	UARTVerboseFlag,1,1
+ 558              		.comm	PacketReadyFlag,1,1
+ 559              		.bss
+ 560              		.align	2
+ 561              		.set	.LANCHOR0,. + 0
+ 562              		.type	i, %object
+ 563              		.size	i, 4
+ 564              	i:
+ 565 0000 00000000 		.space	4
+ 566              		.type	TimerFlag, %object
+ 567              		.size	TimerFlag, 1
+ 568              	TimerFlag:
+ 569 0004 00       		.space	1
+ 570              		.type	UARTVerboseFlagOLD, %object
+ 571              		.size	UARTVerboseFlagOLD, 1
+ 572              	UARTVerboseFlagOLD:
+ 573 0005 00       		.space	1
+ 574              		.text
+ 575              	.Letext0:
+ 576              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.3\\psoc creator\\import\\gnu\\arm\\5.4.
+ 577              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.3\\psoc creator\\import\\gnu\\arm\\5.4.
+ 578              		.file 4 "Generated_Source\\PSoC5/cytypes.h"
+ 579              		.file 5 "Generated_Source\\PSoC5/core_cm3.h"
+ 580              		.file 6 "InterruptRoutines.h"
+ 581              		.file 7 "Generated_Source\\PSoC5/Pin_ISR.h"
+ 582              		.file 8 "Generated_Source\\PSoC5/TIMER_button.h"
+ 583              		.file 9 "Generated_Source\\PSoC5/Timer_Blinking.h"
+ 584              		.file 10 "RGBLedDriver.h"
+ 585              		.file 11 "Generated_Source\\PSoC5/SPIM_1.h"
+ 586              		.file 12 "Generated_Source\\PSoC5/Pin_Led_Blue.h"
+ 587              		.file 13 "Generated_Source\\PSoC5/ADC_DelSig.h"
+ 588              		.file 14 "Generated_Source\\PSoC5/Pin_RED_UARTVerboseFlag.h"
+ 589              		.file 15 "Generated_Source\\PSoC5/Pin_EnableDisable.h"
+ 590              		.file 16 "Generated_Source\\PSoC5/Counter_TimeStamp.h"
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccbaDK1q.s 			page 16
 
 
- 536              		.size	i, 4
- 537              	i:
- 538 0000 00000000 		.space	4
- 539              		.type	configuration_status, %object
- 540              		.size	configuration_status, 1
- 541              	configuration_status:
- 542 0004 00       		.space	1
- 543              		.type	system_status, %object
- 544              		.size	system_status, 1
- 545              	system_status:
- 546 0005 00       		.space	1
- 547              		.type	TimerFlag, %object
- 548              		.size	TimerFlag, 1
- 549              	TimerFlag:
- 550 0006 00       		.space	1
- 551              		.text
- 552              	.Letext0:
- 553              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.3\\psoc creator\\import\\gnu\\arm\\5.4.
- 554              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.3\\psoc creator\\import\\gnu\\arm\\5.4.
- 555              		.file 4 "Generated_Source\\PSoC5/cytypes.h"
- 556              		.file 5 "Generated_Source\\PSoC5/core_cm3.h"
- 557              		.file 6 "InterruptRoutines.h"
- 558              		.file 7 "Generated_Source\\PSoC5/Pin_ISR.h"
- 559              		.file 8 "Generated_Source\\PSoC5/TIMER_button.h"
- 560              		.file 9 "Generated_Source\\PSoC5/Timer_Blinking.h"
- 561              		.file 10 "RGBLedDriver.h"
- 562              		.file 11 "Generated_Source\\PSoC5/SPIM_1.h"
- 563              		.file 12 "Generated_Source\\PSoC5/UART_1.h"
- 564              		.file 13 "Generated_Source\\PSoC5/Pin_Led_Blue.h"
- 565              		.file 14 "Generated_Source\\PSoC5/ADC_DelSig.h"
- 566              		.file 15 "Generated_Source\\PSoC5/Pin_RED_UARTVerboseFlag.h"
- 567              		.file 16 "Generated_Source\\PSoC5/Pin_EnableDisable.h"
- 568              		.file 17 "Generated_Source\\PSoC5/Counter_TimeStamp.h"
- 569              		.section	.debug_info,"",%progbits
- 570              	.Ldebug_info0:
- 571 0000 F4040000 		.4byte	0x4f4
- 572 0004 0400     		.2byte	0x4
- 573 0006 00000000 		.4byte	.Ldebug_abbrev0
- 574 000a 04       		.byte	0x4
- 575 000b 01       		.uleb128 0x1
- 576 000c 55040000 		.4byte	.LASF61
- 577 0010 0C       		.byte	0xc
- 578 0011 7D000000 		.4byte	.LASF62
- 579 0015 83020000 		.4byte	.LASF63
- 580 0019 00000000 		.4byte	.Ldebug_ranges0+0
- 581 001d 00000000 		.4byte	0
- 582 0021 00000000 		.4byte	.Ldebug_line0
- 583 0025 02       		.uleb128 0x2
- 584 0026 01       		.byte	0x1
- 585 0027 06       		.byte	0x6
- 586 0028 41020000 		.4byte	.LASF0
- 587 002c 03       		.uleb128 0x3
- 588 002d D2010000 		.4byte	.LASF4
- 589 0031 02       		.byte	0x2
- 590 0032 1D       		.byte	0x1d
- 591 0033 37000000 		.4byte	0x37
- 592 0037 02       		.uleb128 0x2
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccJjDDw8.s 			page 16
+ 591              		.section	.debug_info,"",%progbits
+ 592              	.Ldebug_info0:
+ 593 0000 BB040000 		.4byte	0x4bb
+ 594 0004 0400     		.2byte	0x4
+ 595 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 596 000a 04       		.byte	0x4
+ 597 000b 01       		.uleb128 0x1
+ 598 000c 58040000 		.4byte	.LASF60
+ 599 0010 0C       		.byte	0xc
+ 600 0011 7B000000 		.4byte	.LASF61
+ 601 0015 73020000 		.4byte	.LASF62
+ 602 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 603 001d 00000000 		.4byte	0
+ 604 0021 00000000 		.4byte	.Ldebug_line0
+ 605 0025 02       		.uleb128 0x2
+ 606 0026 01       		.byte	0x1
+ 607 0027 06       		.byte	0x6
+ 608 0028 31020000 		.4byte	.LASF0
+ 609 002c 03       		.uleb128 0x3
+ 610 002d C2010000 		.4byte	.LASF4
+ 611 0031 02       		.byte	0x2
+ 612 0032 1D       		.byte	0x1d
+ 613 0033 37000000 		.4byte	0x37
+ 614 0037 02       		.uleb128 0x2
+ 615 0038 01       		.byte	0x1
+ 616 0039 08       		.byte	0x8
+ 617 003a 11020000 		.4byte	.LASF1
+ 618 003e 02       		.uleb128 0x2
+ 619 003f 02       		.byte	0x2
+ 620 0040 05       		.byte	0x5
+ 621 0041 8F000000 		.4byte	.LASF2
+ 622 0045 02       		.uleb128 0x2
+ 623 0046 02       		.byte	0x2
+ 624 0047 07       		.byte	0x7
+ 625 0048 28030000 		.4byte	.LASF3
+ 626 004c 03       		.uleb128 0x3
+ 627 004d FC030000 		.4byte	.LASF5
+ 628 0051 02       		.byte	0x2
+ 629 0052 3F       		.byte	0x3f
+ 630 0053 57000000 		.4byte	0x57
+ 631 0057 02       		.uleb128 0x2
+ 632 0058 04       		.byte	0x4
+ 633 0059 05       		.byte	0x5
+ 634 005a B9010000 		.4byte	.LASF6
+ 635 005e 02       		.uleb128 0x2
+ 636 005f 04       		.byte	0x4
+ 637 0060 07       		.byte	0x7
+ 638 0061 9E030000 		.4byte	.LASF7
+ 639 0065 02       		.uleb128 0x2
+ 640 0066 08       		.byte	0x8
+ 641 0067 05       		.byte	0x5
+ 642 0068 50010000 		.4byte	.LASF8
+ 643 006c 02       		.uleb128 0x2
+ 644 006d 08       		.byte	0x8
+ 645 006e 07       		.byte	0x7
+ 646 006f 3D020000 		.4byte	.LASF9
+ 647 0073 04       		.uleb128 0x4
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccbaDK1q.s 			page 17
 
 
- 593 0038 01       		.byte	0x1
- 594 0039 08       		.byte	0x8
- 595 003a 21020000 		.4byte	.LASF1
- 596 003e 02       		.uleb128 0x2
- 597 003f 02       		.byte	0x2
- 598 0040 05       		.byte	0x5
- 599 0041 91000000 		.4byte	.LASF2
- 600 0045 02       		.uleb128 0x2
- 601 0046 02       		.byte	0x2
- 602 0047 07       		.byte	0x7
- 603 0048 38030000 		.4byte	.LASF3
- 604 004c 03       		.uleb128 0x3
- 605 004d 0C040000 		.4byte	.LASF5
- 606 0051 02       		.byte	0x2
- 607 0052 3F       		.byte	0x3f
- 608 0053 57000000 		.4byte	0x57
- 609 0057 02       		.uleb128 0x2
- 610 0058 04       		.byte	0x4
- 611 0059 05       		.byte	0x5
- 612 005a C9010000 		.4byte	.LASF6
- 613 005e 02       		.uleb128 0x2
- 614 005f 04       		.byte	0x4
- 615 0060 07       		.byte	0x7
- 616 0061 AE030000 		.4byte	.LASF7
- 617 0065 02       		.uleb128 0x2
- 618 0066 08       		.byte	0x8
- 619 0067 05       		.byte	0x5
- 620 0068 60010000 		.4byte	.LASF8
- 621 006c 02       		.uleb128 0x2
- 622 006d 08       		.byte	0x8
- 623 006e 07       		.byte	0x7
- 624 006f 4D020000 		.4byte	.LASF9
- 625 0073 04       		.uleb128 0x4
- 626 0074 04       		.byte	0x4
- 627 0075 05       		.byte	0x5
- 628 0076 696E7400 		.ascii	"int\000"
- 629 007a 02       		.uleb128 0x2
- 630 007b 04       		.byte	0x4
- 631 007c 07       		.byte	0x7
- 632 007d 64020000 		.4byte	.LASF10
- 633 0081 03       		.uleb128 0x3
- 634 0082 00010000 		.4byte	.LASF11
- 635 0086 03       		.byte	0x3
- 636 0087 18       		.byte	0x18
- 637 0088 2C000000 		.4byte	0x2c
- 638 008c 03       		.uleb128 0x3
- 639 008d 7F030000 		.4byte	.LASF12
- 640 0091 03       		.byte	0x3
- 641 0092 2C       		.byte	0x2c
- 642 0093 4C000000 		.4byte	0x4c
- 643 0097 05       		.uleb128 0x5
- 644 0098 1A010000 		.4byte	.LASF13
- 645 009c 04       		.byte	0x4
- 646 009d E401     		.2byte	0x1e4
- 647 009f 37000000 		.4byte	0x37
- 648 00a3 05       		.uleb128 0x5
- 649 00a4 C0030000 		.4byte	.LASF14
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccJjDDw8.s 			page 17
+ 648 0074 04       		.byte	0x4
+ 649 0075 05       		.byte	0x5
+ 650 0076 696E7400 		.ascii	"int\000"
+ 651 007a 02       		.uleb128 0x2
+ 652 007b 04       		.byte	0x4
+ 653 007c 07       		.byte	0x7
+ 654 007d 54020000 		.4byte	.LASF10
+ 655 0081 03       		.uleb128 0x3
+ 656 0082 FE000000 		.4byte	.LASF11
+ 657 0086 03       		.byte	0x3
+ 658 0087 18       		.byte	0x18
+ 659 0088 2C000000 		.4byte	0x2c
+ 660 008c 03       		.uleb128 0x3
+ 661 008d 6F030000 		.4byte	.LASF12
+ 662 0091 03       		.byte	0x3
+ 663 0092 2C       		.byte	0x2c
+ 664 0093 4C000000 		.4byte	0x4c
+ 665 0097 05       		.uleb128 0x5
+ 666 0098 18010000 		.4byte	.LASF13
+ 667 009c 04       		.byte	0x4
+ 668 009d E401     		.2byte	0x1e4
+ 669 009f 37000000 		.4byte	0x37
+ 670 00a3 05       		.uleb128 0x5
+ 671 00a4 B0030000 		.4byte	.LASF14
+ 672 00a8 04       		.byte	0x4
+ 673 00a9 E901     		.2byte	0x1e9
+ 674 00ab 57000000 		.4byte	0x57
+ 675 00af 02       		.uleb128 0x2
+ 676 00b0 04       		.byte	0x4
+ 677 00b1 04       		.byte	0x4
+ 678 00b2 1E010000 		.4byte	.LASF15
+ 679 00b6 02       		.uleb128 0x2
+ 680 00b7 08       		.byte	0x8
+ 681 00b8 04       		.byte	0x4
+ 682 00b9 44040000 		.4byte	.LASF16
+ 683 00bd 02       		.uleb128 0x2
+ 684 00be 01       		.byte	0x1
+ 685 00bf 08       		.byte	0x8
+ 686 00c0 59030000 		.4byte	.LASF17
+ 687 00c4 06       		.uleb128 0x6
+ 688 00c5 97000000 		.4byte	0x97
+ 689 00c9 02       		.uleb128 0x2
+ 690 00ca 08       		.byte	0x8
+ 691 00cb 04       		.byte	0x4
+ 692 00cc F3010000 		.4byte	.LASF18
+ 693 00d0 02       		.uleb128 0x2
+ 694 00d1 04       		.byte	0x4
+ 695 00d2 07       		.byte	0x7
+ 696 00d3 A3000000 		.4byte	.LASF19
+ 697 00d7 06       		.uleb128 0x6
+ 698 00d8 81000000 		.4byte	0x81
+ 699 00dc 07       		.uleb128 0x7
+ 700 00dd 41010000 		.4byte	.LASF20
+ 701 00e1 01       		.byte	0x1
+ 702 00e2 22       		.byte	0x22
+ 703 00e3 00000000 		.4byte	.LFB64
+ 704 00e7 14000000 		.4byte	.LFE64-.LFB64
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccbaDK1q.s 			page 18
 
 
- 650 00a8 04       		.byte	0x4
- 651 00a9 E901     		.2byte	0x1e9
- 652 00ab 57000000 		.4byte	0x57
- 653 00af 02       		.uleb128 0x2
- 654 00b0 04       		.byte	0x4
- 655 00b1 04       		.byte	0x4
- 656 00b2 2E010000 		.4byte	.LASF15
- 657 00b6 02       		.uleb128 0x2
- 658 00b7 08       		.byte	0x8
- 659 00b8 04       		.byte	0x4
- 660 00b9 41040000 		.4byte	.LASF16
- 661 00bd 02       		.uleb128 0x2
- 662 00be 01       		.byte	0x1
- 663 00bf 08       		.byte	0x8
- 664 00c0 69030000 		.4byte	.LASF17
- 665 00c4 06       		.uleb128 0x6
- 666 00c5 97000000 		.4byte	0x97
- 667 00c9 02       		.uleb128 0x2
- 668 00ca 08       		.byte	0x8
- 669 00cb 04       		.byte	0x4
- 670 00cc 03020000 		.4byte	.LASF18
- 671 00d0 02       		.uleb128 0x2
- 672 00d1 04       		.byte	0x4
- 673 00d2 07       		.byte	0x7
- 674 00d3 A5000000 		.4byte	.LASF19
- 675 00d7 06       		.uleb128 0x6
- 676 00d8 81000000 		.4byte	0x81
- 677 00dc 07       		.uleb128 0x7
- 678 00dd 51010000 		.4byte	.LASF20
- 679 00e1 01       		.byte	0x1
- 680 00e2 26       		.byte	0x26
- 681 00e3 00000000 		.4byte	.LFB64
- 682 00e7 14000000 		.4byte	.LFE64-.LFB64
- 683 00eb 01       		.uleb128 0x1
- 684 00ec 9C       		.byte	0x9c
- 685 00ed FB000000 		.4byte	0xfb
- 686 00f1 08       		.uleb128 0x8
- 687 00f2 0C000000 		.4byte	.LVL0
- 688 00f6 1B040000 		.4byte	0x41b
- 689 00fa 00       		.byte	0
- 690 00fb 07       		.uleb128 0x7
- 691 00fc 08010000 		.4byte	.LASF21
- 692 0100 01       		.byte	0x1
- 693 0101 2E       		.byte	0x2e
- 694 0102 00000000 		.4byte	.LFB65
- 695 0106 18000000 		.4byte	.LFE65-.LFB65
- 696 010a 01       		.uleb128 0x1
- 697 010b 9C       		.byte	0x9c
- 698 010c 23010000 		.4byte	0x123
- 699 0110 08       		.uleb128 0x8
- 700 0111 06000000 		.4byte	.LVL1
- 701 0115 26040000 		.4byte	0x426
- 702 0119 08       		.uleb128 0x8
- 703 011a 0A000000 		.4byte	.LVL2
- 704 011e 31040000 		.4byte	0x431
- 705 0122 00       		.byte	0
- 706 0123 07       		.uleb128 0x7
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccJjDDw8.s 			page 18
+ 705 00eb 01       		.uleb128 0x1
+ 706 00ec 9C       		.byte	0x9c
+ 707 00ed FB000000 		.4byte	0xfb
+ 708 00f1 08       		.uleb128 0x8
+ 709 00f2 0C000000 		.4byte	.LVL0
+ 710 00f6 F8030000 		.4byte	0x3f8
+ 711 00fa 00       		.byte	0
+ 712 00fb 07       		.uleb128 0x7
+ 713 00fc 06010000 		.4byte	.LASF21
+ 714 0100 01       		.byte	0x1
+ 715 0101 2A       		.byte	0x2a
+ 716 0102 00000000 		.4byte	.LFB65
+ 717 0106 18000000 		.4byte	.LFE65-.LFB65
+ 718 010a 01       		.uleb128 0x1
+ 719 010b 9C       		.byte	0x9c
+ 720 010c 23010000 		.4byte	0x123
+ 721 0110 08       		.uleb128 0x8
+ 722 0111 06000000 		.4byte	.LVL1
+ 723 0115 03040000 		.4byte	0x403
+ 724 0119 08       		.uleb128 0x8
+ 725 011a 0A000000 		.4byte	.LVL2
+ 726 011e 0E040000 		.4byte	0x40e
+ 727 0122 00       		.byte	0
+ 728 0123 07       		.uleb128 0x7
+ 729 0124 AC000000 		.4byte	.LASF22
+ 730 0128 01       		.byte	0x1
+ 731 0129 3B       		.byte	0x3b
+ 732 012a 00000000 		.4byte	.LFB66
+ 733 012e 5C010000 		.4byte	.LFE66-.LFB66
+ 734 0132 01       		.uleb128 0x1
+ 735 0133 9C       		.byte	0x9c
+ 736 0134 27020000 		.4byte	0x227
+ 737 0138 09       		.uleb128 0x9
+ 738 0139 30000000 		.4byte	.LVL3
+ 739 013d 19040000 		.4byte	0x419
+ 740 0141 55010000 		.4byte	0x155
+ 741 0145 0A       		.uleb128 0xa
+ 742 0146 01       		.uleb128 0x1
+ 743 0147 50       		.byte	0x50
+ 744 0148 01       		.uleb128 0x1
+ 745 0149 30       		.byte	0x30
+ 746 014a 0A       		.uleb128 0xa
+ 747 014b 01       		.uleb128 0x1
+ 748 014c 51       		.byte	0x51
+ 749 014d 01       		.uleb128 0x1
+ 750 014e 30       		.byte	0x30
+ 751 014f 0A       		.uleb128 0xa
+ 752 0150 01       		.uleb128 0x1
+ 753 0151 52       		.byte	0x52
+ 754 0152 01       		.uleb128 0x1
+ 755 0153 30       		.byte	0x30
+ 756 0154 00       		.byte	0
+ 757 0155 08       		.uleb128 0x8
+ 758 0156 34000000 		.4byte	.LVL4
+ 759 015a 24040000 		.4byte	0x424
+ 760 015e 08       		.uleb128 0x8
+ 761 015f 38000000 		.4byte	.LVL5
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccbaDK1q.s 			page 19
 
 
- 707 0124 AE000000 		.4byte	.LASF22
- 708 0128 01       		.byte	0x1
- 709 0129 3F       		.byte	0x3f
- 710 012a 00000000 		.4byte	.LFB66
- 711 012e 40010000 		.4byte	.LFE66-.LFB66
- 712 0132 01       		.uleb128 0x1
- 713 0133 9C       		.byte	0x9c
- 714 0134 4B020000 		.4byte	0x24b
- 715 0138 09       		.uleb128 0x9
- 716 0139 2C000000 		.4byte	.LVL3
- 717 013d 3C040000 		.4byte	0x43c
- 718 0141 55010000 		.4byte	0x155
- 719 0145 0A       		.uleb128 0xa
- 720 0146 01       		.uleb128 0x1
- 721 0147 50       		.byte	0x50
- 722 0148 01       		.uleb128 0x1
- 723 0149 30       		.byte	0x30
- 724 014a 0A       		.uleb128 0xa
- 725 014b 01       		.uleb128 0x1
- 726 014c 51       		.byte	0x51
- 727 014d 01       		.uleb128 0x1
- 728 014e 30       		.byte	0x30
- 729 014f 0A       		.uleb128 0xa
- 730 0150 01       		.uleb128 0x1
- 731 0151 52       		.byte	0x52
- 732 0152 01       		.uleb128 0x1
- 733 0153 30       		.byte	0x30
- 734 0154 00       		.byte	0
- 735 0155 08       		.uleb128 0x8
- 736 0156 30000000 		.4byte	.LVL4
- 737 015a 47040000 		.4byte	0x447
- 738 015e 08       		.uleb128 0x8
- 739 015f 34000000 		.4byte	.LVL5
- 740 0163 52040000 		.4byte	0x452
- 741 0167 08       		.uleb128 0x8
- 742 0168 38000000 		.4byte	.LVL6
- 743 016c 31040000 		.4byte	0x431
- 744 0170 09       		.uleb128 0x9
- 745 0171 4E000000 		.4byte	.LVL7
- 746 0175 5D040000 		.4byte	0x45d
- 747 0179 83010000 		.4byte	0x183
- 748 017d 0A       		.uleb128 0xa
- 749 017e 01       		.uleb128 0x1
- 750 017f 50       		.byte	0x50
- 751 0180 01       		.uleb128 0x1
- 752 0181 30       		.byte	0x30
- 753 0182 00       		.byte	0
- 754 0183 09       		.uleb128 0x9
- 755 0184 5A000000 		.4byte	.LVL8
- 756 0188 5D040000 		.4byte	0x45d
- 757 018c 96010000 		.4byte	0x196
- 758 0190 0A       		.uleb128 0xa
- 759 0191 01       		.uleb128 0x1
- 760 0192 50       		.byte	0x50
- 761 0193 01       		.uleb128 0x1
- 762 0194 31       		.byte	0x31
- 763 0195 00       		.byte	0
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccJjDDw8.s 			page 19
+ 762 0163 0E040000 		.4byte	0x40e
+ 763 0167 09       		.uleb128 0x9
+ 764 0168 5A000000 		.4byte	.LVL6
+ 765 016c 2F040000 		.4byte	0x42f
+ 766 0170 7A010000 		.4byte	0x17a
+ 767 0174 0A       		.uleb128 0xa
+ 768 0175 01       		.uleb128 0x1
+ 769 0176 50       		.byte	0x50
+ 770 0177 01       		.uleb128 0x1
+ 771 0178 30       		.byte	0x30
+ 772 0179 00       		.byte	0
+ 773 017a 09       		.uleb128 0x9
+ 774 017b 6C000000 		.4byte	.LVL7
+ 775 017f 2F040000 		.4byte	0x42f
+ 776 0183 8D010000 		.4byte	0x18d
+ 777 0187 0A       		.uleb128 0xa
+ 778 0188 01       		.uleb128 0x1
+ 779 0189 50       		.byte	0x50
+ 780 018a 01       		.uleb128 0x1
+ 781 018b 31       		.byte	0x31
+ 782 018c 00       		.byte	0
+ 783 018d 08       		.uleb128 0x8
+ 784 018e 70000000 		.4byte	.LVL8
+ 785 0192 3A040000 		.4byte	0x43a
+ 786 0196 08       		.uleb128 0x8
+ 787 0197 74000000 		.4byte	.LVL9
+ 788 019b 45040000 		.4byte	0x445
+ 789 019f 08       		.uleb128 0x8
+ 790 01a0 78000000 		.4byte	.LVL10
+ 791 01a4 50040000 		.4byte	0x450
+ 792 01a8 08       		.uleb128 0x8
+ 793 01a9 BE000000 		.4byte	.LVL11
+ 794 01ad 5B040000 		.4byte	0x45b
+ 795 01b1 09       		.uleb128 0x9
+ 796 01b2 D6000000 		.4byte	.LVL12
+ 797 01b6 2F040000 		.4byte	0x42f
+ 798 01ba C5010000 		.4byte	0x1c5
+ 799 01be 0A       		.uleb128 0xa
+ 800 01bf 01       		.uleb128 0x1
+ 801 01c0 50       		.byte	0x50
+ 802 01c1 02       		.uleb128 0x2
+ 803 01c2 74       		.byte	0x74
+ 804 01c3 00       		.sleb128 0
+ 805 01c4 00       		.byte	0
+ 806 01c5 08       		.uleb128 0x8
+ 807 01c6 DA000000 		.4byte	.LVL13
+ 808 01ca 3A040000 		.4byte	0x43a
+ 809 01ce 08       		.uleb128 0x8
+ 810 01cf DE000000 		.4byte	.LVL14
+ 811 01d3 45040000 		.4byte	0x445
+ 812 01d7 08       		.uleb128 0x8
+ 813 01d8 E2000000 		.4byte	.LVL15
+ 814 01dc 50040000 		.4byte	0x450
+ 815 01e0 09       		.uleb128 0x9
+ 816 01e1 0C010000 		.4byte	.LVL16
+ 817 01e5 2F040000 		.4byte	0x42f
+ 818 01e9 F4010000 		.4byte	0x1f4
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccbaDK1q.s 			page 20
 
 
- 764 0196 08       		.uleb128 0x8
- 765 0197 5E000000 		.4byte	.LVL9
- 766 019b 68040000 		.4byte	0x468
- 767 019f 08       		.uleb128 0x8
- 768 01a0 62000000 		.4byte	.LVL10
- 769 01a4 73040000 		.4byte	0x473
- 770 01a8 08       		.uleb128 0x8
- 771 01a9 66000000 		.4byte	.LVL11
- 772 01ad 7E040000 		.4byte	0x47e
- 773 01b1 08       		.uleb128 0x8
- 774 01b2 6A000000 		.4byte	.LVL12
- 775 01b6 89040000 		.4byte	0x489
- 776 01ba 08       		.uleb128 0x8
- 777 01bb AE000000 		.4byte	.LVL13
- 778 01bf 94040000 		.4byte	0x494
- 779 01c3 09       		.uleb128 0x9
- 780 01c4 C2000000 		.4byte	.LVL14
- 781 01c8 5D040000 		.4byte	0x45d
- 782 01cc D7010000 		.4byte	0x1d7
- 783 01d0 0A       		.uleb128 0xa
- 784 01d1 01       		.uleb128 0x1
- 785 01d2 50       		.byte	0x50
- 786 01d3 02       		.uleb128 0x2
- 787 01d4 74       		.byte	0x74
- 788 01d5 00       		.sleb128 0
- 789 01d6 00       		.byte	0
- 790 01d7 08       		.uleb128 0x8
- 791 01d8 C6000000 		.4byte	.LVL15
- 792 01dc 68040000 		.4byte	0x468
- 793 01e0 08       		.uleb128 0x8
- 794 01e1 CA000000 		.4byte	.LVL16
- 795 01e5 73040000 		.4byte	0x473
- 796 01e9 08       		.uleb128 0x8
- 797 01ea CE000000 		.4byte	.LVL17
- 798 01ee 7E040000 		.4byte	0x47e
- 799 01f2 08       		.uleb128 0x8
- 800 01f3 D2000000 		.4byte	.LVL18
- 801 01f7 89040000 		.4byte	0x489
- 802 01fb 09       		.uleb128 0x9
- 803 01fc F6000000 		.4byte	.LVL19
- 804 0200 5D040000 		.4byte	0x45d
- 805 0204 0F020000 		.4byte	0x20f
- 806 0208 0A       		.uleb128 0xa
- 807 0209 01       		.uleb128 0x1
- 808 020a 50       		.byte	0x50
- 809 020b 02       		.uleb128 0x2
- 810 020c 74       		.byte	0x74
- 811 020d 00       		.sleb128 0
- 812 020e 00       		.byte	0
- 813 020f 09       		.uleb128 0x9
- 814 0210 14010000 		.4byte	.LVL20
- 815 0214 3C040000 		.4byte	0x43c
- 816 0218 2F020000 		.4byte	0x22f
- 817 021c 0A       		.uleb128 0xa
- 818 021d 01       		.uleb128 0x1
- 819 021e 50       		.byte	0x50
- 820 021f 02       		.uleb128 0x2
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccJjDDw8.s 			page 20
+ 819 01ed 0A       		.uleb128 0xa
+ 820 01ee 01       		.uleb128 0x1
+ 821 01ef 50       		.byte	0x50
+ 822 01f0 02       		.uleb128 0x2
+ 823 01f1 74       		.byte	0x74
+ 824 01f2 00       		.sleb128 0
+ 825 01f3 00       		.byte	0
+ 826 01f4 09       		.uleb128 0x9
+ 827 01f5 2A010000 		.4byte	.LVL17
+ 828 01f9 19040000 		.4byte	0x419
+ 829 01fd 14020000 		.4byte	0x214
+ 830 0201 0A       		.uleb128 0xa
+ 831 0202 01       		.uleb128 0x1
+ 832 0203 50       		.byte	0x50
+ 833 0204 02       		.uleb128 0x2
+ 834 0205 74       		.byte	0x74
+ 835 0206 00       		.sleb128 0
+ 836 0207 0A       		.uleb128 0xa
+ 837 0208 01       		.uleb128 0x1
+ 838 0209 51       		.byte	0x51
+ 839 020a 02       		.uleb128 0x2
+ 840 020b 74       		.byte	0x74
+ 841 020c 00       		.sleb128 0
+ 842 020d 0A       		.uleb128 0xa
+ 843 020e 01       		.uleb128 0x1
+ 844 020f 52       		.byte	0x52
+ 845 0210 02       		.uleb128 0x2
+ 846 0211 74       		.byte	0x74
+ 847 0212 00       		.sleb128 0
+ 848 0213 00       		.byte	0
+ 849 0214 08       		.uleb128 0x8
+ 850 0215 2E010000 		.4byte	.LVL18
+ 851 0219 24040000 		.4byte	0x424
+ 852 021d 08       		.uleb128 0x8
+ 853 021e 40010000 		.4byte	.LVL19
+ 854 0222 5B040000 		.4byte	0x45b
+ 855 0226 00       		.byte	0
+ 856 0227 07       		.uleb128 0x7
+ 857 0228 D6030000 		.4byte	.LASF23
+ 858 022c 01       		.byte	0x1
+ 859 022d D1       		.byte	0xd1
+ 860 022e 00000000 		.4byte	.LFB67
+ 861 0232 14000000 		.4byte	.LFE67-.LFB67
+ 862 0236 01       		.uleb128 0x1
+ 863 0237 9C       		.byte	0x9c
+ 864 0238 46020000 		.4byte	0x246
+ 865 023c 08       		.uleb128 0x8
+ 866 023d 0C000000 		.4byte	.LVL20
+ 867 0241 66040000 		.4byte	0x466
+ 868 0245 00       		.byte	0
+ 869 0246 07       		.uleb128 0x7
+ 870 0247 C7000000 		.4byte	.LASF24
+ 871 024b 01       		.byte	0x1
+ 872 024c DA       		.byte	0xda
+ 873 024d 00000000 		.4byte	.LFB68
+ 874 0251 AC000000 		.4byte	.LFE68-.LFB68
+ 875 0255 01       		.uleb128 0x1
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccbaDK1q.s 			page 21
 
 
- 821 0220 74       		.byte	0x74
- 822 0221 00       		.sleb128 0
- 823 0222 0A       		.uleb128 0xa
- 824 0223 01       		.uleb128 0x1
- 825 0224 51       		.byte	0x51
- 826 0225 02       		.uleb128 0x2
- 827 0226 74       		.byte	0x74
- 828 0227 00       		.sleb128 0
- 829 0228 0A       		.uleb128 0xa
- 830 0229 01       		.uleb128 0x1
- 831 022a 52       		.byte	0x52
- 832 022b 02       		.uleb128 0x2
- 833 022c 74       		.byte	0x74
- 834 022d 00       		.sleb128 0
- 835 022e 00       		.byte	0
- 836 022f 08       		.uleb128 0x8
- 837 0230 18010000 		.4byte	.LVL21
- 838 0234 47040000 		.4byte	0x447
- 839 0238 08       		.uleb128 0x8
- 840 0239 1C010000 		.4byte	.LVL22
- 841 023d 52040000 		.4byte	0x452
- 842 0241 08       		.uleb128 0x8
- 843 0242 2E010000 		.4byte	.LVL23
- 844 0246 94040000 		.4byte	0x494
- 845 024a 00       		.byte	0
- 846 024b 07       		.uleb128 0x7
- 847 024c E6030000 		.4byte	.LASF23
- 848 0250 01       		.byte	0x1
- 849 0251 D5       		.byte	0xd5
- 850 0252 00000000 		.4byte	.LFB67
- 851 0256 14000000 		.4byte	.LFE67-.LFB67
- 852 025a 01       		.uleb128 0x1
- 853 025b 9C       		.byte	0x9c
- 854 025c 6A020000 		.4byte	0x26a
- 855 0260 08       		.uleb128 0x8
- 856 0261 0C000000 		.4byte	.LVL24
- 857 0265 9F040000 		.4byte	0x49f
- 858 0269 00       		.byte	0
- 859 026a 07       		.uleb128 0x7
- 860 026b C9000000 		.4byte	.LASF24
- 861 026f 01       		.byte	0x1
- 862 0270 DE       		.byte	0xde
- 863 0271 00000000 		.4byte	.LFB68
- 864 0275 84000000 		.4byte	.LFE68-.LFB68
- 865 0279 01       		.uleb128 0x1
- 866 027a 9C       		.byte	0x9c
- 867 027b C6020000 		.4byte	0x2c6
- 868 027f 08       		.uleb128 0x8
- 869 0280 06000000 		.4byte	.LVL25
- 870 0284 AA040000 		.4byte	0x4aa
- 871 0288 08       		.uleb128 0x8
- 872 0289 18000000 		.4byte	.LVL26
- 873 028d B5040000 		.4byte	0x4b5
- 874 0291 08       		.uleb128 0x8
- 875 0292 22000000 		.4byte	.LVL27
- 876 0296 5D040000 		.4byte	0x45d
- 877 029a 08       		.uleb128 0x8
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccJjDDw8.s 			page 21
+ 876 0256 9C       		.byte	0x9c
+ 877 0257 A2020000 		.4byte	0x2a2
+ 878 025b 08       		.uleb128 0x8
+ 879 025c 06000000 		.4byte	.LVL21
+ 880 0260 71040000 		.4byte	0x471
+ 881 0264 08       		.uleb128 0x8
+ 882 0265 1C000000 		.4byte	.LVL22
+ 883 0269 7C040000 		.4byte	0x47c
+ 884 026d 08       		.uleb128 0x8
+ 885 026e 26000000 		.4byte	.LVL23
+ 886 0272 2F040000 		.4byte	0x42f
+ 887 0276 08       		.uleb128 0x8
+ 888 0277 2A000000 		.4byte	.LVL24
+ 889 027b 87040000 		.4byte	0x487
+ 890 027f 09       		.uleb128 0x9
+ 891 0280 68000000 		.4byte	.LVL25
+ 892 0284 92040000 		.4byte	0x492
+ 893 0288 92020000 		.4byte	0x292
+ 894 028c 0A       		.uleb128 0xa
+ 895 028d 01       		.uleb128 0x1
+ 896 028e 50       		.byte	0x50
+ 897 028f 01       		.uleb128 0x1
+ 898 0290 30       		.byte	0x30
+ 899 0291 00       		.byte	0
+ 900 0292 0B       		.uleb128 0xb
+ 901 0293 74000000 		.4byte	.LVL26
+ 902 0297 92040000 		.4byte	0x492
+ 903 029b 0A       		.uleb128 0xa
+ 904 029c 01       		.uleb128 0x1
+ 905 029d 50       		.byte	0x50
+ 906 029e 01       		.uleb128 0x1
+ 907 029f 31       		.byte	0x31
+ 908 02a0 00       		.byte	0
+ 909 02a1 00       		.byte	0
+ 910 02a2 07       		.uleb128 0x7
+ 911 02a3 52000000 		.4byte	.LASF25
+ 912 02a7 01       		.byte	0x1
+ 913 02a8 FF       		.byte	0xff
+ 914 02a9 00000000 		.4byte	.LFB69
+ 915 02ad 20000000 		.4byte	.LFE69-.LFB69
+ 916 02b1 01       		.uleb128 0x1
+ 917 02b2 9C       		.byte	0x9c
+ 918 02b3 CA020000 		.4byte	0x2ca
+ 919 02b7 08       		.uleb128 0x8
+ 920 02b8 06000000 		.4byte	.LVL27
+ 921 02bc 9D040000 		.4byte	0x49d
+ 922 02c0 08       		.uleb128 0x8
+ 923 02c1 0A000000 		.4byte	.LVL28
+ 924 02c5 A8040000 		.4byte	0x4a8
+ 925 02c9 00       		.byte	0
+ 926 02ca 0C       		.uleb128 0xc
+ 927 02cb 3B030000 		.4byte	.LASF26
+ 928 02cf 01       		.byte	0x1
+ 929 02d0 0701     		.2byte	0x107
+ 930 02d2 00000000 		.4byte	.LFB70
+ 931 02d6 18000000 		.4byte	.LFE70-.LFB70
+ 932 02da 01       		.uleb128 0x1
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccbaDK1q.s 			page 22
 
 
- 878 029b 26000000 		.4byte	.LVL28
- 879 029f C0040000 		.4byte	0x4c0
- 880 02a3 09       		.uleb128 0x9
- 881 02a4 64000000 		.4byte	.LVL29
- 882 02a8 CB040000 		.4byte	0x4cb
- 883 02ac B6020000 		.4byte	0x2b6
- 884 02b0 0A       		.uleb128 0xa
- 885 02b1 01       		.uleb128 0x1
- 886 02b2 50       		.byte	0x50
- 887 02b3 01       		.uleb128 0x1
- 888 02b4 30       		.byte	0x30
- 889 02b5 00       		.byte	0
- 890 02b6 0B       		.uleb128 0xb
- 891 02b7 70000000 		.4byte	.LVL30
- 892 02bb CB040000 		.4byte	0x4cb
- 893 02bf 0A       		.uleb128 0xa
- 894 02c0 01       		.uleb128 0x1
- 895 02c1 50       		.byte	0x50
- 896 02c2 01       		.uleb128 0x1
- 897 02c3 31       		.byte	0x31
- 898 02c4 00       		.byte	0
- 899 02c5 00       		.byte	0
- 900 02c6 07       		.uleb128 0x7
- 901 02c7 54000000 		.4byte	.LASF25
- 902 02cb 01       		.byte	0x1
- 903 02cc FD       		.byte	0xfd
- 904 02cd 00000000 		.4byte	.LFB69
- 905 02d1 20000000 		.4byte	.LFE69-.LFB69
- 906 02d5 01       		.uleb128 0x1
- 907 02d6 9C       		.byte	0x9c
- 908 02d7 EE020000 		.4byte	0x2ee
- 909 02db 08       		.uleb128 0x8
- 910 02dc 06000000 		.4byte	.LVL31
- 911 02e0 D6040000 		.4byte	0x4d6
- 912 02e4 08       		.uleb128 0x8
- 913 02e5 0A000000 		.4byte	.LVL32
- 914 02e9 E1040000 		.4byte	0x4e1
- 915 02ed 00       		.byte	0
- 916 02ee 0C       		.uleb128 0xc
- 917 02ef 4B030000 		.4byte	.LASF26
- 918 02f3 01       		.byte	0x1
- 919 02f4 0501     		.2byte	0x105
- 920 02f6 00000000 		.4byte	.LFB70
- 921 02fa 18000000 		.4byte	.LFE70-.LFB70
- 922 02fe 01       		.uleb128 0x1
- 923 02ff 9C       		.byte	0x9c
- 924 0300 0E030000 		.4byte	0x30e
- 925 0304 08       		.uleb128 0x8
- 926 0305 06000000 		.4byte	.LVL33
- 927 0309 EC040000 		.4byte	0x4ec
- 928 030d 00       		.byte	0
- 929 030e 0D       		.uleb128 0xd
- 930 030f 48040000 		.4byte	.LASF27
- 931 0313 05       		.byte	0x5
- 932 0314 1207     		.2byte	0x712
- 933 0316 1A030000 		.4byte	0x31a
- 934 031a 06       		.uleb128 0x6
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccJjDDw8.s 			page 22
+ 933 02db 9C       		.byte	0x9c
+ 934 02dc EA020000 		.4byte	0x2ea
+ 935 02e0 08       		.uleb128 0x8
+ 936 02e1 06000000 		.4byte	.LVL29
+ 937 02e5 B3040000 		.4byte	0x4b3
+ 938 02e9 00       		.byte	0
+ 939 02ea 0D       		.uleb128 0xd
+ 940 02eb 4B040000 		.4byte	.LASF27
+ 941 02ef 05       		.byte	0x5
+ 942 02f0 1207     		.2byte	0x712
+ 943 02f2 F6020000 		.4byte	0x2f6
+ 944 02f6 06       		.uleb128 0x6
+ 945 02f7 8C000000 		.4byte	0x8c
+ 946 02fb 0E       		.uleb128 0xe
+ 947 02fc E3010000 		.4byte	.LASF28
+ 948 0300 06       		.byte	0x6
+ 949 0301 1E       		.byte	0x1e
+ 950 0302 C4000000 		.4byte	0xc4
+ 951 0306 05       		.uleb128 0x5
+ 952 0307 03       		.byte	0x3
+ 953 0308 00000000 		.4byte	PacketReadyFlag
+ 954 030c 0E       		.uleb128 0xe
+ 955 030d 6B000000 		.4byte	.LASF29
+ 956 0311 06       		.byte	0x6
+ 957 0312 1F       		.byte	0x1f
+ 958 0313 C4000000 		.4byte	0xc4
+ 959 0317 05       		.uleb128 0x5
+ 960 0318 03       		.byte	0x3
+ 961 0319 00000000 		.4byte	UARTVerboseFlag
+ 962 031d 0E       		.uleb128 0xe
+ 963 031e 36010000 		.4byte	.LASF30
+ 964 0322 06       		.byte	0x6
+ 965 0323 21       		.byte	0x21
+ 966 0324 97000000 		.4byte	0x97
+ 967 0328 05       		.uleb128 0x5
+ 968 0329 03       		.byte	0x3
+ 969 032a 00000000 		.4byte	data_water
+ 970 032e 0E       		.uleb128 0xe
+ 971 032f FF010000 		.4byte	.LASF31
+ 972 0333 06       		.byte	0x6
+ 973 0334 22       		.byte	0x22
+ 974 0335 C4000000 		.4byte	0xc4
+ 975 0339 05       		.uleb128 0x5
+ 976 033a 03       		.byte	0x3
+ 977 033b 00000000 		.4byte	FlagEnableDisable
+ 978 033f 0E       		.uleb128 0xe
+ 979 0340 19040000 		.4byte	.LASF32
+ 980 0344 06       		.byte	0x6
+ 981 0345 23       		.byte	0x23
+ 982 0346 C4000000 		.4byte	0xc4
+ 983 034a 05       		.uleb128 0x5
+ 984 034b 03       		.byte	0x3
+ 985 034c 00000000 		.4byte	new_EEPROM
+ 986 0350 0E       		.uleb128 0xe
+ 987 0351 32040000 		.4byte	.LASF33
+ 988 0355 06       		.byte	0x6
+ 989 0356 24       		.byte	0x24
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccbaDK1q.s 			page 23
 
 
- 935 031b 8C000000 		.4byte	0x8c
- 936 031f 0E       		.uleb128 0xe
- 937 0320 F3010000 		.4byte	.LASF28
- 938 0324 06       		.byte	0x6
- 939 0325 18       		.byte	0x18
- 940 0326 C4000000 		.4byte	0xc4
- 941 032a 05       		.uleb128 0x5
- 942 032b 03       		.byte	0x3
- 943 032c 00000000 		.4byte	PacketReadyFlag
- 944 0330 0E       		.uleb128 0xe
- 945 0331 6D000000 		.4byte	.LASF29
- 946 0335 06       		.byte	0x6
- 947 0336 19       		.byte	0x19
- 948 0337 C4000000 		.4byte	0xc4
- 949 033b 05       		.uleb128 0x5
- 950 033c 03       		.byte	0x3
- 951 033d 00000000 		.4byte	UARTVerboseFlag
- 952 0341 0E       		.uleb128 0xe
- 953 0342 46010000 		.4byte	.LASF30
- 954 0346 06       		.byte	0x6
- 955 0347 1B       		.byte	0x1b
- 956 0348 97000000 		.4byte	0x97
- 957 034c 05       		.uleb128 0x5
- 958 034d 03       		.byte	0x3
- 959 034e 00000000 		.4byte	data_water
- 960 0352 0E       		.uleb128 0xe
- 961 0353 0F020000 		.4byte	.LASF31
- 962 0357 06       		.byte	0x6
- 963 0358 1C       		.byte	0x1c
- 964 0359 C4000000 		.4byte	0xc4
- 965 035d 05       		.uleb128 0x5
- 966 035e 03       		.byte	0x3
- 967 035f 00000000 		.4byte	FlagEnableDisable
- 968 0363 0E       		.uleb128 0xe
- 969 0364 16040000 		.4byte	.LASF32
- 970 0368 06       		.byte	0x6
- 971 0369 1D       		.byte	0x1d
- 972 036a C4000000 		.4byte	0xc4
- 973 036e 05       		.uleb128 0x5
- 974 036f 03       		.byte	0x3
- 975 0370 00000000 		.4byte	new_EEPROM
- 976 0374 0E       		.uleb128 0xe
- 977 0375 2F040000 		.4byte	.LASF33
- 978 0379 06       		.byte	0x6
- 979 037a 1E       		.byte	0x1e
- 980 037b C4000000 		.4byte	0xc4
- 981 037f 05       		.uleb128 0x5
- 982 0380 03       		.byte	0x3
- 983 0381 00000000 		.4byte	new_EnableDisable
- 984 0385 0E       		.uleb128 0xe
- 985 0386 DD000000 		.4byte	.LASF34
- 986 038a 06       		.byte	0x6
- 987 038b 1F       		.byte	0x1f
- 988 038c 97000000 		.4byte	0x97
- 989 0390 05       		.uleb128 0x5
- 990 0391 03       		.byte	0x3
- 991 0392 00000000 		.4byte	data_register
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccJjDDw8.s 			page 23
+ 990 0357 C4000000 		.4byte	0xc4
+ 991 035b 05       		.uleb128 0x5
+ 992 035c 03       		.byte	0x3
+ 993 035d 00000000 		.4byte	new_EnableDisable
+ 994 0361 0E       		.uleb128 0xe
+ 995 0362 DB000000 		.4byte	.LASF34
+ 996 0366 06       		.byte	0x6
+ 997 0367 25       		.byte	0x25
+ 998 0368 97000000 		.4byte	0x97
+ 999 036c 05       		.uleb128 0x5
+ 1000 036d 03       		.byte	0x3
+ 1001 036e 00000000 		.4byte	data_register
+ 1002 0372 0E       		.uleb128 0xe
+ 1003 0373 5E030000 		.4byte	.LASF35
+ 1004 0377 06       		.byte	0x6
+ 1005 0378 26       		.byte	0x26
+ 1006 0379 D7000000 		.4byte	0xd7
+ 1007 037d 05       		.uleb128 0x5
+ 1008 037e 03       		.byte	0x3
+ 1009 037f 00000000 		.4byte	Counter_overflow
+ 1010 0383 0E       		.uleb128 0xe
+ 1011 0384 24040000 		.4byte	.LASF36
+ 1012 0388 06       		.byte	0x6
+ 1013 0389 27       		.byte	0x27
+ 1014 038a D7000000 		.4byte	0xd7
+ 1015 038e 05       		.uleb128 0x5
+ 1016 038f 03       		.byte	0x3
+ 1017 0390 00000000 		.4byte	system_status
+ 1018 0394 0E       		.uleb128 0xe
+ 1019 0395 E9000000 		.4byte	.LASF37
+ 1020 0399 06       		.byte	0x6
+ 1021 039a 28       		.byte	0x28
+ 1022 039b D7000000 		.4byte	0xd7
+ 1023 039f 05       		.uleb128 0x5
+ 1024 03a0 03       		.byte	0x3
+ 1025 03a1 00000000 		.4byte	configuration_status
+ 1026 03a5 0E       		.uleb128 0xe
+ 1027 03a6 2A000000 		.4byte	.LASF38
+ 1028 03aa 06       		.byte	0x6
+ 1029 03ab 29       		.byte	0x29
+ 1030 03ac D7000000 		.4byte	0xd7
+ 1031 03b0 05       		.uleb128 0x5
+ 1032 03b1 03       		.byte	0x3
+ 1033 03b2 00000000 		.4byte	FlagChangeParameters
+ 1034 03b6 0E       		.uleb128 0xe
+ 1035 03b7 99000000 		.4byte	.LASF39
+ 1036 03bb 01       		.byte	0x1
+ 1037 03bc 1B       		.byte	0x1b
+ 1038 03bd 97000000 		.4byte	0x97
+ 1039 03c1 05       		.uleb128 0x5
+ 1040 03c2 03       		.byte	0x3
+ 1041 03c3 00000000 		.4byte	TimerFlag
+ 1042 03c7 0E       		.uleb128 0xe
+ 1043 03c8 08050000 		.4byte	.LASF40
+ 1044 03cc 01       		.byte	0x1
+ 1045 03cd 1C       		.byte	0x1c
+ 1046 03ce A3000000 		.4byte	0xa3
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccbaDK1q.s 			page 24
 
 
- 992 0396 0E       		.uleb128 0xe
- 993 0397 6E030000 		.4byte	.LASF35
- 994 039b 06       		.byte	0x6
- 995 039c 20       		.byte	0x20
- 996 039d D7000000 		.4byte	0xd7
- 997 03a1 05       		.uleb128 0x5
- 998 03a2 03       		.byte	0x3
- 999 03a3 00000000 		.4byte	Counter_overflow
- 1000 03a7 0F       		.uleb128 0xf
- 1001 03a8 BD000000 		.4byte	0xbd
- 1002 03ac B7030000 		.4byte	0x3b7
- 1003 03b0 10       		.uleb128 0x10
- 1004 03b1 D0000000 		.4byte	0xd0
- 1005 03b5 63       		.byte	0x63
- 1006 03b6 00       		.byte	0
- 1007 03b7 0E       		.uleb128 0xe
- 1008 03b8 49000000 		.4byte	.LASF36
- 1009 03bc 01       		.byte	0x1
- 1010 03bd 12       		.byte	0x12
- 1011 03be A7030000 		.4byte	0x3a7
- 1012 03c2 05       		.uleb128 0x5
- 1013 03c3 03       		.byte	0x3
- 1014 03c4 00000000 		.4byte	bufferUART
- 1015 03c8 0E       		.uleb128 0xe
- 1016 03c9 21040000 		.4byte	.LASF37
- 1017 03cd 01       		.byte	0x1
- 1018 03ce 1F       		.byte	0x1f
- 1019 03cf 81000000 		.4byte	0x81
- 1020 03d3 05       		.uleb128 0x5
- 1021 03d4 03       		.byte	0x3
- 1022 03d5 00000000 		.4byte	system_status
- 1023 03d9 0E       		.uleb128 0xe
- 1024 03da EB000000 		.4byte	.LASF38
- 1025 03de 01       		.byte	0x1
- 1026 03df 20       		.byte	0x20
- 1027 03e0 81000000 		.4byte	0x81
- 1028 03e4 05       		.uleb128 0x5
- 1029 03e5 03       		.byte	0x3
- 1030 03e6 00000000 		.4byte	configuration_status
- 1031 03ea 0E       		.uleb128 0xe
- 1032 03eb 9B000000 		.4byte	.LASF39
- 1033 03ef 01       		.byte	0x1
- 1034 03f0 21       		.byte	0x21
- 1035 03f1 97000000 		.4byte	0x97
- 1036 03f5 05       		.uleb128 0x5
- 1037 03f6 03       		.byte	0x3
- 1038 03f7 00000000 		.4byte	TimerFlag
- 1039 03fb 0E       		.uleb128 0xe
- 1040 03fc 05050000 		.4byte	.LASF40
- 1041 0400 01       		.byte	0x1
- 1042 0401 22       		.byte	0x22
- 1043 0402 A3000000 		.4byte	0xa3
- 1044 0406 05       		.uleb128 0x5
- 1045 0407 03       		.byte	0x3
- 1046 0408 00000000 		.4byte	value_POT
- 1047 040c 11       		.uleb128 0x11
- 1048 040d 6900     		.ascii	"i\000"
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccJjDDw8.s 			page 24
+ 1047 03d2 05       		.uleb128 0x5
+ 1048 03d3 03       		.byte	0x3
+ 1049 03d4 00000000 		.4byte	value_POT
+ 1050 03d8 0F       		.uleb128 0xf
+ 1051 03d9 6900     		.ascii	"i\000"
+ 1052 03db 01       		.byte	0x1
+ 1053 03dc 1D       		.byte	0x1d
+ 1054 03dd 73000000 		.4byte	0x73
+ 1055 03e1 05       		.uleb128 0x5
+ 1056 03e2 03       		.byte	0x3
+ 1057 03e3 00000000 		.4byte	i
+ 1058 03e7 0E       		.uleb128 0xe
+ 1059 03e8 06040000 		.4byte	.LASF41
+ 1060 03ec 01       		.byte	0x1
+ 1061 03ed 1E       		.byte	0x1e
+ 1062 03ee 81000000 		.4byte	0x81
+ 1063 03f2 05       		.uleb128 0x5
+ 1064 03f3 03       		.byte	0x3
+ 1065 03f4 00000000 		.4byte	UARTVerboseFlagOLD
+ 1066 03f8 10       		.uleb128 0x10
+ 1067 03f9 CC010000 		.4byte	.LASF42
+ 1068 03fd CC010000 		.4byte	.LASF42
+ 1069 0401 07       		.byte	0x7
+ 1070 0402 2B       		.byte	0x2b
+ 1071 0403 10       		.uleb128 0x10
+ 1072 0404 61020000 		.4byte	.LASF43
+ 1073 0408 61020000 		.4byte	.LASF43
+ 1074 040c 08       		.byte	0x8
+ 1075 040d 5B       		.byte	0x5b
+ 1076 040e 10       		.uleb128 0x10
+ 1077 040f 83010000 		.4byte	.LASF44
+ 1078 0413 83010000 		.4byte	.LASF44
+ 1079 0417 09       		.byte	0x9
+ 1080 0418 5A       		.byte	0x5a
+ 1081 0419 10       		.uleb128 0x10
+ 1082 041a EA030000 		.4byte	.LASF45
+ 1083 041e EA030000 		.4byte	.LASF45
+ 1084 0422 0A       		.byte	0xa
+ 1085 0423 1E       		.byte	0x1e
+ 1086 0424 10       		.uleb128 0x10
+ 1087 0425 1E000000 		.4byte	.LASF46
+ 1088 0429 1E000000 		.4byte	.LASF46
+ 1089 042d 0B       		.byte	0xb
+ 1090 042e 4E       		.byte	0x4e
+ 1091 042f 10       		.uleb128 0x10
+ 1092 0430 8B030000 		.4byte	.LASF47
+ 1093 0434 8B030000 		.4byte	.LASF47
+ 1094 0438 0C       		.byte	0xc
+ 1095 0439 26       		.byte	0x26
+ 1096 043a 10       		.uleb128 0x10
+ 1097 043b 5E010000 		.4byte	.LASF48
+ 1098 043f 5E010000 		.4byte	.LASF48
+ 1099 0443 0B       		.byte	0xb
+ 1100 0444 4C       		.byte	0x4c
+ 1101 0445 10       		.uleb128 0x10
+ 1102 0446 4C030000 		.4byte	.LASF49
+ 1103 044a 4C030000 		.4byte	.LASF49
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccbaDK1q.s 			page 25
 
 
- 1049 040f 01       		.byte	0x1
- 1050 0410 23       		.byte	0x23
- 1051 0411 73000000 		.4byte	0x73
- 1052 0415 05       		.uleb128 0x5
- 1053 0416 03       		.byte	0x3
- 1054 0417 00000000 		.4byte	i
- 1055 041b 12       		.uleb128 0x12
- 1056 041c DC010000 		.4byte	.LASF41
- 1057 0420 DC010000 		.4byte	.LASF41
- 1058 0424 07       		.byte	0x7
- 1059 0425 2B       		.byte	0x2b
- 1060 0426 12       		.uleb128 0x12
- 1061 0427 71020000 		.4byte	.LASF42
- 1062 042b 71020000 		.4byte	.LASF42
- 1063 042f 08       		.byte	0x8
- 1064 0430 5B       		.byte	0x5b
- 1065 0431 12       		.uleb128 0x12
- 1066 0432 93010000 		.4byte	.LASF43
- 1067 0436 93010000 		.4byte	.LASF43
- 1068 043a 09       		.byte	0x9
- 1069 043b 5A       		.byte	0x5a
- 1070 043c 12       		.uleb128 0x12
- 1071 043d FA030000 		.4byte	.LASF44
- 1072 0441 FA030000 		.4byte	.LASF44
- 1073 0445 0A       		.byte	0xa
- 1074 0446 1E       		.byte	0x1e
- 1075 0447 12       		.uleb128 0x12
- 1076 0448 1E000000 		.4byte	.LASF45
- 1077 044c 1E000000 		.4byte	.LASF45
- 1078 0450 0B       		.byte	0xb
- 1079 0451 4E       		.byte	0x4e
- 1080 0452 12       		.uleb128 0x12
- 1081 0453 2A000000 		.4byte	.LASF46
- 1082 0457 2A000000 		.4byte	.LASF46
- 1083 045b 0C       		.byte	0xc
- 1084 045c 55       		.byte	0x55
- 1085 045d 12       		.uleb128 0x12
- 1086 045e 9B030000 		.4byte	.LASF47
- 1087 0462 9B030000 		.4byte	.LASF47
- 1088 0466 0D       		.byte	0xd
- 1089 0467 26       		.byte	0x26
- 1090 0468 12       		.uleb128 0x12
- 1091 0469 20010000 		.4byte	.LASF48
- 1092 046d 20010000 		.4byte	.LASF48
- 1093 0471 0C       		.byte	0xc
- 1094 0472 5A       		.byte	0x5a
- 1095 0473 12       		.uleb128 0x12
- 1096 0474 6E010000 		.4byte	.LASF49
- 1097 0478 6E010000 		.4byte	.LASF49
- 1098 047c 0B       		.byte	0xb
- 1099 047d 4C       		.byte	0x4c
- 1100 047e 12       		.uleb128 0x12
- 1101 047f 5C030000 		.4byte	.LASF50
- 1102 0483 5C030000 		.4byte	.LASF50
- 1103 0487 0A       		.byte	0xa
- 1104 0488 14       		.byte	0x14
- 1105 0489 12       		.uleb128 0x12
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccJjDDw8.s 			page 25
+ 1104 044e 0A       		.byte	0xa
+ 1105 044f 14       		.byte	0x14
+ 1106 0450 10       		.uleb128 0x10
+ 1107 0451 77030000 		.4byte	.LASF50
+ 1108 0455 77030000 		.4byte	.LASF50
+ 1109 0459 09       		.byte	0x9
+ 1110 045a 5B       		.byte	0x5b
+ 1111 045b 10       		.uleb128 0x10
+ 1112 045c 3F000000 		.4byte	.LASF51
+ 1113 0460 3F000000 		.4byte	.LASF51
+ 1114 0464 08       		.byte	0x8
+ 1115 0465 5A       		.byte	0x5a
+ 1116 0466 10       		.uleb128 0x10
+ 1117 0467 B6030000 		.4byte	.LASF52
+ 1118 046b B6030000 		.4byte	.LASF52
+ 1119 046f 08       		.byte	0x8
+ 1120 0470 5E       		.byte	0x5e
+ 1121 0471 10       		.uleb128 0x10
+ 1122 0472 E6040000 		.4byte	.LASF53
+ 1123 0476 E6040000 		.4byte	.LASF53
+ 1124 047a 09       		.byte	0x9
+ 1125 047b 5E       		.byte	0x5e
+ 1126 047c 10       		.uleb128 0x10
+ 1127 047d 1F020000 		.4byte	.LASF54
+ 1128 0481 1F020000 		.4byte	.LASF54
+ 1129 0485 0C       		.byte	0xc
+ 1130 0486 29       		.byte	0x29
+ 1131 0487 10       		.uleb128 0x10
+ 1132 0488 24010000 		.4byte	.LASF55
+ 1133 048c 24010000 		.4byte	.LASF55
+ 1134 0490 0D       		.byte	0xd
+ 1135 0491 56       		.byte	0x56
+ 1136 0492 10       		.uleb128 0x10
+ 1137 0493 00000000 		.4byte	.LASF56
+ 1138 0497 00000000 		.4byte	.LASF56
+ 1139 049b 0E       		.byte	0xe
+ 1140 049c 26       		.byte	0x26
+ 1141 049d 10       		.uleb128 0x10
+ 1142 049e 98010000 		.4byte	.LASF57
+ 1143 04a2 98010000 		.4byte	.LASF57
+ 1144 04a6 0F       		.byte	0xf
+ 1145 04a7 2B       		.byte	0x2b
+ 1146 04a8 10       		.uleb128 0x10
+ 1147 04a9 6C010000 		.4byte	.LASF58
+ 1148 04ad 6C010000 		.4byte	.LASF58
+ 1149 04b1 0F       		.byte	0xf
+ 1150 04b2 29       		.byte	0x29
+ 1151 04b3 10       		.uleb128 0x10
+ 1152 04b4 03030000 		.4byte	.LASF59
+ 1153 04b8 03030000 		.4byte	.LASF59
+ 1154 04bc 10       		.byte	0x10
+ 1155 04bd 52       		.byte	0x52
+ 1156 04be 00       		.byte	0
+ 1157              		.section	.debug_abbrev,"",%progbits
+ 1158              	.Ldebug_abbrev0:
+ 1159 0000 01       		.uleb128 0x1
+ 1160 0001 11       		.uleb128 0x11
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccbaDK1q.s 			page 26
 
 
- 1106 048a 87030000 		.4byte	.LASF51
- 1107 048e 87030000 		.4byte	.LASF51
- 1108 0492 09       		.byte	0x9
- 1109 0493 5B       		.byte	0x5b
- 1110 0494 12       		.uleb128 0x12
- 1111 0495 36000000 		.4byte	.LASF52
- 1112 0499 36000000 		.4byte	.LASF52
- 1113 049d 08       		.byte	0x8
- 1114 049e 5A       		.byte	0x5a
- 1115 049f 12       		.uleb128 0x12
- 1116 04a0 C6030000 		.4byte	.LASF53
- 1117 04a4 C6030000 		.4byte	.LASF53
- 1118 04a8 08       		.byte	0x8
- 1119 04a9 5E       		.byte	0x5e
- 1120 04aa 12       		.uleb128 0x12
- 1121 04ab E3040000 		.4byte	.LASF54
- 1122 04af E3040000 		.4byte	.LASF54
- 1123 04b3 09       		.byte	0x9
- 1124 04b4 5E       		.byte	0x5e
- 1125 04b5 12       		.uleb128 0x12
- 1126 04b6 2F020000 		.4byte	.LASF55
- 1127 04ba 2F020000 		.4byte	.LASF55
- 1128 04be 0D       		.byte	0xd
- 1129 04bf 29       		.byte	0x29
- 1130 04c0 12       		.uleb128 0x12
- 1131 04c1 34010000 		.4byte	.LASF56
- 1132 04c5 34010000 		.4byte	.LASF56
- 1133 04c9 0E       		.byte	0xe
- 1134 04ca 56       		.byte	0x56
- 1135 04cb 12       		.uleb128 0x12
- 1136 04cc 00000000 		.4byte	.LASF57
- 1137 04d0 00000000 		.4byte	.LASF57
- 1138 04d4 0F       		.byte	0xf
- 1139 04d5 26       		.byte	0x26
- 1140 04d6 12       		.uleb128 0x12
- 1141 04d7 A8010000 		.4byte	.LASF58
- 1142 04db A8010000 		.4byte	.LASF58
- 1143 04df 10       		.byte	0x10
- 1144 04e0 2B       		.byte	0x2b
- 1145 04e1 12       		.uleb128 0x12
- 1146 04e2 7C010000 		.4byte	.LASF59
- 1147 04e6 7C010000 		.4byte	.LASF59
- 1148 04ea 10       		.byte	0x10
- 1149 04eb 29       		.byte	0x29
- 1150 04ec 12       		.uleb128 0x12
- 1151 04ed 13030000 		.4byte	.LASF60
- 1152 04f1 13030000 		.4byte	.LASF60
- 1153 04f5 11       		.byte	0x11
- 1154 04f6 52       		.byte	0x52
- 1155 04f7 00       		.byte	0
- 1156              		.section	.debug_abbrev,"",%progbits
- 1157              	.Ldebug_abbrev0:
- 1158 0000 01       		.uleb128 0x1
- 1159 0001 11       		.uleb128 0x11
- 1160 0002 01       		.byte	0x1
- 1161 0003 25       		.uleb128 0x25
- 1162 0004 0E       		.uleb128 0xe
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccJjDDw8.s 			page 26
+ 1161 0002 01       		.byte	0x1
+ 1162 0003 25       		.uleb128 0x25
+ 1163 0004 0E       		.uleb128 0xe
+ 1164 0005 13       		.uleb128 0x13
+ 1165 0006 0B       		.uleb128 0xb
+ 1166 0007 03       		.uleb128 0x3
+ 1167 0008 0E       		.uleb128 0xe
+ 1168 0009 1B       		.uleb128 0x1b
+ 1169 000a 0E       		.uleb128 0xe
+ 1170 000b 55       		.uleb128 0x55
+ 1171 000c 17       		.uleb128 0x17
+ 1172 000d 11       		.uleb128 0x11
+ 1173 000e 01       		.uleb128 0x1
+ 1174 000f 10       		.uleb128 0x10
+ 1175 0010 17       		.uleb128 0x17
+ 1176 0011 00       		.byte	0
+ 1177 0012 00       		.byte	0
+ 1178 0013 02       		.uleb128 0x2
+ 1179 0014 24       		.uleb128 0x24
+ 1180 0015 00       		.byte	0
+ 1181 0016 0B       		.uleb128 0xb
+ 1182 0017 0B       		.uleb128 0xb
+ 1183 0018 3E       		.uleb128 0x3e
+ 1184 0019 0B       		.uleb128 0xb
+ 1185 001a 03       		.uleb128 0x3
+ 1186 001b 0E       		.uleb128 0xe
+ 1187 001c 00       		.byte	0
+ 1188 001d 00       		.byte	0
+ 1189 001e 03       		.uleb128 0x3
+ 1190 001f 16       		.uleb128 0x16
+ 1191 0020 00       		.byte	0
+ 1192 0021 03       		.uleb128 0x3
+ 1193 0022 0E       		.uleb128 0xe
+ 1194 0023 3A       		.uleb128 0x3a
+ 1195 0024 0B       		.uleb128 0xb
+ 1196 0025 3B       		.uleb128 0x3b
+ 1197 0026 0B       		.uleb128 0xb
+ 1198 0027 49       		.uleb128 0x49
+ 1199 0028 13       		.uleb128 0x13
+ 1200 0029 00       		.byte	0
+ 1201 002a 00       		.byte	0
+ 1202 002b 04       		.uleb128 0x4
+ 1203 002c 24       		.uleb128 0x24
+ 1204 002d 00       		.byte	0
+ 1205 002e 0B       		.uleb128 0xb
+ 1206 002f 0B       		.uleb128 0xb
+ 1207 0030 3E       		.uleb128 0x3e
+ 1208 0031 0B       		.uleb128 0xb
+ 1209 0032 03       		.uleb128 0x3
+ 1210 0033 08       		.uleb128 0x8
+ 1211 0034 00       		.byte	0
+ 1212 0035 00       		.byte	0
+ 1213 0036 05       		.uleb128 0x5
+ 1214 0037 16       		.uleb128 0x16
+ 1215 0038 00       		.byte	0
+ 1216 0039 03       		.uleb128 0x3
+ 1217 003a 0E       		.uleb128 0xe
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccbaDK1q.s 			page 27
 
 
- 1163 0005 13       		.uleb128 0x13
- 1164 0006 0B       		.uleb128 0xb
- 1165 0007 03       		.uleb128 0x3
- 1166 0008 0E       		.uleb128 0xe
- 1167 0009 1B       		.uleb128 0x1b
- 1168 000a 0E       		.uleb128 0xe
- 1169 000b 55       		.uleb128 0x55
- 1170 000c 17       		.uleb128 0x17
- 1171 000d 11       		.uleb128 0x11
- 1172 000e 01       		.uleb128 0x1
- 1173 000f 10       		.uleb128 0x10
- 1174 0010 17       		.uleb128 0x17
- 1175 0011 00       		.byte	0
- 1176 0012 00       		.byte	0
- 1177 0013 02       		.uleb128 0x2
- 1178 0014 24       		.uleb128 0x24
- 1179 0015 00       		.byte	0
- 1180 0016 0B       		.uleb128 0xb
- 1181 0017 0B       		.uleb128 0xb
- 1182 0018 3E       		.uleb128 0x3e
- 1183 0019 0B       		.uleb128 0xb
- 1184 001a 03       		.uleb128 0x3
- 1185 001b 0E       		.uleb128 0xe
- 1186 001c 00       		.byte	0
- 1187 001d 00       		.byte	0
- 1188 001e 03       		.uleb128 0x3
- 1189 001f 16       		.uleb128 0x16
- 1190 0020 00       		.byte	0
- 1191 0021 03       		.uleb128 0x3
- 1192 0022 0E       		.uleb128 0xe
- 1193 0023 3A       		.uleb128 0x3a
- 1194 0024 0B       		.uleb128 0xb
- 1195 0025 3B       		.uleb128 0x3b
- 1196 0026 0B       		.uleb128 0xb
- 1197 0027 49       		.uleb128 0x49
- 1198 0028 13       		.uleb128 0x13
- 1199 0029 00       		.byte	0
- 1200 002a 00       		.byte	0
- 1201 002b 04       		.uleb128 0x4
- 1202 002c 24       		.uleb128 0x24
- 1203 002d 00       		.byte	0
- 1204 002e 0B       		.uleb128 0xb
- 1205 002f 0B       		.uleb128 0xb
- 1206 0030 3E       		.uleb128 0x3e
- 1207 0031 0B       		.uleb128 0xb
- 1208 0032 03       		.uleb128 0x3
- 1209 0033 08       		.uleb128 0x8
- 1210 0034 00       		.byte	0
- 1211 0035 00       		.byte	0
- 1212 0036 05       		.uleb128 0x5
- 1213 0037 16       		.uleb128 0x16
- 1214 0038 00       		.byte	0
- 1215 0039 03       		.uleb128 0x3
- 1216 003a 0E       		.uleb128 0xe
- 1217 003b 3A       		.uleb128 0x3a
- 1218 003c 0B       		.uleb128 0xb
- 1219 003d 3B       		.uleb128 0x3b
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccJjDDw8.s 			page 27
+ 1218 003b 3A       		.uleb128 0x3a
+ 1219 003c 0B       		.uleb128 0xb
+ 1220 003d 3B       		.uleb128 0x3b
+ 1221 003e 05       		.uleb128 0x5
+ 1222 003f 49       		.uleb128 0x49
+ 1223 0040 13       		.uleb128 0x13
+ 1224 0041 00       		.byte	0
+ 1225 0042 00       		.byte	0
+ 1226 0043 06       		.uleb128 0x6
+ 1227 0044 35       		.uleb128 0x35
+ 1228 0045 00       		.byte	0
+ 1229 0046 49       		.uleb128 0x49
+ 1230 0047 13       		.uleb128 0x13
+ 1231 0048 00       		.byte	0
+ 1232 0049 00       		.byte	0
+ 1233 004a 07       		.uleb128 0x7
+ 1234 004b 2E       		.uleb128 0x2e
+ 1235 004c 01       		.byte	0x1
+ 1236 004d 3F       		.uleb128 0x3f
+ 1237 004e 19       		.uleb128 0x19
+ 1238 004f 03       		.uleb128 0x3
+ 1239 0050 0E       		.uleb128 0xe
+ 1240 0051 3A       		.uleb128 0x3a
+ 1241 0052 0B       		.uleb128 0xb
+ 1242 0053 3B       		.uleb128 0x3b
+ 1243 0054 0B       		.uleb128 0xb
+ 1244 0055 27       		.uleb128 0x27
+ 1245 0056 19       		.uleb128 0x19
+ 1246 0057 11       		.uleb128 0x11
+ 1247 0058 01       		.uleb128 0x1
+ 1248 0059 12       		.uleb128 0x12
+ 1249 005a 06       		.uleb128 0x6
+ 1250 005b 40       		.uleb128 0x40
+ 1251 005c 18       		.uleb128 0x18
+ 1252 005d 9742     		.uleb128 0x2117
+ 1253 005f 19       		.uleb128 0x19
+ 1254 0060 01       		.uleb128 0x1
+ 1255 0061 13       		.uleb128 0x13
+ 1256 0062 00       		.byte	0
+ 1257 0063 00       		.byte	0
+ 1258 0064 08       		.uleb128 0x8
+ 1259 0065 898201   		.uleb128 0x4109
+ 1260 0068 00       		.byte	0
+ 1261 0069 11       		.uleb128 0x11
+ 1262 006a 01       		.uleb128 0x1
+ 1263 006b 31       		.uleb128 0x31
+ 1264 006c 13       		.uleb128 0x13
+ 1265 006d 00       		.byte	0
+ 1266 006e 00       		.byte	0
+ 1267 006f 09       		.uleb128 0x9
+ 1268 0070 898201   		.uleb128 0x4109
+ 1269 0073 01       		.byte	0x1
+ 1270 0074 11       		.uleb128 0x11
+ 1271 0075 01       		.uleb128 0x1
+ 1272 0076 31       		.uleb128 0x31
+ 1273 0077 13       		.uleb128 0x13
+ 1274 0078 01       		.uleb128 0x1
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccbaDK1q.s 			page 28
 
 
- 1220 003e 05       		.uleb128 0x5
- 1221 003f 49       		.uleb128 0x49
- 1222 0040 13       		.uleb128 0x13
- 1223 0041 00       		.byte	0
- 1224 0042 00       		.byte	0
- 1225 0043 06       		.uleb128 0x6
- 1226 0044 35       		.uleb128 0x35
- 1227 0045 00       		.byte	0
- 1228 0046 49       		.uleb128 0x49
- 1229 0047 13       		.uleb128 0x13
- 1230 0048 00       		.byte	0
- 1231 0049 00       		.byte	0
- 1232 004a 07       		.uleb128 0x7
- 1233 004b 2E       		.uleb128 0x2e
- 1234 004c 01       		.byte	0x1
- 1235 004d 3F       		.uleb128 0x3f
- 1236 004e 19       		.uleb128 0x19
- 1237 004f 03       		.uleb128 0x3
- 1238 0050 0E       		.uleb128 0xe
- 1239 0051 3A       		.uleb128 0x3a
- 1240 0052 0B       		.uleb128 0xb
- 1241 0053 3B       		.uleb128 0x3b
- 1242 0054 0B       		.uleb128 0xb
- 1243 0055 27       		.uleb128 0x27
- 1244 0056 19       		.uleb128 0x19
- 1245 0057 11       		.uleb128 0x11
- 1246 0058 01       		.uleb128 0x1
- 1247 0059 12       		.uleb128 0x12
- 1248 005a 06       		.uleb128 0x6
- 1249 005b 40       		.uleb128 0x40
- 1250 005c 18       		.uleb128 0x18
- 1251 005d 9742     		.uleb128 0x2117
- 1252 005f 19       		.uleb128 0x19
- 1253 0060 01       		.uleb128 0x1
- 1254 0061 13       		.uleb128 0x13
- 1255 0062 00       		.byte	0
- 1256 0063 00       		.byte	0
- 1257 0064 08       		.uleb128 0x8
- 1258 0065 898201   		.uleb128 0x4109
- 1259 0068 00       		.byte	0
- 1260 0069 11       		.uleb128 0x11
- 1261 006a 01       		.uleb128 0x1
- 1262 006b 31       		.uleb128 0x31
- 1263 006c 13       		.uleb128 0x13
- 1264 006d 00       		.byte	0
- 1265 006e 00       		.byte	0
- 1266 006f 09       		.uleb128 0x9
- 1267 0070 898201   		.uleb128 0x4109
- 1268 0073 01       		.byte	0x1
- 1269 0074 11       		.uleb128 0x11
- 1270 0075 01       		.uleb128 0x1
- 1271 0076 31       		.uleb128 0x31
- 1272 0077 13       		.uleb128 0x13
- 1273 0078 01       		.uleb128 0x1
- 1274 0079 13       		.uleb128 0x13
- 1275 007a 00       		.byte	0
- 1276 007b 00       		.byte	0
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccJjDDw8.s 			page 28
+ 1275 0079 13       		.uleb128 0x13
+ 1276 007a 00       		.byte	0
+ 1277 007b 00       		.byte	0
+ 1278 007c 0A       		.uleb128 0xa
+ 1279 007d 8A8201   		.uleb128 0x410a
+ 1280 0080 00       		.byte	0
+ 1281 0081 02       		.uleb128 0x2
+ 1282 0082 18       		.uleb128 0x18
+ 1283 0083 9142     		.uleb128 0x2111
+ 1284 0085 18       		.uleb128 0x18
+ 1285 0086 00       		.byte	0
+ 1286 0087 00       		.byte	0
+ 1287 0088 0B       		.uleb128 0xb
+ 1288 0089 898201   		.uleb128 0x4109
+ 1289 008c 01       		.byte	0x1
+ 1290 008d 11       		.uleb128 0x11
+ 1291 008e 01       		.uleb128 0x1
+ 1292 008f 31       		.uleb128 0x31
+ 1293 0090 13       		.uleb128 0x13
+ 1294 0091 00       		.byte	0
+ 1295 0092 00       		.byte	0
+ 1296 0093 0C       		.uleb128 0xc
+ 1297 0094 2E       		.uleb128 0x2e
+ 1298 0095 01       		.byte	0x1
+ 1299 0096 3F       		.uleb128 0x3f
+ 1300 0097 19       		.uleb128 0x19
+ 1301 0098 03       		.uleb128 0x3
+ 1302 0099 0E       		.uleb128 0xe
+ 1303 009a 3A       		.uleb128 0x3a
+ 1304 009b 0B       		.uleb128 0xb
+ 1305 009c 3B       		.uleb128 0x3b
+ 1306 009d 05       		.uleb128 0x5
+ 1307 009e 27       		.uleb128 0x27
+ 1308 009f 19       		.uleb128 0x19
+ 1309 00a0 11       		.uleb128 0x11
+ 1310 00a1 01       		.uleb128 0x1
+ 1311 00a2 12       		.uleb128 0x12
+ 1312 00a3 06       		.uleb128 0x6
+ 1313 00a4 40       		.uleb128 0x40
+ 1314 00a5 18       		.uleb128 0x18
+ 1315 00a6 9742     		.uleb128 0x2117
+ 1316 00a8 19       		.uleb128 0x19
+ 1317 00a9 01       		.uleb128 0x1
+ 1318 00aa 13       		.uleb128 0x13
+ 1319 00ab 00       		.byte	0
+ 1320 00ac 00       		.byte	0
+ 1321 00ad 0D       		.uleb128 0xd
+ 1322 00ae 34       		.uleb128 0x34
+ 1323 00af 00       		.byte	0
+ 1324 00b0 03       		.uleb128 0x3
+ 1325 00b1 0E       		.uleb128 0xe
+ 1326 00b2 3A       		.uleb128 0x3a
+ 1327 00b3 0B       		.uleb128 0xb
+ 1328 00b4 3B       		.uleb128 0x3b
+ 1329 00b5 05       		.uleb128 0x5
+ 1330 00b6 49       		.uleb128 0x49
+ 1331 00b7 13       		.uleb128 0x13
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccbaDK1q.s 			page 29
 
 
- 1277 007c 0A       		.uleb128 0xa
- 1278 007d 8A8201   		.uleb128 0x410a
- 1279 0080 00       		.byte	0
- 1280 0081 02       		.uleb128 0x2
- 1281 0082 18       		.uleb128 0x18
- 1282 0083 9142     		.uleb128 0x2111
- 1283 0085 18       		.uleb128 0x18
- 1284 0086 00       		.byte	0
- 1285 0087 00       		.byte	0
- 1286 0088 0B       		.uleb128 0xb
- 1287 0089 898201   		.uleb128 0x4109
- 1288 008c 01       		.byte	0x1
- 1289 008d 11       		.uleb128 0x11
- 1290 008e 01       		.uleb128 0x1
- 1291 008f 31       		.uleb128 0x31
- 1292 0090 13       		.uleb128 0x13
- 1293 0091 00       		.byte	0
- 1294 0092 00       		.byte	0
- 1295 0093 0C       		.uleb128 0xc
- 1296 0094 2E       		.uleb128 0x2e
- 1297 0095 01       		.byte	0x1
- 1298 0096 3F       		.uleb128 0x3f
- 1299 0097 19       		.uleb128 0x19
- 1300 0098 03       		.uleb128 0x3
- 1301 0099 0E       		.uleb128 0xe
- 1302 009a 3A       		.uleb128 0x3a
- 1303 009b 0B       		.uleb128 0xb
- 1304 009c 3B       		.uleb128 0x3b
- 1305 009d 05       		.uleb128 0x5
- 1306 009e 27       		.uleb128 0x27
- 1307 009f 19       		.uleb128 0x19
- 1308 00a0 11       		.uleb128 0x11
- 1309 00a1 01       		.uleb128 0x1
- 1310 00a2 12       		.uleb128 0x12
- 1311 00a3 06       		.uleb128 0x6
- 1312 00a4 40       		.uleb128 0x40
- 1313 00a5 18       		.uleb128 0x18
- 1314 00a6 9742     		.uleb128 0x2117
- 1315 00a8 19       		.uleb128 0x19
- 1316 00a9 01       		.uleb128 0x1
- 1317 00aa 13       		.uleb128 0x13
- 1318 00ab 00       		.byte	0
- 1319 00ac 00       		.byte	0
- 1320 00ad 0D       		.uleb128 0xd
- 1321 00ae 34       		.uleb128 0x34
- 1322 00af 00       		.byte	0
- 1323 00b0 03       		.uleb128 0x3
- 1324 00b1 0E       		.uleb128 0xe
- 1325 00b2 3A       		.uleb128 0x3a
- 1326 00b3 0B       		.uleb128 0xb
- 1327 00b4 3B       		.uleb128 0x3b
- 1328 00b5 05       		.uleb128 0x5
- 1329 00b6 49       		.uleb128 0x49
- 1330 00b7 13       		.uleb128 0x13
- 1331 00b8 3F       		.uleb128 0x3f
- 1332 00b9 19       		.uleb128 0x19
- 1333 00ba 3C       		.uleb128 0x3c
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccJjDDw8.s 			page 29
+ 1332 00b8 3F       		.uleb128 0x3f
+ 1333 00b9 19       		.uleb128 0x19
+ 1334 00ba 3C       		.uleb128 0x3c
+ 1335 00bb 19       		.uleb128 0x19
+ 1336 00bc 00       		.byte	0
+ 1337 00bd 00       		.byte	0
+ 1338 00be 0E       		.uleb128 0xe
+ 1339 00bf 34       		.uleb128 0x34
+ 1340 00c0 00       		.byte	0
+ 1341 00c1 03       		.uleb128 0x3
+ 1342 00c2 0E       		.uleb128 0xe
+ 1343 00c3 3A       		.uleb128 0x3a
+ 1344 00c4 0B       		.uleb128 0xb
+ 1345 00c5 3B       		.uleb128 0x3b
+ 1346 00c6 0B       		.uleb128 0xb
+ 1347 00c7 49       		.uleb128 0x49
+ 1348 00c8 13       		.uleb128 0x13
+ 1349 00c9 3F       		.uleb128 0x3f
+ 1350 00ca 19       		.uleb128 0x19
+ 1351 00cb 02       		.uleb128 0x2
+ 1352 00cc 18       		.uleb128 0x18
+ 1353 00cd 00       		.byte	0
+ 1354 00ce 00       		.byte	0
+ 1355 00cf 0F       		.uleb128 0xf
+ 1356 00d0 34       		.uleb128 0x34
+ 1357 00d1 00       		.byte	0
+ 1358 00d2 03       		.uleb128 0x3
+ 1359 00d3 08       		.uleb128 0x8
+ 1360 00d4 3A       		.uleb128 0x3a
+ 1361 00d5 0B       		.uleb128 0xb
+ 1362 00d6 3B       		.uleb128 0x3b
+ 1363 00d7 0B       		.uleb128 0xb
+ 1364 00d8 49       		.uleb128 0x49
+ 1365 00d9 13       		.uleb128 0x13
+ 1366 00da 3F       		.uleb128 0x3f
+ 1367 00db 19       		.uleb128 0x19
+ 1368 00dc 02       		.uleb128 0x2
+ 1369 00dd 18       		.uleb128 0x18
+ 1370 00de 00       		.byte	0
+ 1371 00df 00       		.byte	0
+ 1372 00e0 10       		.uleb128 0x10
+ 1373 00e1 2E       		.uleb128 0x2e
+ 1374 00e2 00       		.byte	0
+ 1375 00e3 3F       		.uleb128 0x3f
+ 1376 00e4 19       		.uleb128 0x19
+ 1377 00e5 3C       		.uleb128 0x3c
+ 1378 00e6 19       		.uleb128 0x19
+ 1379 00e7 6E       		.uleb128 0x6e
+ 1380 00e8 0E       		.uleb128 0xe
+ 1381 00e9 03       		.uleb128 0x3
+ 1382 00ea 0E       		.uleb128 0xe
+ 1383 00eb 3A       		.uleb128 0x3a
+ 1384 00ec 0B       		.uleb128 0xb
+ 1385 00ed 3B       		.uleb128 0x3b
+ 1386 00ee 0B       		.uleb128 0xb
+ 1387 00ef 00       		.byte	0
+ 1388 00f0 00       		.byte	0
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccbaDK1q.s 			page 30
 
 
- 1334 00bb 19       		.uleb128 0x19
- 1335 00bc 00       		.byte	0
- 1336 00bd 00       		.byte	0
- 1337 00be 0E       		.uleb128 0xe
- 1338 00bf 34       		.uleb128 0x34
- 1339 00c0 00       		.byte	0
- 1340 00c1 03       		.uleb128 0x3
- 1341 00c2 0E       		.uleb128 0xe
- 1342 00c3 3A       		.uleb128 0x3a
- 1343 00c4 0B       		.uleb128 0xb
- 1344 00c5 3B       		.uleb128 0x3b
- 1345 00c6 0B       		.uleb128 0xb
- 1346 00c7 49       		.uleb128 0x49
- 1347 00c8 13       		.uleb128 0x13
- 1348 00c9 3F       		.uleb128 0x3f
- 1349 00ca 19       		.uleb128 0x19
- 1350 00cb 02       		.uleb128 0x2
- 1351 00cc 18       		.uleb128 0x18
- 1352 00cd 00       		.byte	0
- 1353 00ce 00       		.byte	0
- 1354 00cf 0F       		.uleb128 0xf
- 1355 00d0 01       		.uleb128 0x1
- 1356 00d1 01       		.byte	0x1
- 1357 00d2 49       		.uleb128 0x49
- 1358 00d3 13       		.uleb128 0x13
- 1359 00d4 01       		.uleb128 0x1
- 1360 00d5 13       		.uleb128 0x13
- 1361 00d6 00       		.byte	0
- 1362 00d7 00       		.byte	0
- 1363 00d8 10       		.uleb128 0x10
- 1364 00d9 21       		.uleb128 0x21
- 1365 00da 00       		.byte	0
- 1366 00db 49       		.uleb128 0x49
- 1367 00dc 13       		.uleb128 0x13
- 1368 00dd 2F       		.uleb128 0x2f
- 1369 00de 0B       		.uleb128 0xb
- 1370 00df 00       		.byte	0
- 1371 00e0 00       		.byte	0
- 1372 00e1 11       		.uleb128 0x11
- 1373 00e2 34       		.uleb128 0x34
- 1374 00e3 00       		.byte	0
- 1375 00e4 03       		.uleb128 0x3
- 1376 00e5 08       		.uleb128 0x8
- 1377 00e6 3A       		.uleb128 0x3a
- 1378 00e7 0B       		.uleb128 0xb
- 1379 00e8 3B       		.uleb128 0x3b
- 1380 00e9 0B       		.uleb128 0xb
- 1381 00ea 49       		.uleb128 0x49
- 1382 00eb 13       		.uleb128 0x13
- 1383 00ec 3F       		.uleb128 0x3f
- 1384 00ed 19       		.uleb128 0x19
- 1385 00ee 02       		.uleb128 0x2
- 1386 00ef 18       		.uleb128 0x18
- 1387 00f0 00       		.byte	0
- 1388 00f1 00       		.byte	0
- 1389 00f2 12       		.uleb128 0x12
- 1390 00f3 2E       		.uleb128 0x2e
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccJjDDw8.s 			page 30
+ 1389 00f1 00       		.byte	0
+ 1390              		.section	.debug_aranges,"",%progbits
+ 1391 0000 4C000000 		.4byte	0x4c
+ 1392 0004 0200     		.2byte	0x2
+ 1393 0006 00000000 		.4byte	.Ldebug_info0
+ 1394 000a 04       		.byte	0x4
+ 1395 000b 00       		.byte	0
+ 1396 000c 0000     		.2byte	0
+ 1397 000e 0000     		.2byte	0
+ 1398 0010 00000000 		.4byte	.LFB64
+ 1399 0014 14000000 		.4byte	.LFE64-.LFB64
+ 1400 0018 00000000 		.4byte	.LFB65
+ 1401 001c 18000000 		.4byte	.LFE65-.LFB65
+ 1402 0020 00000000 		.4byte	.LFB66
+ 1403 0024 5C010000 		.4byte	.LFE66-.LFB66
+ 1404 0028 00000000 		.4byte	.LFB67
+ 1405 002c 14000000 		.4byte	.LFE67-.LFB67
+ 1406 0030 00000000 		.4byte	.LFB68
+ 1407 0034 AC000000 		.4byte	.LFE68-.LFB68
+ 1408 0038 00000000 		.4byte	.LFB69
+ 1409 003c 20000000 		.4byte	.LFE69-.LFB69
+ 1410 0040 00000000 		.4byte	.LFB70
+ 1411 0044 18000000 		.4byte	.LFE70-.LFB70
+ 1412 0048 00000000 		.4byte	0
+ 1413 004c 00000000 		.4byte	0
+ 1414              		.section	.debug_ranges,"",%progbits
+ 1415              	.Ldebug_ranges0:
+ 1416 0000 00000000 		.4byte	.LFB64
+ 1417 0004 14000000 		.4byte	.LFE64
+ 1418 0008 00000000 		.4byte	.LFB65
+ 1419 000c 18000000 		.4byte	.LFE65
+ 1420 0010 00000000 		.4byte	.LFB66
+ 1421 0014 5C010000 		.4byte	.LFE66
+ 1422 0018 00000000 		.4byte	.LFB67
+ 1423 001c 14000000 		.4byte	.LFE67
+ 1424 0020 00000000 		.4byte	.LFB68
+ 1425 0024 AC000000 		.4byte	.LFE68
+ 1426 0028 00000000 		.4byte	.LFB69
+ 1427 002c 20000000 		.4byte	.LFE69
+ 1428 0030 00000000 		.4byte	.LFB70
+ 1429 0034 18000000 		.4byte	.LFE70
+ 1430 0038 00000000 		.4byte	0
+ 1431 003c 00000000 		.4byte	0
+ 1432              		.section	.debug_line,"",%progbits
+ 1433              	.Ldebug_line0:
+ 1434 0000 06030000 		.section	.debug_str,"MS",%progbits,1
+ 1434      02002E02 
+ 1434      00000201 
+ 1434      FB0E0D00 
+ 1434      01010101 
+ 1435              	.LASF56:
+ 1436 0000 50696E5F 		.ascii	"Pin_RED_UARTVerboseFlag_Write\000"
+ 1436      5245445F 
+ 1436      55415254 
+ 1436      56657262 
+ 1436      6F736546 
+ 1437              	.LASF46:
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccbaDK1q.s 			page 31
 
 
- 1391 00f4 00       		.byte	0
- 1392 00f5 3F       		.uleb128 0x3f
- 1393 00f6 19       		.uleb128 0x19
- 1394 00f7 3C       		.uleb128 0x3c
- 1395 00f8 19       		.uleb128 0x19
- 1396 00f9 6E       		.uleb128 0x6e
- 1397 00fa 0E       		.uleb128 0xe
- 1398 00fb 03       		.uleb128 0x3
- 1399 00fc 0E       		.uleb128 0xe
- 1400 00fd 3A       		.uleb128 0x3a
- 1401 00fe 0B       		.uleb128 0xb
- 1402 00ff 3B       		.uleb128 0x3b
- 1403 0100 0B       		.uleb128 0xb
- 1404 0101 00       		.byte	0
- 1405 0102 00       		.byte	0
- 1406 0103 00       		.byte	0
- 1407              		.section	.debug_aranges,"",%progbits
- 1408 0000 4C000000 		.4byte	0x4c
- 1409 0004 0200     		.2byte	0x2
- 1410 0006 00000000 		.4byte	.Ldebug_info0
- 1411 000a 04       		.byte	0x4
- 1412 000b 00       		.byte	0
- 1413 000c 0000     		.2byte	0
- 1414 000e 0000     		.2byte	0
- 1415 0010 00000000 		.4byte	.LFB64
- 1416 0014 14000000 		.4byte	.LFE64-.LFB64
- 1417 0018 00000000 		.4byte	.LFB65
- 1418 001c 18000000 		.4byte	.LFE65-.LFB65
- 1419 0020 00000000 		.4byte	.LFB66
- 1420 0024 40010000 		.4byte	.LFE66-.LFB66
- 1421 0028 00000000 		.4byte	.LFB67
- 1422 002c 14000000 		.4byte	.LFE67-.LFB67
- 1423 0030 00000000 		.4byte	.LFB68
- 1424 0034 84000000 		.4byte	.LFE68-.LFB68
- 1425 0038 00000000 		.4byte	.LFB69
- 1426 003c 20000000 		.4byte	.LFE69-.LFB69
- 1427 0040 00000000 		.4byte	.LFB70
- 1428 0044 18000000 		.4byte	.LFE70-.LFB70
- 1429 0048 00000000 		.4byte	0
- 1430 004c 00000000 		.4byte	0
- 1431              		.section	.debug_ranges,"",%progbits
- 1432              	.Ldebug_ranges0:
- 1433 0000 00000000 		.4byte	.LFB64
- 1434 0004 14000000 		.4byte	.LFE64
- 1435 0008 00000000 		.4byte	.LFB65
- 1436 000c 18000000 		.4byte	.LFE65
- 1437 0010 00000000 		.4byte	.LFB66
- 1438 0014 40010000 		.4byte	.LFE66
- 1439 0018 00000000 		.4byte	.LFB67
- 1440 001c 14000000 		.4byte	.LFE67
- 1441 0020 00000000 		.4byte	.LFB68
- 1442 0024 84000000 		.4byte	.LFE68
- 1443 0028 00000000 		.4byte	.LFB69
- 1444 002c 20000000 		.4byte	.LFE69
- 1445 0030 00000000 		.4byte	.LFB70
- 1446 0034 18000000 		.4byte	.LFE70
- 1447 0038 00000000 		.4byte	0
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccJjDDw8.s 			page 31
+ 1438 001e 5350494D 		.ascii	"SPIM_1_Stop\000"
+ 1438      5F315F53 
+ 1438      746F7000 
+ 1439              	.LASF38:
+ 1440 002a 466C6167 		.ascii	"FlagChangeParameters\000"
+ 1440      4368616E 
+ 1440      67655061 
+ 1440      72616D65 
+ 1440      74657273 
+ 1441              	.LASF51:
+ 1442 003f 54494D45 		.ascii	"TIMER_button_Start\000"
+ 1442      525F6275 
+ 1442      74746F6E 
+ 1442      5F537461 
+ 1442      727400
+ 1443              	.LASF25:
+ 1444 0052 43757374 		.ascii	"Custom_Pin_EnableDisable\000"
+ 1444      6F6D5F50 
+ 1444      696E5F45 
+ 1444      6E61626C 
+ 1444      65446973 
+ 1445              	.LASF29:
+ 1446 006b 55415254 		.ascii	"UARTVerboseFlag\000"
+ 1446      56657262 
+ 1446      6F736546 
+ 1446      6C616700 
+ 1447              	.LASF61:
+ 1448 007b 496E7465 		.ascii	"InterruptRoutines.c\000"
+ 1448      72727570 
+ 1448      74526F75 
+ 1448      74696E65 
+ 1448      732E6300 
+ 1449              	.LASF2:
+ 1450 008f 73686F72 		.ascii	"short int\000"
+ 1450      7420696E 
+ 1450      7400
+ 1451              	.LASF39:
+ 1452 0099 54696D65 		.ascii	"TimerFlag\000"
+ 1452      72466C61 
+ 1452      6700
+ 1453              	.LASF19:
+ 1454 00a3 73697A65 		.ascii	"sizetype\000"
+ 1454      74797065 
+ 1454      00
+ 1455              	.LASF22:
+ 1456 00ac 43757374 		.ascii	"Custom_Pin_Button_Positive\000"
+ 1456      6F6D5F50 
+ 1456      696E5F42 
+ 1456      7574746F 
+ 1456      6E5F506F 
+ 1457              	.LASF24:
+ 1458 00c7 43757374 		.ascii	"Custom_LED_Blinking\000"
+ 1458      6F6D5F4C 
+ 1458      45445F42 
+ 1458      6C696E6B 
+ 1458      696E6700 
+ 1459              	.LASF34:
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccbaDK1q.s 			page 32
 
 
- 1448 003c 00000000 		.4byte	0
- 1449              		.section	.debug_line,"",%progbits
- 1450              	.Ldebug_line0:
- 1451 0000 13030000 		.section	.debug_str,"MS",%progbits,1
- 1451      02003A02 
- 1451      00000201 
- 1451      FB0E0D00 
- 1451      01010101 
- 1452              	.LASF57:
- 1453 0000 50696E5F 		.ascii	"Pin_RED_UARTVerboseFlag_Write\000"
- 1453      5245445F 
- 1453      55415254 
- 1453      56657262 
- 1453      6F736546 
- 1454              	.LASF45:
- 1455 001e 5350494D 		.ascii	"SPIM_1_Stop\000"
- 1455      5F315F53 
- 1455      746F7000 
- 1456              	.LASF46:
- 1457 002a 55415254 		.ascii	"UART_1_Stop\000"
- 1457      5F315F53 
- 1457      746F7000 
- 1458              	.LASF52:
- 1459 0036 54494D45 		.ascii	"TIMER_button_Start\000"
- 1459      525F6275 
- 1459      74746F6E 
- 1459      5F537461 
- 1459      727400
- 1460              	.LASF36:
- 1461 0049 62756666 		.ascii	"bufferUART\000"
- 1461      65725541 
- 1461      525400
- 1462              	.LASF25:
- 1463 0054 43757374 		.ascii	"Custom_Pin_EnableDisable\000"
- 1463      6F6D5F50 
- 1463      696E5F45 
- 1463      6E61626C 
- 1463      65446973 
- 1464              	.LASF29:
- 1465 006d 55415254 		.ascii	"UARTVerboseFlag\000"
- 1465      56657262 
- 1465      6F736546 
- 1465      6C616700 
- 1466              	.LASF62:
- 1467 007d 496E7465 		.ascii	"InterruptRoutines.c\000"
- 1467      72727570 
- 1467      74526F75 
- 1467      74696E65 
- 1467      732E6300 
- 1468              	.LASF2:
- 1469 0091 73686F72 		.ascii	"short int\000"
- 1469      7420696E 
- 1469      7400
- 1470              	.LASF39:
- 1471 009b 54696D65 		.ascii	"TimerFlag\000"
- 1471      72466C61 
- 1471      6700
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccJjDDw8.s 			page 32
+ 1460 00db 64617461 		.ascii	"data_register\000"
+ 1460      5F726567 
+ 1460      69737465 
+ 1460      7200
+ 1461              	.LASF37:
+ 1462 00e9 636F6E66 		.ascii	"configuration_status\000"
+ 1462      69677572 
+ 1462      6174696F 
+ 1462      6E5F7374 
+ 1462      61747573 
+ 1463              	.LASF11:
+ 1464 00fe 75696E74 		.ascii	"uint8_t\000"
+ 1464      385F7400 
+ 1465              	.LASF21:
+ 1466 0106 43757374 		.ascii	"Custom_Pin_Button\000"
+ 1466      6F6D5F50 
+ 1466      696E5F42 
+ 1466      7574746F 
+ 1466      6E00
+ 1467              	.LASF13:
+ 1468 0118 75696E74 		.ascii	"uint8\000"
+ 1468      3800
+ 1469              	.LASF15:
+ 1470 011e 666C6F61 		.ascii	"float\000"
+ 1470      7400
+ 1471              	.LASF55:
+ 1472 0124 4144435F 		.ascii	"ADC_DelSig_Read32\000"
+ 1472      44656C53 
+ 1472      69675F52 
+ 1472      65616433 
+ 1472      3200
+ 1473              	.LASF30:
+ 1474 0136 64617461 		.ascii	"data_water\000"
+ 1474      5F776174 
+ 1474      657200
+ 1475              	.LASF20:
+ 1476 0141 43757374 		.ascii	"Custom_Pin_ISR\000"
+ 1476      6F6D5F50 
+ 1476      696E5F49 
+ 1476      535200
+ 1477              	.LASF8:
+ 1478 0150 6C6F6E67 		.ascii	"long long int\000"
+ 1478      206C6F6E 
+ 1478      6720696E 
+ 1478      7400
+ 1479              	.LASF48:
+ 1480 015e 5350494D 		.ascii	"SPIM_1_Enable\000"
+ 1480      5F315F45 
+ 1480      6E61626C 
+ 1480      6500
+ 1481              	.LASF58:
+ 1482 016c 50696E5F 		.ascii	"Pin_EnableDisable_Read\000"
+ 1482      456E6162 
+ 1482      6C654469 
+ 1482      7361626C 
+ 1482      655F5265 
+ 1483              	.LASF44:
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccbaDK1q.s 			page 33
 
 
- 1472              	.LASF19:
- 1473 00a5 73697A65 		.ascii	"sizetype\000"
- 1473      74797065 
- 1473      00
- 1474              	.LASF22:
- 1475 00ae 43757374 		.ascii	"Custom_Pin_Button_Positive\000"
- 1475      6F6D5F50 
- 1475      696E5F42 
- 1475      7574746F 
- 1475      6E5F506F 
- 1476              	.LASF24:
- 1477 00c9 43757374 		.ascii	"Custom_LED_Blinking\000"
- 1477      6F6D5F4C 
- 1477      45445F42 
- 1477      6C696E6B 
- 1477      696E6700 
- 1478              	.LASF34:
- 1479 00dd 64617461 		.ascii	"data_register\000"
- 1479      5F726567 
- 1479      69737465 
- 1479      7200
- 1480              	.LASF38:
- 1481 00eb 636F6E66 		.ascii	"configuration_status\000"
- 1481      69677572 
- 1481      6174696F 
- 1481      6E5F7374 
- 1481      61747573 
- 1482              	.LASF11:
- 1483 0100 75696E74 		.ascii	"uint8_t\000"
- 1483      385F7400 
- 1484              	.LASF21:
- 1485 0108 43757374 		.ascii	"Custom_Pin_Button\000"
- 1485      6F6D5F50 
- 1485      696E5F42 
- 1485      7574746F 
- 1485      6E00
- 1486              	.LASF13:
- 1487 011a 75696E74 		.ascii	"uint8\000"
- 1487      3800
- 1488              	.LASF48:
- 1489 0120 55415254 		.ascii	"UART_1_Enable\000"
- 1489      5F315F45 
- 1489      6E61626C 
- 1489      6500
- 1490              	.LASF15:
- 1491 012e 666C6F61 		.ascii	"float\000"
- 1491      7400
- 1492              	.LASF56:
- 1493 0134 4144435F 		.ascii	"ADC_DelSig_Read32\000"
- 1493      44656C53 
- 1493      69675F52 
- 1493      65616433 
- 1493      3200
- 1494              	.LASF30:
- 1495 0146 64617461 		.ascii	"data_water\000"
- 1495      5F776174 
- 1495      657200
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccJjDDw8.s 			page 33
+ 1484 0183 54696D65 		.ascii	"Timer_Blinking_Start\000"
+ 1484      725F426C 
+ 1484      696E6B69 
+ 1484      6E675F53 
+ 1484      74617274 
+ 1485              	.LASF57:
+ 1486 0198 50696E5F 		.ascii	"Pin_EnableDisable_ClearInterrupt\000"
+ 1486      456E6162 
+ 1486      6C654469 
+ 1486      7361626C 
+ 1486      655F436C 
+ 1487              	.LASF6:
+ 1488 01b9 6C6F6E67 		.ascii	"long int\000"
+ 1488      20696E74 
+ 1488      00
+ 1489              	.LASF4:
+ 1490 01c2 5F5F7569 		.ascii	"__uint8_t\000"
+ 1490      6E74385F 
+ 1490      7400
+ 1491              	.LASF42:
+ 1492 01cc 50696E5F 		.ascii	"Pin_ISR_ClearInterrupt\000"
+ 1492      4953525F 
+ 1492      436C6561 
+ 1492      72496E74 
+ 1492      65727275 
+ 1493              	.LASF28:
+ 1494 01e3 5061636B 		.ascii	"PacketReadyFlag\000"
+ 1494      65745265 
+ 1494      61647946 
+ 1494      6C616700 
+ 1495              	.LASF18:
+ 1496 01f3 6C6F6E67 		.ascii	"long double\000"
+ 1496      20646F75 
+ 1496      626C6500 
+ 1497              	.LASF31:
+ 1498 01ff 466C6167 		.ascii	"FlagEnableDisable\000"
+ 1498      456E6162 
+ 1498      6C654469 
+ 1498      7361626C 
+ 1498      6500
+ 1499              	.LASF1:
+ 1500 0211 756E7369 		.ascii	"unsigned char\000"
+ 1500      676E6564 
+ 1500      20636861 
+ 1500      7200
+ 1501              	.LASF54:
+ 1502 021f 50696E5F 		.ascii	"Pin_Led_Blue_Read\000"
+ 1502      4C65645F 
+ 1502      426C7565 
+ 1502      5F526561 
+ 1502      6400
+ 1503              	.LASF0:
+ 1504 0231 7369676E 		.ascii	"signed char\000"
+ 1504      65642063 
+ 1504      68617200 
+ 1505              	.LASF9:
+ 1506 023d 6C6F6E67 		.ascii	"long long unsigned int\000"
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccbaDK1q.s 			page 34
 
 
- 1496              	.LASF20:
- 1497 0151 43757374 		.ascii	"Custom_Pin_ISR\000"
- 1497      6F6D5F50 
- 1497      696E5F49 
- 1497      535200
- 1498              	.LASF8:
- 1499 0160 6C6F6E67 		.ascii	"long long int\000"
- 1499      206C6F6E 
- 1499      6720696E 
- 1499      7400
- 1500              	.LASF49:
- 1501 016e 5350494D 		.ascii	"SPIM_1_Enable\000"
- 1501      5F315F45 
- 1501      6E61626C 
- 1501      6500
- 1502              	.LASF59:
- 1503 017c 50696E5F 		.ascii	"Pin_EnableDisable_Read\000"
- 1503      456E6162 
- 1503      6C654469 
- 1503      7361626C 
- 1503      655F5265 
- 1504              	.LASF43:
- 1505 0193 54696D65 		.ascii	"Timer_Blinking_Start\000"
- 1505      725F426C 
- 1505      696E6B69 
- 1505      6E675F53 
- 1505      74617274 
- 1506              	.LASF58:
- 1507 01a8 50696E5F 		.ascii	"Pin_EnableDisable_ClearInterrupt\000"
- 1507      456E6162 
- 1507      6C654469 
- 1507      7361626C 
- 1507      655F436C 
- 1508              	.LASF6:
- 1509 01c9 6C6F6E67 		.ascii	"long int\000"
- 1509      20696E74 
- 1509      00
- 1510              	.LASF4:
- 1511 01d2 5F5F7569 		.ascii	"__uint8_t\000"
- 1511      6E74385F 
- 1511      7400
- 1512              	.LASF41:
- 1513 01dc 50696E5F 		.ascii	"Pin_ISR_ClearInterrupt\000"
- 1513      4953525F 
- 1513      436C6561 
- 1513      72496E74 
- 1513      65727275 
- 1514              	.LASF28:
- 1515 01f3 5061636B 		.ascii	"PacketReadyFlag\000"
- 1515      65745265 
- 1515      61647946 
- 1515      6C616700 
- 1516              	.LASF18:
- 1517 0203 6C6F6E67 		.ascii	"long double\000"
- 1517      20646F75 
- 1517      626C6500 
- 1518              	.LASF31:
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccJjDDw8.s 			page 34
+ 1506      206C6F6E 
+ 1506      6720756E 
+ 1506      7369676E 
+ 1506      65642069 
+ 1507              	.LASF10:
+ 1508 0254 756E7369 		.ascii	"unsigned int\000"
+ 1508      676E6564 
+ 1508      20696E74 
+ 1508      00
+ 1509              	.LASF43:
+ 1510 0261 54494D45 		.ascii	"TIMER_button_Stop\000"
+ 1510      525F6275 
+ 1510      74746F6E 
+ 1510      5F53746F 
+ 1510      7000
+ 1511              	.LASF62:
+ 1512 0273 433A5C55 		.ascii	"C:\\Users\\noemi\\Desktop\\university\\university\\"
+ 1512      73657273 
+ 1512      5C6E6F65 
+ 1512      6D695C44 
+ 1512      65736B74 
+ 1513 02a0 706F6C69 		.ascii	"poli\\lab sensors\\final assignment\\Final-Assignme"
+ 1513      5C6C6162 
+ 1513      2073656E 
+ 1513      736F7273 
+ 1513      5C66696E 
+ 1514 02d0 6E742D50 		.ascii	"nt-PSoC\\Final_Assignment\\Final_assignment_01.cyds"
+ 1514      536F435C 
+ 1514      46696E61 
+ 1514      6C5F4173 
+ 1514      7369676E 
+ 1515 0301 6E00     		.ascii	"n\000"
+ 1516              	.LASF59:
+ 1517 0303 436F756E 		.ascii	"Counter_TimeStamp_ReadStatusRegister\000"
+ 1517      7465725F 
+ 1517      54696D65 
+ 1517      5374616D 
+ 1517      705F5265 
+ 1518              	.LASF3:
+ 1519 0328 73686F72 		.ascii	"short unsigned int\000"
+ 1519      7420756E 
+ 1519      7369676E 
+ 1519      65642069 
+ 1519      6E7400
+ 1520              	.LASF26:
+ 1521 033b 43757374 		.ascii	"Custom_TimeStamp\000"
+ 1521      6F6D5F54 
+ 1521      696D6553 
+ 1521      74616D70 
+ 1521      00
+ 1522              	.LASF49:
+ 1523 034c 5247424C 		.ascii	"RGBLed_Start\000"
+ 1523      65645F53 
+ 1523      74617274 
+ 1523      00
+ 1524              	.LASF17:
+ 1525 0359 63686172 		.ascii	"char\000"
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccbaDK1q.s 			page 35
 
 
- 1519 020f 466C6167 		.ascii	"FlagEnableDisable\000"
- 1519      456E6162 
- 1519      6C654469 
- 1519      7361626C 
- 1519      6500
- 1520              	.LASF1:
- 1521 0221 756E7369 		.ascii	"unsigned char\000"
- 1521      676E6564 
- 1521      20636861 
- 1521      7200
- 1522              	.LASF55:
- 1523 022f 50696E5F 		.ascii	"Pin_Led_Blue_Read\000"
- 1523      4C65645F 
- 1523      426C7565 
- 1523      5F526561 
- 1523      6400
- 1524              	.LASF0:
- 1525 0241 7369676E 		.ascii	"signed char\000"
- 1525      65642063 
- 1525      68617200 
- 1526              	.LASF9:
- 1527 024d 6C6F6E67 		.ascii	"long long unsigned int\000"
- 1527      206C6F6E 
- 1527      6720756E 
- 1527      7369676E 
- 1527      65642069 
- 1528              	.LASF10:
- 1529 0264 756E7369 		.ascii	"unsigned int\000"
- 1529      676E6564 
- 1529      20696E74 
- 1529      00
- 1530              	.LASF42:
- 1531 0271 54494D45 		.ascii	"TIMER_button_Stop\000"
- 1531      525F6275 
- 1531      74746F6E 
- 1531      5F53746F 
- 1531      7000
- 1532              	.LASF63:
- 1533 0283 433A5C55 		.ascii	"C:\\Users\\noemi\\Desktop\\university\\university\\"
- 1533      73657273 
- 1533      5C6E6F65 
- 1533      6D695C44 
- 1533      65736B74 
- 1534 02b0 706F6C69 		.ascii	"poli\\lab sensors\\final assignment\\Final-Assignme"
- 1534      5C6C6162 
- 1534      2073656E 
- 1534      736F7273 
- 1534      5C66696E 
- 1535 02e0 6E742D50 		.ascii	"nt-PSoC\\Final_Assignment\\Final_assignment_01.cyds"
- 1535      536F435C 
- 1535      46696E61 
- 1535      6C5F4173 
- 1535      7369676E 
- 1536 0311 6E00     		.ascii	"n\000"
- 1537              	.LASF60:
- 1538 0313 436F756E 		.ascii	"Counter_TimeStamp_ReadStatusRegister\000"
- 1538      7465725F 
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccJjDDw8.s 			page 35
+ 1525      00
+ 1526              	.LASF35:
+ 1527 035e 436F756E 		.ascii	"Counter_overflow\000"
+ 1527      7465725F 
+ 1527      6F766572 
+ 1527      666C6F77 
+ 1527      00
+ 1528              	.LASF12:
+ 1529 036f 696E7433 		.ascii	"int32_t\000"
+ 1529      325F7400 
+ 1530              	.LASF50:
+ 1531 0377 54696D65 		.ascii	"Timer_Blinking_Stop\000"
+ 1531      725F426C 
+ 1531      696E6B69 
+ 1531      6E675F53 
+ 1531      746F7000 
+ 1532              	.LASF47:
+ 1533 038b 50696E5F 		.ascii	"Pin_Led_Blue_Write\000"
+ 1533      4C65645F 
+ 1533      426C7565 
+ 1533      5F577269 
+ 1533      746500
+ 1534              	.LASF7:
+ 1535 039e 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1535      20756E73 
+ 1535      69676E65 
+ 1535      6420696E 
+ 1535      7400
+ 1536              	.LASF14:
+ 1537 03b0 696E7433 		.ascii	"int32\000"
+ 1537      3200
+ 1538              	.LASF52:
+ 1539 03b6 54494D45 		.ascii	"TIMER_button_ReadStatusRegister\000"
+ 1539      525F6275 
+ 1539      74746F6E 
+ 1539      5F526561 
+ 1539      64537461 
+ 1540              	.LASF23:
+ 1541 03d6 43757374 		.ascii	"Custom_Timer_Button\000"
+ 1541      6F6D5F54 
+ 1541      696D6572 
+ 1541      5F427574 
+ 1541      746F6E00 
+ 1542              	.LASF45:
+ 1543 03ea 5247424C 		.ascii	"RGBLed_WriteColor\000"
+ 1543      65645F57 
+ 1543      72697465 
+ 1543      436F6C6F 
+ 1543      7200
+ 1544              	.LASF5:
+ 1545 03fc 5F5F696E 		.ascii	"__int32_t\000"
+ 1545      7433325F 
+ 1545      7400
+ 1546              	.LASF41:
+ 1547 0406 55415254 		.ascii	"UARTVerboseFlagOLD\000"
+ 1547      56657262 
+ 1547      6F736546 
+ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccbaDK1q.s 			page 36
 
 
- 1538      54696D65 
- 1538      5374616D 
- 1538      705F5265 
- 1539              	.LASF3:
- 1540 0338 73686F72 		.ascii	"short unsigned int\000"
- 1540      7420756E 
- 1540      7369676E 
- 1540      65642069 
- 1540      6E7400
- 1541              	.LASF26:
- 1542 034b 43757374 		.ascii	"Custom_TimeStamp\000"
- 1542      6F6D5F54 
- 1542      696D6553 
- 1542      74616D70 
- 1542      00
- 1543              	.LASF50:
- 1544 035c 5247424C 		.ascii	"RGBLed_Start\000"
- 1544      65645F53 
- 1544      74617274 
- 1544      00
- 1545              	.LASF17:
- 1546 0369 63686172 		.ascii	"char\000"
- 1546      00
- 1547              	.LASF35:
- 1548 036e 436F756E 		.ascii	"Counter_overflow\000"
- 1548      7465725F 
- 1548      6F766572 
- 1548      666C6F77 
- 1548      00
- 1549              	.LASF12:
- 1550 037f 696E7433 		.ascii	"int32_t\000"
- 1550      325F7400 
- 1551              	.LASF51:
- 1552 0387 54696D65 		.ascii	"Timer_Blinking_Stop\000"
- 1552      725F426C 
- 1552      696E6B69 
- 1552      6E675F53 
- 1552      746F7000 
- 1553              	.LASF47:
- 1554 039b 50696E5F 		.ascii	"Pin_Led_Blue_Write\000"
- 1554      4C65645F 
- 1554      426C7565 
- 1554      5F577269 
- 1554      746500
- 1555              	.LASF7:
- 1556 03ae 6C6F6E67 		.ascii	"long unsigned int\000"
- 1556      20756E73 
- 1556      69676E65 
- 1556      6420696E 
- 1556      7400
- 1557              	.LASF14:
- 1558 03c0 696E7433 		.ascii	"int32\000"
- 1558      3200
- 1559              	.LASF53:
- 1560 03c6 54494D45 		.ascii	"TIMER_button_ReadStatusRegister\000"
- 1560      525F6275 
- 1560      74746F6E 
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccJjDDw8.s 			page 36
-
-
- 1560      5F526561 
- 1560      64537461 
- 1561              	.LASF23:
- 1562 03e6 43757374 		.ascii	"Custom_Timer_Button\000"
- 1562      6F6D5F54 
- 1562      696D6572 
- 1562      5F427574 
- 1562      746F6E00 
- 1563              	.LASF44:
- 1564 03fa 5247424C 		.ascii	"RGBLed_WriteColor\000"
- 1564      65645F57 
- 1564      72697465 
- 1564      436F6C6F 
- 1564      7200
- 1565              	.LASF5:
- 1566 040c 5F5F696E 		.ascii	"__int32_t\000"
- 1566      7433325F 
- 1566      7400
- 1567              	.LASF32:
- 1568 0416 6E65775F 		.ascii	"new_EEPROM\000"
- 1568      45455052 
- 1568      4F4D00
- 1569              	.LASF37:
- 1570 0421 73797374 		.ascii	"system_status\000"
- 1570      656D5F73 
- 1570      74617475 
- 1570      7300
- 1571              	.LASF33:
- 1572 042f 6E65775F 		.ascii	"new_EnableDisable\000"
- 1572      456E6162 
- 1572      6C654469 
- 1572      7361626C 
- 1572      6500
- 1573              	.LASF16:
- 1574 0441 646F7562 		.ascii	"double\000"
- 1574      6C6500
- 1575              	.LASF27:
- 1576 0448 49544D5F 		.ascii	"ITM_RxBuffer\000"
- 1576      52784275 
- 1576      66666572 
- 1576      00
- 1577              	.LASF61:
- 1578 0455 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
- 1578      43313120 
- 1578      352E342E 
- 1578      31203230 
- 1578      31363036 
- 1579 0488 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
- 1579      20726576 
- 1579      6973696F 
- 1579      6E203233 
- 1579      37373135 
- 1580 04bb 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
- 1580      66756E63 
- 1580      74696F6E 
- 1580      2D736563 
- 1580      74696F6E 
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccJjDDw8.s 			page 37
-
-
- 1581              	.LASF54:
- 1582 04e3 54696D65 		.ascii	"Timer_Blinking_ReadStatusRegister\000"
- 1582      725F426C 
- 1582      696E6B69 
- 1582      6E675F52 
- 1582      65616453 
- 1583              	.LASF40:
- 1584 0505 76616C75 		.ascii	"value_POT\000"
- 1584      655F504F 
- 1584      5400
- 1585              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
+ 1547      6C61674F 
+ 1547      4C4400
+ 1548              	.LASF32:
+ 1549 0419 6E65775F 		.ascii	"new_EEPROM\000"
+ 1549      45455052 
+ 1549      4F4D00
+ 1550              	.LASF36:
+ 1551 0424 73797374 		.ascii	"system_status\000"
+ 1551      656D5F73 
+ 1551      74617475 
+ 1551      7300
+ 1552              	.LASF33:
+ 1553 0432 6E65775F 		.ascii	"new_EnableDisable\000"
+ 1553      456E6162 
+ 1553      6C654469 
+ 1553      7361626C 
+ 1553      6500
+ 1554              	.LASF16:
+ 1555 0444 646F7562 		.ascii	"double\000"
+ 1555      6C6500
+ 1556              	.LASF27:
+ 1557 044b 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 1557      52784275 
+ 1557      66666572 
+ 1557      00
+ 1558              	.LASF60:
+ 1559 0458 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1559      43313120 
+ 1559      352E342E 
+ 1559      31203230 
+ 1559      31363036 
+ 1560 048b 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 1560      20726576 
+ 1560      6973696F 
+ 1560      6E203233 
+ 1560      37373135 
+ 1561 04be 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 1561      66756E63 
+ 1561      74696F6E 
+ 1561      2D736563 
+ 1561      74696F6E 
+ 1562              	.LASF53:
+ 1563 04e6 54696D65 		.ascii	"Timer_Blinking_ReadStatusRegister\000"
+ 1563      725F426C 
+ 1563      696E6B69 
+ 1563      6E675F52 
+ 1563      65616453 
+ 1564              	.LASF40:
+ 1565 0508 76616C75 		.ascii	"value_POT\000"
+ 1565      655F504F 
+ 1565      5400
+ 1566              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
