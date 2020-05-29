@@ -88,6 +88,8 @@
     
     #define LIS3DH_FIFO_CTRL_REG_FIFO_MODE_WTM_7 0x47
     
+    #define LIS3DH_FIFO_CTRL_REG_BYPASS_MODE 0x00
+    
     #define LIS3DH_CTRL_REG3 0x22
     
     #define LIS3DH_CTRL_REG3_WTM_INT 0x04

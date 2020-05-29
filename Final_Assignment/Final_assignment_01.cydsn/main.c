@@ -31,6 +31,8 @@ Gozzi Noemi
 #define EEPROM_ADDRESS_STATUS_VERBOSE_FLAG 0x0000
 #define EEPROM_ADDRESS_ACC_DATA_OVER_THRESHOLD 0x0080
 
+#define ACC_PACKET_DIMENSION 6
+#define empty_bit 0x20
 char bufferUART[100];
 
 
@@ -109,7 +111,7 @@ int main(void)
     /*          settings:  0x00                               */
     /*          0b00000000                                    */
     /*          FIFOCTRL[6:7]=00 BYPASS mode                   */
-    LIS3DH_writeByte(LIS3DH_FIFO_CTRL_REG,0x00);
+    LIS3DH_writeByte(LIS3DH_FIFO_CTRL_REG,LIS3DH_FIFO_CTRL_REG_BYPASS_MODE);
     data_read = LIS3DH_readByte(LIS3DH_FIFO_CTRL_REG);
     sprintf(bufferUART, " --> LIS3DH FIFO CTRL REGISTER (BYPASS mode) = 0x%02X\r\n", data_read);
     UART_1_PutBuffer;
@@ -151,7 +153,7 @@ int main(void)
     /*********************INT1 THS REGISTER *******************/
     /*          settings:   0x52                              */
     /*          0b01011100                                    */
-    /*          thresh:1472mg (82 x 16 mg)                    */
+    /*          thresh:1312mg (82 x 16 mg)                    */
     
     LIS3DH_writeByte(LIS3DH_INT1_THS, 0x52);
     data_read = LIS3DH_readByte(LIS3DH_INT1_THS);
@@ -190,8 +192,9 @@ int main(void)
     CyDelay(10);
     
     /* Variables declaration */
-    uint8_t AccData[DATA_BYTES];
-    uint8_t AccData_Threshold [DATA_BYTES];
+    uint8_t AccData[48];
+    uint8_t AccData_trash[ACC_PACKET_DIMENSION];
+    uint8_t AccData_Threshold [48];
     uint32 timestamp;
     int16_t Acc_x;
     int16_t Acc_y;
@@ -286,21 +289,97 @@ int main(void)
         if (PacketReadyFlag==1 && system_status==1 && configuration_status==0){
             uint8_t data = LIS3DH_readByte(LIS3DH_INT1_SRC);
             if(data&0x40){
-                sprintf(bufferUART, "THRESH 0x%02X\r\n", data);
+                sprintf(bufferUART, "EVENT OVERTHRESHOLD\r\n");
                 UART_1_PutBuffer;
-                LIS3DH_readPage(LIS3DH_OUT_X_L, (uint8_t*) AccData_Threshold, DATA_BYTES);
-                EEPROM_writePage(EEPROM_ADDRESS_ACC_DATA_OVER_THRESHOLD,(uint8_t*) AccData, DATA_BYTES);
-                EEPROM_waitForWriteComplete();
-//                EEPROM_readPage(0x0080, (uint8_t*) data_EEPROM, DATA_BYTES);
-//                Acc_x = ((int16)((AccData[0]) | ((AccData[1])<<8))>>6);
-//                Acc_y =((int16)((AccData[2]) | ((AccData[3])<<8))>>6);
-//                Acc_z =((int16)((AccData[4]) | ((AccData[5])<<8))>>6);
-//                sprintf(bufferUART, " --> EEPROM Test Read = %d %d %d \r\n\n", Acc_x* CONVERSION_FACTOR_DIGIT_MG, Acc_y* CONVERSION_FACTOR_DIGIT_MG, Acc_z* CONVERSION_FACTOR_DIGIT_MG);
-//                UART_1_PutBuffer;
-
                 
-                LIS3DH_writeByte(LIS3DH_FIFO_CTRL_REG,0x00);
-                LIS3DH_writeByte(LIS3DH_FIFO_CTRL_REG,0x47);
+                /*              SIGNAL WAVEFORM              */
+                uint8 j=0;
+                uint8 count_fifo=0;
+                
+                LIS3DH_readPage(LIS3DH_OUT_X_L, (uint8_t*) AccData_trash, ACC_PACKET_DIMENSION);
+                while(j<=7){
+                    
+                    /*FIFO REGISTER: ONLY IF IT'S NOT EMPTY WE READ AND SAVE NEW VALUES*/
+                    
+                    if ((LIS3DH_readByte(LIS3DH_FIFO_SRC_REG))!=empty_bit){
+                    LIS3DH_readPage(LIS3DH_OUT_X_L,  &AccData_Threshold[0+j], ACC_PACKET_DIMENSION);
+                    count_fifo++;
+                    }
+                    j++;
+                }
+                
+                /* SIGNAL WAVEFORM CASES
+                - if the new values saved in the FIFO are less than the overthreshold event duration(cases 1, 2, 3, 4)
+                  the data are retrieved from the previous FIFO saved in accData (watermark reading)
+                  e.g. only 2 values in FIFO
+                  OVERTHRESHOLD overall duration 5 samples (INT1_DURATION register counts also if the FIFO is cleared.)
+                  so, it means that some overthreshold values were in the previous read FIFO.
+                  --> read 2 values from current FIFO, and 3 last values from previous FIFO (most recent ones).
+                
+                - if the new values saved in the FIFO are more or equal than the overthreshold event duration (cases 5,6,7,8)
+                  only the most recent 5 acceleration packets are identified as signalwaveform.
+                
+                */
+                switch (count_fifo)
+            	{
+            		case 1:
+                    EEPROM_writePage((EEPROM_ADDRESS_ACC_DATA_OVER_THRESHOLD),&AccData[24], ACC_PACKET_DIMENSION);
+                    EEPROM_waitForWriteComplete();
+                    EEPROM_writePage((EEPROM_ADDRESS_ACC_DATA_OVER_THRESHOLD+ACC_PACKET_DIMENSION*1),&AccData[30], ACC_PACKET_DIMENSION);
+                    EEPROM_waitForWriteComplete();
+                    EEPROM_writePage((EEPROM_ADDRESS_ACC_DATA_OVER_THRESHOLD+ACC_PACKET_DIMENSION*2),&AccData[36], ACC_PACKET_DIMENSION);
+                    EEPROM_waitForWriteComplete();
+                    EEPROM_writePage((EEPROM_ADDRESS_ACC_DATA_OVER_THRESHOLD+ACC_PACKET_DIMENSION*3),&AccData[42], ACC_PACKET_DIMENSION);
+                    EEPROM_waitForWriteComplete();
+                    EEPROM_writePage((EEPROM_ADDRESS_ACC_DATA_OVER_THRESHOLD+ACC_PACKET_DIMENSION*4),&AccData_Threshold[0], 1*ACC_PACKET_DIMENSION);
+                    EEPROM_waitForWriteComplete();
+            		break;
+                    case 2: 
+                    EEPROM_writePage((EEPROM_ADDRESS_ACC_DATA_OVER_THRESHOLD),&AccData[30], 6);
+                    EEPROM_waitForWriteComplete();
+                    EEPROM_writePage((EEPROM_ADDRESS_ACC_DATA_OVER_THRESHOLD+ACC_PACKET_DIMENSION*1),&AccData[36], ACC_PACKET_DIMENSION);
+                    EEPROM_waitForWriteComplete();
+                    EEPROM_writePage((EEPROM_ADDRESS_ACC_DATA_OVER_THRESHOLD+ACC_PACKET_DIMENSION*2),&AccData[42], ACC_PACKET_DIMENSION);
+                    EEPROM_waitForWriteComplete();
+                    EEPROM_writePage((EEPROM_ADDRESS_ACC_DATA_OVER_THRESHOLD+ACC_PACKET_DIMENSION*3),&AccData_Threshold[0], 2*ACC_PACKET_DIMENSION);
+                    EEPROM_waitForWriteComplete();
+            		break;
+                    case 3:
+                    EEPROM_writePage((EEPROM_ADDRESS_ACC_DATA_OVER_THRESHOLD),&AccData[36], ACC_PACKET_DIMENSION);
+                    EEPROM_waitForWriteComplete();
+                    EEPROM_writePage((EEPROM_ADDRESS_ACC_DATA_OVER_THRESHOLD+ACC_PACKET_DIMENSION*1),&AccData[42], ACC_PACKET_DIMENSION);
+                    EEPROM_waitForWriteComplete();
+                    EEPROM_writePage((EEPROM_ADDRESS_ACC_DATA_OVER_THRESHOLD+ACC_PACKET_DIMENSION*2),&AccData_Threshold[0], 3*ACC_PACKET_DIMENSION);
+                    EEPROM_waitForWriteComplete();
+            		break;
+                    case 4: 
+            		EEPROM_writePage((EEPROM_ADDRESS_ACC_DATA_OVER_THRESHOLD),&AccData[42], ACC_PACKET_DIMENSION);
+                    EEPROM_waitForWriteComplete();
+                    EEPROM_writePage((EEPROM_ADDRESS_ACC_DATA_OVER_THRESHOLD+ACC_PACKET_DIMENSION*1),&AccData_Threshold[0], 4*ACC_PACKET_DIMENSION);
+                    EEPROM_waitForWriteComplete();
+                    break;
+                    case 5:
+                    EEPROM_writePage(EEPROM_ADDRESS_ACC_DATA_OVER_THRESHOLD,&AccData_Threshold[0], 5*ACC_PACKET_DIMENSION);
+                    EEPROM_waitForWriteComplete();
+            		break;
+                    case 6:
+                    EEPROM_writePage(EEPROM_ADDRESS_ACC_DATA_OVER_THRESHOLD,&AccData_Threshold[6], 5*ACC_PACKET_DIMENSION);
+                    EEPROM_waitForWriteComplete();
+            		break;
+                    case 7:
+                    EEPROM_writePage(EEPROM_ADDRESS_ACC_DATA_OVER_THRESHOLD,&AccData_Threshold[12], 5*ACC_PACKET_DIMENSION);
+                    EEPROM_waitForWriteComplete();
+            		break;
+                    case 8:
+                    EEPROM_writePage(EEPROM_ADDRESS_ACC_DATA_OVER_THRESHOLD,&AccData_Threshold[18], 5*ACC_PACKET_DIMENSION);
+                    EEPROM_waitForWriteComplete();
+            		break;
+                }
+                
+                LIS3DH_writeByte(LIS3DH_FIFO_CTRL_REG,LIS3DH_FIFO_CTRL_REG_BYPASS_MODE);
+                LIS3DH_writeByte(LIS3DH_FIFO_CTRL_REG,LIS3DH_FIFO_CTRL_REG_FIFO_MODE_WTM_7);
+                
+                /*              TIME STAMP              */
                 
                 timestamp=(FSR_COUNTER-Counter_TimeStamp_ReadCounter())*CONVERSION_COUNTER_TIMESTAMP_SEC;
                 timestamp=timestamp+Counter_overflow*CONVERSION_COUNTER_ISR;
@@ -316,27 +395,30 @@ int main(void)
                              
             }
             else{
-
-                for (int i=0; i<7; i++){
-                    LIS3DH_readPage(LIS3DH_OUT_X_L, (uint8_t*) AccData, DATA_BYTES);
-                    Acc_x = Acc_x + ((int16)((AccData[0]) | ((AccData[1])<<8))>>6);
-                    Acc_y = Acc_y + ((int16)((AccData[2]) | ((AccData[3])<<8))>>6);
-                    Acc_z = Acc_z + ((int16)((AccData[4]) | ((AccData[5])<<8))>>6);
+                LIS3DH_readPage(LIS3DH_OUT_X_L, (uint8_t*) AccData_trash, DATA_BYTES);
+                for (int i=0; i<=7; i++){
+                    
+                    LIS3DH_readPage(LIS3DH_OUT_X_L, &AccData[0+i], DATA_BYTES);
+                    Acc_x = Acc_x + ((int16)((AccData[0+i]) | ((AccData[1+i])<<8))>>6);
+                    Acc_y = Acc_y + ((int16)((AccData[2+i]) | ((AccData[3+i])<<8))>>6);
+                    Acc_z = Acc_z + ((int16)((AccData[4+i]) | ((AccData[5+i])<<8))>>6);
                     
                 }
-                LIS3DH_writeByte(LIS3DH_FIFO_CTRL_REG,0x00);
-                LIS3DH_writeByte(LIS3DH_FIFO_CTRL_REG,0x47);
                 
-                Acc_x = Acc_x/7;
-                Acc_y = Acc_y/7;
-                Acc_z = Acc_z/7;
+                LIS3DH_writeByte(LIS3DH_FIFO_CTRL_REG,LIS3DH_FIFO_CTRL_REG_BYPASS_MODE);
+                LIS3DH_writeByte(LIS3DH_FIFO_CTRL_REG,LIS3DH_FIFO_CTRL_REG_FIFO_MODE_WTM_7);
+                
+                UART_1_PutString("*********\r\n");
+                Acc_x = Acc_x/8;
+                Acc_y = Acc_y/8;
+                Acc_z = Acc_z/8;
                 
                 OutAccX = Acc_x * CONVERSION_FACTOR_DIGIT_MG;
                 OutAccY = Acc_y * CONVERSION_FACTOR_DIGIT_MG;
                 OutAccZ = Acc_z * CONVERSION_FACTOR_DIGIT_MG;
                 sprintf(bufferUART, "X: %d, Y: %d, Z: %d [mg]\r\n", OutAccX, OutAccY, OutAccZ);
                 UART_1_PutBuffer;
-                
+//                
                 if (UARTVerboseFlag){
                     //data preparing for UART serial Communication
                     OutArray[1] = (uint8_t)(OutAccX & 0xFF); 

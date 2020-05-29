@@ -13,7 +13,7 @@
 #include "RGBLedDriver.h"
 #define DATA_BYTES 6
 
-#define empty_bit 0x20
+
 
 #include <stdio.h>
 #include <string.h>
@@ -149,16 +149,16 @@ CY_ISR(Custom_Pin_Button_Positive){
             
             if (system_status==OFF){
                 /******************* SYSTEM START ACQUISITION ******************/
-                          
-                system_status=ON;
-                Pin_Led_Blue_Write(ON);
-                 
+
                 //UART_1_Enable();
                 SPIM_1_Enable();
                 //SPIM_2_Start();
                 RGBLed_Start();
                 Timer_Blinking_Stop();
-
+                system_status=ON;
+                Pin_Led_Blue_Write(ON);
+                
+                
                 /* DATA REGISTER (0x0000 EEPROM): system_status - - - - - - UARTVerboseFlag
                 i.e. if the system is ON (acquisition) and the flag is high 
                 (transmission via UART to the Bridge Control Panel) data 
