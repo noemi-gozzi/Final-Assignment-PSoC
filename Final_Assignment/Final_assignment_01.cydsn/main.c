@@ -92,6 +92,7 @@ int main(void)
     /*          CTRL4[4:5]= FULL SCALE RANGE. e.g. 00 +-2g    */
     /*          CTRL4[3]=RESOLUTION. normal 0                 */
     /*                                                        */
+    
     LIS3DH_writeByte(LIS3DH_CTRL_REG4, LIS3DH_CTRL_REG4_2G_NORMAL);
     data_read = LIS3DH_readByte(LIS3DH_CTRL_REG4);
     sprintf(bufferUART, " --> LIS3DH CTRL REGISTER 4= 0x%02X\r\n", data_read);
@@ -110,8 +111,9 @@ int main(void)
     /*********************FIFO_CTRL_REG************************/
     /*          settings:  0x00                               */
     /*          0b00000000                                    */
-    /*          FIFOCTRL[6:7]=00 BYPASS mode                   */
-    LIS3DH_writeByte(LIS3DH_FIFO_CTRL_REG,LIS3DH_FIFO_CTRL_REG_BYPASS_MODE);
+    /*          FIFOCTRL[6:7]=00 BYPASS mode                  */
+    
+    LIS3DH_writeByte(LIS3DH_FIFO_CTRL_REG, LIS3DH_FIFO_CTRL_REG_BYPASS_MODE);
     data_read = LIS3DH_readByte(LIS3DH_FIFO_CTRL_REG);
     sprintf(bufferUART, " --> LIS3DH FIFO CTRL REGISTER (BYPASS mode) = 0x%02X\r\n", data_read);
     UART_1_PutBuffer;
@@ -121,6 +123,7 @@ int main(void)
     /*          FIFOCTRL[6:7]=01 FIFO mode                    */
     /*          FIFOCTRL[5]=0 allows triggering signal on INT1*/
     /*          FIFOCTRL[0:4]=00111 watermark: 7 sample       */
+    
     LIS3DH_writeByte(LIS3DH_FIFO_CTRL_REG, LIS3DH_FIFO_CTRL_REG_FIFO_MODE_WTM_7);
     data_read = LIS3DH_readByte(LIS3DH_FIFO_CTRL_REG);
     sprintf(bufferUART, " --> LIS3DH FIFO CTRL REGISTER (FIFO mode) = 0x%02X\r\n", data_read);
@@ -152,25 +155,24 @@ int main(void)
     
     /*********************INT1 THS REGISTER *******************/
     /*          settings:   0x52                              */
-    /*          0b01011100                                    */
+    /*          0b0101 0010                                    */
     /*          thresh:1312mg (82 x 16 mg)                    */
     
-    LIS3DH_writeByte(LIS3DH_INT1_THS, 0x52);
+    LIS3DH_writeByte(LIS3DH_INT1_THS, LIS3DH_INT1_THS_1312mg);
     data_read = LIS3DH_readByte(LIS3DH_INT1_THS);
     sprintf(bufferUART, " --> LIS3DH INT1 THS REGISTER= 0x%02X\r\n", data_read);
     UART_1_PutBuffer;
     
     /*******************INT1 DURATION REGISTER ****************/
     /*          settings:   0x04                              */
-    /*          thresh:4/ODR=160ms (1/ODR = 40 ms)            */
+    /*          thresh:4/ODR = 80ms (1/ODR = 20 ms)           */
  
-    LIS3DH_writeByte(LIS3DH_INT1_DURATION, 0x04);
+    LIS3DH_writeByte(LIS3DH_INT1_DURATION, LIS3DH_INT1_DURATION_OVER);
     data_read = LIS3DH_readByte(LIS3DH_INT1_DURATION);
     sprintf(bufferUART, " --> LIS3DH DURATION REGISTER= 0x%02X\r\n", data_read);
     UART_1_PutBuffer;
     
     /*******************CONFIGURATION MODE ****************/    
-    
     FlagEnableDisable=Pin_EnableDisable_Read();
     EEPROM_writeByte(EEPROM_ADDRESS_ENABLEDISABLE, FlagEnableDisable);
     EEPROM_waitForWriteComplete();
@@ -202,7 +204,6 @@ int main(void)
     uint8_t footer = 0xC0;
     uint8_t OutArray[TRANSMIT_BUFFER_SIZE];
     uint8_t red_x, green_y, blue_z;
-    //    uint8_t reading_eeprom;
     
     /* Header and footer set up */
     OutArray[0] = header;
@@ -236,12 +237,6 @@ int main(void)
 
     for(;;)
     {
-        /*
-        TESTING FOR eeprom 0x0000 --> data register system_status - - - - - - verboseFlag      
-        reading_eeprom = EEPROM_readByte(0x0000);
-        sprintf(bufferUART, "** DATA REGISTER= 0x%02X\r\n", reading_eeprom);
-        UART_1_PutBuffer;
-        */
         
         /* Variables initialization */
         Acc_x = 0;
@@ -261,6 +256,9 @@ int main(void)
         }
         
         /*
+        If the pin moved from GND to 5V or viceversa an interrupt is generated, the new 
+        condition is stored in the EEPROM address 0x0001 and the configuration status is
+        communicated by means of UART, together with the level of the verbose flag.
         */
         if(new_EnableDisable){
             EEPROM_writeByte(EEPROM_ADDRESS_ENABLEDISABLE, FlagEnableDisable);
@@ -276,7 +274,11 @@ int main(void)
                 UART_1_PutBuffer;
             }    
         }
+        
         /*
+        If in configuration mode with the pin 3.2 in 5V (FlagEnableDisable high) a 
+        potentiometer value change causes a change in UARTVerboseFlag, the variation
+        is communicated to the user
         */
         if (configuration_status && FlagChangeParameters){
                 sprintf(bufferUART, "NEW UART VERBOSE FLAG: %d\r\n", UARTVerboseFlag);
@@ -284,11 +286,18 @@ int main(void)
                 FlagChangeParameters=0;
         
         }
-
+        
+        /*
+        If the system is in acquistion mode, an interrupt caused by an over-threshold
+        event or by the watermark achievement (PacketReadyFlag=1) leads to data elaboration
+        for further steps
+        */
         if (PacketReadyFlag==1 && system_status==1 && configuration_status==0){
+            //togliere utilizzo variabile??
             uint8_t data = LIS3DH_readByte(LIS3DH_INT1_SRC);
-            if(data&0x40){
-                sprintf(bufferUART, "EVENT OVERTHRESHOLD\r\n");
+            /*if the interrupt is generated by an overthreshold event*/
+            if(data & LIS3DH_INT1_SRC_INTERRUPT_ACTIVE){
+                sprintf(bufferUART, "OVERTHRESHOLD EVENT\r\n");
                 UART_1_PutBuffer;
                 
                 /*              SIGNAL WAVEFORM              */
@@ -298,7 +307,7 @@ int main(void)
                 LIS3DH_readPage(LIS3DH_OUT_X_L, (uint8_t*) AccData_trash, ACC_PACKET_DIMENSION);
                 while(j<=7){
                     
-                    /*FIFO REGISTER: ONLY IF IT'S NOT EMPTY WE READ AND SAVE NEW VALUES*/
+                    /*FIFO REGISTER: ONLY IF IT IS NOT EMPTY WE READ AND SAVE NEW VALUES*/
                     
                     if ((LIS3DH_readByte(LIS3DH_FIFO_SRC_REG))!=empty_bit){
                     LIS3DH_readPage(LIS3DH_OUT_X_L,  &AccData_Threshold[0+j], ACC_PACKET_DIMENSION);
@@ -379,7 +388,14 @@ int main(void)
                 LIS3DH_writeByte(LIS3DH_FIFO_CTRL_REG,LIS3DH_FIFO_CTRL_REG_FIFO_MODE_WTM_7);
                 
                 /*              TIME STAMP              */
-                
+                /*
+                In order to store a timestamp at the EEPROM adress 0x0002representing when the 
+                overthreshold event occurred from the start of the device, a clock and a counter 
+                are exploited. 
+                The number of clocks is converted in time; this  value is added to the product 
+                between the number of overflow multiplied and the time to reach an overflow (1200 s). 
+                In this way, it is possible to have no temporal limits to generate a timestamp. 
+                */
                 timestamp=(FSR_COUNTER-Counter_TimeStamp_ReadCounter())*CONVERSION_COUNTER_TIMESTAMP_SEC;
                 timestamp=timestamp+Counter_overflow*CONVERSION_COUNTER_ISR;
                 
@@ -393,8 +409,16 @@ int main(void)
                 EEPROM_waitForWriteComplete();
                              
             }
+            
+            /*if the interrupt is generated by the watermark level achievement*/
             else{
+                /*
+                According to the FIFO functioningan additional sample (oldest one repeated) 
+                must be read and discarded. 
+                */
                 LIS3DH_readPage(LIS3DH_OUT_X_L, (uint8_t*) AccData_trash, DATA_BYTES);
+                
+                /* Data reading */                
                 for (int i=0; i<=7; i++){
                     
                     LIS3DH_readPage(LIS3DH_OUT_X_L, &AccData[0+i], DATA_BYTES);
@@ -404,19 +428,32 @@ int main(void)
 
                 }
                 
+                /*
+                Bypass mode must be used in order to reset the FIFO buffer, then
+                the FIFO mode is re-selected
+                */
                 LIS3DH_writeByte(LIS3DH_FIFO_CTRL_REG,LIS3DH_FIFO_CTRL_REG_BYPASS_MODE);
                 LIS3DH_writeByte(LIS3DH_FIFO_CTRL_REG,LIS3DH_FIFO_CTRL_REG_FIFO_MODE_WTM_7);
                 
+                /* 8-samples average */
                 Acc_x = Acc_x/8;
                 Acc_y = Acc_y/8;
                 Acc_z = Acc_z/8;
                 
+                /* 
+                The digit value is multiplied by the conversion facto in order to obtain
+                the value in mg
+                */
                 OutAccX = Acc_x * CONVERSION_FACTOR_DIGIT_MG;
                 OutAccY = Acc_y * CONVERSION_FACTOR_DIGIT_MG;
                 OutAccZ = Acc_z * CONVERSION_FACTOR_DIGIT_MG;
                 sprintf(bufferUART, "X: %d, Y: %d, Z: %d [mg]\r\n", OutAccX, OutAccY, OutAccZ);
                 UART_1_PutBuffer;
                 
+                /*
+                If the UARTVerboseFlag is set high by means of the potentiometer, the data
+                are sent to the Bridge Control Panel
+                */
                 if (UARTVerboseFlag){
                     /*Data preparing for UART serial Communication with Bridge Control Panel*/
                     OutArray[1] = (uint8_t)(OutAccX & 0xFF); 
@@ -429,13 +466,17 @@ int main(void)
                     UART_1_PutArray(OutArray, TRANSMIT_BUFFER_SIZE);
                 }
                 
+                /*
+                The acceleration absolute values are converted in RGB values in order to set the 
+                PWM level of the RGB LED.
+                */
                 red_x= (uint8_t)(abs(OutAccX*CONVERSION_MG_RGB));
                 green_y=(uint8_t)(abs(OutAccY*CONVERSION_MG_RGB));
                 blue_z=(uint8_t)(abs(OutAccZ*CONVERSION_MG_RGB));
 
                 RGBLed_WriteColor(red_x, green_y, blue_z);
             }
-          
+        /*The flag is re-set to 0, waiting for another interrupt*/  
         PacketReadyFlag=0;
         
         }    

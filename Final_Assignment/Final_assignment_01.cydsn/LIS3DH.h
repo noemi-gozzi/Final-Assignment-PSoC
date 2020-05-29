@@ -9,8 +9,8 @@
  *
  * ========================================
 */
-#ifndef __LIS3DH_
-    #define __LIS3DH_
+#ifndef __LIS3DH_H
+    #define __LIS3DH_H
         
     #define LIS3DH_DEVICE_ADDRESS 0x18
 
@@ -107,6 +107,12 @@
     #define LIS3DH_INT1_CFG 0x30
     
     #define LIS3DH_INT1_CFG_OR_XYZIHE 0x2A
+    
+    #define LIS3DH_INT1_THS_1312mg 0x52
+    
+    #define LIS3DH_INT1_DURATION_OVER 0x04
+    
+    #define LIS3DH_INT1_SRC_INTERRUPT_ACTIVE 0X40
     
     
 #endif
