@@ -5,15 +5,10 @@
  * This header file contains macros and function prototypes to interface
  * with the SPI Master (SPIM) of the PSoC.
  *
+ * CS_1 and SPIM_1 are referred to LIS3DH
 
 */
 
-/*											 
- * NOTE: in the .h Lib of the SPI Slave     		   *
- *       you need to define SLAVE_CS_Write  		   *
- *       with the name of the Chip Select    		   * 
- *       pin (as defined in the Top Design)  		   *
-*/
 
 #pragma once
 

@@ -1,8 +1,8 @@
 /* ========================================
  *
-FINAL PROJECT 
-Francioli Lorenzo
-Gozzi Noemi
+ * FINAL PROJECT 
+ * Francioli Lorenzo
+ * Gozzi Noemi
  *
  * ========================================
 */
@@ -75,9 +75,9 @@ int main(void)
     UART_1_PutBuffer;
     
     /*********************CONTROL REGISTER 1*******************/
-    /*          settings: 0x27                                */
-    /*          0b00100111                                    */
-    /*          CTRL1[4:7]=0100 frequency=10 Hz               */
+    /*          settings: 0x47                                */
+    /*          0b01000111                                    */
+    /*          CTRL1[4:7]=0100 frequency=50 Hz               */
     /*          CTRL1[0:2]=1 x,y,z enable                     */
     /*          CTRL1[3]=1 normal/high resolution mode        */
     
@@ -174,17 +174,13 @@ int main(void)
     FlagEnableDisable=Pin_EnableDisable_Read();
     EEPROM_writeByte(EEPROM_ADDRESS_ENABLEDISABLE, FlagEnableDisable);
     EEPROM_waitForWriteComplete();
-    //potremmo togliere questa read all'indirizzo eeprom e lasciare solo il print modality + verbose
-//    data_read = EEPROM_readByte(EEPROM_ADDRESS_ENABLEDISABLE);
-//    sprintf(bufferUART, " --> FlagEnableDisable= %d\r\n", data_read);
-//    UART_1_PutBuffer;
     
     if (FlagEnableDisable){
-        sprintf(bufferUART, "\r\nREAD/WRITE CONFIGURATION MODALITY. configuration mode: %d\r\nUART VERBOSE FLAG: %d\r\n", FlagEnableDisable, UARTVerboseFlag);
+        sprintf(bufferUART, "\r\nREAD/WRITE CONFIGURATION MODALITY. Configuration mode: %d\r\nUART VERBOSE FLAG: %d\r\n", FlagEnableDisable, UARTVerboseFlag);
         UART_1_PutBuffer;
     }
     else {
-        sprintf(bufferUART, "\r\nATTENTION! READ ONLY MODALITY. configuration mode: %d\r\nUART VERBOSE FLAG: %d\r\n", FlagEnableDisable, UARTVerboseFlag);
+        sprintf(bufferUART, "\r\nATTENTION! READ ONLY MODALITY. Configuration mode: %d\r\nUART VERBOSE FLAG: %d\r\n", FlagEnableDisable, UARTVerboseFlag);
         UART_1_PutBuffer;
     }  
     
@@ -241,7 +237,7 @@ int main(void)
     for(;;)
     {
         /*
-      TESTING FOR eeprom 0x0000 --> data register system_status - - - - - - verboseFlag      
+        TESTING FOR eeprom 0x0000 --> data register system_status - - - - - - verboseFlag      
         reading_eeprom = EEPROM_readByte(0x0000);
         sprintf(bufferUART, "** DATA REGISTER= 0x%02X\r\n", reading_eeprom);
         UART_1_PutBuffer;

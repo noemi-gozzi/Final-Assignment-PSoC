@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 1
 
 
    1              		.syntax unified
@@ -33,9 +33,9 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
   30              		.file 1 "main.c"
    1:main.c        **** /* ========================================
    2:main.c        ****  *
-   3:main.c        **** FINAL PROJECT 
-   4:main.c        **** Francioli Lorenzo
-   5:main.c        **** Gozzi Noemi
+   3:main.c        ****  * FINAL PROJECT 
+   4:main.c        ****  * Francioli Lorenzo
+   5:main.c        ****  * Gozzi Noemi
    6:main.c        ****  *
    7:main.c        ****  * ========================================
    8:main.c        **** */
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
   25:main.c        **** #define CONVERSION_MG_RGB 255/2000
   26:main.c        **** #define CONVERSION_COUNTER_TIMESTAMP_SEC 0.02 //each clock 0.02 sec
   27:main.c        **** #define CONVERSION_COUNTER_ISR 1200 //clock overflow 60000*0.02=1200 sec. when an ISR occured 1200 
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 2
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 2
 
 
   28:main.c        **** #define FSR_COUNTER 60000
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
   64 0014 FFF7FEFF 		bl	RGBLed_Start
   65              	.LVL3:
   49:main.c        ****     ADC_DelSig_Start();
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 3
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 3
 
 
   66              		.loc 1 49 0
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  106 0058 2020     		movs	r0, #32
  107 005a FFF7FEFF 		bl	EEPROM_writePage
  108              	.LVL11:
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 4
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 4
 
 
   64:main.c        ****     EEPROM_waitForWriteComplete();
@@ -232,13 +232,13 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  145              	.LVL19:
   76:main.c        ****     
   77:main.c        ****     /*********************CONTROL REGISTER 1*******************/
-  78:main.c        ****     /*          settings: 0x27                                */
-  79:main.c        ****     /*          0b00100111                                    */
-  80:main.c        ****     /*          CTRL1[4:7]=0100 frequency=10 Hz               */
+  78:main.c        ****     /*          settings: 0x47                                */
+  79:main.c        ****     /*          0b01000111                                    */
+  80:main.c        ****     /*          CTRL1[4:7]=0100 frequency=50 Hz               */
   81:main.c        ****     /*          CTRL1[0:2]=1 x,y,z enable                     */
   82:main.c        ****     /*          CTRL1[3]=1 normal/high resolution mode        */
   83:main.c        ****     
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 5
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 5
 
 
   84:main.c        ****     LIS3DH_writeByte(LIS3DH_CTRL_REG1, 0x37);
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  185              	.LVL29:
   99:main.c        ****     
  100:main.c        ****     /*********************CONTROL REGISTER 5*******************/
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 6
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 6
 
 
  101:main.c        ****     /*          settings: 0x40                                */
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  223 0110 2046     		mov	r0, r4
  224 0112 FFF7FEFF 		bl	UART_1_PutString
  225              	.LVL39:
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 7
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 7
 
 
  118:main.c        ****     
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  260 0148 FFF7FEFF 		bl	sprintf
  261              	.LVL48:
  138:main.c        ****     UART_1_PutBuffer;
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 8
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 8
 
 
  262              		.loc 1 138 0
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  160:main.c        ****     sprintf(bufferUART, " --> LIS3DH INT1 THS REGISTER= 0x%02X\r\n", data_read);
  295              		.loc 1 160 0
  296 017e 0246     		mov	r2, r0
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 9
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 9
 
 
  297 0180 5E49     		ldr	r1, .L32+52
@@ -538,22 +538,18 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  176:main.c        ****     EEPROM_waitForWriteComplete();
  336              		.loc 1 176 0
  337 01bc FFF7FEFF 		bl	EEPROM_waitForWriteComplete
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 10
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 10
 
 
  338              	.LVL67:
- 177:main.c        ****     //potremmo togliere questa read all'indirizzo eeprom e lasciare solo il print modality + verbos
- 178:main.c        **** //    data_read = EEPROM_readByte(EEPROM_ADDRESS_ENABLEDISABLE);
- 179:main.c        **** //    sprintf(bufferUART, " --> FlagEnableDisable= %d\r\n", data_read);
- 180:main.c        **** //    UART_1_PutBuffer;
- 181:main.c        ****     
- 182:main.c        ****     if (FlagEnableDisable){
- 339              		.loc 1 182 0
+ 177:main.c        ****     
+ 178:main.c        ****     if (FlagEnableDisable){
+ 339              		.loc 1 178 0
  340 01c0 2378     		ldrb	r3, [r4]	@ zero_extendqisi2
  341 01c2 13F0FF0F 		tst	r3, #255
  342 01c6 0BD0     		beq	.L2
- 183:main.c        ****         sprintf(bufferUART, "\r\nREAD/WRITE CONFIGURATION MODALITY. configuration mode: %d\r\nUART 
- 343              		.loc 1 183 0
+ 179:main.c        ****         sprintf(bufferUART, "\r\nREAD/WRITE CONFIGURATION MODALITY. Configuration mode: %d\r\nUART 
+ 343              		.loc 1 179 0
  344 01c8 2278     		ldrb	r2, [r4]	@ zero_extendqisi2
  345 01ca 4F4B     		ldr	r3, .L32+64
  346 01cc 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
@@ -562,17 +558,17 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  349 01d2 2046     		mov	r0, r4
  350 01d4 FFF7FEFF 		bl	sprintf
  351              	.LVL68:
- 184:main.c        ****         UART_1_PutBuffer;
- 352              		.loc 1 184 0
+ 180:main.c        ****         UART_1_PutBuffer;
+ 352              		.loc 1 180 0
  353 01d8 2046     		mov	r0, r4
  354 01da FFF7FEFF 		bl	UART_1_PutString
  355              	.LVL69:
  356 01de 0BE0     		b	.L3
  357              	.L2:
- 185:main.c        ****     }
- 186:main.c        ****     else {
- 187:main.c        ****         sprintf(bufferUART, "\r\nATTENTION! READ ONLY MODALITY. configuration mode: %d\r\nUART VERB
- 358              		.loc 1 187 0
+ 181:main.c        ****     }
+ 182:main.c        ****     else {
+ 183:main.c        ****         sprintf(bufferUART, "\r\nATTENTION! READ ONLY MODALITY. Configuration mode: %d\r\nUART VERB
+ 358              		.loc 1 183 0
  359 01e0 484B     		ldr	r3, .L32+60
  360 01e2 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
  361 01e4 484B     		ldr	r3, .L32+64
@@ -582,229 +578,229 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  365 01ec 2046     		mov	r0, r4
  366 01ee FFF7FEFF 		bl	sprintf
  367              	.LVL70:
- 188:main.c        ****         UART_1_PutBuffer;
- 368              		.loc 1 188 0
+ 184:main.c        ****         UART_1_PutBuffer;
+ 368              		.loc 1 184 0
  369 01f2 2046     		mov	r0, r4
  370 01f4 FFF7FEFF 		bl	UART_1_PutString
  371              	.LVL71:
  372              	.L3:
- 189:main.c        ****     }  
- 190:main.c        ****     
- 191:main.c        ****     UART_1_PutString("\r\nREADY \r\n\r\n");
- 373              		.loc 1 191 0
+ 185:main.c        ****     }  
+ 186:main.c        ****     
+ 187:main.c        ****     UART_1_PutString("\r\nREADY \r\n\r\n");
+ 373              		.loc 1 187 0
  374 01f8 4648     		ldr	r0, .L32+76
  375 01fa FFF7FEFF 		bl	UART_1_PutString
  376              	.LVL72:
- 192:main.c        ****     CyDelay(10);
- 377              		.loc 1 192 0
+ 188:main.c        ****     CyDelay(10);
+ 377              		.loc 1 188 0
  378 01fe 0A20     		movs	r0, #10
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 11
-
-
  379 0200 FFF7FEFF 		bl	CyDelay
  380              	.LVL73:
- 193:main.c        ****     
- 194:main.c        ****     /* Variables declaration */
- 195:main.c        ****     uint8_t AccData[48];
- 196:main.c        ****     uint8_t AccData_trash[ACC_PACKET_DIMENSION];
- 197:main.c        ****     uint8_t AccData_Threshold [48];
- 198:main.c        ****     uint32 timestamp;
- 199:main.c        ****     int16_t Acc_x;
- 200:main.c        ****     int16_t Acc_y;
- 201:main.c        ****     int16_t Acc_z;
- 202:main.c        ****     int16 OutAccX;
- 203:main.c        ****     int16 OutAccY;
- 204:main.c        ****     int16 OutAccZ;
- 205:main.c        ****     uint8_t header = 0xA0;
- 206:main.c        ****     uint8_t footer = 0xC0;
- 207:main.c        ****     uint8_t OutArray[TRANSMIT_BUFFER_SIZE];
- 208:main.c        ****     uint8_t red_x, green_y, blue_z;
- 209:main.c        ****     //    uint8_t reading_eeprom;
- 210:main.c        ****     
- 211:main.c        ****     /* Header and footer set up */
- 212:main.c        ****     OutArray[0] = header;
- 381              		.loc 1 212 0
+ 189:main.c        ****     
+ 190:main.c        ****     /* Variables declaration */
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 11
+
+
+ 191:main.c        ****     uint8_t AccData[48];
+ 192:main.c        ****     uint8_t AccData_trash[ACC_PACKET_DIMENSION];
+ 193:main.c        ****     uint8_t AccData_Threshold [48];
+ 194:main.c        ****     uint32 timestamp;
+ 195:main.c        ****     int16_t Acc_x;
+ 196:main.c        ****     int16_t Acc_y;
+ 197:main.c        ****     int16_t Acc_z;
+ 198:main.c        ****     int16 OutAccX;
+ 199:main.c        ****     int16 OutAccY;
+ 200:main.c        ****     int16 OutAccZ;
+ 201:main.c        ****     uint8_t header = 0xA0;
+ 202:main.c        ****     uint8_t footer = 0xC0;
+ 203:main.c        ****     uint8_t OutArray[TRANSMIT_BUFFER_SIZE];
+ 204:main.c        ****     uint8_t red_x, green_y, blue_z;
+ 205:main.c        ****     //    uint8_t reading_eeprom;
+ 206:main.c        ****     
+ 207:main.c        ****     /* Header and footer set up */
+ 208:main.c        ****     OutArray[0] = header;
+ 381              		.loc 1 208 0
  382 0204 A023     		movs	r3, #160
  383 0206 8DF81030 		strb	r3, [sp, #16]
- 213:main.c        ****     OutArray[TRANSMIT_BUFFER_SIZE - 1] = footer;
- 384              		.loc 1 213 0
+ 209:main.c        ****     OutArray[TRANSMIT_BUFFER_SIZE - 1] = footer;
+ 384              		.loc 1 209 0
  385 020a C023     		movs	r3, #192
  386 020c 8DF81730 		strb	r3, [sp, #23]
- 214:main.c        **** 
- 215:main.c        ****      /* ISRs StartEx */   
- 216:main.c        ****     isr_ACC_StartEx(Custom_Pin_ISR);
- 387              		.loc 1 216 0
+ 210:main.c        **** 
+ 211:main.c        ****      /* ISRs StartEx */   
+ 212:main.c        ****     isr_ACC_StartEx(Custom_Pin_ISR);
+ 387              		.loc 1 212 0
  388 0210 4148     		ldr	r0, .L32+80
  389 0212 FFF7FEFF 		bl	isr_ACC_StartEx
  390              	.LVL74:
- 217:main.c        ****     isr_DEBOUNCER_StartEx(Custom_Pin_Button);
- 391              		.loc 1 217 0
+ 213:main.c        ****     isr_DEBOUNCER_StartEx(Custom_Pin_Button);
+ 391              		.loc 1 213 0
  392 0216 4148     		ldr	r0, .L32+84
  393 0218 FFF7FEFF 		bl	isr_DEBOUNCER_StartEx
  394              	.LVL75:
- 218:main.c        ****     isr_TIMER_StartEx(Custom_Timer_Button);
- 395              		.loc 1 218 0
+ 214:main.c        ****     isr_TIMER_StartEx(Custom_Timer_Button);
+ 395              		.loc 1 214 0
  396 021c 4048     		ldr	r0, .L32+88
  397 021e FFF7FEFF 		bl	isr_TIMER_StartEx
  398              	.LVL76:
- 219:main.c        ****     isr_BLINKING_StartEx(Custom_LED_Blinking);
- 399              		.loc 1 219 0
+ 215:main.c        ****     isr_BLINKING_StartEx(Custom_LED_Blinking);
+ 399              		.loc 1 215 0
  400 0222 4048     		ldr	r0, .L32+92
  401 0224 FFF7FEFF 		bl	isr_BLINKING_StartEx
  402              	.LVL77:
- 220:main.c        ****     isr_positive_StartEx(Custom_Pin_Button_Positive);
- 403              		.loc 1 220 0
+ 216:main.c        ****     isr_positive_StartEx(Custom_Pin_Button_Positive);
+ 403              		.loc 1 216 0
  404 0228 3F48     		ldr	r0, .L32+96
  405 022a FFF7FEFF 		bl	isr_positive_StartEx
  406              	.LVL78:
- 221:main.c        ****     isr_EnableDisable_StartEx(Custom_Pin_EnableDisable);
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 12
-
-
- 407              		.loc 1 221 0
+ 217:main.c        ****     isr_EnableDisable_StartEx(Custom_Pin_EnableDisable);
+ 407              		.loc 1 217 0
  408 022e 3F48     		ldr	r0, .L32+100
  409 0230 FFF7FEFF 		bl	isr_EnableDisable_StartEx
  410              	.LVL79:
- 222:main.c        ****     isr_TimeStamp_StartEx(Custom_TimeStamp);
- 411              		.loc 1 222 0
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 12
+
+
+ 218:main.c        ****     isr_TimeStamp_StartEx(Custom_TimeStamp);
+ 411              		.loc 1 218 0
  412 0234 3E48     		ldr	r0, .L32+104
  413 0236 FFF7FEFF 		bl	isr_TimeStamp_StartEx
  414              	.LVL80:
- 223:main.c        ****         
- 224:main.c        ****     ADC_DelSig_StartConvert();
- 415              		.loc 1 224 0
+ 219:main.c        ****         
+ 220:main.c        ****     ADC_DelSig_StartConvert();
+ 415              		.loc 1 220 0
  416 023a FFF7FEFF 		bl	ADC_DelSig_StartConvert
  417              	.LVL81:
- 225:main.c        ****     
- 226:main.c        ****     CyDelay(10);
- 418              		.loc 1 226 0
+ 221:main.c        ****     
+ 222:main.c        ****     CyDelay(10);
+ 418              		.loc 1 222 0
  419 023e 0A20     		movs	r0, #10
  420 0240 FFF7FEFF 		bl	CyDelay
  421              	.LVL82:
- 227:main.c        ****     
- 228:main.c        ****     /* Variables initialization */
- 229:main.c        ****     UARTVerboseFlag=0;
- 422              		.loc 1 229 0
+ 223:main.c        ****     
+ 224:main.c        ****     /* Variables initialization */
+ 225:main.c        ****     UARTVerboseFlag=0;
+ 422              		.loc 1 225 0
  423 0244 0023     		movs	r3, #0
  424 0246 304A     		ldr	r2, .L32+64
  425 0248 1370     		strb	r3, [r2]
- 230:main.c        ****     new_EEPROM=0;
- 426              		.loc 1 230 0
+ 226:main.c        ****     new_EEPROM=0;
+ 426              		.loc 1 226 0
  427 024a 3A4A     		ldr	r2, .L32+108
  428 024c 1370     		strb	r3, [r2]
- 231:main.c        ****     new_EnableDisable=0;
- 429              		.loc 1 231 0
+ 227:main.c        ****     new_EnableDisable=0;
+ 429              		.loc 1 227 0
  430 024e 3A4A     		ldr	r2, .L32+112
  431 0250 1370     		strb	r3, [r2]
- 232:main.c        ****     Counter_overflow=0;
- 432              		.loc 1 232 0
+ 228:main.c        ****     Counter_overflow=0;
+ 432              		.loc 1 228 0
  433 0252 3A4A     		ldr	r2, .L32+116
  434 0254 1370     		strb	r3, [r2]
- 233:main.c        ****     PacketReadyFlag = 0;
- 435              		.loc 1 233 0
+ 229:main.c        ****     PacketReadyFlag = 0;
+ 435              		.loc 1 229 0
  436 0256 3A4A     		ldr	r2, .L32+120
  437 0258 1370     		strb	r3, [r2]
- 234:main.c        ****     system_status=0;
- 438              		.loc 1 234 0
+ 230:main.c        ****     system_status=0;
+ 438              		.loc 1 230 0
  439 025a 3A4A     		ldr	r2, .L32+124
  440 025c 1370     		strb	r3, [r2]
- 235:main.c        ****     configuration_status=0;
- 441              		.loc 1 235 0
+ 231:main.c        ****     configuration_status=0;
+ 441              		.loc 1 231 0
  442 025e 3A4A     		ldr	r2, .L32+128
  443 0260 1370     		strb	r3, [r2]
- 236:main.c        ****     FlagChangeParameters=0;
- 444              		.loc 1 236 0
+ 232:main.c        ****     FlagChangeParameters=0;
+ 444              		.loc 1 232 0
  445 0262 3A4A     		ldr	r2, .L32+132
  446 0264 1370     		strb	r3, [r2]
- 237:main.c        **** 
- 238:main.c        ****     /* The Accelerometer SPI must be ON only in acquisition mode*/
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 13
-
-
- 239:main.c        ****     SPIM_1_Stop();
- 447              		.loc 1 239 0
+ 233:main.c        **** 
+ 234:main.c        ****     /* The Accelerometer SPI must be ON only in acquisition mode*/
+ 235:main.c        ****     SPIM_1_Stop();
+ 447              		.loc 1 235 0
  448 0266 FFF7FEFF 		bl	SPIM_1_Stop
  449              	.LVL83:
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 13
+
+
  450              	.L4:
- 240:main.c        **** 
- 241:main.c        ****     for(;;)
- 242:main.c        ****     {
- 243:main.c        ****         /*
- 244:main.c        ****       TESTING FOR eeprom 0x0000 --> data register system_status - - - - - - verboseFlag      
- 245:main.c        ****         reading_eeprom = EEPROM_readByte(0x0000);
- 246:main.c        ****         sprintf(bufferUART, "** DATA REGISTER= 0x%02X\r\n", reading_eeprom);
- 247:main.c        ****         UART_1_PutBuffer;
- 248:main.c        ****         */
- 249:main.c        ****         
- 250:main.c        ****         /* Variables initialization */
- 251:main.c        ****         Acc_x = 0;
- 252:main.c        ****         Acc_y = 0;
- 253:main.c        ****         Acc_z = 0;
- 254:main.c        ****         
- 255:main.c        ****         /*
- 256:main.c        ****         If the system enters in a new state (from acquisition ON to OFF or viceversa, 
- 257:main.c        ****         from acquisition ON to CONFIGURATION MODE), the system state is stored at the 
- 258:main.c        ****         EEPROM address 0x0000, together with the value of the verbose flag, indicating 
- 259:main.c        ****         the enabled or disabled communication via Bridge Control Panel
- 260:main.c        ****         */
- 261:main.c        ****         if(new_EEPROM){
- 451              		.loc 1 261 0
+ 236:main.c        **** 
+ 237:main.c        ****     for(;;)
+ 238:main.c        ****     {
+ 239:main.c        ****         /*
+ 240:main.c        ****         TESTING FOR eeprom 0x0000 --> data register system_status - - - - - - verboseFlag      
+ 241:main.c        ****         reading_eeprom = EEPROM_readByte(0x0000);
+ 242:main.c        ****         sprintf(bufferUART, "** DATA REGISTER= 0x%02X\r\n", reading_eeprom);
+ 243:main.c        ****         UART_1_PutBuffer;
+ 244:main.c        ****         */
+ 245:main.c        ****         
+ 246:main.c        ****         /* Variables initialization */
+ 247:main.c        ****         Acc_x = 0;
+ 248:main.c        ****         Acc_y = 0;
+ 249:main.c        ****         Acc_z = 0;
+ 250:main.c        ****         
+ 251:main.c        ****         /*
+ 252:main.c        ****         If the system enters in a new state (from acquisition ON to OFF or viceversa, 
+ 253:main.c        ****         from acquisition ON to CONFIGURATION MODE), the system state is stored at the 
+ 254:main.c        ****         EEPROM address 0x0000, together with the value of the verbose flag, indicating 
+ 255:main.c        ****         the enabled or disabled communication via Bridge Control Panel
+ 256:main.c        ****         */
+ 257:main.c        ****         if(new_EEPROM){
+ 451              		.loc 1 257 0
  452 026a 324B     		ldr	r3, .L32+108
  453 026c 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
  454 026e 13F0FF0F 		tst	r3, #255
  455 0272 09D0     		beq	.L5
- 262:main.c        ****             EEPROM_writeByte(EEPROM_ADDRESS_STATUS_VERBOSE_FLAG, data_register);
- 456              		.loc 1 262 0
+ 258:main.c        ****             EEPROM_writeByte(EEPROM_ADDRESS_STATUS_VERBOSE_FLAG, data_register);
+ 456              		.loc 1 258 0
  457 0274 364B     		ldr	r3, .L32+136
  458 0276 1978     		ldrb	r1, [r3]	@ zero_extendqisi2
  459 0278 0020     		movs	r0, #0
  460 027a FFF7FEFF 		bl	EEPROM_writeByte
  461              	.LVL84:
- 263:main.c        ****             EEPROM_waitForWriteComplete();
- 462              		.loc 1 263 0
+ 259:main.c        ****             EEPROM_waitForWriteComplete();
+ 462              		.loc 1 259 0
  463 027e FFF7FEFF 		bl	EEPROM_waitForWriteComplete
  464              	.LVL85:
- 264:main.c        ****             new_EEPROM=0;
- 465              		.loc 1 264 0
+ 260:main.c        ****             new_EEPROM=0;
+ 465              		.loc 1 260 0
  466 0282 0022     		movs	r2, #0
  467 0284 2B4B     		ldr	r3, .L32+108
  468 0286 1A70     		strb	r2, [r3]
  469              	.L5:
- 265:main.c        ****         }
- 266:main.c        ****         
- 267:main.c        ****         if(new_EnableDisable){
- 470              		.loc 1 267 0
+ 261:main.c        ****         }
+ 262:main.c        ****         
+ 263:main.c        ****         if(new_EnableDisable){
+ 470              		.loc 1 263 0
  471 0288 2B4B     		ldr	r3, .L32+112
  472 028a 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
  473 028c 13F0FF0F 		tst	r3, #255
  474 0290 6ED0     		beq	.L6
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 14
-
-
- 268:main.c        ****             EEPROM_writeByte(EEPROM_ADDRESS_ENABLEDISABLE, FlagEnableDisable);
- 475              		.loc 1 268 0
+ 264:main.c        ****             EEPROM_writeByte(EEPROM_ADDRESS_ENABLEDISABLE, FlagEnableDisable);
+ 475              		.loc 1 264 0
  476 0292 1C4C     		ldr	r4, .L32+60
  477 0294 2178     		ldrb	r1, [r4]	@ zero_extendqisi2
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 14
+
+
  478 0296 0120     		movs	r0, #1
  479 0298 FFF7FEFF 		bl	EEPROM_writeByte
  480              	.LVL86:
- 269:main.c        ****             EEPROM_waitForWriteComplete();
- 481              		.loc 1 269 0
+ 265:main.c        ****             EEPROM_waitForWriteComplete();
+ 481              		.loc 1 265 0
  482 029c FFF7FEFF 		bl	EEPROM_waitForWriteComplete
  483              	.LVL87:
- 270:main.c        ****             new_EnableDisable=0;
- 484              		.loc 1 270 0
+ 266:main.c        ****             new_EnableDisable=0;
+ 484              		.loc 1 266 0
  485 02a0 0022     		movs	r2, #0
  486 02a2 254B     		ldr	r3, .L32+112
  487 02a4 1A70     		strb	r2, [r3]
- 271:main.c        **** 
- 272:main.c        ****             if (FlagEnableDisable){
- 488              		.loc 1 272 0
+ 267:main.c        **** 
+ 268:main.c        ****             if (FlagEnableDisable){
+ 488              		.loc 1 268 0
  489 02a6 2378     		ldrb	r3, [r4]	@ zero_extendqisi2
  490 02a8 13F0FF0F 		tst	r3, #255
  491 02ac 54D0     		beq	.L7
- 273:main.c        ****                 sprintf(bufferUART, "READ/WRITE CONFIGURATION MODALITY. configuration mode: %d\r\nU
- 492              		.loc 1 273 0
+ 269:main.c        ****                 sprintf(bufferUART, "READ/WRITE CONFIGURATION MODALITY. configuration mode: %d\r\nU
+ 492              		.loc 1 269 0
  493 02ae 2278     		ldrb	r2, [r4]	@ zero_extendqisi2
  494 02b0 154B     		ldr	r3, .L32+64
  495 02b2 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
@@ -813,8 +809,8 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  498 02b8 2046     		mov	r0, r4
  499 02ba FFF7FEFF 		bl	sprintf
  500              	.LVL88:
- 274:main.c        ****                 UART_1_PutBuffer;
- 501              		.loc 1 274 0
+ 270:main.c        ****                 UART_1_PutBuffer;
+ 501              		.loc 1 270 0
  502 02be 2046     		mov	r0, r4
  503 02c0 FFF7FEFF 		bl	UART_1_PutString
  504              	.LVL89:
@@ -838,13 +834,13 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  522 02fc 38020000 		.word	.LC12
  523 0300 60020000 		.word	.LC13
  524 0304 00000000 		.word	FlagEnableDisable
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 15
-
-
  525 0308 00000000 		.word	UARTVerboseFlag
  526 030c 88020000 		.word	.LC14
  527 0310 E0020000 		.word	.LC15
  528 0314 34030000 		.word	.LC16
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 15
+
+
  529 0318 00000000 		.word	Custom_Pin_ISR
  530 031c 00000000 		.word	Custom_Pin_Button
  531 0320 00000000 		.word	Custom_Timer_Button
@@ -862,10 +858,10 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  543 0350 00000000 		.word	data_register
  544 0354 44030000 		.word	.LC17
  545              	.L7:
- 275:main.c        ****             }
- 276:main.c        ****             else {
- 277:main.c        ****                 sprintf(bufferUART, "ATTENTION! READ ONLY MODALITY. configuration mode: %d\r\nUART 
- 546              		.loc 1 277 0
+ 271:main.c        ****             }
+ 272:main.c        ****             else {
+ 273:main.c        ****                 sprintf(bufferUART, "ATTENTION! READ ONLY MODALITY. configuration mode: %d\r\nUART 
+ 546              		.loc 1 273 0
  547 0358 9B4B     		ldr	r3, .L34+8
  548 035a 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
  549 035c 9B4B     		ldr	r3, .L34+12
@@ -875,182 +871,182 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  553 0364 2046     		mov	r0, r4
  554 0366 FFF7FEFF 		bl	sprintf
  555              	.LVL90:
- 278:main.c        ****                 UART_1_PutBuffer;
- 556              		.loc 1 278 0
+ 274:main.c        ****                 UART_1_PutBuffer;
+ 556              		.loc 1 274 0
  557 036a 2046     		mov	r0, r4
  558 036c FFF7FEFF 		bl	UART_1_PutString
  559              	.LVL91:
  560              	.L6:
- 279:main.c        ****             }    
- 280:main.c        ****         }
- 281:main.c        ****         
- 282:main.c        ****        if (configuration_status && FlagChangeParameters){
- 561              		.loc 1 282 0
+ 275:main.c        ****             }    
+ 276:main.c        ****         }
+ 277:main.c        ****         
+ 278:main.c        ****        if (configuration_status && FlagChangeParameters){
+ 561              		.loc 1 278 0
  562 0370 994B     		ldr	r3, .L34+24
  563 0372 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
  564 0374 13F0FF0F 		tst	r3, #255
  565 0378 11D0     		beq	.L8
- 566              		.loc 1 282 0 is_stmt 0 discriminator 1
+ 566              		.loc 1 278 0 is_stmt 0 discriminator 1
  567 037a 984B     		ldr	r3, .L34+28
  568 037c 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
  569 037e 13F0FF0F 		tst	r3, #255
  570 0382 0CD0     		beq	.L8
- 283:main.c        ****                 sprintf(bufferUART, "NEW UART VERBOSE FLAG: %d\r\n", UARTVerboseFlag);
- 571              		.loc 1 283 0 is_stmt 1
+ 279:main.c        ****                 sprintf(bufferUART, "NEW UART VERBOSE FLAG: %d\r\n", UARTVerboseFlag);
+ 571              		.loc 1 279 0 is_stmt 1
  572 0384 914B     		ldr	r3, .L34+12
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 16
-
-
  573 0386 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
  574 0388 914C     		ldr	r4, .L34+16
  575 038a 9549     		ldr	r1, .L34+32
  576 038c 2046     		mov	r0, r4
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 16
+
+
  577 038e FFF7FEFF 		bl	sprintf
  578              	.LVL92:
- 284:main.c        ****                 UART_1_PutBuffer;
- 579              		.loc 1 284 0
+ 280:main.c        ****                 UART_1_PutBuffer;
+ 579              		.loc 1 280 0
  580 0392 2046     		mov	r0, r4
  581 0394 FFF7FEFF 		bl	UART_1_PutString
  582              	.LVL93:
- 285:main.c        ****                 FlagChangeParameters=0;
- 583              		.loc 1 285 0
+ 281:main.c        ****                 FlagChangeParameters=0;
+ 583              		.loc 1 281 0
  584 0398 0022     		movs	r2, #0
  585 039a 904B     		ldr	r3, .L34+28
  586 039c 1A70     		strb	r2, [r3]
  587              	.L8:
- 286:main.c        ****         
- 287:main.c        ****        }
- 288:main.c        **** 
- 289:main.c        ****         if (PacketReadyFlag==1 && system_status==1 && configuration_status==0){
- 588              		.loc 1 289 0
+ 282:main.c        ****         
+ 283:main.c        ****        }
+ 284:main.c        **** 
+ 285:main.c        ****         if (PacketReadyFlag==1 && system_status==1 && configuration_status==0){
+ 588              		.loc 1 285 0
  589 039e 914B     		ldr	r3, .L34+36
  590 03a0 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
  591 03a2 DBB2     		uxtb	r3, r3
  592 03a4 012B     		cmp	r3, #1
  593 03a6 7FF460AF 		bne	.L4
- 594              		.loc 1 289 0 is_stmt 0 discriminator 1
+ 594              		.loc 1 285 0 is_stmt 0 discriminator 1
  595 03aa 8F4B     		ldr	r3, .L34+40
  596 03ac 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
  597 03ae DBB2     		uxtb	r3, r3
  598 03b0 012B     		cmp	r3, #1
  599 03b2 7FF45AAF 		bne	.L4
- 600              		.loc 1 289 0 discriminator 2
+ 600              		.loc 1 285 0 discriminator 2
  601 03b6 884B     		ldr	r3, .L34+24
  602 03b8 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
  603 03ba 13F0FF0F 		tst	r3, #255
  604 03be 7FF454AF 		bne	.L4
  605              	.LBB2:
- 290:main.c        ****             uint8_t data = LIS3DH_readByte(LIS3DH_INT1_SRC);
- 606              		.loc 1 290 0 is_stmt 1
+ 286:main.c        ****             uint8_t data = LIS3DH_readByte(LIS3DH_INT1_SRC);
+ 606              		.loc 1 286 0 is_stmt 1
  607 03c2 3120     		movs	r0, #49
  608 03c4 FFF7FEFF 		bl	LIS3DH_readByte
  609              	.LVL94:
- 291:main.c        ****             if(data&0x40){
- 610              		.loc 1 291 0
+ 287:main.c        ****             if(data&0x40){
+ 610              		.loc 1 287 0
  611 03c8 10F0400F 		tst	r0, #64
  612 03cc 00F0EE80 		beq	.L10
  613              	.LBB3:
- 292:main.c        ****                 sprintf(bufferUART, "EVENT OVERTHRESHOLD\r\n");
- 614              		.loc 1 292 0
+ 288:main.c        ****                 sprintf(bufferUART, "EVENT OVERTHRESHOLD\r\n");
+ 614              		.loc 1 288 0
  615 03d0 7F4D     		ldr	r5, .L34+16
  616 03d2 864C     		ldr	r4, .L34+44
  617 03d4 0FCC     		ldmia	r4!, {r0, r1, r2, r3}
  618              	.LVL95:
  619 03d6 2860     		str	r0, [r5]	@ unaligned
  620 03d8 6960     		str	r1, [r5, #4]	@ unaligned
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 17
-
-
  621 03da AA60     		str	r2, [r5, #8]	@ unaligned
  622 03dc EB60     		str	r3, [r5, #12]	@ unaligned
  623 03de 2068     		ldr	r0, [r4]	@ unaligned
  624 03e0 2861     		str	r0, [r5, #16]	@ unaligned
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 17
+
+
  625 03e2 A388     		ldrh	r3, [r4, #4]	@ unaligned
  626 03e4 AB82     		strh	r3, [r5, #20]	@ unaligned
- 293:main.c        ****                 UART_1_PutBuffer;
- 627              		.loc 1 293 0
+ 289:main.c        ****                 UART_1_PutBuffer;
+ 627              		.loc 1 289 0
  628 03e6 2846     		mov	r0, r5
  629 03e8 FFF7FEFF 		bl	UART_1_PutString
  630              	.LVL96:
+ 290:main.c        ****                 
+ 291:main.c        ****                 /*              SIGNAL WAVEFORM              */
+ 292:main.c        ****                 uint8 j=0;
+ 293:main.c        ****                 uint8 count_fifo=0;
  294:main.c        ****                 
- 295:main.c        ****                 /*              SIGNAL WAVEFORM              */
- 296:main.c        ****                 uint8 j=0;
- 297:main.c        ****                 uint8 count_fifo=0;
- 298:main.c        ****                 
- 299:main.c        ****                 LIS3DH_readPage(LIS3DH_OUT_X_L, (uint8_t*) AccData_trash, ACC_PACKET_DIMENSION);
- 631              		.loc 1 299 0
+ 295:main.c        ****                 LIS3DH_readPage(LIS3DH_OUT_X_L, (uint8_t*) AccData_trash, ACC_PACKET_DIMENSION);
+ 631              		.loc 1 295 0
  632 03ec 0622     		movs	r2, #6
  633 03ee 12A9     		add	r1, sp, #72
  634 03f0 2820     		movs	r0, #40
  635 03f2 FFF7FEFF 		bl	LIS3DH_readPage
  636              	.LVL97:
- 297:main.c        ****                 
- 637              		.loc 1 297 0
+ 293:main.c        ****                 
+ 637              		.loc 1 293 0
  638 03f6 0025     		movs	r5, #0
- 296:main.c        ****                 uint8 count_fifo=0;
- 639              		.loc 1 296 0
+ 292:main.c        ****                 uint8 count_fifo=0;
+ 639              		.loc 1 292 0
  640 03f8 2C46     		mov	r4, r5
- 300:main.c        ****                 while(j<=7){
- 641              		.loc 1 300 0
+ 296:main.c        ****                 while(j<=7){
+ 641              		.loc 1 296 0
  642 03fa 0EE0     		b	.L11
  643              	.LVL98:
  644              	.L13:
- 301:main.c        ****                     
- 302:main.c        ****                     /*FIFO REGISTER: ONLY IF IT'S NOT EMPTY WE READ AND SAVE NEW VALUES*/
- 303:main.c        ****                     
- 304:main.c        ****                     if ((LIS3DH_readByte(LIS3DH_FIFO_SRC_REG))!=empty_bit){
- 645              		.loc 1 304 0
+ 297:main.c        ****                     
+ 298:main.c        ****                     /*FIFO REGISTER: ONLY IF IT'S NOT EMPTY WE READ AND SAVE NEW VALUES*/
+ 299:main.c        ****                     
+ 300:main.c        ****                     if ((LIS3DH_readByte(LIS3DH_FIFO_SRC_REG))!=empty_bit){
+ 645              		.loc 1 300 0
  646 03fc 2F20     		movs	r0, #47
  647 03fe FFF7FEFF 		bl	LIS3DH_readByte
  648              	.LVL99:
  649 0402 2028     		cmp	r0, #32
  650 0404 07D0     		beq	.L12
- 305:main.c        ****                     LIS3DH_readPage(LIS3DH_OUT_X_L,  &AccData_Threshold[0+j], ACC_PACKET_DIMENSION)
- 651              		.loc 1 305 0
+ 301:main.c        ****                     LIS3DH_readPage(LIS3DH_OUT_X_L,  &AccData_Threshold[0+j], ACC_PACKET_DIMENSION)
+ 651              		.loc 1 301 0
  652 0406 0622     		movs	r2, #6
  653 0408 06AB     		add	r3, sp, #24
  654 040a 1919     		adds	r1, r3, r4
  655 040c 2820     		movs	r0, #40
  656 040e FFF7FEFF 		bl	LIS3DH_readPage
  657              	.LVL100:
- 306:main.c        ****                     count_fifo++;
- 658              		.loc 1 306 0
+ 302:main.c        ****                     count_fifo++;
+ 658              		.loc 1 302 0
  659 0412 0135     		adds	r5, r5, #1
  660              	.LVL101:
  661 0414 EDB2     		uxtb	r5, r5
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 18
-
-
  662              	.LVL102:
  663              	.L12:
- 307:main.c        ****                     }
- 308:main.c        ****                     j++;
- 664              		.loc 1 308 0
+ 303:main.c        ****                     }
+ 304:main.c        ****                     j++;
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 18
+
+
+ 664              		.loc 1 304 0
  665 0416 0134     		adds	r4, r4, #1
  666              	.LVL103:
  667 0418 E4B2     		uxtb	r4, r4
  668              	.LVL104:
  669              	.L11:
- 300:main.c        ****                     
- 670              		.loc 1 300 0
+ 296:main.c        ****                     
+ 670              		.loc 1 296 0
  671 041a 072C     		cmp	r4, #7
  672 041c EED9     		bls	.L13
- 309:main.c        ****                 }
- 310:main.c        ****                 
- 311:main.c        ****                 /* SIGNAL WAVEFORM CASES
- 312:main.c        ****                 - if the new values saved in the FIFO are less than the overthreshold event duratio
- 313:main.c        ****                   the data are retrieved from the previous FIFO saved in accData (watermark reading
- 314:main.c        ****                   e.g. only 2 values in FIFO
- 315:main.c        ****                   OVERTHRESHOLD overall duration 5 samples (INT1_DURATION register counts also if t
- 316:main.c        ****                   so, it means that some overthreshold values were in the previous read FIFO.
- 317:main.c        ****                   --> read 2 values from current FIFO, and 3 last values from previous FIFO (most r
- 318:main.c        ****                 
- 319:main.c        ****                 - if the new values saved in the FIFO are more or equal than the overthreshold even
- 320:main.c        ****                   only the most recent 5 acceleration packets are identified as signalwaveform.
- 321:main.c        ****                 
- 322:main.c        ****                 */
- 323:main.c        ****                 switch (count_fifo)
- 673              		.loc 1 323 0
+ 305:main.c        ****                 }
+ 306:main.c        ****                 
+ 307:main.c        ****                 /* SIGNAL WAVEFORM CASES
+ 308:main.c        ****                 - if the new values saved in the FIFO are less than the overthreshold event duratio
+ 309:main.c        ****                   the data are retrieved from the previous FIFO saved in accData (watermark reading
+ 310:main.c        ****                   e.g. only 2 values in FIFO
+ 311:main.c        ****                   OVERTHRESHOLD overall duration 5 samples (INT1_DURATION register counts also if t
+ 312:main.c        ****                   so, it means that some overthreshold values were in the previous read FIFO.
+ 313:main.c        ****                   --> read 2 values from current FIFO, and 3 last values from previous FIFO (most r
+ 314:main.c        ****                 
+ 315:main.c        ****                 - if the new values saved in the FIFO are more or equal than the overthreshold even
+ 316:main.c        ****                   only the most recent 5 acceleration packets are identified as signalwaveform.
+ 317:main.c        ****                 
+ 318:main.c        ****                 */
+ 319:main.c        ****                 switch (count_fifo)
+ 673              		.loc 1 319 0
  674 041e 013D     		subs	r5, r5, #1
  675              	.LVL105:
  676 0420 072D     		cmp	r5, #7
@@ -1067,277 +1063,277 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  687 0431 8A       		.byte	(.L23-.L16)/2
  688              		.p2align 1
  689              	.L15:
- 324:main.c        ****             	{
- 325:main.c        ****             		case 1:
- 326:main.c        ****                     EEPROM_writePage((EEPROM_ADDRESS_ACC_DATA_OVER_THRESHOLD),&AccData[24], ACC_PAC
- 690              		.loc 1 326 0
+ 320:main.c        ****             	{
+ 321:main.c        ****             		case 1:
+ 322:main.c        ****                     EEPROM_writePage((EEPROM_ADDRESS_ACC_DATA_OVER_THRESHOLD),&AccData[24], ACC_PAC
+ 690              		.loc 1 322 0
  691 0432 0622     		movs	r2, #6
  692 0434 1AA9     		add	r1, sp, #104
  693 0436 8020     		movs	r0, #128
  694 0438 FFF7FEFF 		bl	EEPROM_writePage
  695              	.LVL106:
- 327:main.c        ****                     EEPROM_waitForWriteComplete();
- 696              		.loc 1 327 0
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 19
-
-
+ 323:main.c        ****                     EEPROM_waitForWriteComplete();
+ 696              		.loc 1 323 0
  697 043c FFF7FEFF 		bl	EEPROM_waitForWriteComplete
  698              	.LVL107:
- 328:main.c        ****                     EEPROM_writePage((EEPROM_ADDRESS_ACC_DATA_OVER_THRESHOLD+ACC_PACKET_DIMENSION*1
- 699              		.loc 1 328 0
+ 324:main.c        ****                     EEPROM_writePage((EEPROM_ADDRESS_ACC_DATA_OVER_THRESHOLD+ACC_PACKET_DIMENSION*1
+ 699              		.loc 1 324 0
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 19
+
+
  700 0440 0622     		movs	r2, #6
  701 0442 0DF16E01 		add	r1, sp, #110
  702 0446 8620     		movs	r0, #134
  703 0448 FFF7FEFF 		bl	EEPROM_writePage
  704              	.LVL108:
- 329:main.c        ****                     EEPROM_waitForWriteComplete();
- 705              		.loc 1 329 0
+ 325:main.c        ****                     EEPROM_waitForWriteComplete();
+ 705              		.loc 1 325 0
  706 044c FFF7FEFF 		bl	EEPROM_waitForWriteComplete
  707              	.LVL109:
- 330:main.c        ****                     EEPROM_writePage((EEPROM_ADDRESS_ACC_DATA_OVER_THRESHOLD+ACC_PACKET_DIMENSION*2
- 708              		.loc 1 330 0
+ 326:main.c        ****                     EEPROM_writePage((EEPROM_ADDRESS_ACC_DATA_OVER_THRESHOLD+ACC_PACKET_DIMENSION*2
+ 708              		.loc 1 326 0
  709 0450 0622     		movs	r2, #6
  710 0452 1DA9     		add	r1, sp, #116
  711 0454 8C20     		movs	r0, #140
  712 0456 FFF7FEFF 		bl	EEPROM_writePage
  713              	.LVL110:
- 331:main.c        ****                     EEPROM_waitForWriteComplete();
- 714              		.loc 1 331 0
+ 327:main.c        ****                     EEPROM_waitForWriteComplete();
+ 714              		.loc 1 327 0
  715 045a FFF7FEFF 		bl	EEPROM_waitForWriteComplete
  716              	.LVL111:
- 332:main.c        ****                     EEPROM_writePage((EEPROM_ADDRESS_ACC_DATA_OVER_THRESHOLD+ACC_PACKET_DIMENSION*3
- 717              		.loc 1 332 0
+ 328:main.c        ****                     EEPROM_writePage((EEPROM_ADDRESS_ACC_DATA_OVER_THRESHOLD+ACC_PACKET_DIMENSION*3
+ 717              		.loc 1 328 0
  718 045e 0622     		movs	r2, #6
  719 0460 0DF17A01 		add	r1, sp, #122
  720 0464 9220     		movs	r0, #146
  721 0466 FFF7FEFF 		bl	EEPROM_writePage
  722              	.LVL112:
- 333:main.c        ****                     EEPROM_waitForWriteComplete();
- 723              		.loc 1 333 0
+ 329:main.c        ****                     EEPROM_waitForWriteComplete();
+ 723              		.loc 1 329 0
  724 046a FFF7FEFF 		bl	EEPROM_waitForWriteComplete
  725              	.LVL113:
- 334:main.c        ****                     EEPROM_writePage((EEPROM_ADDRESS_ACC_DATA_OVER_THRESHOLD+ACC_PACKET_DIMENSION*4
- 726              		.loc 1 334 0
+ 330:main.c        ****                     EEPROM_writePage((EEPROM_ADDRESS_ACC_DATA_OVER_THRESHOLD+ACC_PACKET_DIMENSION*4
+ 726              		.loc 1 330 0
  727 046e 0622     		movs	r2, #6
  728 0470 06A9     		add	r1, sp, #24
  729 0472 9820     		movs	r0, #152
  730 0474 FFF7FEFF 		bl	EEPROM_writePage
  731              	.LVL114:
- 335:main.c        ****                     EEPROM_waitForWriteComplete();
- 732              		.loc 1 335 0
+ 331:main.c        ****                     EEPROM_waitForWriteComplete();
+ 732              		.loc 1 331 0
  733 0478 FFF7FEFF 		bl	EEPROM_waitForWriteComplete
  734              	.LVL115:
- 336:main.c        ****             		break;
- 735              		.loc 1 336 0
+ 332:main.c        ****             		break;
+ 735              		.loc 1 332 0
  736 047c 67E0     		b	.L14
  737              	.L17:
- 337:main.c        ****                     case 2: 
- 338:main.c        ****                     EEPROM_writePage((EEPROM_ADDRESS_ACC_DATA_OVER_THRESHOLD),&AccData[30], 6);
- 738              		.loc 1 338 0
+ 333:main.c        ****                     case 2: 
+ 334:main.c        ****                     EEPROM_writePage((EEPROM_ADDRESS_ACC_DATA_OVER_THRESHOLD),&AccData[30], 6);
+ 738              		.loc 1 334 0
  739 047e 0622     		movs	r2, #6
  740 0480 0DF16E01 		add	r1, sp, #110
  741 0484 8020     		movs	r0, #128
  742 0486 FFF7FEFF 		bl	EEPROM_writePage
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 20
-
-
  743              	.LVL116:
- 339:main.c        ****                     EEPROM_waitForWriteComplete();
- 744              		.loc 1 339 0
+ 335:main.c        ****                     EEPROM_waitForWriteComplete();
+ 744              		.loc 1 335 0
  745 048a FFF7FEFF 		bl	EEPROM_waitForWriteComplete
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 20
+
+
  746              	.LVL117:
- 340:main.c        ****                     EEPROM_writePage((EEPROM_ADDRESS_ACC_DATA_OVER_THRESHOLD+ACC_PACKET_DIMENSION*1
- 747              		.loc 1 340 0
+ 336:main.c        ****                     EEPROM_writePage((EEPROM_ADDRESS_ACC_DATA_OVER_THRESHOLD+ACC_PACKET_DIMENSION*1
+ 747              		.loc 1 336 0
  748 048e 0622     		movs	r2, #6
  749 0490 1DA9     		add	r1, sp, #116
  750 0492 8620     		movs	r0, #134
  751 0494 FFF7FEFF 		bl	EEPROM_writePage
  752              	.LVL118:
- 341:main.c        ****                     EEPROM_waitForWriteComplete();
- 753              		.loc 1 341 0
+ 337:main.c        ****                     EEPROM_waitForWriteComplete();
+ 753              		.loc 1 337 0
  754 0498 FFF7FEFF 		bl	EEPROM_waitForWriteComplete
  755              	.LVL119:
- 342:main.c        ****                     EEPROM_writePage((EEPROM_ADDRESS_ACC_DATA_OVER_THRESHOLD+ACC_PACKET_DIMENSION*2
- 756              		.loc 1 342 0
+ 338:main.c        ****                     EEPROM_writePage((EEPROM_ADDRESS_ACC_DATA_OVER_THRESHOLD+ACC_PACKET_DIMENSION*2
+ 756              		.loc 1 338 0
  757 049c 0622     		movs	r2, #6
  758 049e 0DF17A01 		add	r1, sp, #122
  759 04a2 8C20     		movs	r0, #140
  760 04a4 FFF7FEFF 		bl	EEPROM_writePage
  761              	.LVL120:
- 343:main.c        ****                     EEPROM_waitForWriteComplete();
- 762              		.loc 1 343 0
+ 339:main.c        ****                     EEPROM_waitForWriteComplete();
+ 762              		.loc 1 339 0
  763 04a8 FFF7FEFF 		bl	EEPROM_waitForWriteComplete
  764              	.LVL121:
- 344:main.c        ****                     EEPROM_writePage((EEPROM_ADDRESS_ACC_DATA_OVER_THRESHOLD+ACC_PACKET_DIMENSION*3
- 765              		.loc 1 344 0
+ 340:main.c        ****                     EEPROM_writePage((EEPROM_ADDRESS_ACC_DATA_OVER_THRESHOLD+ACC_PACKET_DIMENSION*3
+ 765              		.loc 1 340 0
  766 04ac 0C22     		movs	r2, #12
  767 04ae 06A9     		add	r1, sp, #24
  768 04b0 9220     		movs	r0, #146
  769 04b2 FFF7FEFF 		bl	EEPROM_writePage
  770              	.LVL122:
- 345:main.c        ****                     EEPROM_waitForWriteComplete();
- 771              		.loc 1 345 0
+ 341:main.c        ****                     EEPROM_waitForWriteComplete();
+ 771              		.loc 1 341 0
  772 04b6 FFF7FEFF 		bl	EEPROM_waitForWriteComplete
  773              	.LVL123:
- 346:main.c        ****             		break;
- 774              		.loc 1 346 0
+ 342:main.c        ****             		break;
+ 774              		.loc 1 342 0
  775 04ba 48E0     		b	.L14
  776              	.L18:
- 347:main.c        ****                     case 3:
- 348:main.c        ****                     EEPROM_writePage((EEPROM_ADDRESS_ACC_DATA_OVER_THRESHOLD),&AccData[36], ACC_PAC
- 777              		.loc 1 348 0
+ 343:main.c        ****                     case 3:
+ 344:main.c        ****                     EEPROM_writePage((EEPROM_ADDRESS_ACC_DATA_OVER_THRESHOLD),&AccData[36], ACC_PAC
+ 777              		.loc 1 344 0
  778 04bc 0622     		movs	r2, #6
  779 04be 1DA9     		add	r1, sp, #116
  780 04c0 8020     		movs	r0, #128
  781 04c2 FFF7FEFF 		bl	EEPROM_writePage
  782              	.LVL124:
- 349:main.c        ****                     EEPROM_waitForWriteComplete();
- 783              		.loc 1 349 0
+ 345:main.c        ****                     EEPROM_waitForWriteComplete();
+ 783              		.loc 1 345 0
  784 04c6 FFF7FEFF 		bl	EEPROM_waitForWriteComplete
  785              	.LVL125:
- 350:main.c        ****                     EEPROM_writePage((EEPROM_ADDRESS_ACC_DATA_OVER_THRESHOLD+ACC_PACKET_DIMENSION*1
- 786              		.loc 1 350 0
+ 346:main.c        ****                     EEPROM_writePage((EEPROM_ADDRESS_ACC_DATA_OVER_THRESHOLD+ACC_PACKET_DIMENSION*1
+ 786              		.loc 1 346 0
  787 04ca 0622     		movs	r2, #6
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 21
-
-
  788 04cc 0DF17A01 		add	r1, sp, #122
  789 04d0 8620     		movs	r0, #134
  790 04d2 FFF7FEFF 		bl	EEPROM_writePage
  791              	.LVL126:
- 351:main.c        ****                     EEPROM_waitForWriteComplete();
- 792              		.loc 1 351 0
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 21
+
+
+ 347:main.c        ****                     EEPROM_waitForWriteComplete();
+ 792              		.loc 1 347 0
  793 04d6 FFF7FEFF 		bl	EEPROM_waitForWriteComplete
  794              	.LVL127:
- 352:main.c        ****                     EEPROM_writePage((EEPROM_ADDRESS_ACC_DATA_OVER_THRESHOLD+ACC_PACKET_DIMENSION*2
- 795              		.loc 1 352 0
+ 348:main.c        ****                     EEPROM_writePage((EEPROM_ADDRESS_ACC_DATA_OVER_THRESHOLD+ACC_PACKET_DIMENSION*2
+ 795              		.loc 1 348 0
  796 04da 1222     		movs	r2, #18
  797 04dc 06A9     		add	r1, sp, #24
  798 04de 8C20     		movs	r0, #140
  799 04e0 FFF7FEFF 		bl	EEPROM_writePage
  800              	.LVL128:
- 353:main.c        ****                     EEPROM_waitForWriteComplete();
- 801              		.loc 1 353 0
+ 349:main.c        ****                     EEPROM_waitForWriteComplete();
+ 801              		.loc 1 349 0
  802 04e4 FFF7FEFF 		bl	EEPROM_waitForWriteComplete
  803              	.LVL129:
- 354:main.c        ****             		break;
- 804              		.loc 1 354 0
+ 350:main.c        ****             		break;
+ 804              		.loc 1 350 0
  805 04e8 31E0     		b	.L14
  806              	.L19:
- 355:main.c        ****                     case 4: 
- 356:main.c        ****             		EEPROM_writePage((EEPROM_ADDRESS_ACC_DATA_OVER_THRESHOLD),&AccData[42], ACC_PACKET_DI
- 807              		.loc 1 356 0
+ 351:main.c        ****                     case 4: 
+ 352:main.c        ****             		EEPROM_writePage((EEPROM_ADDRESS_ACC_DATA_OVER_THRESHOLD),&AccData[42], ACC_PACKET_DI
+ 807              		.loc 1 352 0
  808 04ea 0622     		movs	r2, #6
  809 04ec 0DF17A01 		add	r1, sp, #122
  810 04f0 8020     		movs	r0, #128
  811 04f2 FFF7FEFF 		bl	EEPROM_writePage
  812              	.LVL130:
- 357:main.c        ****                     EEPROM_waitForWriteComplete();
- 813              		.loc 1 357 0
+ 353:main.c        ****                     EEPROM_waitForWriteComplete();
+ 813              		.loc 1 353 0
  814 04f6 FFF7FEFF 		bl	EEPROM_waitForWriteComplete
  815              	.LVL131:
- 358:main.c        ****                     EEPROM_writePage((EEPROM_ADDRESS_ACC_DATA_OVER_THRESHOLD+ACC_PACKET_DIMENSION*1
- 816              		.loc 1 358 0
+ 354:main.c        ****                     EEPROM_writePage((EEPROM_ADDRESS_ACC_DATA_OVER_THRESHOLD+ACC_PACKET_DIMENSION*1
+ 816              		.loc 1 354 0
  817 04fa 1822     		movs	r2, #24
  818 04fc 0DEB0201 		add	r1, sp, r2
  819 0500 8620     		movs	r0, #134
  820 0502 FFF7FEFF 		bl	EEPROM_writePage
  821              	.LVL132:
- 359:main.c        ****                     EEPROM_waitForWriteComplete();
- 822              		.loc 1 359 0
+ 355:main.c        ****                     EEPROM_waitForWriteComplete();
+ 822              		.loc 1 355 0
  823 0506 FFF7FEFF 		bl	EEPROM_waitForWriteComplete
  824              	.LVL133:
- 360:main.c        ****                     break;
- 825              		.loc 1 360 0
+ 356:main.c        ****                     break;
+ 825              		.loc 1 356 0
  826 050a 20E0     		b	.L14
  827              	.L20:
- 361:main.c        ****                     case 5:
- 362:main.c        ****                     EEPROM_writePage(EEPROM_ADDRESS_ACC_DATA_OVER_THRESHOLD,&AccData_Threshold[0], 
- 828              		.loc 1 362 0
+ 357:main.c        ****                     case 5:
+ 358:main.c        ****                     EEPROM_writePage(EEPROM_ADDRESS_ACC_DATA_OVER_THRESHOLD,&AccData_Threshold[0], 
+ 828              		.loc 1 358 0
  829 050c 1E22     		movs	r2, #30
  830 050e 06A9     		add	r1, sp, #24
  831 0510 8020     		movs	r0, #128
  832 0512 FFF7FEFF 		bl	EEPROM_writePage
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 22
-
-
  833              	.LVL134:
- 363:main.c        ****                     EEPROM_waitForWriteComplete();
- 834              		.loc 1 363 0
+ 359:main.c        ****                     EEPROM_waitForWriteComplete();
+ 834              		.loc 1 359 0
  835 0516 FFF7FEFF 		bl	EEPROM_waitForWriteComplete
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 22
+
+
  836              	.LVL135:
- 364:main.c        ****             		break;
- 837              		.loc 1 364 0
+ 360:main.c        ****             		break;
+ 837              		.loc 1 360 0
  838 051a 18E0     		b	.L14
  839              	.L21:
- 365:main.c        ****                     case 6:
- 366:main.c        ****                     EEPROM_writePage(EEPROM_ADDRESS_ACC_DATA_OVER_THRESHOLD,&AccData_Threshold[6], 
- 840              		.loc 1 366 0
+ 361:main.c        ****                     case 6:
+ 362:main.c        ****                     EEPROM_writePage(EEPROM_ADDRESS_ACC_DATA_OVER_THRESHOLD,&AccData_Threshold[6], 
+ 840              		.loc 1 362 0
  841 051c 1E22     		movs	r2, #30
  842 051e 0DEB0201 		add	r1, sp, r2
  843 0522 8020     		movs	r0, #128
  844 0524 FFF7FEFF 		bl	EEPROM_writePage
  845              	.LVL136:
- 367:main.c        ****                     EEPROM_waitForWriteComplete();
- 846              		.loc 1 367 0
+ 363:main.c        ****                     EEPROM_waitForWriteComplete();
+ 846              		.loc 1 363 0
  847 0528 FFF7FEFF 		bl	EEPROM_waitForWriteComplete
  848              	.LVL137:
- 368:main.c        ****             		break;
- 849              		.loc 1 368 0
+ 364:main.c        ****             		break;
+ 849              		.loc 1 364 0
  850 052c 0FE0     		b	.L14
  851              	.L22:
- 369:main.c        ****                     case 7:
- 370:main.c        ****                     EEPROM_writePage(EEPROM_ADDRESS_ACC_DATA_OVER_THRESHOLD,&AccData_Threshold[12],
- 852              		.loc 1 370 0
+ 365:main.c        ****                     case 7:
+ 366:main.c        ****                     EEPROM_writePage(EEPROM_ADDRESS_ACC_DATA_OVER_THRESHOLD,&AccData_Threshold[12],
+ 852              		.loc 1 366 0
  853 052e 1E22     		movs	r2, #30
  854 0530 09A9     		add	r1, sp, #36
  855 0532 8020     		movs	r0, #128
  856 0534 FFF7FEFF 		bl	EEPROM_writePage
  857              	.LVL138:
- 371:main.c        ****                     EEPROM_waitForWriteComplete();
- 858              		.loc 1 371 0
+ 367:main.c        ****                     EEPROM_waitForWriteComplete();
+ 858              		.loc 1 367 0
  859 0538 FFF7FEFF 		bl	EEPROM_waitForWriteComplete
  860              	.LVL139:
- 372:main.c        ****             		break;
- 861              		.loc 1 372 0
+ 368:main.c        ****             		break;
+ 861              		.loc 1 368 0
  862 053c 07E0     		b	.L14
  863              	.L23:
- 373:main.c        ****                     case 8:
- 374:main.c        ****                     EEPROM_writePage(EEPROM_ADDRESS_ACC_DATA_OVER_THRESHOLD,&AccData_Threshold[18],
- 864              		.loc 1 374 0
+ 369:main.c        ****                     case 8:
+ 370:main.c        ****                     EEPROM_writePage(EEPROM_ADDRESS_ACC_DATA_OVER_THRESHOLD,&AccData_Threshold[18],
+ 864              		.loc 1 370 0
  865 053e 1E22     		movs	r2, #30
  866 0540 0DF12A01 		add	r1, sp, #42
  867 0544 8020     		movs	r0, #128
  868 0546 FFF7FEFF 		bl	EEPROM_writePage
  869              	.LVL140:
- 375:main.c        ****                     EEPROM_waitForWriteComplete();
- 870              		.loc 1 375 0
+ 371:main.c        ****                     EEPROM_waitForWriteComplete();
+ 870              		.loc 1 371 0
  871 054a FFF7FEFF 		bl	EEPROM_waitForWriteComplete
  872              	.LVL141:
  873              	.L14:
- 376:main.c        ****             		break;
- 377:main.c        ****                 }
- 378:main.c        ****                 
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 23
-
-
- 379:main.c        ****                 LIS3DH_writeByte(LIS3DH_FIFO_CTRL_REG,LIS3DH_FIFO_CTRL_REG_BYPASS_MODE);
- 874              		.loc 1 379 0
+ 372:main.c        ****             		break;
+ 373:main.c        ****                 }
+ 374:main.c        ****                 
+ 375:main.c        ****                 LIS3DH_writeByte(LIS3DH_FIFO_CTRL_REG,LIS3DH_FIFO_CTRL_REG_BYPASS_MODE);
+ 874              		.loc 1 375 0
  875 054e 0021     		movs	r1, #0
  876 0550 2E20     		movs	r0, #46
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 23
+
+
  877 0552 FFF7FEFF 		bl	LIS3DH_writeByte
  878              	.LVL142:
- 380:main.c        ****                 LIS3DH_writeByte(LIS3DH_FIFO_CTRL_REG,LIS3DH_FIFO_CTRL_REG_FIFO_MODE_WTM_7);
- 879              		.loc 1 380 0
+ 376:main.c        ****                 LIS3DH_writeByte(LIS3DH_FIFO_CTRL_REG,LIS3DH_FIFO_CTRL_REG_FIFO_MODE_WTM_7);
+ 879              		.loc 1 376 0
  880 0556 4721     		movs	r1, #71
  881 0558 2E20     		movs	r0, #46
  882 055a FFF7FEFF 		bl	LIS3DH_writeByte
  883              	.LVL143:
- 381:main.c        ****                 
- 382:main.c        ****                 /*              TIME STAMP              */
- 383:main.c        ****                 
- 384:main.c        ****                 timestamp=(FSR_COUNTER-Counter_TimeStamp_ReadCounter())*CONVERSION_COUNTER_TIMESTAM
- 884              		.loc 1 384 0
+ 377:main.c        ****                 
+ 378:main.c        ****                 /*              TIME STAMP              */
+ 379:main.c        ****                 
+ 380:main.c        ****                 timestamp=(FSR_COUNTER-Counter_TimeStamp_ReadCounter())*CONVERSION_COUNTER_TIMESTAM
+ 884              		.loc 1 380 0
  885 055e FFF7FEFF 		bl	Counter_TimeStamp_ReadCounter
  886              	.LVL144:
  887 0562 C0F56A40 		rsb	r0, r0, #59904
@@ -1350,55 +1346,55 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  894              	.LVL146:
  895 0576 FFF7FEFF 		bl	__aeabi_d2uiz
  896              	.LVL147:
- 385:main.c        ****                 timestamp=timestamp+Counter_overflow*CONVERSION_COUNTER_ISR;
- 897              		.loc 1 385 0
+ 381:main.c        ****                 timestamp=timestamp+Counter_overflow*CONVERSION_COUNTER_ISR;
+ 897              		.loc 1 381 0
  898 057a 1D4B     		ldr	r3, .L34+48
  899 057c 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
  900 057e 4FF49663 		mov	r3, #1200
  901 0582 02FB0300 		mla	r0, r2, r3, r0
  902              	.LVL148:
- 386:main.c        ****                 
- 387:main.c        ****                 uint8 timestamp_array[4];
- 388:main.c        ****                 timestamp_array[0]=(timestamp>>24)&0xFF; //MSB
- 903              		.loc 1 388 0
+ 382:main.c        ****                 
+ 383:main.c        ****                 uint8 timestamp_array[4];
+ 384:main.c        ****                 timestamp_array[0]=(timestamp>>24)&0xFF; //MSB
+ 903              		.loc 1 384 0
  904 0586 030E     		lsrs	r3, r0, #24
  905 0588 8DF80C30 		strb	r3, [sp, #12]
- 389:main.c        ****                 timestamp_array[1]=(timestamp>>16)&0xFF;
- 906              		.loc 1 389 0
+ 385:main.c        ****                 timestamp_array[1]=(timestamp>>16)&0xFF;
+ 906              		.loc 1 385 0
  907 058c 030C     		lsrs	r3, r0, #16
  908 058e 8DF80D30 		strb	r3, [sp, #13]
- 390:main.c        ****                 timestamp_array[2]=(timestamp>>8)&0xFF;
- 909              		.loc 1 390 0
+ 386:main.c        ****                 timestamp_array[2]=(timestamp>>8)&0xFF;
+ 909              		.loc 1 386 0
  910 0592 030A     		lsrs	r3, r0, #8
  911 0594 8DF80E30 		strb	r3, [sp, #14]
- 391:main.c        ****                 timestamp_array[3]=(timestamp)&0xFF; //LSB
- 912              		.loc 1 391 0
+ 387:main.c        ****                 timestamp_array[3]=(timestamp)&0xFF; //LSB
+ 912              		.loc 1 387 0
  913 0598 8DF80F00 		strb	r0, [sp, #15]
- 392:main.c        ****                 
- 393:main.c        ****                 EEPROM_writePage(EEPROM_ADDRESS_TIMESTAMP,(uint8_t*)timestamp_array, 4);
- 914              		.loc 1 393 0
+ 388:main.c        ****                 
+ 389:main.c        ****                 EEPROM_writePage(EEPROM_ADDRESS_TIMESTAMP,(uint8_t*)timestamp_array, 4);
+ 914              		.loc 1 389 0
  915 059c 0422     		movs	r2, #4
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 24
-
-
  916 059e 03A9     		add	r1, sp, #12
  917 05a0 0220     		movs	r0, #2
  918              	.LVL149:
  919 05a2 FFF7FEFF 		bl	EEPROM_writePage
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 24
+
+
  920              	.LVL150:
- 394:main.c        ****                 EEPROM_waitForWriteComplete();
- 921              		.loc 1 394 0
+ 390:main.c        ****                 EEPROM_waitForWriteComplete();
+ 921              		.loc 1 390 0
  922 05a6 FFF7FEFF 		bl	EEPROM_waitForWriteComplete
  923              	.LVL151:
  924              	.LBE3:
  925 05aa D0E0     		b	.L24
  926              	.LVL152:
  927              	.L10:
- 395:main.c        ****                              
- 396:main.c        ****             }
- 397:main.c        ****             else{
- 398:main.c        ****                 LIS3DH_readPage(LIS3DH_OUT_X_L, (uint8_t*) AccData_trash, DATA_BYTES);
- 928              		.loc 1 398 0
+ 391:main.c        ****                              
+ 392:main.c        ****             }
+ 393:main.c        ****             else{
+ 394:main.c        ****                 LIS3DH_readPage(LIS3DH_OUT_X_L, (uint8_t*) AccData_trash, DATA_BYTES);
+ 928              		.loc 1 394 0
  929 05ac 0622     		movs	r2, #6
  930 05ae 12A9     		add	r1, sp, #72
  931 05b0 2820     		movs	r0, #40
@@ -1406,23 +1402,23 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  933 05b2 FFF7FEFF 		bl	LIS3DH_readPage
  934              	.LVL154:
  935              	.LBB4:
- 399:main.c        ****                 for (int i=0; i<=7; i++){
- 936              		.loc 1 399 0
+ 395:main.c        ****                 for (int i=0; i<=7; i++){
+ 936              		.loc 1 395 0
  937 05b6 0024     		movs	r4, #0
  938              	.LBE4:
  939              	.LBE2:
- 253:main.c        ****         
- 940              		.loc 1 253 0
+ 249:main.c        ****         
+ 940              		.loc 1 249 0
  941 05b8 2546     		mov	r5, r4
- 252:main.c        ****         Acc_z = 0;
- 942              		.loc 1 252 0
+ 248:main.c        ****         Acc_z = 0;
+ 942              		.loc 1 248 0
  943 05ba 2746     		mov	r7, r4
- 251:main.c        ****         Acc_y = 0;
- 944              		.loc 1 251 0
+ 247:main.c        ****         Acc_y = 0;
+ 944              		.loc 1 247 0
  945 05bc 2646     		mov	r6, r4
  946              	.LBB6:
  947              	.LBB5:
- 948              		.loc 1 399 0
+ 948              		.loc 1 395 0
  949 05be 4DE0     		b	.L25
  950              	.L35:
  951              		.align	3
@@ -1438,24 +1434,24 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  961 05e0 E8030000 		.word	.LC19
  962 05e4 00000000 		.word	PacketReadyFlag
  963 05e8 00000000 		.word	system_status
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 25
-
-
  964 05ec 04040000 		.word	.LC20
  965 05f0 00000000 		.word	Counter_overflow
  966              	.LVL155:
  967              	.L26:
- 400:main.c        ****                     
- 401:main.c        ****                     LIS3DH_readPage(LIS3DH_OUT_X_L, &AccData[0+i], DATA_BYTES);
- 968              		.loc 1 401 0 discriminator 3
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 25
+
+
+ 396:main.c        ****                     
+ 397:main.c        ****                     LIS3DH_readPage(LIS3DH_OUT_X_L, &AccData[0+i], DATA_BYTES);
+ 968              		.loc 1 397 0 discriminator 3
  969 05f4 0622     		movs	r2, #6
  970 05f6 14AB     		add	r3, sp, #80
  971 05f8 1919     		adds	r1, r3, r4
  972 05fa 2820     		movs	r0, #40
  973 05fc FFF7FEFF 		bl	LIS3DH_readPage
  974              	.LVL156:
- 402:main.c        ****                     Acc_x = Acc_x + ((int16)((AccData[0+i]) | ((AccData[1+i])<<8))>>6);
- 975              		.loc 1 402 0 discriminator 3
+ 398:main.c        ****                     Acc_x = Acc_x + ((int16)((AccData[0+i]) | ((AccData[1+i])<<8))>>6);
+ 975              		.loc 1 398 0 discriminator 3
  976 0600 24AB     		add	r3, sp, #144
  977 0602 2344     		add	r3, r3, r4
  978 0604 13F8403C 		ldrb	r3, [r3, #-64]	@ zero_extendqisi2
@@ -1469,8 +1465,8 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  986              	.LVL157:
  987 061c 36B2     		sxth	r6, r6
  988              	.LVL158:
- 403:main.c        ****                     Acc_y = Acc_y + ((int16)((AccData[2+i]) | ((AccData[3+i])<<8))>>6);
- 989              		.loc 1 403 0 discriminator 3
+ 399:main.c        ****                     Acc_y = Acc_y + ((int16)((AccData[2+i]) | ((AccData[3+i])<<8))>>6);
+ 989              		.loc 1 399 0 discriminator 3
  990 061e A31C     		adds	r3, r4, #2
  991 0620 24A9     		add	r1, sp, #144
  992 0622 0B44     		add	r3, r3, r1
@@ -1484,8 +1480,8 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  1000 063a 3B44     		add	r3, r3, r7
  1001 063c 1FB2     		sxth	r7, r3
  1002              	.LVL159:
- 404:main.c        ****                     Acc_z = Acc_z + ((int16)((AccData[4+i]) | ((AccData[5+i])<<8))>>6);
- 1003              		.loc 1 404 0 discriminator 3
+ 400:main.c        ****                     Acc_z = Acc_z + ((int16)((AccData[4+i]) | ((AccData[5+i])<<8))>>6);
+ 1003              		.loc 1 400 0 discriminator 3
  1004 063e 231D     		adds	r3, r4, #4
  1005 0640 0344     		add	r3, r3, r0
  1006 0642 13F8403C 		ldrb	r3, [r3, #-64]	@ zero_extendqisi2
@@ -1498,43 +1494,43 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  1013 0652 43F38913 		sbfx	r3, r3, #6, #10
  1014 0656 2B44     		add	r3, r3, r5
  1015 0658 1DB2     		sxth	r5, r3
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 26
-
-
  1016              	.LVL162:
- 399:main.c        ****                     
- 1017              		.loc 1 399 0 discriminator 3
+ 395:main.c        ****                     
+ 1017              		.loc 1 395 0 discriminator 3
  1018 065a 1446     		mov	r4, r2
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 26
+
+
  1019              	.LVL163:
  1020              	.L25:
- 399:main.c        ****                     
- 1021              		.loc 1 399 0 is_stmt 0 discriminator 1
+ 395:main.c        ****                     
+ 1021              		.loc 1 395 0 is_stmt 0 discriminator 1
  1022 065c 072C     		cmp	r4, #7
  1023 065e C9DD     		ble	.L26
  1024              	.LBE5:
- 405:main.c        ****                     
- 406:main.c        ****                 }
- 407:main.c        ****                 
- 408:main.c        ****                 LIS3DH_writeByte(LIS3DH_FIFO_CTRL_REG,LIS3DH_FIFO_CTRL_REG_BYPASS_MODE);
- 1025              		.loc 1 408 0 is_stmt 1
+ 401:main.c        ****                     
+ 402:main.c        ****                 }
+ 403:main.c        ****                 
+ 404:main.c        ****                 LIS3DH_writeByte(LIS3DH_FIFO_CTRL_REG,LIS3DH_FIFO_CTRL_REG_BYPASS_MODE);
+ 1025              		.loc 1 404 0 is_stmt 1
  1026 0660 0021     		movs	r1, #0
  1027 0662 2E20     		movs	r0, #46
  1028 0664 FFF7FEFF 		bl	LIS3DH_writeByte
  1029              	.LVL164:
- 409:main.c        ****                 LIS3DH_writeByte(LIS3DH_FIFO_CTRL_REG,LIS3DH_FIFO_CTRL_REG_FIFO_MODE_WTM_7);
- 1030              		.loc 1 409 0
+ 405:main.c        ****                 LIS3DH_writeByte(LIS3DH_FIFO_CTRL_REG,LIS3DH_FIFO_CTRL_REG_FIFO_MODE_WTM_7);
+ 1030              		.loc 1 405 0
  1031 0668 4721     		movs	r1, #71
  1032 066a 2E20     		movs	r0, #46
  1033 066c FFF7FEFF 		bl	LIS3DH_writeByte
  1034              	.LVL165:
- 410:main.c        ****                 
- 411:main.c        ****                 UART_1_PutString("*********\r\n");
- 1035              		.loc 1 411 0
+ 406:main.c        ****                 
+ 407:main.c        ****                 UART_1_PutString("*********\r\n");
+ 1035              		.loc 1 407 0
  1036 0670 3948     		ldr	r0, .L36
  1037 0672 FFF7FEFF 		bl	UART_1_PutString
  1038              	.LVL166:
- 412:main.c        ****                 Acc_x = Acc_x/8;
- 1039              		.loc 1 412 0
+ 408:main.c        ****                 Acc_x = Acc_x/8;
+ 1039              		.loc 1 408 0
  1040 0676 3346     		mov	r3, r6
  1041 0678 002E     		cmp	r6, #0
  1042 067a 00DA     		bge	.L27
@@ -1542,8 +1538,8 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  1044              	.L27:
  1045 067e 43F3CF09 		sbfx	r9, r3, #3, #16
  1046              	.LVL167:
- 413:main.c        ****                 Acc_y = Acc_y/8;
- 1047              		.loc 1 413 0
+ 409:main.c        ****                 Acc_y = Acc_y/8;
+ 1047              		.loc 1 409 0
  1048 0682 3B46     		mov	r3, r7
  1049 0684 002F     		cmp	r7, #0
  1050 0686 00DA     		bge	.L28
@@ -1551,42 +1547,42 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  1052              	.L28:
  1053 068a 43F3CF08 		sbfx	r8, r3, #3, #16
  1054              	.LVL168:
- 414:main.c        ****                 Acc_z = Acc_z/8;
- 1055              		.loc 1 414 0
+ 410:main.c        ****                 Acc_z = Acc_z/8;
+ 1055              		.loc 1 410 0
  1056 068e 2B46     		mov	r3, r5
  1057 0690 002D     		cmp	r5, #0
  1058 0692 00DA     		bge	.L29
  1059 0694 EB1D     		adds	r3, r5, #7
  1060              	.L29:
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 27
-
-
  1061 0696 43F3CF07 		sbfx	r7, r3, #3, #16
  1062              	.LVL169:
- 415:main.c        ****                 
- 416:main.c        ****                 OutAccX = Acc_x * CONVERSION_FACTOR_DIGIT_MG;
- 1063              		.loc 1 416 0
+ 411:main.c        ****                 
+ 412:main.c        ****                 OutAccX = Acc_x * CONVERSION_FACTOR_DIGIT_MG;
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 27
+
+
+ 1063              		.loc 1 412 0
  1064 069a 4FEA8909 		lsl	r9, r9, #2
  1065              	.LVL170:
  1066 069e 1FFA89F9 		uxth	r9, r9
  1067 06a2 0FFA89F4 		sxth	r4, r9
  1068              	.LVL171:
- 417:main.c        ****                 OutAccY = Acc_y * CONVERSION_FACTOR_DIGIT_MG;
- 1069              		.loc 1 417 0
+ 413:main.c        ****                 OutAccY = Acc_y * CONVERSION_FACTOR_DIGIT_MG;
+ 1069              		.loc 1 413 0
  1070 06a6 4FEA8808 		lsl	r8, r8, #2
  1071              	.LVL172:
  1072 06aa 1FFA88F8 		uxth	r8, r8
  1073 06ae 0FFA88F6 		sxth	r6, r8
  1074              	.LVL173:
- 418:main.c        ****                 OutAccZ = Acc_z * CONVERSION_FACTOR_DIGIT_MG;
- 1075              		.loc 1 418 0
+ 414:main.c        ****                 OutAccZ = Acc_z * CONVERSION_FACTOR_DIGIT_MG;
+ 1075              		.loc 1 414 0
  1076 06b2 BF00     		lsls	r7, r7, #2
  1077              	.LVL174:
  1078 06b4 BFB2     		uxth	r7, r7
  1079 06b6 3DB2     		sxth	r5, r7
  1080              	.LVL175:
- 419:main.c        ****                 sprintf(bufferUART, "X: %d, Y: %d, Z: %d [mg]\r\n", OutAccX, OutAccY, OutAccZ);
- 1081              		.loc 1 419 0
+ 415:main.c        ****                 sprintf(bufferUART, "X: %d, Y: %d, Z: %d [mg]\r\n", OutAccX, OutAccY, OutAccZ);
+ 1081              		.loc 1 415 0
  1082 06b8 DFF8B0A0 		ldr	r10, .L36+20
  1083 06bc 0095     		str	r5, [sp]
  1084 06be 3346     		mov	r3, r6
@@ -1596,55 +1592,55 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  1088 06c4 5046     		mov	r0, r10
  1089 06c6 FFF7FEFF 		bl	sprintf
  1090              	.LVL177:
- 420:main.c        ****                 UART_1_PutBuffer;
- 1091              		.loc 1 420 0
+ 416:main.c        ****                 UART_1_PutBuffer;
+ 1091              		.loc 1 416 0
  1092 06ca 5046     		mov	r0, r10
  1093 06cc FFF7FEFF 		bl	UART_1_PutString
  1094              	.LVL178:
- 421:main.c        **** //                
- 422:main.c        ****                 if (UARTVerboseFlag){
- 1095              		.loc 1 422 0
+ 417:main.c        **** //                
+ 418:main.c        ****                 if (UARTVerboseFlag){
+ 1095              		.loc 1 418 0
  1096 06d0 234B     		ldr	r3, .L36+8
  1097 06d2 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
  1098 06d4 13F0FF0F 		tst	r3, #255
  1099 06d8 15D0     		beq	.L30
- 423:main.c        ****                     //data preparing for UART serial Communication
- 424:main.c        ****                     OutArray[1] = (uint8_t)(OutAccX & 0xFF); 
- 1100              		.loc 1 424 0
+ 419:main.c        ****                     //data preparing for UART serial Communication
+ 420:main.c        ****                     OutArray[1] = (uint8_t)(OutAccX & 0xFF); 
+ 1100              		.loc 1 420 0
  1101 06da 8DF81190 		strb	r9, [sp, #17]
- 425:main.c        ****                     OutArray[2] = (uint8_t)(OutAccX >> 8);
- 1102              		.loc 1 425 0
+ 421:main.c        ****                     OutArray[2] = (uint8_t)(OutAccX >> 8);
+ 1102              		.loc 1 421 0
  1103 06de C4F30723 		ubfx	r3, r4, #8, #8
  1104 06e2 8DF81230 		strb	r3, [sp, #18]
- 426:main.c        ****                     OutArray[3] = (uint8_t)(OutAccY & 0xFF);
- 1105              		.loc 1 426 0
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 28
-
-
+ 422:main.c        ****                     OutArray[3] = (uint8_t)(OutAccY & 0xFF);
+ 1105              		.loc 1 422 0
  1106 06e6 8DF81380 		strb	r8, [sp, #19]
- 427:main.c        ****                     OutArray[4] = (uint8_t)(OutAccY >> 8);
- 1107              		.loc 1 427 0
+ 423:main.c        ****                     OutArray[4] = (uint8_t)(OutAccY >> 8);
+ 1107              		.loc 1 423 0
  1108 06ea C6F30723 		ubfx	r3, r6, #8, #8
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 28
+
+
  1109 06ee 8DF81430 		strb	r3, [sp, #20]
- 428:main.c        ****                     OutArray[5] = (uint8_t)(OutAccZ & 0xFF);
- 1110              		.loc 1 428 0
+ 424:main.c        ****                     OutArray[5] = (uint8_t)(OutAccZ & 0xFF);
+ 1110              		.loc 1 424 0
  1111 06f2 8DF81570 		strb	r7, [sp, #21]
- 429:main.c        ****                     OutArray[6] = (uint8_t)(OutAccZ >> 8);
- 1112              		.loc 1 429 0
+ 425:main.c        ****                     OutArray[6] = (uint8_t)(OutAccZ >> 8);
+ 1112              		.loc 1 425 0
  1113 06f6 C5F30723 		ubfx	r3, r5, #8, #8
  1114 06fa 8DF81630 		strb	r3, [sp, #22]
- 430:main.c        ****                     
- 431:main.c        ****                     UART_1_PutArray(OutArray, TRANSMIT_BUFFER_SIZE);
- 1115              		.loc 1 431 0
+ 426:main.c        ****                     
+ 427:main.c        ****                     UART_1_PutArray(OutArray, TRANSMIT_BUFFER_SIZE);
+ 1115              		.loc 1 427 0
  1116 06fe 0821     		movs	r1, #8
  1117 0700 04A8     		add	r0, sp, #16
  1118 0702 FFF7FEFF 		bl	UART_1_PutArray
  1119              	.LVL179:
  1120              	.L30:
- 432:main.c        ****                 }
- 433:main.c        ****                 
- 434:main.c        ****                 red_x= (uint8_t)(abs(OutAccX*CONVERSION_MG_RGB));
- 1121              		.loc 1 434 0
+ 428:main.c        ****                 }
+ 429:main.c        ****                 
+ 430:main.c        ****                 red_x= (uint8_t)(abs(OutAccX*CONVERSION_MG_RGB));
+ 1121              		.loc 1 430 0
  1122 0706 C4EB0424 		rsb	r4, r4, r4, lsl #8
  1123              	.LVL180:
  1124 070a 164A     		ldr	r2, .L36+12
@@ -1655,8 +1651,8 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  1129 0718 B8BF     		it	lt
  1130 071a 4042     		rsblt	r0, r0, #0
  1131              	.LVL181:
- 435:main.c        ****                 green_y=(uint8_t)(abs(OutAccY*CONVERSION_MG_RGB));
- 1132              		.loc 1 435 0
+ 431:main.c        ****                 green_y=(uint8_t)(abs(OutAccY*CONVERSION_MG_RGB));
+ 1132              		.loc 1 431 0
  1133 071c C6EB0623 		rsb	r3, r6, r6, lsl #8
  1134 0720 82FB0341 		smull	r4, r1, r2, r3
  1135 0724 DB17     		asrs	r3, r3, #31
@@ -1665,8 +1661,8 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  1138 072c B8BF     		it	lt
  1139 072e 4942     		rsblt	r1, r1, #0
  1140              	.LVL182:
- 436:main.c        ****                 blue_z=(uint8_t)(abs(OutAccZ*CONVERSION_MG_RGB));
- 1141              		.loc 1 436 0
+ 432:main.c        ****                 blue_z=(uint8_t)(abs(OutAccZ*CONVERSION_MG_RGB));
+ 1141              		.loc 1 432 0
  1142 0730 C5EB0523 		rsb	r3, r5, r5, lsl #8
  1143 0734 82FB0342 		smull	r4, r2, r2, r3
  1144 0738 DB17     		asrs	r3, r3, #31
@@ -1675,23 +1671,23 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  1147 0740 B8BF     		it	lt
  1148 0742 5242     		rsblt	r2, r2, #0
  1149              	.LVL183:
- 437:main.c        **** 
- 438:main.c        ****                 RGBLed_WriteColor(red_x, green_y, blue_z);
- 1150              		.loc 1 438 0
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 29
-
-
+ 433:main.c        **** 
+ 434:main.c        ****                 RGBLed_WriteColor(red_x, green_y, blue_z);
+ 1150              		.loc 1 434 0
  1151 0744 D2B2     		uxtb	r2, r2
  1152 0746 C9B2     		uxtb	r1, r1
  1153 0748 C0B2     		uxtb	r0, r0
  1154 074a FFF7FEFF 		bl	RGBLed_WriteColor
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 29
+
+
  1155              	.LVL184:
  1156              	.L24:
- 439:main.c        ****             }
- 440:main.c        ****         
- 441:main.c        ****             
- 442:main.c        ****         PacketReadyFlag=0;
- 1157              		.loc 1 442 0
+ 435:main.c        ****             }
+ 436:main.c        ****         
+ 437:main.c        ****             
+ 438:main.c        ****         PacketReadyFlag=0;
+ 1157              		.loc 1 438 0
  1158 074e 0022     		movs	r2, #0
  1159 0750 054B     		ldr	r3, .L36+16
  1160 0752 1A70     		strb	r2, [r3]
@@ -1738,13 +1734,13 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  1197      726F6A65 
  1198 0033 6F6C6920 		.ascii	"oli ^^^^^^^^\015\012\012\000"
  1198      5E5E5E5E 
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 30
-
-
  1198      5E5E5E5E 
  1198      0D0A0A00 
  1199 0043 00       		.space	1
  1200              	.LC2:
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 30
+
+
  1201 0044 2A2A2A2A 		.ascii	"**************** TEST EEPROM and LIS3DH CONFIGURATI"
  1201      2A2A2A2A 
  1201      2A2A2A2A 
@@ -1798,13 +1794,13 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  1221      204C4953 
  1221      33444820 
  1221      4649464F 
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 31
-
-
  1221      20435452 
  1222 01a7 32580D0A 		.ascii	"2X\015\012\000"
  1222      00
  1223              	.LC9:
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 31
+
+
  1224 01ac 202D2D3E 		.ascii	" --> LIS3DH FIFO CTRL REGISTER (FIFO mode) = 0x%02X"
  1224      204C4953 
  1224      33444820 
@@ -1839,7 +1835,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  1236      44555241 
  1236      54494F4E 
  1237              	.LC14:
- 1238 0288 0D0A5245 		.ascii	"\015\012READ/WRITE CONFIGURATION MODALITY. configur"
+ 1238 0288 0D0A5245 		.ascii	"\015\012READ/WRITE CONFIGURATION MODALITY. Configur"
  1238      41442F57 
  1238      52495445 
  1238      20434F4E 
@@ -1852,19 +1848,19 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  1240 02dc 00       		.ascii	"\000"
  1241 02dd 000000   		.space	3
  1242              	.LC15:
- 1243 02e0 0D0A4154 		.ascii	"\015\012ATTENTION! READ ONLY MODALITY. configuratio"
+ 1243 02e0 0D0A4154 		.ascii	"\015\012ATTENTION! READ ONLY MODALITY. Configuratio"
  1243      54454E54 
  1243      494F4E21 
  1243      20524541 
  1243      44204F4E 
  1244 030d 6E206D6F 		.ascii	"n mode: %d\015\012UART VERBOSE FLAG: %d\015\012\000"
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 32
-
-
  1244      64653A20 
  1244      25640D0A 
  1244      55415254 
  1244      20564552 
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 32
+
+
  1245 0331 000000   		.space	3
  1246              	.LC16:
  1247 0334 0D0A5245 		.ascii	"\015\012READY \015\012\015\012\000"
@@ -1918,13 +1914,13 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  1265      642C2059 
  1265      3A202564 
  1265      2C205A3A 
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 33
-
-
  1265      20256420 
  1266              		.text
  1267              	.Letext0:
  1268              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.3\\psoc creator\\import\\gnu\\arm\\5.4.
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 33
+
+
  1269              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.3\\psoc creator\\import\\gnu\\arm\\5.4.
  1270              		.file 4 "Generated_Source\\PSoC5/cytypes.h"
  1271              		.file 5 "Generated_Source\\PSoC5/core_cm3.h"
@@ -1954,9 +1950,9 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  1295 0006 00000000 		.4byte	.Ldebug_abbrev0
  1296 000a 04       		.byte	0x4
  1297 000b 01       		.uleb128 0x1
- 1298 000c 23050000 		.4byte	.LASF87
+ 1298 000c ED040000 		.4byte	.LASF87
  1299 0010 0C       		.byte	0xc
- 1300 0011 61040000 		.4byte	.LASF88
+ 1300 0011 2B040000 		.4byte	.LASF88
  1301 0015 47030000 		.4byte	.LASF89
  1302 0019 30000000 		.4byte	.Ldebug_ranges0+0x30
  1303 001d 00000000 		.4byte	0
@@ -1978,13 +1974,13 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  1319 003c 06       		.byte	0x6
  1320 003d D7020000 		.4byte	.LASF2
  1321 0041 04       		.uleb128 0x4
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 34
-
-
  1322 0042 0E020000 		.4byte	.LASF4
  1323 0046 02       		.byte	0x2
  1324 0047 1D       		.byte	0x1d
  1325 0048 4C000000 		.4byte	0x4c
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 34
+
+
  1326 004c 02       		.uleb128 0x2
  1327 004d 01       		.byte	0x1
  1328 004e 08       		.byte	0x8
@@ -2001,20 +1997,20 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  1339 0065 02       		.uleb128 0x2
  1340 0066 02       		.byte	0x2
  1341 0067 07       		.byte	0x7
- 1342 0068 D7030000 		.4byte	.LASF7
+ 1342 0068 A1030000 		.4byte	.LASF7
  1343 006c 04       		.uleb128 0x4
- 1344 006d C2040000 		.4byte	.LASF8
+ 1344 006d 8C040000 		.4byte	.LASF8
  1345 0071 02       		.byte	0x2
  1346 0072 3F       		.byte	0x3f
  1347 0073 77000000 		.4byte	0x77
  1348 0077 02       		.uleb128 0x2
  1349 0078 04       		.byte	0x4
  1350 0079 05       		.byte	0x5
- 1351 007a FC030000 		.4byte	.LASF9
+ 1351 007a C6030000 		.4byte	.LASF9
  1352 007e 02       		.uleb128 0x2
  1353 007f 04       		.byte	0x4
  1354 0080 07       		.byte	0x7
- 1355 0081 68040000 		.4byte	.LASF10
+ 1355 0081 32040000 		.4byte	.LASF10
  1356 0085 02       		.uleb128 0x2
  1357 0086 08       		.byte	0x8
  1358 0087 05       		.byte	0x5
@@ -2025,26 +2021,26 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  1363 0092 18       		.byte	0x18
  1364 0093 41000000 		.4byte	0x41
  1365 0097 04       		.uleb128 0x4
- 1366 0098 47040000 		.4byte	.LASF13
+ 1366 0098 11040000 		.4byte	.LASF13
  1367 009c 03       		.byte	0x3
  1368 009d 20       		.byte	0x20
  1369 009e 53000000 		.4byte	0x53
  1370 00a2 04       		.uleb128 0x4
- 1371 00a3 27040000 		.4byte	.LASF14
+ 1371 00a3 F1030000 		.4byte	.LASF14
  1372 00a7 03       		.byte	0x3
  1373 00a8 2C       		.byte	0x2c
  1374 00a9 6C000000 		.4byte	0x6c
  1375 00ad 05       		.uleb128 0x5
- 1376 00ae 4F040000 		.4byte	.LASF15
+ 1376 00ae 19040000 		.4byte	.LASF15
  1377 00b2 04       		.byte	0x4
  1378 00b3 E401     		.2byte	0x1e4
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 35
-
-
  1379 00b5 4C000000 		.4byte	0x4c
  1380 00b9 05       		.uleb128 0x5
- 1381 00ba 5A040000 		.4byte	.LASF16
+ 1381 00ba 24040000 		.4byte	.LASF16
  1382 00be 04       		.byte	0x4
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 35
+
+
  1383 00bf E601     		.2byte	0x1e6
  1384 00c1 7E000000 		.4byte	0x7e
  1385 00c5 05       		.uleb128 0x5
@@ -2059,11 +2055,11 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  1394 00d8 02       		.uleb128 0x2
  1395 00d9 08       		.byte	0x8
  1396 00da 04       		.byte	0x4
- 1397 00db 7A040000 		.4byte	.LASF19
+ 1397 00db 44040000 		.4byte	.LASF19
  1398 00df 02       		.uleb128 0x2
  1399 00e0 01       		.byte	0x1
  1400 00e1 08       		.byte	0x8
- 1401 00e2 F7030000 		.4byte	.LASF20
+ 1401 00e2 C1030000 		.4byte	.LASF20
  1402 00e6 06       		.uleb128 0x6
  1403 00e7 AD000000 		.4byte	0xad
  1404 00eb 02       		.uleb128 0x2
@@ -2098,13 +2094,13 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  1433 0126 F2010000 		.4byte	.LASF24
  1434 012a 01       		.byte	0x1
  1435 012b 41       		.byte	0x41
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 36
-
-
  1436 012c 9A0F0000 		.4byte	0xf9a
  1437 0130 02       		.uleb128 0x2
  1438 0131 91       		.byte	0x91
  1439 0132 50       		.sleb128 -48
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 36
+
+
  1440 0133 09       		.uleb128 0x9
  1441 0134 62010000 		.4byte	.LASF25
  1442 0138 01       		.byte	0x1
@@ -2112,9 +2108,9 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  1444 013a 8C000000 		.4byte	0x8c
  1445 013e 00000000 		.4byte	.LLST0
  1446 0142 08       		.uleb128 0x8
- 1447 0143 BF050000 		.4byte	.LASF26
+ 1447 0143 89050000 		.4byte	.LASF26
  1448 0147 01       		.byte	0x1
- 1449 0148 C3       		.byte	0xc3
+ 1449 0148 BF       		.byte	0xbf
  1450 0149 AA0F0000 		.4byte	0xfaa
  1451 014d 03       		.uleb128 0x3
  1452 014e 91       		.byte	0x91
@@ -2122,7 +2118,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  1454 0151 08       		.uleb128 0x8
  1455 0152 8B000000 		.4byte	.LASF27
  1456 0156 01       		.byte	0x1
- 1457 0157 C4       		.byte	0xc4
+ 1457 0157 C0       		.byte	0xc0
  1458 0158 BA0F0000 		.4byte	0xfba
  1459 015c 03       		.uleb128 0x3
  1460 015d 91       		.byte	0x91
@@ -2130,7 +2126,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  1462 0160 08       		.uleb128 0x8
  1463 0161 75020000 		.4byte	.LASF28
  1464 0165 01       		.byte	0x1
- 1465 0166 C5       		.byte	0xc5
+ 1465 0166 C1       		.byte	0xc1
  1466 0167 AA0F0000 		.4byte	0xfaa
  1467 016b 03       		.uleb128 0x3
  1468 016c 91       		.byte	0x91
@@ -2138,96 +2134,96 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  1470 016f 09       		.uleb128 0x9
  1471 0170 C5020000 		.4byte	.LASF29
  1472 0174 01       		.byte	0x1
- 1473 0175 C6       		.byte	0xc6
+ 1473 0175 C2       		.byte	0xc2
  1474 0176 B9000000 		.4byte	0xb9
  1475 017a 76000000 		.4byte	.LLST1
  1476 017e 09       		.uleb128 0x9
- 1477 017f F7040000 		.4byte	.LASF30
+ 1477 017f C1040000 		.4byte	.LASF30
  1478 0183 01       		.byte	0x1
- 1479 0184 C7       		.byte	0xc7
+ 1479 0184 C3       		.byte	0xc3
  1480 0185 97000000 		.4byte	0x97
  1481 0189 89000000 		.4byte	.LLST2
  1482 018d 09       		.uleb128 0x9
- 1483 018e FD040000 		.4byte	.LASF31
+ 1483 018e C7040000 		.4byte	.LASF31
  1484 0192 01       		.byte	0x1
- 1485 0193 C8       		.byte	0xc8
+ 1485 0193 C4       		.byte	0xc4
  1486 0194 97000000 		.4byte	0x97
  1487 0198 BE000000 		.4byte	.LLST3
  1488 019c 09       		.uleb128 0x9
- 1489 019d 03050000 		.4byte	.LASF32
+ 1489 019d CD040000 		.4byte	.LASF32
  1490 01a1 01       		.byte	0x1
- 1491 01a2 C9       		.byte	0xc9
+ 1491 01a2 C5       		.byte	0xc5
  1492 01a3 97000000 		.4byte	0x97
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 37
-
-
  1493 01a7 E8000000 		.4byte	.LLST4
  1494 01ab 09       		.uleb128 0x9
  1495 01ac 3F020000 		.4byte	.LASF33
  1496 01b0 01       		.byte	0x1
- 1497 01b1 CA       		.byte	0xca
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 37
+
+
+ 1497 01b1 C6       		.byte	0xc6
  1498 01b2 C5000000 		.4byte	0xc5
  1499 01b6 25010000 		.4byte	.LLST5
  1500 01ba 09       		.uleb128 0x9
  1501 01bb 47020000 		.4byte	.LASF34
  1502 01bf 01       		.byte	0x1
- 1503 01c0 CB       		.byte	0xcb
+ 1503 01c0 C7       		.byte	0xc7
  1504 01c1 C5000000 		.4byte	0xc5
  1505 01c5 43010000 		.4byte	.LLST6
  1506 01c9 09       		.uleb128 0x9
  1507 01ca 4F020000 		.4byte	.LASF35
  1508 01ce 01       		.byte	0x1
- 1509 01cf CC       		.byte	0xcc
+ 1509 01cf C8       		.byte	0xc8
  1510 01d0 C5000000 		.4byte	0xc5
  1511 01d4 56010000 		.4byte	.LLST7
  1512 01d8 0A       		.uleb128 0xa
  1513 01d9 28000000 		.4byte	.LASF36
  1514 01dd 01       		.byte	0x1
- 1515 01de CD       		.byte	0xcd
+ 1515 01de C9       		.byte	0xc9
  1516 01df 8C000000 		.4byte	0x8c
  1517 01e3 A07F     		.sleb128 -96
  1518 01e5 0A       		.uleb128 0xa
- 1519 01e6 B3040000 		.4byte	.LASF37
+ 1519 01e6 7D040000 		.4byte	.LASF37
  1520 01ea 01       		.byte	0x1
- 1521 01eb CE       		.byte	0xce
+ 1521 01eb CA       		.byte	0xca
  1522 01ec 8C000000 		.4byte	0x8c
  1523 01f0 40       		.sleb128 -64
  1524 01f1 08       		.uleb128 0x8
  1525 01f2 40000000 		.4byte	.LASF38
  1526 01f6 01       		.byte	0x1
- 1527 01f7 CF       		.byte	0xcf
+ 1527 01f7 CB       		.byte	0xcb
  1528 01f8 CA0F0000 		.4byte	0xfca
  1529 01fc 03       		.uleb128 0x3
  1530 01fd 91       		.byte	0x91
  1531 01fe E07E     		.sleb128 -160
  1532 0200 09       		.uleb128 0x9
- 1533 0201 B9050000 		.4byte	.LASF39
+ 1533 0201 83050000 		.4byte	.LASF39
  1534 0205 01       		.byte	0x1
- 1535 0206 D0       		.byte	0xd0
+ 1535 0206 CC       		.byte	0xcc
  1536 0207 8C000000 		.4byte	0x8c
  1537 020b 69010000 		.4byte	.LLST8
  1538 020f 09       		.uleb128 0x9
- 1539 0210 BA040000 		.4byte	.LASF40
+ 1539 0210 84040000 		.4byte	.LASF40
  1540 0214 01       		.byte	0x1
- 1541 0215 D0       		.byte	0xd0
+ 1541 0215 CC       		.byte	0xcc
  1542 0216 8C000000 		.4byte	0x8c
  1543 021a 30020000 		.4byte	.LLST9
  1544 021e 09       		.uleb128 0x9
  1545 021f 00000000 		.4byte	.LASF41
  1546 0223 01       		.byte	0x1
- 1547 0224 D0       		.byte	0xd0
+ 1547 0224 CC       		.byte	0xcc
  1548 0225 8C000000 		.4byte	0x8c
  1549 0229 C7020000 		.4byte	.LLST10
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 38
-
-
  1550 022d 0B       		.uleb128 0xb
  1551 022e 00000000 		.4byte	.Ldebug_ranges0+0
  1552 0232 F6080000 		.4byte	0x8f6
  1553 0236 0C       		.uleb128 0xc
- 1554 0237 55040000 		.4byte	.LASF42
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 38
+
+
+ 1554 0237 1F040000 		.4byte	.LASF42
  1555 023b 01       		.byte	0x1
- 1556 023c 2201     		.2byte	0x122
+ 1556 023c 1E01     		.2byte	0x11e
  1557 023e 8C000000 		.4byte	0x8c
  1558 0242 5E030000 		.4byte	.LLST11
  1559 0246 0D       		.uleb128 0xd
@@ -2237,19 +2233,19 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  1563 0253 0E       		.uleb128 0xe
  1564 0254 6A00     		.ascii	"j\000"
  1565 0256 01       		.byte	0x1
- 1566 0257 2801     		.2byte	0x128
+ 1566 0257 2401     		.2byte	0x124
  1567 0259 AD000000 		.4byte	0xad
  1568 025d 7C030000 		.4byte	.LLST12
  1569 0261 0C       		.uleb128 0xc
  1570 0262 E7010000 		.4byte	.LASF43
  1571 0266 01       		.byte	0x1
- 1572 0267 2901     		.2byte	0x129
+ 1572 0267 2501     		.2byte	0x125
  1573 0269 AD000000 		.4byte	0xad
  1574 026d A6030000 		.4byte	.LLST13
  1575 0271 0F       		.uleb128 0xf
- 1576 0272 92040000 		.4byte	.LASF44
+ 1576 0272 5C040000 		.4byte	.LASF44
  1577 0276 01       		.byte	0x1
- 1578 0277 8301     		.2byte	0x183
+ 1578 0277 7F01     		.2byte	0x17f
  1579 0279 DA0F0000 		.4byte	0xfda
  1580 027d 03       		.uleb128 0x3
  1581 027e 91       		.byte	0x91
@@ -2278,13 +2274,13 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  1604 02a8 11       		.uleb128 0x11
  1605 02a9 01       		.uleb128 0x1
  1606 02aa 51       		.byte	0x51
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 39
-
-
  1607 02ab 03       		.uleb128 0x3
  1608 02ac 91       		.byte	0x91
  1609 02ad 987F     		.sleb128 -104
  1610 02af 11       		.uleb128 0x11
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 39
+
+
  1611 02b0 01       		.uleb128 0x1
  1612 02b1 52       		.byte	0x52
  1613 02b2 01       		.uleb128 0x1
@@ -2338,13 +2334,13 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  1661 02fd 50       		.byte	0x50
  1662 02fe 02       		.uleb128 0x2
  1663 02ff 08       		.byte	0x8
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 40
-
-
  1664 0300 80       		.byte	0x80
  1665 0301 11       		.uleb128 0x11
  1666 0302 01       		.uleb128 0x1
  1667 0303 51       		.byte	0x51
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 40
+
+
  1668 0304 03       		.uleb128 0x3
  1669 0305 91       		.byte	0x91
  1670 0306 B87F     		.sleb128 -72
@@ -2398,13 +2394,13 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  1718 0356 02       		.uleb128 0x2
  1719 0357 91       		.byte	0x91
  1720 0358 44       		.sleb128 -60
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 41
-
-
  1721 0359 11       		.uleb128 0x11
  1722 035a 01       		.uleb128 0x1
  1723 035b 52       		.byte	0x52
  1724 035c 01       		.uleb128 0x1
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 41
+
+
  1725 035d 36       		.byte	0x36
  1726 035e 00       		.byte	0
  1727 035f 12       		.uleb128 0x12
@@ -2458,13 +2454,13 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  1775 03ae 36       		.byte	0x36
  1776 03af 00       		.byte	0
  1777 03b0 12       		.uleb128 0x12
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 42
-
-
  1778 03b1 7C040000 		.4byte	.LVL115
  1779 03b5 03110000 		.4byte	0x1103
  1780 03b9 10       		.uleb128 0x10
  1781 03ba 8A040000 		.4byte	.LVL116
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 42
+
+
  1782 03be F8100000 		.4byte	0x10f8
  1783 03c2 D9030000 		.4byte	0x3d9
  1784 03c6 11       		.uleb128 0x11
@@ -2518,13 +2514,13 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  1832 040f F8100000 		.4byte	0x10f8
  1833 0413 29040000 		.4byte	0x429
  1834 0417 11       		.uleb128 0x11
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 43
-
-
  1835 0418 01       		.uleb128 0x1
  1836 0419 50       		.byte	0x50
  1837 041a 02       		.uleb128 0x2
  1838 041b 08       		.byte	0x8
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 43
+
+
  1839 041c 8C       		.byte	0x8c
  1840 041d 11       		.uleb128 0x11
  1841 041e 01       		.uleb128 0x1
@@ -2578,13 +2574,13 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  1889 046d 80       		.byte	0x80
  1890 046e 11       		.uleb128 0x11
  1891 046f 01       		.uleb128 0x1
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 44
-
-
  1892 0470 51       		.byte	0x51
  1893 0471 02       		.uleb128 0x2
  1894 0472 91       		.byte	0x91
  1895 0473 44       		.sleb128 -60
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 44
+
+
  1896 0474 11       		.uleb128 0x11
  1897 0475 01       		.uleb128 0x1
  1898 0476 52       		.byte	0x52
@@ -2638,13 +2634,13 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  1946 04c5 11       		.uleb128 0x11
  1947 04c6 01       		.uleb128 0x1
  1948 04c7 52       		.byte	0x52
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 45
-
-
  1949 04c8 01       		.uleb128 0x1
  1950 04c9 42       		.byte	0x42
  1951 04ca 00       		.byte	0
  1952 04cb 12       		.uleb128 0x12
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 45
+
+
  1953 04cc E8040000 		.4byte	.LVL129
  1954 04d0 03110000 		.4byte	0x1103
  1955 04d4 10       		.uleb128 0x10
@@ -2698,13 +2694,13 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  2003 051d 0A050000 		.4byte	.LVL133
  2004 0521 03110000 		.4byte	0x1103
  2005 0525 10       		.uleb128 0x10
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 46
-
-
  2006 0526 16050000 		.4byte	.LVL134
  2007 052a F8100000 		.4byte	0x10f8
  2008 052e 45050000 		.4byte	0x545
  2009 0532 11       		.uleb128 0x11
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 46
+
+
  2010 0533 01       		.uleb128 0x1
  2011 0534 50       		.byte	0x50
  2012 0535 02       		.uleb128 0x2
@@ -2758,13 +2754,13 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  2060 0585 01       		.uleb128 0x1
  2061 0586 50       		.byte	0x50
  2062 0587 02       		.uleb128 0x2
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 47
-
-
  2063 0588 08       		.byte	0x8
  2064 0589 80       		.byte	0x80
  2065 058a 11       		.uleb128 0x11
  2066 058b 01       		.uleb128 0x1
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 47
+
+
  2067 058c 51       		.byte	0x51
  2068 058d 03       		.uleb128 0x3
  2069 058e 91       		.byte	0x91
@@ -2818,13 +2814,13 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  2117 05de 51       		.byte	0x51
  2118 05df 01       		.uleb128 0x1
  2119 05e0 30       		.byte	0x30
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 48
-
-
  2120 05e1 00       		.byte	0
  2121 05e2 10       		.uleb128 0x10
  2122 05e3 5E050000 		.4byte	.LVL143
  2123 05e7 0E110000 		.4byte	0x110e
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 48
+
+
  2124 05eb FC050000 		.4byte	0x5fc
  2125 05ef 11       		.uleb128 0x11
  2126 05f0 01       		.uleb128 0x1
@@ -2873,18 +2869,18 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  2169 0637 0E       		.uleb128 0xe
  2170 0638 6900     		.ascii	"i\000"
  2171 063a 01       		.byte	0x1
- 2172 063b 8F01     		.2byte	0x18f
+ 2172 063b 8B01     		.2byte	0x18b
  2173 063d 33000000 		.4byte	0x33
  2174 0641 D0030000 		.4byte	.LLST14
  2175 0645 13       		.uleb128 0x13
  2176 0646 00060000 		.4byte	.LVL156
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 49
-
-
  2177 064a E2100000 		.4byte	0x10e2
  2178 064e 11       		.uleb128 0x11
  2179 064f 01       		.uleb128 0x1
  2180 0650 50       		.byte	0x50
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 49
+
+
  2181 0651 02       		.uleb128 0x2
  2182 0652 08       		.byte	0x8
  2183 0653 28       		.byte	0x28
@@ -2938,13 +2934,13 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  2231 0696 01       		.uleb128 0x1
  2232 0697 52       		.byte	0x52
  2233 0698 01       		.uleb128 0x1
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 50
-
-
  2234 0699 36       		.byte	0x36
  2235 069a 00       		.byte	0
  2236 069b 10       		.uleb128 0x10
  2237 069c 68060000 		.4byte	.LVL164
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 50
+
+
  2238 06a0 0E110000 		.4byte	0x110e
  2239 06a4 B4060000 		.4byte	0x6b4
  2240 06a8 11       		.uleb128 0x11
@@ -2998,13 +2994,13 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  2288 06f6 7A       		.byte	0x7a
  2289 06f7 00       		.sleb128 0
  2290 06f8 11       		.uleb128 0x11
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 51
-
-
  2291 06f9 01       		.uleb128 0x1
  2292 06fa 51       		.byte	0x51
  2293 06fb 05       		.uleb128 0x5
  2294 06fc 03       		.byte	0x3
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 51
+
+
  2295 06fd 28040000 		.4byte	.LC22
  2296 0701 11       		.uleb128 0x11
  2297 0702 01       		.uleb128 0x1
@@ -3058,13 +3054,13 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  2345 0748 3A110000 		.4byte	0x113a
  2346 074c 11       		.uleb128 0x11
  2347 074d 01       		.uleb128 0x1
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 52
-
-
  2348 074e 50       		.byte	0x50
  2349 074f A901     		.uleb128 0xa9
  2350 0751 79       		.byte	0x79
  2351 0752 00       		.sleb128 0
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 52
+
+
  2352 0753 40       		.byte	0x40
  2353 0754 24       		.byte	0x24
  2354 0755 40       		.byte	0x40
@@ -3118,13 +3114,13 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  2402 0788 00       		.sleb128 0
  2403 0789 40       		.byte	0x40
  2404 078a 24       		.byte	0x24
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 53
-
-
  2405 078b 40       		.byte	0x40
  2406 078c 26       		.byte	0x26
  2407 078d 38       		.byte	0x38
  2408 078e 24       		.byte	0x24
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 53
+
+
  2409 078f 79       		.byte	0x79
  2410 0790 00       		.sleb128 0
  2411 0791 40       		.byte	0x40
@@ -3178,13 +3174,13 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  2459 07c4 24       		.byte	0x24
  2460 07c5 79       		.byte	0x79
  2461 07c6 00       		.sleb128 0
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 54
-
-
  2462 07c7 40       		.byte	0x40
  2463 07c8 24       		.byte	0x24
  2464 07c9 40       		.byte	0x40
  2465 07ca 26       		.byte	0x26
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 54
+
+
  2466 07cb 1C       		.byte	0x1c
  2467 07cc F7       		.byte	0xf7
  2468 07cd 33       		.uleb128 0x33
@@ -3238,13 +3234,13 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  2516 0801 24       		.byte	0x24
  2517 0802 76       		.byte	0x76
  2518 0803 00       		.sleb128 0
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 55
-
-
  2519 0804 1C       		.byte	0x1c
  2520 0805 4F       		.byte	0x4f
  2521 0806 26       		.byte	0x26
  2522 0807 76       		.byte	0x76
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 55
+
+
  2523 0808 00       		.sleb128 0
  2524 0809 38       		.byte	0x38
  2525 080a 24       		.byte	0x24
@@ -3298,13 +3294,13 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  2573 0840 76       		.byte	0x76
  2574 0841 00       		.sleb128 0
  2575 0842 38       		.byte	0x38
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 56
-
-
  2576 0843 24       		.byte	0x24
  2577 0844 76       		.byte	0x76
  2578 0845 00       		.sleb128 0
  2579 0846 1C       		.byte	0x1c
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 56
+
+
  2580 0847 4F       		.byte	0x4f
  2581 0848 26       		.byte	0x26
  2582 0849 1C       		.byte	0x1c
@@ -3358,13 +3354,13 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  2630 087d 38       		.byte	0x38
  2631 087e 24       		.byte	0x24
  2632 087f 75       		.byte	0x75
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 57
-
-
  2633 0880 00       		.sleb128 0
  2634 0881 1C       		.byte	0x1c
  2635 0882 4F       		.byte	0x4f
  2636 0883 26       		.byte	0x26
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 57
+
+
  2637 0884 75       		.byte	0x75
  2638 0885 00       		.sleb128 0
  2639 0886 38       		.byte	0x38
@@ -3418,13 +3414,13 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  2687 08bc 26       		.byte	0x26
  2688 08bd 75       		.byte	0x75
  2689 08be 00       		.sleb128 0
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 58
-
-
  2690 08bf 38       		.byte	0x38
  2691 08c0 24       		.byte	0x24
  2692 08c1 75       		.byte	0x75
  2693 08c2 00       		.sleb128 0
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 58
+
+
  2694 08c3 1C       		.byte	0x1c
  2695 08c4 4F       		.byte	0x4f
  2696 08c5 26       		.byte	0x26
@@ -3478,13 +3474,13 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  2744 08ff 12       		.uleb128 0x12
  2745 0900 10000000 		.4byte	.LVL1
  2746 0904 50110000 		.4byte	0x1150
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 59
-
-
  2747 0908 12       		.uleb128 0x12
  2748 0909 14000000 		.4byte	.LVL2
  2749 090d 5B110000 		.4byte	0x115b
  2750 0911 12       		.uleb128 0x12
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 59
+
+
  2751 0912 18000000 		.4byte	.LVL3
  2752 0916 66110000 		.4byte	0x1166
  2753 091a 12       		.uleb128 0x12
@@ -3538,13 +3534,13 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  2801 0974 00       		.sleb128 0
  2802 0975 00       		.byte	0
  2803 0976 10       		.uleb128 0x10
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 60
-
-
  2804 0977 42000000 		.4byte	.LVL9
  2805 097b 92110000 		.4byte	0x1192
  2806 097f 99090000 		.4byte	0x999
  2807 0983 11       		.uleb128 0x11
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 60
+
+
  2808 0984 01       		.uleb128 0x1
  2809 0985 50       		.byte	0x50
  2810 0986 02       		.uleb128 0x2
@@ -3598,13 +3594,13 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  2858 09cb 00       		.byte	0
  2859 09cc 12       		.uleb128 0x12
  2860 09cd 62000000 		.4byte	.LVL12
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 61
-
-
  2861 09d1 03110000 		.4byte	0x1103
  2862 09d5 10       		.uleb128 0x10
  2863 09d6 6C000000 		.4byte	.LVL13
  2864 09da 9B110000 		.4byte	0x119b
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 61
+
+
  2865 09de F4090000 		.4byte	0x9f4
  2866 09e2 11       		.uleb128 0x11
  2867 09e3 01       		.uleb128 0x1
@@ -3658,13 +3654,13 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  2915 0a2e 380A0000 		.4byte	0xa38
  2916 0a32 11       		.uleb128 0x11
  2917 0a33 01       		.uleb128 0x1
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 62
-
-
  2918 0a34 50       		.byte	0x50
  2919 0a35 01       		.uleb128 0x1
  2920 0a36 3F       		.byte	0x3f
  2921 0a37 00       		.byte	0
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 62
+
+
  2922 0a38 10       		.uleb128 0x10
  2923 0a39 98000000 		.4byte	.LVL18
  2924 0a3d 24110000 		.4byte	0x1124
@@ -3718,13 +3714,13 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  2972 0a91 01       		.uleb128 0x1
  2973 0a92 50       		.byte	0x50
  2974 0a93 02       		.uleb128 0x2
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 63
-
-
  2975 0a94 08       		.byte	0x8
  2976 0a95 20       		.byte	0x20
  2977 0a96 00       		.byte	0
  2978 0a97 10       		.uleb128 0x10
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 63
+
+
  2979 0a98 B6000000 		.4byte	.LVL23
  2980 0a9c 24110000 		.4byte	0x1124
  2981 0aa0 B40A0000 		.4byte	0xab4
@@ -3778,13 +3774,13 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  3029 0af1 02       		.uleb128 0x2
  3030 0af2 08       		.byte	0x8
  3031 0af3 23       		.byte	0x23
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 64
-
-
  3032 0af4 00       		.byte	0
  3033 0af5 10       		.uleb128 0x10
  3034 0af6 D4000000 		.4byte	.LVL28
  3035 0afa 24110000 		.4byte	0x1124
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 64
+
+
  3036 0afe 120B0000 		.4byte	0xb12
  3037 0b02 11       		.uleb128 0x11
  3038 0b03 01       		.uleb128 0x1
@@ -3838,13 +3834,13 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  3086 0b51 08       		.byte	0x8
  3087 0b52 24       		.byte	0x24
  3088 0b53 00       		.byte	0
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 65
-
-
  3089 0b54 10       		.uleb128 0x10
  3090 0b55 F2000000 		.4byte	.LVL33
  3091 0b59 24110000 		.4byte	0x1124
  3092 0b5d 710B0000 		.4byte	0xb71
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 65
+
+
  3093 0b61 11       		.uleb128 0x11
  3094 0b62 01       		.uleb128 0x1
  3095 0b63 50       		.byte	0x50
@@ -3898,13 +3894,13 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  3143 0bb1 00       		.byte	0
  3144 0bb2 10       		.uleb128 0x10
  3145 0bb3 10010000 		.4byte	.LVL38
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 66
-
-
  3146 0bb7 24110000 		.4byte	0x1124
  3147 0bbb CF0B0000 		.4byte	0xbcf
  3148 0bbf 11       		.uleb128 0x11
  3149 0bc0 01       		.uleb128 0x1
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 66
+
+
  3150 0bc1 50       		.byte	0x50
  3151 0bc2 02       		.uleb128 0x2
  3152 0bc3 74       		.byte	0x74
@@ -3958,13 +3954,13 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  3200 0c11 10       		.uleb128 0x10
  3201 0c12 2E010000 		.4byte	.LVL43
  3202 0c16 24110000 		.4byte	0x1124
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 67
-
-
  3203 0c1a 2E0C0000 		.4byte	0xc2e
  3204 0c1e 11       		.uleb128 0x11
  3205 0c1f 01       		.uleb128 0x1
  3206 0c20 50       		.byte	0x50
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 67
+
+
  3207 0c21 02       		.uleb128 0x2
  3208 0c22 74       		.byte	0x74
  3209 0c23 00       		.sleb128 0
@@ -4018,13 +4014,13 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  3257 0c71 4C010000 		.4byte	.LVL48
  3258 0c75 24110000 		.4byte	0x1124
  3259 0c79 8D0C0000 		.4byte	0xc8d
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 68
-
-
  3260 0c7d 11       		.uleb128 0x11
  3261 0c7e 01       		.uleb128 0x1
  3262 0c7f 50       		.byte	0x50
  3263 0c80 02       		.uleb128 0x2
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 68
+
+
  3264 0c81 74       		.byte	0x74
  3265 0c82 00       		.sleb128 0
  3266 0c83 11       		.uleb128 0x11
@@ -4078,13 +4074,13 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  3314 0cd4 24110000 		.4byte	0x1124
  3315 0cd8 EC0C0000 		.4byte	0xcec
  3316 0cdc 11       		.uleb128 0x11
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 69
-
-
  3317 0cdd 01       		.uleb128 0x1
  3318 0cde 50       		.byte	0x50
  3319 0cdf 02       		.uleb128 0x2
  3320 0ce0 74       		.byte	0x74
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 69
+
+
  3321 0ce1 00       		.sleb128 0
  3322 0ce2 11       		.uleb128 0x11
  3323 0ce3 01       		.uleb128 0x1
@@ -4138,13 +4134,13 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  3371 0d37 4B0D0000 		.4byte	0xd4b
  3372 0d3b 11       		.uleb128 0x11
  3373 0d3c 01       		.uleb128 0x1
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 70
-
-
  3374 0d3d 50       		.byte	0x50
  3375 0d3e 02       		.uleb128 0x2
  3376 0d3f 74       		.byte	0x74
  3377 0d40 00       		.sleb128 0
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 70
+
+
  3378 0d41 11       		.uleb128 0x11
  3379 0d42 01       		.uleb128 0x1
  3380 0d43 51       		.byte	0x51
@@ -4198,13 +4194,13 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  3428 0d9a 01       		.uleb128 0x1
  3429 0d9b 50       		.byte	0x50
  3430 0d9c 02       		.uleb128 0x2
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 71
-
-
  3431 0d9d 74       		.byte	0x74
  3432 0d9e 00       		.sleb128 0
  3433 0d9f 11       		.uleb128 0x11
  3434 0da0 01       		.uleb128 0x1
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 71
+
+
  3435 0da1 51       		.byte	0x51
  3436 0da2 05       		.uleb128 0x5
  3437 0da3 03       		.byte	0x3
@@ -4258,13 +4254,13 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  3485 0e00 DE010000 		.4byte	.LVL69
  3486 0e04 D7100000 		.4byte	0x10d7
  3487 0e08 130E0000 		.4byte	0xe13
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 72
-
-
  3488 0e0c 11       		.uleb128 0x11
  3489 0e0d 01       		.uleb128 0x1
  3490 0e0e 50       		.byte	0x50
  3491 0e0f 02       		.uleb128 0x2
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 72
+
+
  3492 0e10 74       		.byte	0x74
  3493 0e11 00       		.sleb128 0
  3494 0e12 00       		.byte	0
@@ -4318,13 +4314,13 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  3542 0e6c 3A       		.byte	0x3a
  3543 0e6d 00       		.byte	0
  3544 0e6e 12       		.uleb128 0x12
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 73
-
-
  3545 0e6f 16020000 		.4byte	.LVL74
  3546 0e73 BC110000 		.4byte	0x11bc
  3547 0e77 12       		.uleb128 0x12
  3548 0e78 1C020000 		.4byte	.LVL75
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 73
+
+
  3549 0e7c C7110000 		.4byte	0x11c7
  3550 0e80 12       		.uleb128 0x12
  3551 0e81 22020000 		.4byte	.LVL76
@@ -4378,13 +4374,13 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  3599 0efc 01       		.uleb128 0x1
  3600 0efd 50       		.byte	0x50
  3601 0efe 01       		.uleb128 0x1
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 74
-
-
  3602 0eff 31       		.byte	0x31
  3603 0f00 00       		.byte	0
  3604 0f01 12       		.uleb128 0x12
  3605 0f02 A0020000 		.4byte	.LVL87
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 74
+
+
  3606 0f06 03110000 		.4byte	0x1103
  3607 0f0a 10       		.uleb128 0x10
  3608 0f0b BE020000 		.4byte	.LVL88
@@ -4438,13 +4434,13 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  3656 0f65 11       		.uleb128 0x11
  3657 0f66 01       		.uleb128 0x1
  3658 0f67 50       		.byte	0x50
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 75
-
-
  3659 0f68 02       		.uleb128 0x2
  3660 0f69 74       		.byte	0x74
  3661 0f6a 00       		.sleb128 0
  3662 0f6b 00       		.byte	0
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 75
+
+
  3663 0f6c 10       		.uleb128 0x10
  3664 0f6d 92030000 		.4byte	.LVL92
  3665 0f71 24110000 		.4byte	0x1124
@@ -4498,13 +4494,13 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  3713 0fcb 8C000000 		.4byte	0x8c
  3714 0fcf DA0F0000 		.4byte	0xfda
  3715 0fd3 15       		.uleb128 0x15
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 76
-
-
  3716 0fd4 F2000000 		.4byte	0xf2
  3717 0fd8 07       		.byte	0x7
  3718 0fd9 00       		.byte	0
  3719 0fda 14       		.uleb128 0x14
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 76
+
+
  3720 0fdb AD000000 		.4byte	0xad
  3721 0fdf EA0F0000 		.4byte	0xfea
  3722 0fe3 15       		.uleb128 0x15
@@ -4512,7 +4508,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  3724 0fe8 03       		.byte	0x3
  3725 0fe9 00       		.byte	0
  3726 0fea 16       		.uleb128 0x16
- 3727 0feb 16050000 		.4byte	.LASF45
+ 3727 0feb E0040000 		.4byte	.LASF45
  3728 0fef 05       		.byte	0x5
  3729 0ff0 1207     		.2byte	0x712
  3730 0ff2 F60F0000 		.4byte	0xff6
@@ -4551,20 +4547,20 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  3763 103a 03       		.byte	0x3
  3764 103b 00000000 		.4byte	FlagEnableDisable
  3765 103f 17       		.uleb128 0x17
- 3766 1040 CC040000 		.4byte	.LASF50
+ 3766 1040 96040000 		.4byte	.LASF50
  3767 1044 06       		.byte	0x6
  3768 1045 23       		.byte	0x23
  3769 1046 E6000000 		.4byte	0xe6
  3770 104a 05       		.uleb128 0x5
  3771 104b 03       		.byte	0x3
  3772 104c 00000000 		.4byte	new_EEPROM
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 77
-
-
  3773 1050 17       		.uleb128 0x17
- 3774 1051 E5040000 		.4byte	.LASF51
+ 3774 1051 AF040000 		.4byte	.LASF51
  3775 1055 06       		.byte	0x6
  3776 1056 24       		.byte	0x24
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 77
+
+
  3777 1057 E6000000 		.4byte	0xe6
  3778 105b 05       		.uleb128 0x5
  3779 105c 03       		.byte	0x3
@@ -4578,7 +4574,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  3787 106d 03       		.byte	0x3
  3788 106e 00000000 		.4byte	data_register
  3789 1072 17       		.uleb128 0x17
- 3790 1073 05040000 		.4byte	.LASF53
+ 3790 1073 CF030000 		.4byte	.LASF53
  3791 1077 06       		.byte	0x6
  3792 1078 26       		.byte	0x26
  3793 1079 F9000000 		.4byte	0xf9
@@ -4586,7 +4582,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  3795 107e 03       		.byte	0x3
  3796 107f 00000000 		.4byte	Counter_overflow
  3797 1083 17       		.uleb128 0x17
- 3798 1084 D7040000 		.4byte	.LASF54
+ 3798 1084 A1040000 		.4byte	.LASF54
  3799 1088 06       		.byte	0x6
  3800 1089 27       		.byte	0x27
  3801 108a F9000000 		.4byte	0xf9
@@ -4618,18 +4614,18 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  3827 10c5 00       		.byte	0
  3828 10c6 17       		.uleb128 0x17
  3829 10c7 80000000 		.4byte	.LASF57
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 78
-
-
  3830 10cb 01       		.byte	0x1
  3831 10cc 24       		.byte	0x24
  3832 10cd B6100000 		.4byte	0x10b6
  3833 10d1 05       		.uleb128 0x5
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 78
+
+
  3834 10d2 03       		.byte	0x3
  3835 10d3 00000000 		.4byte	bufferUART
  3836 10d7 18       		.uleb128 0x18
- 3837 10d8 81040000 		.4byte	.LASF58
- 3838 10dc 81040000 		.4byte	.LASF58
+ 3837 10d8 4B040000 		.4byte	.LASF58
+ 3838 10dc 4B040000 		.4byte	.LASF58
  3839 10e0 07       		.byte	0x7
  3840 10e1 8B       		.byte	0x8b
  3841 10e2 18       		.uleb128 0x18
@@ -4653,8 +4649,8 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  3859 110c 09       		.byte	0x9
  3860 110d 66       		.byte	0x66
  3861 110e 18       		.uleb128 0x18
- 3862 110f 16040000 		.4byte	.LASF63
- 3863 1113 16040000 		.4byte	.LASF63
+ 3862 110f E0030000 		.4byte	.LASF63
+ 3863 1113 E0030000 		.4byte	.LASF63
  3864 1117 08       		.byte	0x8
  3865 1118 20       		.byte	0x20
  3866 1119 18       		.uleb128 0x18
@@ -4678,16 +4674,16 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  3884 1143 0C       		.byte	0xc
  3885 1144 1E       		.byte	0x1e
  3886 1145 18       		.uleb128 0x18
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 79
-
-
  3887 1146 6C010000 		.4byte	.LASF68
  3888 114a 6C010000 		.4byte	.LASF68
  3889 114e 07       		.byte	0x7
  3890 114f 54       		.byte	0x54
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 79
+
+
  3891 1150 18       		.uleb128 0x18
- 3892 1151 09050000 		.4byte	.LASF69
- 3893 1155 09050000 		.4byte	.LASF69
+ 3892 1151 D3040000 		.4byte	.LASF69
+ 3893 1155 D3040000 		.4byte	.LASF69
  3894 1159 0D       		.byte	0xd
  3895 115a 4D       		.byte	0x4d
  3896 115b 18       		.uleb128 0x18
@@ -4696,23 +4692,23 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  3899 1164 0E       		.byte	0xe
  3900 1165 4D       		.byte	0x4d
  3901 1166 18       		.uleb128 0x18
- 3902 1167 EA030000 		.4byte	.LASF71
- 3903 116b EA030000 		.4byte	.LASF71
+ 3902 1167 B4030000 		.4byte	.LASF71
+ 3903 116b B4030000 		.4byte	.LASF71
  3904 116f 0C       		.byte	0xc
  3905 1170 14       		.byte	0x14
  3906 1171 18       		.uleb128 0x18
- 3907 1172 A2040000 		.4byte	.LASF72
- 3908 1176 A2040000 		.4byte	.LASF72
+ 3907 1172 6C040000 		.4byte	.LASF72
+ 3908 1176 6C040000 		.4byte	.LASF72
  3909 117a 0F       		.byte	0xf
  3910 117b 3A       		.byte	0x3a
  3911 117c 18       		.uleb128 0x18
- 3912 117d 2F040000 		.4byte	.LASF73
- 3913 1181 2F040000 		.4byte	.LASF73
+ 3912 117d F9030000 		.4byte	.LASF73
+ 3913 1181 F9030000 		.4byte	.LASF73
  3914 1185 0A       		.byte	0xa
  3915 1186 4F       		.byte	0x4f
  3916 1187 18       		.uleb128 0x18
- 3917 1188 B1050000 		.4byte	.LASF74
- 3918 118c B1050000 		.4byte	.LASF74
+ 3917 1188 7B050000 		.4byte	.LASF74
+ 3918 118c 7B050000 		.4byte	.LASF74
  3919 1190 10       		.byte	0x10
  3920 1191 76       		.byte	0x76
  3921 1192 19       		.uleb128 0x19
@@ -4738,13 +4734,13 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  3941 11c1 C4000000 		.4byte	.LASF78
  3942 11c5 12       		.byte	0x12
  3943 11c6 18       		.byte	0x18
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 80
-
-
  3944 11c7 18       		.uleb128 0x18
  3945 11c8 BA010000 		.4byte	.LASF79
  3946 11cc BA010000 		.4byte	.LASF79
  3947 11d0 13       		.byte	0x13
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 80
+
+
  3948 11d1 18       		.byte	0x18
  3949 11d2 18       		.uleb128 0x18
  3950 11d3 2D020000 		.4byte	.LASF80
@@ -4798,13 +4794,13 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  3998 000b 55       		.uleb128 0x55
  3999 000c 17       		.uleb128 0x17
  4000 000d 11       		.uleb128 0x11
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 81
-
-
  4001 000e 01       		.uleb128 0x1
  4002 000f 10       		.uleb128 0x10
  4003 0010 17       		.uleb128 0x17
  4004 0011 00       		.byte	0
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 81
+
+
  4005 0012 00       		.byte	0
  4006 0013 02       		.uleb128 0x2
  4007 0014 24       		.uleb128 0x24
@@ -4858,13 +4854,13 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  4055 0044 35       		.uleb128 0x35
  4056 0045 00       		.byte	0
  4057 0046 49       		.uleb128 0x49
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 82
-
-
  4058 0047 13       		.uleb128 0x13
  4059 0048 00       		.byte	0
  4060 0049 00       		.byte	0
  4061 004a 07       		.uleb128 0x7
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 82
+
+
  4062 004b 2E       		.uleb128 0x2e
  4063 004c 01       		.byte	0x1
  4064 004d 3F       		.uleb128 0x3f
@@ -4918,13 +4914,13 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  4112 007f 3B       		.uleb128 0x3b
  4113 0080 0B       		.uleb128 0xb
  4114 0081 49       		.uleb128 0x49
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 83
-
-
  4115 0082 13       		.uleb128 0x13
  4116 0083 02       		.uleb128 0x2
  4117 0084 17       		.uleb128 0x17
  4118 0085 00       		.byte	0
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 83
+
+
  4119 0086 00       		.byte	0
  4120 0087 0A       		.uleb128 0xa
  4121 0088 34       		.uleb128 0x34
@@ -4978,13 +4974,13 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  4169 00b8 00       		.byte	0
  4170 00b9 0E       		.uleb128 0xe
  4171 00ba 34       		.uleb128 0x34
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 84
-
-
  4172 00bb 00       		.byte	0
  4173 00bc 03       		.uleb128 0x3
  4174 00bd 08       		.uleb128 0x8
  4175 00be 3A       		.uleb128 0x3a
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 84
+
+
  4176 00bf 0B       		.uleb128 0xb
  4177 00c0 3B       		.uleb128 0x3b
  4178 00c1 05       		.uleb128 0x5
@@ -5038,13 +5034,13 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  4226 00f8 13       		.uleb128 0x13
  4227 00f9 00       		.byte	0
  4228 00fa 00       		.byte	0
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 85
-
-
  4229 00fb 13       		.uleb128 0x13
  4230 00fc 898201   		.uleb128 0x4109
  4231 00ff 01       		.byte	0x1
  4232 0100 11       		.uleb128 0x11
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 85
+
+
  4233 0101 01       		.uleb128 0x1
  4234 0102 31       		.uleb128 0x31
  4235 0103 13       		.uleb128 0x13
@@ -5098,13 +5094,13 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  4283 0133 13       		.uleb128 0x13
  4284 0134 3F       		.uleb128 0x3f
  4285 0135 19       		.uleb128 0x19
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 86
-
-
  4286 0136 02       		.uleb128 0x2
  4287 0137 18       		.uleb128 0x18
  4288 0138 00       		.byte	0
  4289 0139 00       		.byte	0
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 86
+
+
  4290 013a 18       		.uleb128 0x18
  4291 013b 2E       		.uleb128 0x2e
  4292 013c 00       		.byte	0
@@ -5158,13 +5154,13 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  4340 002c 06010000 		.4byte	.LVL36
  4341 0030 0C010000 		.4byte	.LVL37
  4342 0034 0100     		.2byte	0x1
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 87
-
-
  4343 0036 50       		.byte	0x50
  4344 0037 24010000 		.4byte	.LVL41
  4345 003b 2A010000 		.4byte	.LVL42
  4346 003f 0100     		.2byte	0x1
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 87
+
+
  4347 0041 50       		.byte	0x50
  4348 0042 42010000 		.4byte	.LVL46
  4349 0046 48010000 		.4byte	.LVL47
@@ -5218,13 +5214,13 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  4397 00c8 30       		.byte	0x30
  4398 00c9 9F       		.byte	0x9f
  4399 00ca F4050000 		.4byte	.LVL155
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 88
-
-
  4400 00ce 8E060000 		.4byte	.LVL168
  4401 00d2 0100     		.2byte	0x1
  4402 00d4 57       		.byte	0x57
  4403 00d5 8E060000 		.4byte	.LVL168
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 88
+
+
  4404 00d9 AA060000 		.4byte	.LVL172
  4405 00dd 0100     		.2byte	0x1
  4406 00df 58       		.byte	0x58
@@ -5278,13 +5274,13 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  4454 0152 00000000 		.4byte	0
  4455              	.LLST7:
  4456 0156 B8060000 		.4byte	.LVL175
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 89
-
-
  4457 015a 4E070000 		.4byte	.LVL184
  4458 015e 0100     		.2byte	0x1
  4459 0160 55       		.byte	0x55
  4460 0161 00000000 		.4byte	0
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 89
+
+
  4461 0165 00000000 		.4byte	0
  4462              	.LLST8:
  4463 0169 1C070000 		.4byte	.LVL181
@@ -5338,13 +5334,13 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  4511 01aa 08       		.byte	0x8
  4512 01ab 20       		.byte	0x20
  4513 01ac F7       		.byte	0xf7
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 90
-
-
  4514 01ad 25       		.uleb128 0x25
  4515 01ae 25       		.byte	0x25
  4516 01af F7       		.byte	0xf7
  4517 01b0 2C       		.uleb128 0x2c
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 90
+
+
  4518 01b1 37       		.byte	0x37
  4519 01b2 26       		.byte	0x26
  4520 01b3 1C       		.byte	0x1c
@@ -5398,13 +5394,13 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  4568 01e6 1C       		.byte	0x1c
  4569 01e7 4F       		.byte	0x4f
  4570 01e8 26       		.byte	0x26
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 91
-
-
  4571 01e9 1C       		.byte	0x1c
  4572 01ea 79       		.byte	0x79
  4573 01eb 00       		.sleb128 0
  4574 01ec 40       		.byte	0x40
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 91
+
+
  4575 01ed 24       		.byte	0x24
  4576 01ee 40       		.byte	0x40
  4577 01ef 26       		.byte	0x26
@@ -5458,13 +5454,13 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  4625 0222 28       		.byte	0x28
  4626 0223 0100     		.2byte	0x1
  4627 0225 16       		.byte	0x16
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 92
-
-
  4628 0226 13       		.byte	0x13
  4629 0227 9F       		.byte	0x9f
  4630 0228 00000000 		.4byte	0
  4631 022c 00000000 		.4byte	0
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 92
+
+
  4632              	.LLST9:
  4633 0230 30070000 		.4byte	.LVL182
  4634 0234 4D070000 		.4byte	.LVL184-1
@@ -5518,13 +5514,13 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  4682 0272 F7       		.byte	0xf7
  4683 0273 33       		.uleb128 0x33
  4684 0274 F7       		.byte	0xf7
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 93
-
-
  4685 0275 25       		.uleb128 0x25
  4686 0276 0C       		.byte	0xc
  4687 0277 D34D6210 		.4byte	0x10624dd3
  4688 027b F7       		.byte	0xf7
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 93
+
+
  4689 027c 25       		.uleb128 0x25
  4690 027d 1E       		.byte	0x1e
  4691 027e 08       		.byte	0x8
@@ -5578,13 +5574,13 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  4739 02b1 76       		.byte	0x76
  4740 02b2 00       		.sleb128 0
  4741 02b3 1C       		.byte	0x1c
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 94
-
-
  4742 02b4 4F       		.byte	0x4f
  4743 02b5 26       		.byte	0x26
  4744 02b6 1C       		.byte	0x1c
  4745 02b7 30       		.byte	0x30
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 94
+
+
  4746 02b8 2D       		.byte	0x2d
  4747 02b9 28       		.byte	0x28
  4748 02ba 0100     		.2byte	0x1
@@ -5638,13 +5634,13 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  4796 0301 1C       		.byte	0x1c
  4797 0302 75       		.byte	0x75
  4798 0303 00       		.sleb128 0
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 95
-
-
  4799 0304 38       		.byte	0x38
  4800 0305 24       		.byte	0x24
  4801 0306 75       		.byte	0x75
  4802 0307 00       		.sleb128 0
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 95
+
+
  4803 0308 1C       		.byte	0x1c
  4804 0309 F7       		.byte	0xf7
  4805 030a 33       		.uleb128 0x33
@@ -5698,13 +5694,13 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  4853 0340 F7       		.byte	0xf7
  4854 0341 2C       		.uleb128 0x2c
  4855 0342 37       		.byte	0x37
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 96
-
-
  4856 0343 26       		.byte	0x26
  4857 0344 75       		.byte	0x75
  4858 0345 00       		.sleb128 0
  4859 0346 38       		.byte	0x38
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 96
+
+
  4860 0347 24       		.byte	0x24
  4861 0348 75       		.byte	0x75
  4862 0349 00       		.sleb128 0
@@ -5758,13 +5754,13 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  4910 03b6 14040000 		.4byte	.LVL101
  4911 03ba 0100     		.2byte	0x1
  4912 03bc 55       		.byte	0x55
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 97
-
-
  4913 03bd 16040000 		.4byte	.LVL102
  4914 03c1 20040000 		.4byte	.LVL105
  4915 03c5 0100     		.2byte	0x1
  4916 03c7 55       		.byte	0x55
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 97
+
+
  4917 03c8 00000000 		.4byte	0
  4918 03cc 00000000 		.4byte	0
  4919              	.LLST14:
@@ -5818,13 +5814,13 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  4967 0008 BE050000 		.4byte	.LBB6
  4968 000c 70070000 		.4byte	.LBE6
  4969 0010 00000000 		.4byte	0
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 98
-
-
  4970 0014 00000000 		.4byte	0
  4971 0018 B6050000 		.4byte	.LBB4
  4972 001c B8050000 		.4byte	.LBE4
  4973 0020 BE050000 		.4byte	.LBB5
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 98
+
+
  4974 0024 60060000 		.4byte	.LBE5
  4975 0028 00000000 		.4byte	0
  4976 002c 00000000 		.4byte	0
@@ -5878,13 +5874,13 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  5000              	.LASF56:
  5001 006b 466C6167 		.ascii	"FlagChangeParameters\000"
  5001      4368616E 
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 99
-
-
  5001      67655061 
  5001      72616D65 
  5001      74657273 
  5002              	.LASF57:
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 99
+
+
  5003 0080 62756666 		.ascii	"bufferUART\000"
  5003      65725541 
  5003      525400
@@ -5938,13 +5934,13 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  5025 0108 5350494D 		.ascii	"SPIM_2_Start\000"
  5025      5F325F53 
  5025      74617274 
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 100
-
-
  5025      00
  5026              	.LASF52:
  5027 0115 64617461 		.ascii	"data_register\000"
  5027      5F726567 
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 100
+
+
  5027      69737465 
  5027      7200
  5028              	.LASF55:
@@ -5998,13 +5994,13 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  5049      4445424F 
  5049      554E4345 
  5049      525F5374 
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 101
-
-
  5049      61727445 
  5050              	.LASF76:
  5051 01d0 50696E5F 		.ascii	"Pin_EnableDisable_Read\000"
  5051      456E6162 
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 101
+
+
  5051      6C654469 
  5051      7361626C 
  5051      655F5265 
@@ -6058,13 +6054,13 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  5073      7200
  5074              	.LASF28:
  5075 0275 41636344 		.ascii	"AccData_Threshold\000"
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 102
-
-
  5075      6174615F 
  5075      54687265 
  5075      73686F6C 
  5075      6400
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 102
+
+
  5076              	.LASF21:
  5077 0287 6C6F6E67 		.ascii	"long double\000"
  5077      20646F75 
@@ -6118,188 +6114,179 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 1
  5097 032a 756E7369 		.ascii	"unsigned int\000"
  5097      676E6564 
  5097      20696E74 
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 103
-
-
  5097      00
  5098              	.LASF60:
  5099 0337 4C495333 		.ascii	"LIS3DH_readByte\000"
  5099      44485F72 
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 103
+
+
  5099      65616442 
  5099      79746500 
  5100              	.LASF89:
- 5101 0347 433A5C55 		.ascii	"C:\\Users\\noemi\\Desktop\\university\\university\\"
+ 5101 0347 433A5C55 		.ascii	"C:\\Users\\Lorenzo\\Desktop\\Final-Assignment-PSoC\\"
  5101      73657273 
- 5101      5C6E6F65 
- 5101      6D695C44 
- 5101      65736B74 
- 5102 0374 706F6C69 		.ascii	"poli\\lab sensors\\final assignment\\Final-Assignme"
- 5102      5C6C6162 
- 5102      2073656E 
- 5102      736F7273 
- 5102      5C66696E 
- 5103 03a4 6E742D50 		.ascii	"nt-PSoC\\Final_Assignment\\Final_assignment_01.cyds"
- 5103      536F435C 
- 5103      46696E61 
- 5103      6C5F4173 
- 5103      7369676E 
- 5104 03d5 6E00     		.ascii	"n\000"
- 5105              	.LASF7:
- 5106 03d7 73686F72 		.ascii	"short unsigned int\000"
- 5106      7420756E 
- 5106      7369676E 
- 5106      65642069 
- 5106      6E7400
- 5107              	.LASF71:
- 5108 03ea 5247424C 		.ascii	"RGBLed_Start\000"
- 5108      65645F53 
- 5108      74617274 
+ 5101      5C4C6F72 
+ 5101      656E7A6F 
+ 5101      5C446573 
+ 5102 0376 46696E61 		.ascii	"Final_Assignment\\Final_assignment_01.cydsn\000"
+ 5102      6C5F4173 
+ 5102      7369676E 
+ 5102      6D656E74 
+ 5102      5C46696E 
+ 5103              	.LASF7:
+ 5104 03a1 73686F72 		.ascii	"short unsigned int\000"
+ 5104      7420756E 
+ 5104      7369676E 
+ 5104      65642069 
+ 5104      6E7400
+ 5105              	.LASF71:
+ 5106 03b4 5247424C 		.ascii	"RGBLed_Start\000"
+ 5106      65645F53 
+ 5106      74617274 
+ 5106      00
+ 5107              	.LASF20:
+ 5108 03c1 63686172 		.ascii	"char\000"
  5108      00
- 5109              	.LASF20:
- 5110 03f7 63686172 		.ascii	"char\000"
+ 5109              	.LASF9:
+ 5110 03c6 6C6F6E67 		.ascii	"long int\000"
+ 5110      20696E74 
  5110      00
- 5111              	.LASF9:
- 5112 03fc 6C6F6E67 		.ascii	"long int\000"
- 5112      20696E74 
+ 5111              	.LASF53:
+ 5112 03cf 436F756E 		.ascii	"Counter_overflow\000"
+ 5112      7465725F 
+ 5112      6F766572 
+ 5112      666C6F77 
  5112      00
- 5113              	.LASF53:
- 5114 0405 436F756E 		.ascii	"Counter_overflow\000"
- 5114      7465725F 
- 5114      6F766572 
- 5114      666C6F77 
+ 5113              	.LASF63:
+ 5114 03e0 4C495333 		.ascii	"LIS3DH_writeByte\000"
+ 5114      44485F77 
+ 5114      72697465 
+ 5114      42797465 
  5114      00
- 5115              	.LASF63:
- 5116 0416 4C495333 		.ascii	"LIS3DH_writeByte\000"
- 5116      44485F77 
- 5116      72697465 
- 5116      42797465 
- 5116      00
- 5117              	.LASF14:
- 5118 0427 696E7433 		.ascii	"int32_t\000"
- 5118      325F7400 
- 5119              	.LASF73:
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 104
+ 5115              	.LASF14:
+ 5116 03f1 696E7433 		.ascii	"int32_t\000"
+ 5116      325F7400 
+ 5117              	.LASF73:
+ 5118 03f9 436F756E 		.ascii	"Counter_TimeStamp_Start\000"
+ 5118      7465725F 
+ 5118      54696D65 
+ 5118      5374616D 
+ 5118      705F5374 
+ 5119              	.LASF13:
+ 5120 0411 696E7431 		.ascii	"int16_t\000"
+ 5120      365F7400 
+ 5121              	.LASF15:
+ 5122 0419 75696E74 		.ascii	"uint8\000"
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 104
 
 
- 5120 042f 436F756E 		.ascii	"Counter_TimeStamp_Start\000"
- 5120      7465725F 
- 5120      54696D65 
- 5120      5374616D 
- 5120      705F5374 
- 5121              	.LASF13:
- 5122 0447 696E7431 		.ascii	"int16_t\000"
- 5122      365F7400 
- 5123              	.LASF15:
- 5124 044f 75696E74 		.ascii	"uint8\000"
- 5124      3800
- 5125              	.LASF42:
- 5126 0455 64617461 		.ascii	"data\000"
- 5126      00
- 5127              	.LASF16:
- 5128 045a 75696E74 		.ascii	"uint32\000"
- 5128      333200
- 5129              	.LASF88:
- 5130 0461 6D61696E 		.ascii	"main.c\000"
- 5130      2E6300
- 5131              	.LASF10:
- 5132 0468 6C6F6E67 		.ascii	"long unsigned int\000"
- 5132      20756E73 
- 5132      69676E65 
- 5132      6420696E 
- 5132      7400
- 5133              	.LASF19:
- 5134 047a 646F7562 		.ascii	"double\000"
- 5134      6C6500
- 5135              	.LASF58:
- 5136 0481 55415254 		.ascii	"UART_1_PutString\000"
- 5136      5F315F50 
- 5136      75745374 
- 5136      72696E67 
- 5136      00
- 5137              	.LASF44:
- 5138 0492 74696D65 		.ascii	"timestamp_array\000"
- 5138      7374616D 
- 5138      705F6172 
- 5138      72617900 
- 5139              	.LASF72:
- 5140 04a2 4144435F 		.ascii	"ADC_DelSig_Start\000"
- 5140      44656C53 
- 5140      69675F53 
- 5140      74617274 
- 5140      00
- 5141              	.LASF37:
- 5142 04b3 666F6F74 		.ascii	"footer\000"
- 5142      657200
- 5143              	.LASF40:
- 5144 04ba 67726565 		.ascii	"green_y\000"
- 5144      6E5F7900 
- 5145              	.LASF8:
- 5146 04c2 5F5F696E 		.ascii	"__int32_t\000"
- 5146      7433325F 
- 5146      7400
- 5147              	.LASF50:
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 105
+ 5122      3800
+ 5123              	.LASF42:
+ 5124 041f 64617461 		.ascii	"data\000"
+ 5124      00
+ 5125              	.LASF16:
+ 5126 0424 75696E74 		.ascii	"uint32\000"
+ 5126      333200
+ 5127              	.LASF88:
+ 5128 042b 6D61696E 		.ascii	"main.c\000"
+ 5128      2E6300
+ 5129              	.LASF10:
+ 5130 0432 6C6F6E67 		.ascii	"long unsigned int\000"
+ 5130      20756E73 
+ 5130      69676E65 
+ 5130      6420696E 
+ 5130      7400
+ 5131              	.LASF19:
+ 5132 0444 646F7562 		.ascii	"double\000"
+ 5132      6C6500
+ 5133              	.LASF58:
+ 5134 044b 55415254 		.ascii	"UART_1_PutString\000"
+ 5134      5F315F50 
+ 5134      75745374 
+ 5134      72696E67 
+ 5134      00
+ 5135              	.LASF44:
+ 5136 045c 74696D65 		.ascii	"timestamp_array\000"
+ 5136      7374616D 
+ 5136      705F6172 
+ 5136      72617900 
+ 5137              	.LASF72:
+ 5138 046c 4144435F 		.ascii	"ADC_DelSig_Start\000"
+ 5138      44656C53 
+ 5138      69675F53 
+ 5138      74617274 
+ 5138      00
+ 5139              	.LASF37:
+ 5140 047d 666F6F74 		.ascii	"footer\000"
+ 5140      657200
+ 5141              	.LASF40:
+ 5142 0484 67726565 		.ascii	"green_y\000"
+ 5142      6E5F7900 
+ 5143              	.LASF8:
+ 5144 048c 5F5F696E 		.ascii	"__int32_t\000"
+ 5144      7433325F 
+ 5144      7400
+ 5145              	.LASF50:
+ 5146 0496 6E65775F 		.ascii	"new_EEPROM\000"
+ 5146      45455052 
+ 5146      4F4D00
+ 5147              	.LASF54:
+ 5148 04a1 73797374 		.ascii	"system_status\000"
+ 5148      656D5F73 
+ 5148      74617475 
+ 5148      7300
+ 5149              	.LASF51:
+ 5150 04af 6E65775F 		.ascii	"new_EnableDisable\000"
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\cc6ljJ1b.s 			page 105
 
 
- 5148 04cc 6E65775F 		.ascii	"new_EEPROM\000"
- 5148      45455052 
- 5148      4F4D00
- 5149              	.LASF54:
- 5150 04d7 73797374 		.ascii	"system_status\000"
- 5150      656D5F73 
- 5150      74617475 
- 5150      7300
- 5151              	.LASF51:
- 5152 04e5 6E65775F 		.ascii	"new_EnableDisable\000"
- 5152      456E6162 
- 5152      6C654469 
- 5152      7361626C 
- 5152      6500
- 5153              	.LASF30:
- 5154 04f7 4163635F 		.ascii	"Acc_x\000"
- 5154      7800
- 5155              	.LASF31:
- 5156 04fd 4163635F 		.ascii	"Acc_y\000"
- 5156      7900
- 5157              	.LASF32:
- 5158 0503 4163635F 		.ascii	"Acc_z\000"
- 5158      7A00
- 5159              	.LASF69:
- 5160 0509 5350494D 		.ascii	"SPIM_1_Start\000"
- 5160      5F315F53 
- 5160      74617274 
+ 5150      456E6162 
+ 5150      6C654469 
+ 5150      7361626C 
+ 5150      6500
+ 5151              	.LASF30:
+ 5152 04c1 4163635F 		.ascii	"Acc_x\000"
+ 5152      7800
+ 5153              	.LASF31:
+ 5154 04c7 4163635F 		.ascii	"Acc_y\000"
+ 5154      7900
+ 5155              	.LASF32:
+ 5156 04cd 4163635F 		.ascii	"Acc_z\000"
+ 5156      7A00
+ 5157              	.LASF69:
+ 5158 04d3 5350494D 		.ascii	"SPIM_1_Start\000"
+ 5158      5F315F53 
+ 5158      74617274 
+ 5158      00
+ 5159              	.LASF45:
+ 5160 04e0 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 5160      52784275 
+ 5160      66666572 
  5160      00
- 5161              	.LASF45:
- 5162 0516 49544D5F 		.ascii	"ITM_RxBuffer\000"
- 5162      52784275 
- 5162      66666572 
- 5162      00
- 5163              	.LASF87:
- 5164 0523 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
- 5164      43313120 
- 5164      352E342E 
- 5164      31203230 
- 5164      31363036 
- 5165 0556 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
- 5165      20726576 
- 5165      6973696F 
- 5165      6E203233 
- 5165      37373135 
- 5166 0589 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
- 5166      66756E63 
- 5166      74696F6E 
- 5166      2D736563 
- 5166      74696F6E 
- 5167              	.LASF74:
- 5168 05b1 43794465 		.ascii	"CyDelay\000"
- 5168      6C617900 
- 5169              	.LASF39:
- 5170 05b9 7265645F 		.ascii	"red_x\000"
- 5170      7800
- 5171              	.LASF26:
- 5172 05bf 41636344 		.ascii	"AccData\000"
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\ccAxpwVW.s 			page 106
-
-
- 5172      61746100 
- 5173              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
+ 5161              	.LASF87:
+ 5162 04ed 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 5162      43313120 
+ 5162      352E342E 
+ 5162      31203230 
+ 5162      31363036 
+ 5163 0520 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 5163      20726576 
+ 5163      6973696F 
+ 5163      6E203233 
+ 5163      37373135 
+ 5164 0553 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 5164      66756E63 
+ 5164      74696F6E 
+ 5164      2D736563 
+ 5164      74696F6E 
+ 5165              	.LASF74:
+ 5166 057b 43794465 		.ascii	"CyDelay\000"
+ 5166      6C617900 
+ 5167              	.LASF39:
+ 5168 0583 7265645F 		.ascii	"red_x\000"
+ 5168      7800
+ 5169              	.LASF26:
+ 5170 0589 41636344 		.ascii	"AccData\000"
+ 5170      61746100 
+ 5171              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

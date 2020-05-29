@@ -4,6 +4,7 @@
  * 
  * This source code file contains macros and functions to interface
  * with the SPI Master (SPIM) of the PSoC.
+ * CS_1 and SPIM_1 are referred to LIS3DH
 
 */
 

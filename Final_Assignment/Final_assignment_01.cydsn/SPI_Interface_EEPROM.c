@@ -4,6 +4,7 @@
  * 
  * This source code file contains macros and functions to interface
  * with the SPI Master (SPIM) of the PSoC.
+ * CS_2 and SPIM_2 are referred to EEPROM 25LC256
 
 */
 
