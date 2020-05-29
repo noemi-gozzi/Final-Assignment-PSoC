@@ -81,7 +81,7 @@ int main(void)
     /*          CTRL1[0:2]=1 x,y,z enable                     */
     /*          CTRL1[3]=1 normal/high resolution mode        */
     
-    LIS3DH_writeByte(LIS3DH_CTRL_REG1, 0x37);
+    LIS3DH_writeByte(LIS3DH_CTRL_REG1, 0x47);
     data_read = LIS3DH_readByte(LIS3DH_CTRL_REG1);
     sprintf(bufferUART, " --> LIS3DH CTRL REGISTER 1= 0x%02X\r\n", data_read);
     UART_1_PutBuffer;
@@ -260,6 +260,8 @@ int main(void)
             new_EEPROM=0;
         }
         
+        /*
+        */
         if(new_EnableDisable){
             EEPROM_writeByte(EEPROM_ADDRESS_ENABLEDISABLE, FlagEnableDisable);
             EEPROM_waitForWriteComplete();
@@ -274,13 +276,14 @@ int main(void)
                 UART_1_PutBuffer;
             }    
         }
-        
-       if (configuration_status && FlagChangeParameters){
+        /*
+        */
+        if (configuration_status && FlagChangeParameters){
                 sprintf(bufferUART, "NEW UART VERBOSE FLAG: %d\r\n", UARTVerboseFlag);
                 UART_1_PutBuffer;
                 FlagChangeParameters=0;
         
-       }
+        }
 
         if (PacketReadyFlag==1 && system_status==1 && configuration_status==0){
             uint8_t data = LIS3DH_readByte(LIS3DH_INT1_SRC);
@@ -398,13 +401,12 @@ int main(void)
                     Acc_x = Acc_x + ((int16)((AccData[0+i]) | ((AccData[1+i])<<8))>>6);
                     Acc_y = Acc_y + ((int16)((AccData[2+i]) | ((AccData[3+i])<<8))>>6);
                     Acc_z = Acc_z + ((int16)((AccData[4+i]) | ((AccData[5+i])<<8))>>6);
-                    
+
                 }
                 
                 LIS3DH_writeByte(LIS3DH_FIFO_CTRL_REG,LIS3DH_FIFO_CTRL_REG_BYPASS_MODE);
                 LIS3DH_writeByte(LIS3DH_FIFO_CTRL_REG,LIS3DH_FIFO_CTRL_REG_FIFO_MODE_WTM_7);
                 
-                UART_1_PutString("*********\r\n");
                 Acc_x = Acc_x/8;
                 Acc_y = Acc_y/8;
                 Acc_z = Acc_z/8;
@@ -414,9 +416,9 @@ int main(void)
                 OutAccZ = Acc_z * CONVERSION_FACTOR_DIGIT_MG;
                 sprintf(bufferUART, "X: %d, Y: %d, Z: %d [mg]\r\n", OutAccX, OutAccY, OutAccZ);
                 UART_1_PutBuffer;
-//                
+                
                 if (UARTVerboseFlag){
-                    //data preparing for UART serial Communication
+                    /*Data preparing for UART serial Communication with Bridge Control Panel*/
                     OutArray[1] = (uint8_t)(OutAccX & 0xFF); 
                     OutArray[2] = (uint8_t)(OutAccX >> 8);
                     OutArray[3] = (uint8_t)(OutAccY & 0xFF);
@@ -433,14 +435,10 @@ int main(void)
 
                 RGBLed_WriteColor(red_x, green_y, blue_z);
             }
-        
-            
+          
         PacketReadyFlag=0;
         
-        }
-//    
-
-
+        }    
     }
 }
 

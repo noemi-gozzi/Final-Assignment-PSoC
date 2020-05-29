@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc8PckDx.s 			page 1
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccUkPhV6.s 			page 1
 
 
    1              		.syntax unified
@@ -34,16 +34,17 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc8PckDx.s 			page 1
    4:SPI_Interface.c ****  * 
    5:SPI_Interface.c ****  * This source code file contains macros and functions to interface
    6:SPI_Interface.c ****  * with the SPI Master (SPIM) of the PSoC.
-   7:SPI_Interface.c **** 
-   8:SPI_Interface.c **** */
-   9:SPI_Interface.c **** 
-  10:SPI_Interface.c **** #include "SPI_Interface.h"
-  11:SPI_Interface.c **** 
-  12:SPI_Interface.c **** /*
-  13:SPI_Interface.c **** * @brief Full-Duplex, Single-Operation 1-Byte Trade
-  14:SPI_Interface.c **** */
-  15:SPI_Interface.c **** uint8_t SPI_Interface_tradeByte(uint8_t byte) {
-  28              		.loc 1 15 0
+   7:SPI_Interface.c ****  * CS_1 and SPIM_1 are referred to LIS3DH
+   8:SPI_Interface.c **** 
+   9:SPI_Interface.c **** */
+  10:SPI_Interface.c **** 
+  11:SPI_Interface.c **** #include "SPI_Interface.h"
+  12:SPI_Interface.c **** 
+  13:SPI_Interface.c **** /*
+  14:SPI_Interface.c **** * @brief Full-Duplex, Single-Operation 1-Byte Trade
+  15:SPI_Interface.c **** */
+  16:SPI_Interface.c **** uint8_t SPI_Interface_tradeByte(uint8_t byte) {
+  28              		.loc 1 16 0
   29              		.cfi_startproc
   30              		@ args = 0, pretend = 0, frame = 0
   31              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -53,53 +54,53 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc8PckDx.s 			page 1
   35              		.cfi_offset 4, -8
   36              		.cfi_offset 14, -4
   37 0002 0446     		mov	r4, r0
-  16:SPI_Interface.c **** 		
-  17:SPI_Interface.c ****     /* Enable the Slave */
-  18:SPI_Interface.c ****     CS_1_Write(0);
-  38              		.loc 1 18 0
+  17:SPI_Interface.c **** 		
+  18:SPI_Interface.c ****     /* Enable the Slave */
+  19:SPI_Interface.c ****     CS_1_Write(0);
+  38              		.loc 1 19 0
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccUkPhV6.s 			page 2
+
+
   39 0004 0020     		movs	r0, #0
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc8PckDx.s 			page 2
-
-
   40              	.LVL1:
   41 0006 FFF7FEFF 		bl	CS_1_Write
   42              	.LVL2:
-  19:SPI_Interface.c **** 
-  20:SPI_Interface.c **** 	/* Load the TX Buffer */
-  21:SPI_Interface.c **** 	SPIM_1_WriteTxData(byte);
-  43              		.loc 1 21 0
+  20:SPI_Interface.c **** 
+  21:SPI_Interface.c **** 	/* Load the TX Buffer */
+  22:SPI_Interface.c **** 	SPIM_1_WriteTxData(byte);
+  43              		.loc 1 22 0
   44 000a 2046     		mov	r0, r4
   45 000c FFF7FEFF 		bl	SPIM_1_WriteTxData
   46              	.LVL3:
   47              	.L2:
-  22:SPI_Interface.c **** 	
-  23:SPI_Interface.c **** 	/* Wait for TX */
-  24:SPI_Interface.c ****     while( !(SPIM_1_ReadTxStatus() & SPIM_1_STS_BYTE_COMPLETE) );
-  48              		.loc 1 24 0 discriminator 1
+  23:SPI_Interface.c **** 	
+  24:SPI_Interface.c **** 	/* Wait for TX */
+  25:SPI_Interface.c ****     while( !(SPIM_1_ReadTxStatus() & SPIM_1_STS_BYTE_COMPLETE) );
+  48              		.loc 1 25 0 discriminator 1
   49 0010 FFF7FEFF 		bl	SPIM_1_ReadTxStatus
   50              	.LVL4:
   51 0014 10F0080F 		tst	r0, #8
   52 0018 FAD0     		beq	.L2
-  25:SPI_Interface.c **** 	
-  26:SPI_Interface.c **** 	/* Read the RX Buffer */
-  27:SPI_Interface.c **** 	uint8_t data = SPIM_1_ReadRxData();
-  53              		.loc 1 27 0
+  26:SPI_Interface.c **** 	
+  27:SPI_Interface.c **** 	/* Read the RX Buffer */
+  28:SPI_Interface.c **** 	uint8_t data = SPIM_1_ReadRxData();
+  53              		.loc 1 28 0
   54 001a FFF7FEFF 		bl	SPIM_1_ReadRxData
   55              	.LVL5:
   56 001e 0446     		mov	r4, r0
   57              	.LVL6:
-  28:SPI_Interface.c **** 	
-  29:SPI_Interface.c **** 	/* Disable the Slave */
-  30:SPI_Interface.c ****     CS_1_Write(1);
-  58              		.loc 1 30 0
+  29:SPI_Interface.c **** 	
+  30:SPI_Interface.c **** 	/* Disable the Slave */
+  31:SPI_Interface.c ****     CS_1_Write(1);
+  58              		.loc 1 31 0
   59 0020 0120     		movs	r0, #1
   60 0022 FFF7FEFF 		bl	CS_1_Write
   61              	.LVL7:
-  31:SPI_Interface.c **** 
-  32:SPI_Interface.c **** 	return data;    
-  33:SPI_Interface.c ****     
-  34:SPI_Interface.c **** }
-  62              		.loc 1 34 0
+  32:SPI_Interface.c **** 
+  33:SPI_Interface.c **** 	return data;    
+  34:SPI_Interface.c ****     
+  35:SPI_Interface.c **** }
+  62              		.loc 1 35 0
   63 0026 2046     		mov	r0, r4
   64 0028 10BD     		pop	{r4, pc}
   65              		.cfi_endproc
@@ -113,16 +114,16 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc8PckDx.s 			page 1
   73              		.type	SPI_Interface_ReadByte, %function
   74              	SPI_Interface_ReadByte:
   75              	.LFB1:
-  35:SPI_Interface.c **** 
   36:SPI_Interface.c **** 
-  37:SPI_Interface.c **** /*
-  38:SPI_Interface.c **** * @brief RX-only, Dual-Operation 1-Byte READ
-  39:SPI_Interface.c **** */
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc8PckDx.s 			page 3
+  37:SPI_Interface.c **** 
+  38:SPI_Interface.c **** /*
+  39:SPI_Interface.c **** * @brief RX-only, Dual-Operation 1-Byte READ
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccUkPhV6.s 			page 3
 
 
-  40:SPI_Interface.c **** uint8_t SPI_Interface_ReadByte(uint8_t byteTX) {
-  76              		.loc 1 40 0
+  40:SPI_Interface.c **** */
+  41:SPI_Interface.c **** uint8_t SPI_Interface_ReadByte(uint8_t byteTX) {
+  76              		.loc 1 41 0
   77              		.cfi_startproc
   78              		@ args = 0, pretend = 0, frame = 0
   79              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -132,64 +133,64 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc8PckDx.s 			page 1
   83              		.cfi_offset 4, -8
   84              		.cfi_offset 14, -4
   85 0002 0446     		mov	r4, r0
-  41:SPI_Interface.c **** 	
-  42:SPI_Interface.c **** 	/* Enable the Slave */
-  43:SPI_Interface.c ****     CS_1_Write(0);
-  86              		.loc 1 43 0
+  42:SPI_Interface.c **** 	
+  43:SPI_Interface.c **** 	/* Enable the Slave */
+  44:SPI_Interface.c ****     CS_1_Write(0);
+  86              		.loc 1 44 0
   87 0004 0020     		movs	r0, #0
   88              	.LVL9:
   89 0006 FFF7FEFF 		bl	CS_1_Write
   90              	.LVL10:
-  44:SPI_Interface.c **** 
-  45:SPI_Interface.c ****     /* Load the TX Buffer */
-  46:SPI_Interface.c ****     SPIM_1_WriteTxData(byteTX);
-  91              		.loc 1 46 0
+  45:SPI_Interface.c **** 
+  46:SPI_Interface.c ****     /* Load the TX Buffer */
+  47:SPI_Interface.c ****     SPIM_1_WriteTxData(byteTX);
+  91              		.loc 1 47 0
   92 000a 2046     		mov	r0, r4
   93 000c FFF7FEFF 		bl	SPIM_1_WriteTxData
   94              	.LVL11:
-  47:SPI_Interface.c ****     
-  48:SPI_Interface.c ****     /* SPI Dummy Byte */
-  49:SPI_Interface.c ****     SPIM_1_WriteTxData(SPI_DUMMY_BYTE);
-  95              		.loc 1 49 0
+  48:SPI_Interface.c ****     
+  49:SPI_Interface.c ****     /* SPI Dummy Byte */
+  50:SPI_Interface.c ****     SPIM_1_WriteTxData(SPI_DUMMY_BYTE);
+  95              		.loc 1 50 0
   96 0010 0020     		movs	r0, #0
   97 0012 FFF7FEFF 		bl	SPIM_1_WriteTxData
   98              	.LVL12:
   99              	.L5:
-  50:SPI_Interface.c ****     
-  51:SPI_Interface.c ****     /* Wait for TX/RX */
-  52:SPI_Interface.c ****     while( !(SPIM_1_ReadTxStatus() & SPIM_1_STS_SPI_DONE) ) ;
- 100              		.loc 1 52 0 discriminator 1
+  51:SPI_Interface.c ****     
+  52:SPI_Interface.c ****     /* Wait for TX/RX */
+  53:SPI_Interface.c ****     while( !(SPIM_1_ReadTxStatus() & SPIM_1_STS_SPI_DONE) ) ;
+ 100              		.loc 1 53 0 discriminator 1
  101 0016 FFF7FEFF 		bl	SPIM_1_ReadTxStatus
  102              	.LVL13:
  103 001a 10F0010F 		tst	r0, #1
  104 001e FAD0     		beq	.L5
-  53:SPI_Interface.c ****     
-  54:SPI_Interface.c ****     /* Read the RX Buffer */
-  55:SPI_Interface.c ****     SPIM_1_ReadRxData();
- 105              		.loc 1 55 0
+  54:SPI_Interface.c ****     
+  55:SPI_Interface.c ****     /* Read the RX Buffer */
+  56:SPI_Interface.c ****     SPIM_1_ReadRxData();
+ 105              		.loc 1 56 0
  106 0020 FFF7FEFF 		bl	SPIM_1_ReadRxData
  107              	.LVL14:
-  56:SPI_Interface.c ****     uint8_t byteRX = SPIM_1_ReadRxData();
- 108              		.loc 1 56 0
+  57:SPI_Interface.c ****     uint8_t byteRX = SPIM_1_ReadRxData();
+ 108              		.loc 1 57 0
  109 0024 FFF7FEFF 		bl	SPIM_1_ReadRxData
  110              	.LVL15:
  111 0028 0446     		mov	r4, r0
  112              	.LVL16:
-  57:SPI_Interface.c ****         
-  58:SPI_Interface.c ****     /* Disable the Slave */
-  59:SPI_Interface.c ****     CS_1_Write(1);
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc8PckDx.s 			page 4
+  58:SPI_Interface.c ****         
+  59:SPI_Interface.c ****     /* Disable the Slave */
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccUkPhV6.s 			page 4
 
 
- 113              		.loc 1 59 0
+  60:SPI_Interface.c ****     CS_1_Write(1);
+ 113              		.loc 1 60 0
  114 002a 0120     		movs	r0, #1
  115 002c FFF7FEFF 		bl	CS_1_Write
  116              	.LVL17:
-  60:SPI_Interface.c ****    
-  61:SPI_Interface.c ****     return byteRX;	
-  62:SPI_Interface.c ****     
-  63:SPI_Interface.c **** }
- 117              		.loc 1 63 0
+  61:SPI_Interface.c ****    
+  62:SPI_Interface.c ****     return byteRX;	
+  63:SPI_Interface.c ****     
+  64:SPI_Interface.c **** }
+ 117              		.loc 1 64 0
  118 0030 2046     		mov	r0, r4
  119 0032 10BD     		pop	{r4, pc}
  120              		.cfi_endproc
@@ -203,13 +204,13 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc8PckDx.s 			page 1
  128              		.type	SPI_Interface_Multi_Trade, %function
  129              	SPI_Interface_Multi_Trade:
  130              	.LFB2:
-  64:SPI_Interface.c **** 
   65:SPI_Interface.c **** 
-  66:SPI_Interface.c **** /*
-  67:SPI_Interface.c **** * @brief Full-Duplex, Multi-Byte Trade (RX/TX)
-  68:SPI_Interface.c **** */
-  69:SPI_Interface.c **** void SPI_Interface_Multi_Trade(uint8_t* dataTX, uint8_t* dataRX, uint8_t nBytes) {
- 131              		.loc 1 69 0
+  66:SPI_Interface.c **** 
+  67:SPI_Interface.c **** /*
+  68:SPI_Interface.c **** * @brief Full-Duplex, Multi-Byte Trade (RX/TX)
+  69:SPI_Interface.c **** */
+  70:SPI_Interface.c **** void SPI_Interface_Multi_Trade(uint8_t* dataTX, uint8_t* dataRX, uint8_t nBytes) {
+ 131              		.loc 1 70 0
  132              		.cfi_startproc
  133              		@ args = 0, pretend = 0, frame = 0
  134              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -227,24 +228,24 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc8PckDx.s 			page 1
  146              		.type	SPI_Interface_Multi_RW, %function
  147              	SPI_Interface_Multi_RW:
  148              	.LFB3:
-  70:SPI_Interface.c **** 	
-  71:SPI_Interface.c ****     
-  72:SPI_Interface.c **** 	
-  73:SPI_Interface.c **** }
-  74:SPI_Interface.c **** 
-  75:SPI_Interface.c **** /*
-  76:SPI_Interface.c **** * @brief RX-only, Dual-Operation Multi-Byte READ/WRITE
-  77:SPI_Interface.c **** */
-  78:SPI_Interface.c **** void SPI_Interface_Multi_RW(uint8_t* dataTX, uint8_t bytesTX, uint8_t* dataRX, uint8_t bytesRX) {
- 149              		.loc 1 78 0
+  71:SPI_Interface.c **** 	
+  72:SPI_Interface.c ****     
+  73:SPI_Interface.c **** 	
+  74:SPI_Interface.c **** }
+  75:SPI_Interface.c **** 
+  76:SPI_Interface.c **** /*
+  77:SPI_Interface.c **** * @brief RX-only, Dual-Operation Multi-Byte READ/WRITE
+  78:SPI_Interface.c **** */
+  79:SPI_Interface.c **** void SPI_Interface_Multi_RW(uint8_t* dataTX, uint8_t bytesTX, uint8_t* dataRX, uint8_t bytesRX) {
+ 149              		.loc 1 79 0
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccUkPhV6.s 			page 5
+
+
  150              		.cfi_startproc
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc8PckDx.s 			page 5
-
-
  151              		@ args = 0, pretend = 0, frame = 8
  152              		@ frame_needed = 0, uses_anonymous_args = 0
  153              	.LVL19:
- 154              		.loc 1 78 0
+ 154              		.loc 1 79 0
  155 0000 2DE9F043 		push	{r4, r5, r6, r7, r8, r9, lr}
  156              		.cfi_def_cfa_offset 28
  157              		.cfi_offset 4, -28
@@ -260,31 +261,31 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc8PckDx.s 			page 1
  167 0008 0C46     		mov	r4, r1
  168 000a 1746     		mov	r7, r2
  169 000c 9846     		mov	r8, r3
-  79:SPI_Interface.c **** 
-  80:SPI_Interface.c ****     /* Enable the Slave */
-  81:SPI_Interface.c ****     CS_1_Write(0);
- 170              		.loc 1 81 0
+  80:SPI_Interface.c **** 
+  81:SPI_Interface.c ****     /* Enable the Slave */
+  82:SPI_Interface.c ****     CS_1_Write(0);
+ 170              		.loc 1 82 0
  171 000e 0020     		movs	r0, #0
  172              	.LVL20:
  173 0010 FFF7FEFF 		bl	CS_1_Write
  174              	.LVL21:
-  82:SPI_Interface.c ****         
-  83:SPI_Interface.c ****     int8_t count = bytesTX, index = 0;
- 175              		.loc 1 83 0
+  83:SPI_Interface.c ****         
+  84:SPI_Interface.c ****     int8_t count = bytesTX, index = 0;
+ 175              		.loc 1 84 0
  176 0014 64B2     		sxtb	r4, r4
  177              	.LVL22:
  178 0016 0025     		movs	r5, #0
-  84:SPI_Interface.c ****     	
-  85:SPI_Interface.c ****     /* Transmit Data */
-  86:SPI_Interface.c ****     while ( count > 0 ) {
- 179              		.loc 1 86 0
+  85:SPI_Interface.c ****     	
+  86:SPI_Interface.c ****     /* Transmit Data */
+  87:SPI_Interface.c ****     while ( count > 0 ) {
+ 179              		.loc 1 87 0
  180 0018 11E0     		b	.L9
  181              	.LVL23:
  182              	.L11:
-  87:SPI_Interface.c ****             
-  88:SPI_Interface.c ****     	/* Load the TX buffer with Data*/
-  89:SPI_Interface.c ****         SPIM_1_PutArray(&dataTX[index*SPI_TxBufferSize], (count > SPI_TxBufferSize ? SPI_TxBufferSi
- 183              		.loc 1 89 0
+  88:SPI_Interface.c ****             
+  89:SPI_Interface.c ****     	/* Load the TX buffer with Data*/
+  90:SPI_Interface.c ****         SPIM_1_PutArray(&dataTX[index*SPI_TxBufferSize], (count > SPI_TxBufferSize ? SPI_TxBufferSi
+ 183              		.loc 1 90 0
  184 001a 2146     		mov	r1, r4
  185 001c 082C     		cmp	r4, #8
  186 001e A8BF     		it	ge
@@ -294,77 +295,77 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc8PckDx.s 			page 1
  190 0028 FFF7FEFF 		bl	SPIM_1_PutArray
  191              	.LVL24:
  192              	.L10:
-  90:SPI_Interface.c ****         /* Wait for TX */
-  91:SPI_Interface.c ****         while( !(SPIM_1_ReadTxStatus() & SPIM_1_STS_SPI_DONE) );
- 193              		.loc 1 91 0 discriminator 1
+  91:SPI_Interface.c ****         /* Wait for TX */
+  92:SPI_Interface.c ****         while( !(SPIM_1_ReadTxStatus() & SPIM_1_STS_SPI_DONE) );
+ 193              		.loc 1 92 0 discriminator 1
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccUkPhV6.s 			page 6
+
+
  194 002c FFF7FEFF 		bl	SPIM_1_ReadTxStatus
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc8PckDx.s 			page 6
-
-
  195              	.LVL25:
  196 0030 10F0010F 		tst	r0, #1
  197 0034 FAD0     		beq	.L10
-  92:SPI_Interface.c ****         
-  93:SPI_Interface.c ****         /* Update count */
-  94:SPI_Interface.c ****         count -= SPI_TxBufferSize;
- 198              		.loc 1 94 0
+  93:SPI_Interface.c ****         
+  94:SPI_Interface.c ****         /* Update count */
+  95:SPI_Interface.c ****         count -= SPI_TxBufferSize;
+ 198              		.loc 1 95 0
  199 0036 083C     		subs	r4, r4, #8
  200              	.LVL26:
  201 0038 64B2     		sxtb	r4, r4
  202              	.LVL27:
-  95:SPI_Interface.c ****         index++;
- 203              		.loc 1 95 0
+  96:SPI_Interface.c ****         index++;
+ 203              		.loc 1 96 0
  204 003a 0135     		adds	r5, r5, #1
  205              	.LVL28:
  206 003c 6DB2     		sxtb	r5, r5
  207              	.LVL29:
  208              	.L9:
-  86:SPI_Interface.c ****             
- 209              		.loc 1 86 0
+  87:SPI_Interface.c ****             
+ 209              		.loc 1 87 0
  210 003e 002C     		cmp	r4, #0
  211 0040 EBDC     		bgt	.L11
-  96:SPI_Interface.c ****            
-  97:SPI_Interface.c ****     }
-  98:SPI_Interface.c ****         
-  99:SPI_Interface.c ****     /* Clear the RX Buffer */
- 100:SPI_Interface.c ****     SPIM_1_ClearFIFO();
- 212              		.loc 1 100 0
+  97:SPI_Interface.c ****            
+  98:SPI_Interface.c ****     }
+  99:SPI_Interface.c ****         
+ 100:SPI_Interface.c ****     /* Clear the RX Buffer */
+ 101:SPI_Interface.c ****     SPIM_1_ClearFIFO();
+ 212              		.loc 1 101 0
  213 0042 FFF7FEFF 		bl	SPIM_1_ClearFIFO
  214              	.LVL30:
- 101:SPI_Interface.c ****     SPIM_1_ClearRxBuffer();
- 215              		.loc 1 101 0
+ 102:SPI_Interface.c ****     SPIM_1_ClearRxBuffer();
+ 215              		.loc 1 102 0
  216 0046 FFF7FEFF 		bl	SPIM_1_ClearRxBuffer
  217              	.LVL31:
- 102:SPI_Interface.c ****         
- 103:SPI_Interface.c ****     /* Init the Dummy TX Buffer */
- 104:SPI_Interface.c ****     uint8_t dummyTX[SPI_RxBufferSize];
- 105:SPI_Interface.c ****     memset(dummyTX, SPI_DUMMY_BYTE, SPI_RxBufferSize);
- 218              		.loc 1 105 0
+ 103:SPI_Interface.c ****         
+ 104:SPI_Interface.c ****     /* Init the Dummy TX Buffer */
+ 105:SPI_Interface.c ****     uint8_t dummyTX[SPI_RxBufferSize];
+ 106:SPI_Interface.c ****     memset(dummyTX, SPI_DUMMY_BYTE, SPI_RxBufferSize);
+ 218              		.loc 1 106 0
  219 004a 0026     		movs	r6, #0
  220              	.LVL32:
  221 004c 0096     		str	r6, [sp]
  222 004e 0196     		str	r6, [sp, #4]
- 106:SPI_Interface.c ****         
- 107:SPI_Interface.c ****     /* Update count for RX */
- 108:SPI_Interface.c ****     count = bytesRX;
- 223              		.loc 1 108 0
+ 107:SPI_Interface.c ****         
+ 108:SPI_Interface.c ****     /* Update count for RX */
+ 109:SPI_Interface.c ****     count = bytesRX;
+ 223              		.loc 1 109 0
  224 0050 4FFA88F8 		sxtb	r8, r8
  225              	.LVL33:
- 109:SPI_Interface.c ****     index = 0;
- 110:SPI_Interface.c ****         
- 111:SPI_Interface.c ****     /* Get the RX Data */
- 112:SPI_Interface.c ****     while ( count > 0 ) {
- 226              		.loc 1 112 0
+ 110:SPI_Interface.c ****     index = 0;
+ 111:SPI_Interface.c ****         
+ 112:SPI_Interface.c ****     /* Get the RX Data */
+ 113:SPI_Interface.c ****     while ( count > 0 ) {
+ 226              		.loc 1 113 0
  227 0054 20E0     		b	.L12
  228              	.LVL34:
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccUkPhV6.s 			page 7
+
+
  229              	.L16:
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc8PckDx.s 			page 7
-
-
- 113:SPI_Interface.c ****          
- 114:SPI_Interface.c ****         /* Load the TX buffer with Dummy Bytes*/
- 115:SPI_Interface.c ****         SPIM_1_PutArray(dummyTX, (count > SPI_TxBufferSize ? SPI_TxBufferSize : count));
- 230              		.loc 1 115 0
+ 114:SPI_Interface.c ****          
+ 115:SPI_Interface.c ****         /* Load the TX buffer with Dummy Bytes*/
+ 116:SPI_Interface.c ****         SPIM_1_PutArray(dummyTX, (count > SPI_TxBufferSize ? SPI_TxBufferSize : count));
+ 230              		.loc 1 116 0
  231 0056 C146     		mov	r9, r8
  232 0058 B8F1080F 		cmp	r8, #8
  233 005c A8BF     		it	ge
@@ -374,9 +375,9 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc8PckDx.s 			page 1
  237 0068 FFF7FEFF 		bl	SPIM_1_PutArray
  238              	.LVL35:
  239              	.L13:
- 116:SPI_Interface.c ****         /* Wait for TX */
- 117:SPI_Interface.c ****         while( !(SPIM_1_ReadTxStatus() & SPIM_1_STS_SPI_DONE) );
- 240              		.loc 1 117 0 discriminator 1
+ 117:SPI_Interface.c ****         /* Wait for TX */
+ 118:SPI_Interface.c ****         while( !(SPIM_1_ReadTxStatus() & SPIM_1_STS_SPI_DONE) );
+ 240              		.loc 1 118 0 discriminator 1
  241 006c FFF7FEFF 		bl	SPIM_1_ReadTxStatus
  242              	.LVL36:
  243 0070 10F0010F 		tst	r0, #1
@@ -386,74 +387,74 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc8PckDx.s 			page 1
  247              	.LVL37:
  248              	.L15:
  249              	.LBB2:
- 118:SPI_Interface.c ****         /* Read the RX Buffer */
- 119:SPI_Interface.c ****         for( uint8_t j = 0; j < (count > SPI_TxBufferSize ? SPI_TxBufferSize : count); j++ ) {
- 120:SPI_Interface.c ****             dataRX[j + index*SPI_RxBufferSize] = SPIM_1_ReadRxData();   
- 250              		.loc 1 120 0 discriminator 3
+ 119:SPI_Interface.c ****         /* Read the RX Buffer */
+ 120:SPI_Interface.c ****         for( uint8_t j = 0; j < (count > SPI_TxBufferSize ? SPI_TxBufferSize : count); j++ ) {
+ 121:SPI_Interface.c ****             dataRX[j + index*SPI_RxBufferSize] = SPIM_1_ReadRxData();   
+ 250              		.loc 1 121 0 discriminator 3
  251 007a 04EBC605 		add	r5, r4, r6, lsl #3
  252 007e FFF7FEFF 		bl	SPIM_1_ReadRxData
  253              	.LVL38:
  254 0082 7855     		strb	r0, [r7, r5]
- 119:SPI_Interface.c ****             dataRX[j + index*SPI_RxBufferSize] = SPIM_1_ReadRxData();   
- 255              		.loc 1 119 0 discriminator 3
+ 120:SPI_Interface.c ****             dataRX[j + index*SPI_RxBufferSize] = SPIM_1_ReadRxData();   
+ 255              		.loc 1 120 0 discriminator 3
  256 0084 0134     		adds	r4, r4, #1
  257              	.LVL39:
  258 0086 E4B2     		uxtb	r4, r4
  259              	.LVL40:
  260              	.L14:
- 119:SPI_Interface.c ****             dataRX[j + index*SPI_RxBufferSize] = SPIM_1_ReadRxData();   
- 261              		.loc 1 119 0 is_stmt 0 discriminator 1
+ 120:SPI_Interface.c ****             dataRX[j + index*SPI_RxBufferSize] = SPIM_1_ReadRxData();   
+ 261              		.loc 1 120 0 is_stmt 0 discriminator 1
  262 0088 4C45     		cmp	r4, r9
  263 008a F6DB     		blt	.L15
  264              	.LBE2:
- 121:SPI_Interface.c ****         }
- 122:SPI_Interface.c ****         
- 123:SPI_Interface.c ****         count -= SPI_RxBufferSize;
- 265              		.loc 1 123 0 is_stmt 1
+ 122:SPI_Interface.c ****         }
+ 123:SPI_Interface.c ****         
+ 124:SPI_Interface.c ****         count -= SPI_RxBufferSize;
+ 265              		.loc 1 124 0 is_stmt 1
  266 008c A8F10808 		sub	r8, r8, #8
  267              	.LVL41:
  268 0090 4FFA88F8 		sxtb	r8, r8
  269              	.LVL42:
- 124:SPI_Interface.c ****         index++;
- 270              		.loc 1 124 0
+ 125:SPI_Interface.c ****         index++;
+ 270              		.loc 1 125 0
  271 0094 0136     		adds	r6, r6, #1
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccUkPhV6.s 			page 8
+
+
  272              	.LVL43:
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc8PckDx.s 			page 8
-
-
  273 0096 76B2     		sxtb	r6, r6
  274              	.LVL44:
  275              	.L12:
- 112:SPI_Interface.c ****          
- 276              		.loc 1 112 0
+ 113:SPI_Interface.c ****          
+ 276              		.loc 1 113 0
  277 0098 B8F1000F 		cmp	r8, #0
  278 009c DBDC     		bgt	.L16
- 125:SPI_Interface.c ****             
- 126:SPI_Interface.c ****     }
- 127:SPI_Interface.c ****         
- 128:SPI_Interface.c ****     /* Disable the Slave */
- 129:SPI_Interface.c ****     CS_1_Write(1);
- 279              		.loc 1 129 0
+ 126:SPI_Interface.c ****             
+ 127:SPI_Interface.c ****     }
+ 128:SPI_Interface.c ****         
+ 129:SPI_Interface.c ****     /* Disable the Slave */
+ 130:SPI_Interface.c ****     CS_1_Write(1);
+ 279              		.loc 1 130 0
  280 009e 0120     		movs	r0, #1
  281 00a0 FFF7FEFF 		bl	CS_1_Write
  282              	.LVL45:
- 130:SPI_Interface.c **** 
- 131:SPI_Interface.c ****     /* Clear */
- 132:SPI_Interface.c ****     SPIM_1_ClearFIFO();
- 283              		.loc 1 132 0
+ 131:SPI_Interface.c **** 
+ 132:SPI_Interface.c ****     /* Clear */
+ 133:SPI_Interface.c ****     SPIM_1_ClearFIFO();
+ 283              		.loc 1 133 0
  284 00a4 FFF7FEFF 		bl	SPIM_1_ClearFIFO
  285              	.LVL46:
- 133:SPI_Interface.c ****     SPIM_1_ClearRxBuffer();
- 286              		.loc 1 133 0
+ 134:SPI_Interface.c ****     SPIM_1_ClearRxBuffer();
+ 286              		.loc 1 134 0
  287 00a8 FFF7FEFF 		bl	SPIM_1_ClearRxBuffer
  288              	.LVL47:
- 134:SPI_Interface.c ****     SPIM_1_ClearTxBuffer();
- 289              		.loc 1 134 0
+ 135:SPI_Interface.c ****     SPIM_1_ClearTxBuffer();
+ 289              		.loc 1 135 0
  290 00ac FFF7FEFF 		bl	SPIM_1_ClearTxBuffer
  291              	.LVL48:
- 135:SPI_Interface.c ****     
- 136:SPI_Interface.c **** }
- 292              		.loc 1 136 0
+ 136:SPI_Interface.c ****     
+ 137:SPI_Interface.c **** }
+ 292              		.loc 1 137 0
  293 00b0 03B0     		add	sp, sp, #12
  294              		.cfi_def_cfa_offset 28
  295              		@ sp needed
@@ -477,11 +478,11 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc8PckDx.s 			page 1
  313 000b 01       		.uleb128 0x1
  314 000c BB000000 		.4byte	.LASF43
  315 0010 0C       		.byte	0xc
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccUkPhV6.s 			page 9
+
+
  316 0011 49010000 		.4byte	.LASF44
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc8PckDx.s 			page 9
-
-
- 317 0015 B1020000 		.4byte	.LASF45
+ 317 0015 B6010000 		.4byte	.LASF45
  318 0019 00000000 		.4byte	.Ldebug_ranges0+0
  319 001d 00000000 		.4byte	0
  320 0021 00000000 		.4byte	.Ldebug_line0
@@ -493,7 +494,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc8PckDx.s 			page 1
  326 0030 03       		.uleb128 0x3
  327 0031 01       		.byte	0x1
  328 0032 06       		.byte	0x6
- 329 0033 9E020000 		.4byte	.LASF2
+ 329 0033 F8020000 		.4byte	.LASF2
  330 0037 02       		.uleb128 0x2
  331 0038 09000000 		.4byte	.LASF1
  332 003c 02       		.byte	0x2
@@ -506,7 +507,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc8PckDx.s 			page 1
  339 0049 03       		.uleb128 0x3
  340 004a 02       		.byte	0x2
  341 004b 05       		.byte	0x5
- 342 004c 6A020000 		.4byte	.LASF4
+ 342 004c B2020000 		.4byte	.LASF4
  343 0050 03       		.uleb128 0x3
  344 0051 02       		.byte	0x2
  345 0052 07       		.byte	0x7
@@ -514,7 +515,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc8PckDx.s 			page 1
  347 0057 03       		.uleb128 0x3
  348 0058 04       		.byte	0x4
  349 0059 05       		.byte	0x5
- 350 005a 89020000 		.4byte	.LASF6
+ 350 005a E3020000 		.4byte	.LASF6
  351 005e 03       		.uleb128 0x3
  352 005f 04       		.byte	0x4
  353 0060 07       		.byte	0x7
@@ -522,11 +523,11 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc8PckDx.s 			page 1
  355 0065 03       		.uleb128 0x3
  356 0066 08       		.byte	0x8
  357 0067 05       		.byte	0x5
- 358 0068 3F020000 		.4byte	.LASF8
+ 358 0068 92020000 		.4byte	.LASF8
  359 006c 03       		.uleb128 0x3
  360 006d 08       		.byte	0x8
  361 006e 07       		.byte	0x7
- 362 006f E5010000 		.4byte	.LASF9
+ 362 006f 38020000 		.4byte	.LASF9
  363 0073 04       		.uleb128 0x4
  364 0074 04       		.byte	0x4
  365 0075 05       		.byte	0x5
@@ -534,17 +535,17 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc8PckDx.s 			page 1
  367 007a 03       		.uleb128 0x3
  368 007b 04       		.byte	0x4
  369 007c 07       		.byte	0x7
- 370 007d CD010000 		.4byte	.LASF10
+ 370 007d 20020000 		.4byte	.LASF10
  371 0081 02       		.uleb128 0x2
  372 0082 69000000 		.4byte	.LASF11
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccUkPhV6.s 			page 10
+
+
  373 0086 03       		.byte	0x3
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc8PckDx.s 			page 10
-
-
  374 0087 14       		.byte	0x14
  375 0088 25000000 		.4byte	0x25
  376 008c 02       		.uleb128 0x2
- 377 008d FC010000 		.4byte	.LASF12
+ 377 008d 4F020000 		.4byte	.LASF12
  378 0091 03       		.byte	0x3
  379 0092 18       		.byte	0x18
  380 0093 37000000 		.4byte	0x37
@@ -564,19 +565,19 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc8PckDx.s 			page 1
  394 00b1 03       		.uleb128 0x3
  395 00b2 01       		.byte	0x1
  396 00b3 08       		.byte	0x8
- 397 00b4 4D020000 		.4byte	.LASF16
+ 397 00b4 A0020000 		.4byte	.LASF16
  398 00b8 03       		.uleb128 0x3
  399 00b9 08       		.byte	0x8
  400 00ba 04       		.byte	0x4
- 401 00bb 92020000 		.4byte	.LASF17
+ 401 00bb EC020000 		.4byte	.LASF17
  402 00bf 03       		.uleb128 0x3
  403 00c0 04       		.byte	0x4
  404 00c1 07       		.byte	0x7
- 405 00c2 36020000 		.4byte	.LASF18
+ 405 00c2 89020000 		.4byte	.LASF18
  406 00c6 06       		.uleb128 0x6
  407 00c7 8D010000 		.4byte	.LASF19
  408 00cb 01       		.byte	0x1
- 409 00cc 0F       		.byte	0xf
+ 409 00cc 10       		.byte	0x10
  410 00cd 8C000000 		.4byte	0x8c
  411 00d1 00000000 		.4byte	.LFB0
  412 00d5 2A000000 		.4byte	.LFE0-.LFB0
@@ -586,21 +587,21 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc8PckDx.s 			page 1
  416 00df 07       		.uleb128 0x7
  417 00e0 33000000 		.4byte	.LASF21
  418 00e4 01       		.byte	0x1
- 419 00e5 0F       		.byte	0xf
+ 419 00e5 10       		.byte	0x10
  420 00e6 8C000000 		.4byte	0x8c
  421 00ea 00000000 		.4byte	.LLST0
  422 00ee 08       		.uleb128 0x8
  423 00ef 91000000 		.4byte	.LASF23
  424 00f3 01       		.byte	0x1
- 425 00f4 1B       		.byte	0x1b
+ 425 00f4 1C       		.byte	0x1c
  426 00f5 8C000000 		.4byte	0x8c
  427 00f9 01       		.uleb128 0x1
  428 00fa 54       		.byte	0x54
  429 00fb 09       		.uleb128 0x9
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccUkPhV6.s 			page 11
+
+
  430 00fc 0A000000 		.4byte	.LVL2
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc8PckDx.s 			page 11
-
-
  431 0100 7B030000 		.4byte	0x37b
  432 0104 0E010000 		.4byte	0x10e
  433 0108 0A       		.uleb128 0xa
@@ -639,7 +640,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc8PckDx.s 			page 1
  466 0144 06       		.uleb128 0x6
  467 0145 96000000 		.4byte	.LASF20
  468 0149 01       		.byte	0x1
- 469 014a 28       		.byte	0x28
+ 469 014a 29       		.byte	0x29
  470 014b 8C000000 		.4byte	0x8c
  471 014f 00000000 		.4byte	.LFB1
  472 0153 34000000 		.4byte	.LFE1-.LFB1
@@ -649,18 +650,18 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc8PckDx.s 			page 1
  476 015d 07       		.uleb128 0x7
  477 015e 84000000 		.4byte	.LASF22
  478 0162 01       		.byte	0x1
- 479 0163 28       		.byte	0x28
+ 479 0163 29       		.byte	0x29
  480 0164 8C000000 		.4byte	0x8c
  481 0168 21000000 		.4byte	.LLST1
  482 016c 08       		.uleb128 0x8
- 483 016d B6010000 		.4byte	.LASF24
+ 483 016d AB020000 		.4byte	.LASF24
  484 0171 01       		.byte	0x1
- 485 0172 38       		.byte	0x38
+ 485 0172 39       		.byte	0x39
  486 0173 8C000000 		.4byte	0x8c
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccUkPhV6.s 			page 12
+
+
  487 0177 01       		.uleb128 0x1
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc8PckDx.s 			page 12
-
-
  488 0178 54       		.byte	0x54
  489 0179 09       		.uleb128 0x9
  490 017a 0A000000 		.4byte	.LVL10
@@ -715,33 +716,33 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc8PckDx.s 			page 1
  539 01de 0D       		.uleb128 0xd
  540 01df 38000000 		.4byte	.LASF28
  541 01e3 01       		.byte	0x1
- 542 01e4 45       		.byte	0x45
+ 542 01e4 46       		.byte	0x46
  543 01e5 00000000 		.4byte	.LFB2
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccUkPhV6.s 			page 13
+
+
  544 01e9 02000000 		.4byte	.LFE2-.LFB2
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc8PckDx.s 			page 13
-
-
  545 01ed 01       		.uleb128 0x1
  546 01ee 9C       		.byte	0x9c
  547 01ef 1B020000 		.4byte	0x21b
  548 01f3 0E       		.uleb128 0xe
- 549 01f4 AA020000 		.4byte	.LASF25
+ 549 01f4 04030000 		.4byte	.LASF25
  550 01f8 01       		.byte	0x1
- 551 01f9 45       		.byte	0x45
+ 551 01f9 46       		.byte	0x46
  552 01fa 1B020000 		.4byte	0x21b
  553 01fe 01       		.uleb128 0x1
  554 01ff 50       		.byte	0x50
  555 0200 0E       		.uleb128 0xe
- 556 0201 27020000 		.4byte	.LASF26
+ 556 0201 7A020000 		.4byte	.LASF26
  557 0205 01       		.byte	0x1
- 558 0206 45       		.byte	0x45
+ 558 0206 46       		.byte	0x46
  559 0207 1B020000 		.4byte	0x21b
  560 020b 01       		.uleb128 0x1
  561 020c 51       		.byte	0x51
  562 020d 0E       		.uleb128 0xe
  563 020e 19000000 		.4byte	.LASF27
  564 0212 01       		.byte	0x1
- 565 0213 45       		.byte	0x45
+ 565 0213 46       		.byte	0x46
  566 0214 8C000000 		.4byte	0x8c
  567 0218 01       		.uleb128 0x1
  568 0219 52       		.byte	0x52
@@ -752,55 +753,55 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc8PckDx.s 			page 1
  573 0221 0D       		.uleb128 0xd
  574 0222 52000000 		.4byte	.LASF29
  575 0226 01       		.byte	0x1
- 576 0227 4E       		.byte	0x4e
+ 576 0227 4F       		.byte	0x4f
  577 0228 00000000 		.4byte	.LFB3
  578 022c B6000000 		.4byte	.LFE3-.LFB3
  579 0230 01       		.uleb128 0x1
  580 0231 9C       		.byte	0x9c
  581 0232 6B030000 		.4byte	0x36b
  582 0236 07       		.uleb128 0x7
- 583 0237 AA020000 		.4byte	.LASF25
+ 583 0237 04030000 		.4byte	.LASF25
  584 023b 01       		.byte	0x1
- 585 023c 4E       		.byte	0x4e
+ 585 023c 4F       		.byte	0x4f
  586 023d 1B020000 		.4byte	0x21b
  587 0241 42000000 		.4byte	.LLST2
  588 0245 07       		.uleb128 0x7
- 589 0246 2E020000 		.4byte	.LASF30
+ 589 0246 81020000 		.4byte	.LASF30
  590 024a 01       		.byte	0x1
- 591 024b 4E       		.byte	0x4e
+ 591 024b 4F       		.byte	0x4f
  592 024c 8C000000 		.4byte	0x8c
  593 0250 6E000000 		.4byte	.LLST3
  594 0254 07       		.uleb128 0x7
- 595 0255 27020000 		.4byte	.LASF26
+ 595 0255 7A020000 		.4byte	.LASF26
  596 0259 01       		.byte	0x1
- 597 025a 4E       		.byte	0x4e
+ 597 025a 4F       		.byte	0x4f
  598 025b 1B020000 		.4byte	0x21b
  599 025f 8F000000 		.4byte	.LLST4
  600 0263 07       		.uleb128 0x7
- 601 0264 04020000 		.4byte	.LASF31
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc8PckDx.s 			page 14
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccUkPhV6.s 			page 14
 
 
+ 601 0264 57020000 		.4byte	.LASF31
  602 0268 01       		.byte	0x1
- 603 0269 4E       		.byte	0x4e
+ 603 0269 4F       		.byte	0x4f
  604 026a 8C000000 		.4byte	0x8c
  605 026e AD000000 		.4byte	.LLST5
  606 0272 10       		.uleb128 0x10
  607 0273 13000000 		.4byte	.LASF32
  608 0277 01       		.byte	0x1
- 609 0278 53       		.byte	0x53
+ 609 0278 54       		.byte	0x54
  610 0279 81000000 		.4byte	0x81
  611 027d CE000000 		.4byte	.LLST6
  612 0281 10       		.uleb128 0x10
- 613 0282 52020000 		.4byte	.LASF33
+ 613 0282 A5020000 		.4byte	.LASF33
  614 0286 01       		.byte	0x1
- 615 0287 53       		.byte	0x53
+ 615 0287 54       		.byte	0x54
  616 0288 81000000 		.4byte	0x81
  617 028c 02010000 		.4byte	.LLST7
  618 0290 08       		.uleb128 0x8
- 619 0291 0C020000 		.4byte	.LASF34
+ 619 0291 5F020000 		.4byte	.LASF34
  620 0295 01       		.byte	0x1
- 621 0296 68       		.byte	0x68
+ 621 0296 69       		.byte	0x69
  622 0297 6B030000 		.4byte	0x36b
  623 029b 02       		.uleb128 0x2
  624 029c 91       		.byte	0x91
@@ -812,7 +813,7 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc8PckDx.s 			page 1
  630 02ab 12       		.uleb128 0x12
  631 02ac 6A00     		.ascii	"j\000"
  632 02ae 01       		.byte	0x1
- 633 02af 77       		.byte	0x77
+ 633 02af 78       		.byte	0x78
  634 02b0 8C000000 		.4byte	0x8c
  635 02b4 4E010000 		.4byte	.LLST8
  636 02b8 0B       		.uleb128 0xb
@@ -837,10 +838,10 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc8PckDx.s 			page 1
  655 02e3 01       		.uleb128 0x1
  656 02e4 50       		.byte	0x50
  657 02e5 07       		.uleb128 0x7
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccUkPhV6.s 			page 15
+
+
  658 02e6 75       		.byte	0x75
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc8PckDx.s 			page 15
-
-
  659 02e7 00       		.sleb128 0
  660 02e8 33       		.byte	0x33
  661 02e9 24       		.byte	0x24
@@ -897,10 +898,10 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc8PckDx.s 			page 1
  712 0341 7B030000 		.4byte	0x37b
  713 0345 4F030000 		.4byte	0x34f
  714 0349 0A       		.uleb128 0xa
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccUkPhV6.s 			page 16
+
+
  715 034a 01       		.uleb128 0x1
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc8PckDx.s 			page 16
-
-
  716 034b 50       		.byte	0x50
  717 034c 01       		.uleb128 0x1
  718 034d 31       		.byte	0x31
@@ -923,13 +924,13 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc8PckDx.s 			page 1
  735 0379 07       		.byte	0x7
  736 037a 00       		.byte	0
  737 037b 15       		.uleb128 0x15
- 738 037c DA010000 		.4byte	.LASF35
- 739 0380 DA010000 		.4byte	.LASF35
+ 738 037c 2D020000 		.4byte	.LASF35
+ 739 0380 2D020000 		.4byte	.LASF35
  740 0384 05       		.byte	0x5
  741 0385 26       		.byte	0x26
  742 0386 15       		.uleb128 0x15
- 743 0387 14020000 		.4byte	.LASF36
- 744 038b 14020000 		.4byte	.LASF36
+ 743 0387 67020000 		.4byte	.LASF36
+ 744 038b 67020000 		.4byte	.LASF36
  745 038f 06       		.byte	0x6
  746 0390 5E       		.byte	0x5e
  747 0391 15       		.uleb128 0x15
@@ -938,13 +939,13 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc8PckDx.s 			page 1
  750 039a 06       		.byte	0x6
  751 039b 5C       		.byte	0x5c
  752 039c 15       		.uleb128 0x15
- 753 039d 58020000 		.4byte	.LASF38
- 754 03a1 58020000 		.4byte	.LASF38
+ 753 039d D1020000 		.4byte	.LASF38
+ 754 03a1 D1020000 		.4byte	.LASF38
  755 03a5 06       		.byte	0x6
  756 03a6 60       		.byte	0x60
  757 03a7 15       		.uleb128 0x15
- 758 03a8 BD010000 		.4byte	.LASF39
- 759 03ac BD010000 		.4byte	.LASF39
+ 758 03a8 10020000 		.4byte	.LASF39
+ 759 03ac 10020000 		.4byte	.LASF39
  760 03b0 06       		.byte	0x6
  761 03b1 67       		.byte	0x67
  762 03b2 15       		.uleb128 0x15
@@ -953,14 +954,14 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc8PckDx.s 			page 1
  765 03bb 06       		.byte	0x6
  766 03bc 66       		.byte	0x66
  767 03bd 15       		.uleb128 0x15
- 768 03be 74020000 		.4byte	.LASF41
- 769 03c2 74020000 		.4byte	.LASF41
+ 768 03be BC020000 		.4byte	.LASF41
+ 769 03c2 BC020000 		.4byte	.LASF41
  770 03c6 06       		.byte	0x6
  771 03c7 64       		.byte	0x64
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccUkPhV6.s 			page 17
+
+
  772 03c8 15       		.uleb128 0x15
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc8PckDx.s 			page 17
-
-
  773 03c9 71010000 		.4byte	.LASF42
  774 03cd 71010000 		.4byte	.LASF42
  775 03d1 06       		.byte	0x6
@@ -1017,10 +1018,10 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc8PckDx.s 			page 1
  826 002e 0B       		.uleb128 0xb
  827 002f 0B       		.uleb128 0xb
  828 0030 3E       		.uleb128 0x3e
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccUkPhV6.s 			page 18
+
+
  829 0031 0B       		.uleb128 0xb
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc8PckDx.s 			page 18
-
-
  830 0032 03       		.uleb128 0x3
  831 0033 08       		.uleb128 0x8
  832 0034 00       		.byte	0
@@ -1077,10 +1078,10 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc8PckDx.s 			page 1
  883 0068 49       		.uleb128 0x49
  884 0069 13       		.uleb128 0x13
  885 006a 02       		.uleb128 0x2
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccUkPhV6.s 			page 19
+
+
  886 006b 17       		.uleb128 0x17
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc8PckDx.s 			page 19
-
-
  887 006c 00       		.byte	0
  888 006d 00       		.byte	0
  889 006e 08       		.uleb128 0x8
@@ -1137,10 +1138,10 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc8PckDx.s 			page 1
  940 00aa 00       		.byte	0
  941 00ab 00       		.byte	0
  942 00ac 0D       		.uleb128 0xd
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccUkPhV6.s 			page 20
+
+
  943 00ad 2E       		.uleb128 0x2e
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc8PckDx.s 			page 20
-
-
  944 00ae 01       		.byte	0x1
  945 00af 3F       		.uleb128 0x3f
  946 00b0 19       		.uleb128 0x19
@@ -1197,10 +1198,10 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc8PckDx.s 			page 1
  997 00e4 0B       		.uleb128 0xb
  998 00e5 3B       		.uleb128 0x3b
  999 00e6 0B       		.uleb128 0xb
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccUkPhV6.s 			page 21
+
+
  1000 00e7 49       		.uleb128 0x49
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc8PckDx.s 			page 21
-
-
  1001 00e8 13       		.uleb128 0x13
  1002 00e9 02       		.uleb128 0x2
  1003 00ea 17       		.uleb128 0x17
@@ -1257,10 +1258,10 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc8PckDx.s 			page 1
  1054 011d 19       		.uleb128 0x19
  1055 011e 3C       		.uleb128 0x3c
  1056 011f 19       		.uleb128 0x19
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccUkPhV6.s 			page 22
+
+
  1057 0120 6E       		.uleb128 0x6e
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc8PckDx.s 			page 22
-
-
  1058 0121 0E       		.uleb128 0xe
  1059 0122 03       		.uleb128 0x3
  1060 0123 0E       		.uleb128 0xe
@@ -1317,10 +1318,10 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc8PckDx.s 			page 1
  1111 0063 01       		.uleb128 0x1
  1112 0064 50       		.byte	0x50
  1113 0065 9F       		.byte	0x9f
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccUkPhV6.s 			page 23
+
+
  1114 0066 00000000 		.4byte	0
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc8PckDx.s 			page 23
-
-
  1115 006a 00000000 		.4byte	0
  1116              	.LLST3:
  1117 006e 00000000 		.4byte	.LVL19
@@ -1377,10 +1378,10 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc8PckDx.s 			page 1
  1168 00ef 94000000 		.4byte	.LVL42
  1169 00f3 B6000000 		.4byte	.LFE3
  1170 00f7 0100     		.2byte	0x1
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccUkPhV6.s 			page 24
+
+
  1171 00f9 58       		.byte	0x58
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc8PckDx.s 			page 24
-
-
  1172 00fa 00000000 		.4byte	0
  1173 00fe 00000000 		.4byte	0
  1174              	.LLST7:
@@ -1437,10 +1438,10 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc8PckDx.s 			page 1
  1225 001c 34000000 		.4byte	.LFE1-.LFB1
  1226 0020 00000000 		.4byte	.LFB2
  1227 0024 02000000 		.4byte	.LFE2-.LFB2
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccUkPhV6.s 			page 25
+
+
  1228 0028 00000000 		.4byte	.LFB3
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc8PckDx.s 			page 25
-
-
  1229 002c B6000000 		.4byte	.LFE3-.LFB3
  1230 0030 00000000 		.4byte	0
  1231 0034 00000000 		.4byte	0
@@ -1497,10 +1498,10 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc8PckDx.s 			page 1
  1262      496E7465 
  1262      72666163 
  1262      655F4D75 
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccUkPhV6.s 			page 26
+
+
  1262      6C74695F 
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc8PckDx.s 			page 26
-
-
  1263              	.LASF11:
  1264 0069 696E7438 		.ascii	"int8_t\000"
  1264      5F7400
@@ -1557,10 +1558,10 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc8PckDx.s 			page 1
  1284      69676E65 
  1284      6420696E 
  1284      7400
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccUkPhV6.s 			page 27
+
+
  1285              	.LASF13:
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc8PckDx.s 			page 27
-
-
  1286 016b 75696E74 		.ascii	"uint8\000"
  1286      3800
  1287              	.LASF42:
@@ -1584,117 +1585,111 @@ ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc8PckDx.s 			page 1
  1294      6C656172 
  1294      4649464F 
  1294      00
- 1295              	.LASF24:
- 1296 01b6 62797465 		.ascii	"byteRX\000"
- 1296      525800
- 1297              	.LASF39:
- 1298 01bd 5350494D 		.ascii	"SPIM_1_PutArray\000"
- 1298      5F315F50 
- 1298      75744172 
- 1298      72617900 
- 1299              	.LASF10:
- 1300 01cd 756E7369 		.ascii	"unsigned int\000"
- 1300      676E6564 
- 1300      20696E74 
- 1300      00
- 1301              	.LASF35:
- 1302 01da 43535F31 		.ascii	"CS_1_Write\000"
- 1302      5F577269 
- 1302      746500
- 1303              	.LASF9:
- 1304 01e5 6C6F6E67 		.ascii	"long long unsigned int\000"
- 1304      206C6F6E 
- 1304      6720756E 
- 1304      7369676E 
- 1304      65642069 
- 1305              	.LASF12:
- 1306 01fc 75696E74 		.ascii	"uint8_t\000"
- 1306      385F7400 
- 1307              	.LASF31:
- 1308 0204 62797465 		.ascii	"bytesRX\000"
- 1308      73525800 
- 1309              	.LASF34:
- 1310 020c 64756D6D 		.ascii	"dummyTX\000"
- 1310      79545800 
- 1311              	.LASF36:
- 1312 0214 5350494D 		.ascii	"SPIM_1_WriteTxData\000"
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc8PckDx.s 			page 28
+ 1295              	.LASF45:
+ 1296 01b6 433A5C55 		.ascii	"C:\\Users\\Lorenzo\\Desktop\\Final-Assignment-PSoC\\"
+ 1296      73657273 
+ 1296      5C4C6F72 
+ 1296      656E7A6F 
+ 1296      5C446573 
+ 1297 01e5 46696E61 		.ascii	"Final_Assignment\\Final_assignment_01.cydsn\000"
+ 1297      6C5F4173 
+ 1297      7369676E 
+ 1297      6D656E74 
+ 1297      5C46696E 
+ 1298              	.LASF39:
+ 1299 0210 5350494D 		.ascii	"SPIM_1_PutArray\000"
+ 1299      5F315F50 
+ 1299      75744172 
+ 1299      72617900 
+ 1300              	.LASF10:
+ 1301 0220 756E7369 		.ascii	"unsigned int\000"
+ 1301      676E6564 
+ 1301      20696E74 
+ 1301      00
+ 1302              	.LASF35:
+ 1303 022d 43535F31 		.ascii	"CS_1_Write\000"
+ 1303      5F577269 
+ 1303      746500
+ 1304              	.LASF9:
+ 1305 0238 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1305      206C6F6E 
+ 1305      6720756E 
+ 1305      7369676E 
+ 1305      65642069 
+ 1306              	.LASF12:
+ 1307 024f 75696E74 		.ascii	"uint8_t\000"
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccUkPhV6.s 			page 28
 
 
- 1312      5F315F57 
- 1312      72697465 
- 1312      54784461 
- 1312      746100
- 1313              	.LASF26:
- 1314 0227 64617461 		.ascii	"dataRX\000"
- 1314      525800
- 1315              	.LASF30:
- 1316 022e 62797465 		.ascii	"bytesTX\000"
- 1316      73545800 
- 1317              	.LASF18:
- 1318 0236 73697A65 		.ascii	"sizetype\000"
- 1318      74797065 
- 1318      00
- 1319              	.LASF8:
- 1320 023f 6C6F6E67 		.ascii	"long long int\000"
- 1320      206C6F6E 
- 1320      6720696E 
- 1320      7400
- 1321              	.LASF16:
- 1322 024d 63686172 		.ascii	"char\000"
- 1322      00
- 1323              	.LASF33:
- 1324 0252 696E6465 		.ascii	"index\000"
- 1324      7800
- 1325              	.LASF38:
- 1326 0258 5350494D 		.ascii	"SPIM_1_ReadRxData\000"
- 1326      5F315F52 
- 1326      65616452 
- 1326      78446174 
- 1326      6100
- 1327              	.LASF4:
- 1328 026a 73686F72 		.ascii	"short int\000"
- 1328      7420696E 
- 1328      7400
- 1329              	.LASF41:
- 1330 0274 5350494D 		.ascii	"SPIM_1_ClearRxBuffer\000"
- 1330      5F315F43 
- 1330      6C656172 
- 1330      52784275 
- 1330      66666572 
- 1331              	.LASF6:
- 1332 0289 6C6F6E67 		.ascii	"long int\000"
- 1332      20696E74 
- 1332      00
- 1333              	.LASF17:
- 1334 0292 6C6F6E67 		.ascii	"long double\000"
- 1334      20646F75 
- 1334      626C6500 
- 1335              	.LASF2:
- 1336 029e 7369676E 		.ascii	"signed char\000"
- 1336      65642063 
- 1336      68617200 
- 1337              	.LASF25:
- 1338 02aa 64617461 		.ascii	"dataTX\000"
- 1338      545800
- 1339              	.LASF45:
-ARM GAS  C:\Users\noemi\AppData\Local\Temp\cc8PckDx.s 			page 29
+ 1307      385F7400 
+ 1308              	.LASF31:
+ 1309 0257 62797465 		.ascii	"bytesRX\000"
+ 1309      73525800 
+ 1310              	.LASF34:
+ 1311 025f 64756D6D 		.ascii	"dummyTX\000"
+ 1311      79545800 
+ 1312              	.LASF36:
+ 1313 0267 5350494D 		.ascii	"SPIM_1_WriteTxData\000"
+ 1313      5F315F57 
+ 1313      72697465 
+ 1313      54784461 
+ 1313      746100
+ 1314              	.LASF26:
+ 1315 027a 64617461 		.ascii	"dataRX\000"
+ 1315      525800
+ 1316              	.LASF30:
+ 1317 0281 62797465 		.ascii	"bytesTX\000"
+ 1317      73545800 
+ 1318              	.LASF18:
+ 1319 0289 73697A65 		.ascii	"sizetype\000"
+ 1319      74797065 
+ 1319      00
+ 1320              	.LASF8:
+ 1321 0292 6C6F6E67 		.ascii	"long long int\000"
+ 1321      206C6F6E 
+ 1321      6720696E 
+ 1321      7400
+ 1322              	.LASF16:
+ 1323 02a0 63686172 		.ascii	"char\000"
+ 1323      00
+ 1324              	.LASF33:
+ 1325 02a5 696E6465 		.ascii	"index\000"
+ 1325      7800
+ 1326              	.LASF24:
+ 1327 02ab 62797465 		.ascii	"byteRX\000"
+ 1327      525800
+ 1328              	.LASF4:
+ 1329 02b2 73686F72 		.ascii	"short int\000"
+ 1329      7420696E 
+ 1329      7400
+ 1330              	.LASF41:
+ 1331 02bc 5350494D 		.ascii	"SPIM_1_ClearRxBuffer\000"
+ 1331      5F315F43 
+ 1331      6C656172 
+ 1331      52784275 
+ 1331      66666572 
+ 1332              	.LASF38:
+ 1333 02d1 5350494D 		.ascii	"SPIM_1_ReadRxData\000"
+ 1333      5F315F52 
+ 1333      65616452 
+ 1333      78446174 
+ 1333      6100
+ 1334              	.LASF6:
+ 1335 02e3 6C6F6E67 		.ascii	"long int\000"
+ 1335      20696E74 
+ 1335      00
+ARM GAS  C:\Users\Lorenzo\AppData\Local\Temp\ccUkPhV6.s 			page 29
 
 
- 1340 02b1 433A5C55 		.ascii	"C:\\Users\\noemi\\Desktop\\university\\university\\"
- 1340      73657273 
- 1340      5C6E6F65 
- 1340      6D695C44 
- 1340      65736B74 
- 1341 02de 706F6C69 		.ascii	"poli\\lab sensors\\final assignment\\Final-Assignme"
- 1341      5C6C6162 
- 1341      2073656E 
- 1341      736F7273 
- 1341      5C66696E 
- 1342 030e 6E742D50 		.ascii	"nt-PSoC\\Final_Assignment\\Final_assignment_01.cyds"
- 1342      536F435C 
- 1342      46696E61 
- 1342      6C5F4173 
- 1342      7369676E 
- 1343 033f 6E00     		.ascii	"n\000"
- 1344              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
+ 1336              	.LASF17:
+ 1337 02ec 6C6F6E67 		.ascii	"long double\000"
+ 1337      20646F75 
+ 1337      626C6500 
+ 1338              	.LASF2:
+ 1339 02f8 7369676E 		.ascii	"signed char\000"
+ 1339      65642063 
+ 1339      68617200 
+ 1340              	.LASF25:
+ 1341 0304 64617461 		.ascii	"dataTX\000"
+ 1341      545800
+ 1342              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
