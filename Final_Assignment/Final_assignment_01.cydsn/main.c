@@ -4,6 +4,15 @@
  * Francioli Lorenzo
  * Gozzi Noemi
  *
+ * 1. register settings, components initialization and start, 
+ *    check correct functioning of the components and related communication protocols
+ * 2. hardware settings changes are saved in EEPROM and communicated through UART
+ * 3. ISR outputs handling: 
+ *    3.1 ISR on overthreshold event: signal waveform and timestamp stored in EEPROM
+ *    3.2 ISR on full FIFO watermark: signal elaboration and RGB settings
+ *        configration mode: choice of variant 5.c in the project guidelines. 
+ *        Possible data transmission and visualization through Bridge Control Panel
+ *
  * ========================================
 */
 #include "project.h"
@@ -19,20 +28,24 @@
 #include "SPI_Interface_EEPROM.h"
 
 #define UART_1_PutBuffer UART_1_PutString(bufferUART)
-#define DATA_BYTES 6
 #define CONVERSION_FACTOR_DIGIT_MG 4
-#define TRANSMIT_BUFFER_SIZE 8
-#define CONVERSION_MG_RGB 255/2000
-#define CONVERSION_COUNTER_TIMESTAMP_SEC 0.02 //each clock 0.02 sec
-#define CONVERSION_COUNTER_ISR 1200 //clock overflow 60000*0.02=1200 sec. when an ISR occured 1200 sec have passed
-#define FSR_COUNTER 60000
+#define TRANSMIT_BUFFER_SIZE 8 //Packet dimension for bridge control panel 6 bytes+Header+Footer
+#define CONVERSION_MG_RGB 255/2000 //255=maximum rgb value; 2000 [mg]= maximum acceleration value with CTRL4 0x00 (+-2g)
+#define CONVERSION_COUNTER_TIMESTAMP_SEC 0.02 //each clock in counter 0.02 sec
+#define CONVERSION_COUNTER_ISR 1200 //counter overflow 60000*0.02=1200 sec. when an ISR occured 1200 sec have passed
+#define FSR_COUNTER 60000 //TOTAL set period counter 16 bit
+#define WTM 8
+#define ACC_PACKET_DIMENSION 6
+#define ACC_PACKET_DIMENSION_WTM ACC_PACKET_DIMENSION*WTM
+
+#define empty_bit 0x20 //empty bit FIFO_SRC_REG
+
 #define EEPROM_ADDRESS_TIMESTAMP 0x0002
 #define EEPROM_ADDRESS_ENABLEDISABLE 0x0001
 #define EEPROM_ADDRESS_STATUS_VERBOSE_FLAG 0x0000
 #define EEPROM_ADDRESS_ACC_DATA_OVER_THRESHOLD 0x0080
 
-#define ACC_PACKET_DIMENSION 6
-#define empty_bit 0x20
+
 char bufferUART[100];
 
 
@@ -60,10 +73,10 @@ int main(void)
     
     /*********************EEPROM TEST*******************/
     int16_t data_test_eeprom[3] = {15, -32, 258};
-    EEPROM_writePage(0x0020, (uint8_t*) data_test_eeprom, DATA_BYTES);
+    EEPROM_writePage(0x0020, (uint8_t*) data_test_eeprom, ACC_PACKET_DIMENSION);
     EEPROM_waitForWriteComplete();
     int16_t data_EEPROM[3];
-    EEPROM_readPage(0x0020, (uint8_t*) data_EEPROM, DATA_BYTES);
+    EEPROM_readPage(0x0020, (uint8_t*) data_EEPROM, ACC_PACKET_DIMENSION);
     sprintf(bufferUART, " --> EEPROM Test Read = %d %d %d, expected 15 -32 258\r\n\n", data_EEPROM[0], data_EEPROM[1], data_EEPROM[2]);
     UART_1_PutBuffer;
     
@@ -81,7 +94,7 @@ int main(void)
     /*          CTRL1[0:2]=1 x,y,z enable                     */
     /*          CTRL1[3]=1 normal/high resolution mode        */
     
-    LIS3DH_writeByte(LIS3DH_CTRL_REG1, 0x47);
+    LIS3DH_writeByte(LIS3DH_CTRL_REG1, LIS3DH_CTRL_REG1_50HZ);
     data_read = LIS3DH_readByte(LIS3DH_CTRL_REG1);
     sprintf(bufferUART, " --> LIS3DH CTRL REGISTER 1= 0x%02X\r\n", data_read);
     UART_1_PutBuffer;
@@ -165,34 +178,38 @@ int main(void)
     
     /*******************INT1 DURATION REGISTER ****************/
     /*          settings:   0x04                              */
-    /*          thresh:4/ODR = 80ms (1/ODR = 20 ms)           */
+    /*          1/ODR = 20ms                                  */
  
     LIS3DH_writeByte(LIS3DH_INT1_DURATION, LIS3DH_INT1_DURATION_OVER);
     data_read = LIS3DH_readByte(LIS3DH_INT1_DURATION);
     sprintf(bufferUART, " --> LIS3DH DURATION REGISTER= 0x%02X\r\n", data_read);
     UART_1_PutBuffer;
     
-    /*******************CONFIGURATION MODE ****************/    
+    /*******************CONFIGURATION MODE*********************/    
+    /*         Pin 3.2: GND: read-only mode                   */
+    /*         Pin 3.2: Vcc: read write mode                  */
+    /*   Initial check, thenk changes detected through isr    */
+    
     FlagEnableDisable=Pin_EnableDisable_Read();
     EEPROM_writeByte(EEPROM_ADDRESS_ENABLEDISABLE, FlagEnableDisable);
     EEPROM_waitForWriteComplete();
     
     if (FlagEnableDisable){
-        sprintf(bufferUART, "\r\nREAD/WRITE CONFIGURATION MODALITY. Configuration mode: %d\r\nUART VERBOSE FLAG: %d\r\n", FlagEnableDisable, UARTVerboseFlag);
+        sprintf(bufferUART, "\r\nConfiguration mode: READ/WRITE MODALITY: %d\r\nUART VERBOSE FLAG: %d\r\n", FlagEnableDisable, UARTVerboseFlag);
         UART_1_PutBuffer;
     }
     else {
-        sprintf(bufferUART, "\r\nATTENTION! READ ONLY MODALITY. Configuration mode: %d\r\nUART VERBOSE FLAG: %d\r\n", FlagEnableDisable, UARTVerboseFlag);
+        sprintf(bufferUART, "\r\nATTENTION! Configuration mode: READ-ONLY MODALITY: %d\r\nUART VERBOSE FLAG: %d\r\n", FlagEnableDisable, UARTVerboseFlag);
         UART_1_PutBuffer;
     }  
     
     UART_1_PutString("\r\nREADY \r\n\r\n");
     CyDelay(10);
     
-    /* Variables declaration */
-    uint8_t AccData[48];
+    /*               Variables declaration                */
+    uint8_t AccData[ACC_PACKET_DIMENSION_WTM];
+    uint8_t AccData_Threshold [ACC_PACKET_DIMENSION_WTM];
     uint8_t AccData_trash[ACC_PACKET_DIMENSION];
-    uint8_t AccData_Threshold [48];
     uint32 timestamp;
     int16_t Acc_x;
     int16_t Acc_y;
@@ -205,11 +222,11 @@ int main(void)
     uint8_t OutArray[TRANSMIT_BUFFER_SIZE];
     uint8_t red_x, green_y, blue_z;
     
-    /* Header and footer set up */
+    /*               Header and footer set up             */
     OutArray[0] = header;
     OutArray[TRANSMIT_BUFFER_SIZE - 1] = footer;
 
-     /* ISRs StartEx */   
+    /*                ISRs StartEx                        */   
     isr_ACC_StartEx(Custom_Pin_ISR);
     isr_DEBOUNCER_StartEx(Custom_Pin_Button);
     isr_TIMER_StartEx(Custom_Timer_Button);
@@ -222,7 +239,7 @@ int main(void)
     
     CyDelay(10);
     
-    /* Variables initialization */
+    /*             Volatile Variables initialization            */
     UARTVerboseFlag=0;
     new_EEPROM=0;
     new_EnableDisable=0;
@@ -258,7 +275,7 @@ int main(void)
         /*
         If the pin moved from GND to 5V or viceversa an interrupt is generated, the new 
         condition is stored in the EEPROM address 0x0001 and the configuration status is
-        communicated by means of UART, together with the level of the verbose flag.
+        communicated by means of UART, together with the value of the verbose flag.
         */
         if(new_EnableDisable){
             EEPROM_writeByte(EEPROM_ADDRESS_ENABLEDISABLE, FlagEnableDisable);
@@ -266,11 +283,11 @@ int main(void)
             new_EnableDisable=0;
 
             if (FlagEnableDisable){
-                sprintf(bufferUART, "READ/WRITE CONFIGURATION MODALITY. configuration mode: %d\r\nUART VERBOSE FLAG: %d\r\n", FlagEnableDisable, UARTVerboseFlag);
+                sprintf(bufferUART, "Configuration mode: READ/WRITE MODALITY: %d\r\nUART VERBOSE FLAG: %d\r\n", FlagEnableDisable, UARTVerboseFlag);
                 UART_1_PutBuffer;
             }
             else {
-                sprintf(bufferUART, "ATTENTION! READ ONLY MODALITY. configuration mode: %d\r\nUART VERBOSE FLAG: %d\r\n", FlagEnableDisable, UARTVerboseFlag);
+                sprintf(bufferUART, "ATTENTION! Configuration mode: READ ONLY MODALITY: %d\r\nUART VERBOSE FLAG: %d\r\n", FlagEnableDisable, UARTVerboseFlag);
                 UART_1_PutBuffer;
             }    
         }
@@ -293,11 +310,11 @@ int main(void)
         for further steps
         */
         if (PacketReadyFlag==1 && system_status==1 && configuration_status==0){
-            //togliere utilizzo variabile??
-            uint8_t data = LIS3DH_readByte(LIS3DH_INT1_SRC);
-            /*if the interrupt is generated by an overthreshold event*/
-            if(data & LIS3DH_INT1_SRC_INTERRUPT_ACTIVE){
-                sprintf(bufferUART, "OVERTHRESHOLD EVENT\r\n");
+
+            /*****************************OVERTHRESHOLD ISR**************************/
+            
+            if  (LIS3DH_readByte(LIS3DH_INT1_SRC) & LIS3DH_INT1_SRC_INTERRUPT_ACTIVE){
+                sprintf(bufferUART, "OVERTHRESHOLD EVENT DETECTED\r\n");
                 UART_1_PutBuffer;
                 
                 /*              SIGNAL WAVEFORM              */
@@ -305,7 +322,7 @@ int main(void)
                 uint8 count_fifo=0;
                 
                 LIS3DH_readPage(LIS3DH_OUT_X_L, (uint8_t*) AccData_trash, ACC_PACKET_DIMENSION);
-                while(j<=7){
+                while(j<WTM){
                     
                     /*FIFO REGISTER: ONLY IF IT IS NOT EMPTY WE READ AND SAVE NEW VALUES*/
                     
@@ -343,7 +360,7 @@ int main(void)
                     EEPROM_waitForWriteComplete();
             		break;
                     case 2: 
-                    EEPROM_writePage((EEPROM_ADDRESS_ACC_DATA_OVER_THRESHOLD),&AccData[30], 6);
+                    EEPROM_writePage((EEPROM_ADDRESS_ACC_DATA_OVER_THRESHOLD),&AccData[30], ACC_PACKET_DIMENSION);
                     EEPROM_waitForWriteComplete();
                     EEPROM_writePage((EEPROM_ADDRESS_ACC_DATA_OVER_THRESHOLD+ACC_PACKET_DIMENSION*1),&AccData[36], ACC_PACKET_DIMENSION);
                     EEPROM_waitForWriteComplete();
@@ -389,12 +406,12 @@ int main(void)
                 
                 /*              TIME STAMP              */
                 /*
-                In order to store a timestamp at the EEPROM adress 0x0002representing when the 
-                overthreshold event occurred from the start of the device, a clock and a counter 
+                In order to store a timestamp at the EEPROM adress 0x0002 representing the 
+                occurence time of an overthreshold event from the start of the device, a clock and a counter 
                 are exploited. 
-                The number of clocks is converted in time; this  value is added to the product 
-                between the number of overflow multiplied and the time to reach an overflow (1200 s). 
-                In this way, it is possible to have no temporal limits to generate a timestamp. 
+                The counter register value is converted in time; this  value is added to the product 
+                between the number of overflows and the time to reach an overflow (1200 s). 
+                In this way, it is possible to have a wider temporal interval to generate a timestamp. 
                 */
                 timestamp=(FSR_COUNTER-Counter_TimeStamp_ReadCounter())*CONVERSION_COUNTER_TIMESTAMP_SEC;
                 timestamp=timestamp+Counter_overflow*CONVERSION_COUNTER_ISR;
@@ -410,18 +427,20 @@ int main(void)
                              
             }
             
-            /*if the interrupt is generated by the watermark level achievement*/
+            
+            /*****************************WATERMARK ISR**************************/
+            
             else{
                 /*
-                According to the FIFO functioningan additional sample (oldest one repeated) 
+                According to the FIFO functioning an additional sample (oldest one repeated) 
                 must be read and discarded. 
                 */
-                LIS3DH_readPage(LIS3DH_OUT_X_L, (uint8_t*) AccData_trash, DATA_BYTES);
+                LIS3DH_readPage(LIS3DH_OUT_X_L, (uint8_t*) AccData_trash, ACC_PACKET_DIMENSION);
                 
                 /* Data reading */                
-                for (int i=0; i<=7; i++){
+                for (int i=0; i<WTM; i++){
                     
-                    LIS3DH_readPage(LIS3DH_OUT_X_L, &AccData[0+i], DATA_BYTES);
+                    LIS3DH_readPage(LIS3DH_OUT_X_L, &AccData[0+i], ACC_PACKET_DIMENSION);
                     Acc_x = Acc_x + ((int16)((AccData[0+i]) | ((AccData[1+i])<<8))>>6);
                     Acc_y = Acc_y + ((int16)((AccData[2+i]) | ((AccData[3+i])<<8))>>6);
                     Acc_z = Acc_z + ((int16)((AccData[4+i]) | ((AccData[5+i])<<8))>>6);
@@ -436,12 +455,12 @@ int main(void)
                 LIS3DH_writeByte(LIS3DH_FIFO_CTRL_REG,LIS3DH_FIFO_CTRL_REG_FIFO_MODE_WTM_7);
                 
                 /* 8-samples average */
-                Acc_x = Acc_x/8;
-                Acc_y = Acc_y/8;
-                Acc_z = Acc_z/8;
+                Acc_x = Acc_x/WTM;
+                Acc_y = Acc_y/WTM;
+                Acc_z = Acc_z/WTM;
                 
                 /* 
-                The digit value is multiplied by the conversion facto in order to obtain
+                The digit value is multiplied by the conversion factor in order to obtain
                 the value in mg
                 */
                 OutAccX = Acc_x * CONVERSION_FACTOR_DIGIT_MG;
@@ -468,7 +487,7 @@ int main(void)
                 
                 /*
                 The acceleration absolute values are converted in RGB values in order to set the 
-                PWM level of the RGB LED.
+                PWM level of the RGB LED, exploiting the whole full-scale range of the RGB.
                 */
                 red_x= (uint8_t)(abs(OutAccX*CONVERSION_MG_RGB));
                 green_y=(uint8_t)(abs(OutAccY*CONVERSION_MG_RGB));

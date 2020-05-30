@@ -1,11 +1,6 @@
 /* ========================================
  *
- * Copyright YOUR COMPANY, THE YEAR
- * All Rights Reserved
- * UNPUBLISHED, LICENSED SOFTWARE.
- *
- * CONFIDENTIAL AND PROPRIETARY INFORMATION
- * WHICH IS THE PROPERTY OF your company.
+ * LIBRARY with MACROS LIS3DH 
  *
  * ========================================
 */
@@ -73,6 +68,8 @@
     #define LIS3DH_CTRL_REG4_HIGH_RES 0x18
     
     #define LIS3DH_CTRL_REG1_10HZ 0x27
+    
+    #define LIS3DH_CTRL_REG1_50HZ 0x47
     
     #define LIS3DH_CTRL_REG4_2G_NORMAL 0x00
     
